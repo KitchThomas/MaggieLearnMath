@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maggie's Math Learning - 五年级数学学习</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      color: white;
+      padding: 30px 0;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .progress-section {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .progress-bar {
+      height: 20px;
+      background: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #4CAF50, #8BC34A);
+      width: 0%;
+      transition: width 0.5s ease;
+      border-radius: 10px;
+    }
+
+    .progress-text {
+      text-align: center;
+      margin-top: 10px;
+      color: #666;
+    }
+
+    .units-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 20px;
+    }
+
+    .unit-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .unit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    }
+
+    .unit-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px;
+    }
+
+    .unit-header h2 {
+      font-size: 1.3rem;
+      margin-bottom: 5px;
+    }
+
+    .unit-header p {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .unit-topics {
+      padding: 15px;
+      display: none;
+    }
+
+    .unit-card.expanded .unit-topics {
+      display: block;
+    }
+
+    .topic-item {
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .topic-item:hover {
+      background: #f5f5f5;
+    }
+
+    .topic-item:last-child {
+      border-bottom: none;
+    }
+
+    .topic-title {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .topic-title .status {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #ddd;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .topic-title .status.completed {
+      background: #4CAF50;
+      border-color: #4CAF50;
+      color: white;
+    }
+
+    .topic-description {
+      font-size: 0.85rem;
+      color: #666;
+      margin-left: 30px;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: white;
+      border-radius: 15px;
+      max-width: 800px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .modal-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 25px;
+      position: sticky;
+      top: 0;
+    }
+
+    .modal-header h2 {
+      margin-bottom: 5px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-close:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .modal-content {
+      padding: 25px;
+    }
+
+    .resource-section {
+      margin-bottom: 25px;
+    }
+
+    .resource-section h3 {
+      color: #333;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .resource-section h3 .icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+    }
+
+    .khan-icon { background: #14bf96; }
+    .youtube-icon { background: #ff0000; }
+    .practice-icon { background: #ff9800; }
+
+    .resource-list {
+      list-style: none;
+    }
+
+    .resource-item {
+      padding: 12px 15px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.2s;
+    }
+
+    .resource-item:hover {
+      background: #e9ecef;
+    }
+
+    .resource-item a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 500;
+      flex: 1;
+    }
+
+    .resource-item a:hover {
+      text-decoration: underline;
+    }
+
+    .resource-item .type-badge {
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 12px;
+      background: #e0e0e0;
+      color: #666;
+      margin-left: 10px;
+    }
+
+    .resource-item .channel {
+      font-size: 0.8rem;
+      color: #888;
+      margin-left: 10px;
+    }
+
+    .mark-complete-btn {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .mark-complete-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+    }
+
+    .mark-complete-btn.completed {
+      background: linear-gradient(135deg, #9e9e9e 0%, #757575 100%);
+    }
+
+    .no-resources {
+      color: #999;
+      font-style: italic;
+      padding: 10px 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+
+      .units-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Stars decoration */
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .star {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.5;
+      animation: twinkle 2s infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.8; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" id="stars"></div>
+
+  <div class="container">
+    <header>
+      <h1>🌟 Maggie's Math Learning 🌟</h1>
+      <p>Grade 5 Ontario Math Curriculum / 五年级安大略省数学课程</p>
+    </header>
+
+    <div class="progress-section">
+      <h3 style="margin-bottom: 15px; color: #333;">Learning Progress / 学习进度</h3>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <p class="progress-text" id="progressText">0 / 0 topics completed</p>
+    </div>
+
+    <div class="units-grid" id="unitsContainer">
+      <!-- Units will be loaded here -->
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-header">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <h2 id="modalTitle">Topic Title</h2>
+        <p id="modalDescription">Topic description</p>
+      </div>
+      <div class="modal-content" id="modalContent">
+        <!-- Resources will be loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Curriculum data will be loaded from curriculum.js
+    let curriculum = null;
+    let completedTopics = JSON.parse(localStorage.getItem('completedTopics') || '[]');
+
+    // Load curriculum data
+    async function loadCurriculum() {
+      try {
+        const response = await fetch('curriculum.json');
+        curriculum = await response.json();
+        renderUnits();
+        updateProgress();
+      } catch (error) {
+        console.error('Failed to load curriculum:', error);
+      }
+    }
+
+    // Render all units
+    function renderUnits() {
+      const container = document.getElementById('unitsContainer');
+      container.innerHTML = '';
+
+      curriculum.units.forEach((unit, unitIndex) => {
+        const unitCard = document.createElement('div');
+        unitCard.className = 'unit-card';
+        unitCard.innerHTML = `
+          <div class="unit-header" onclick="toggleUnit(${unitIndex})">
+            <h2>${getUnitEmoji(unitIndex)} ${unit.title}</h2>
+            <p>${unit.description}</p>
+          </div>
+          <div class="unit-topics" id="unit-${unitIndex}">
+            ${unit.topics.map((topic, topicIndex) => `
+              <div class="topic-item" onclick="openTopic('${unit.id}', '${topic.id}', event)">
+                <div class="topic-title">
+                  <span class="status ${isCompleted(topic.id) ? 'completed' : ''}">${isCompleted(topic.id) ? '✓' : ''}</span>
+                  ${topic.title}
+                </div>
+                <div class="topic-description">${topic.description}</div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        container.appendChild(unitCard);
+      });
+    }
+
+    // Get emoji for unit
+    function getUnitEmoji(index) {
+      const emojis = ['🔢', '🔵', '🍕', '➕', '📐', '📏', '📊', '💰', '🎯'];
+      return emojis[index] || '📚';
+    }
+
+    // Toggle unit expansion
+    function toggleUnit(unitIndex) {
+      const unitCards = document.querySelectorAll('.unit-card');
+      unitCards[unitIndex].classList.toggle('expanded');
+    }
+
+    // Check if topic is completed
+    function isCompleted(topicId) {
+      return completedTopics.includes(topicId);
+    }
+
+    // Open topic modal
+    function openTopic(unitId, topicId, event) {
+      event.stopPropagation();
+
+      const unit = curriculum.units.find(u => u.id === unitId);
+      const topic = unit.topics.find(t => t.id === topicId);
+
+      document.getElementById('modalTitle').textContent = topic.title;
+      document.getElementById('modalDescription').textContent = topic.description;
+
+      let content = '';
+
+      // Khan Academy resources
+      if (topic.khanAcademy && topic.khanAcademy.length > 0) {
+        content += `
+          <div class="resource-section">
+            <h3><span class="icon khan-icon">K</span> Khan Academy</h3>
+            <ul class="resource-list">
+              ${topic.khanAcademy.map(resource => `
+                <li class="resource-item">
+                  <a href="${resource.url}" target="_blank">${resource.title}</a>
+                  <span class="type-badge">${resource.type || 'video'}</span>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+        `;
+      }
+
+      // YouTube resources
+      if (topic.youtube && topic.youtube.length > 0) {
+        content += `
+          <div class="resource-section">
+            <h3><span class="icon youtube-icon">▶</span> YouTube Videos</h3>
+            <ul class="resource-list">
+              ${topic.youtube.map(resource => `
+                <li class="resource-item">
+                  <a href="${resource.url}" target="_blank">${resource.title}</a>
+                  <span class="channel">${resource.channel}</span>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+        `;
+      }
+
+      // Practice resources
+      if (topic.practice && topic.practice.length > 0) {
+        content += `
+          <div class="resource-section">
+            <h3><span class="icon practice-icon">✎</span> Practice / 练习</h3>
+            <ul class="resource-list">
+              ${topic.practice.map(resource => `
+                <li class="resource-item">
+                  <a href="${resource.url}" target="_blank">${resource.title}</a>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+        `;
+      }
+
+      // Mark complete button
+      const isComplete = isCompleted(topicId);
+      content += `
+        <button class="mark-complete-btn ${isComplete ? 'completed' : ''}"
+                onclick="toggleComplete('${topicId}')">
+          ${isComplete ? '✓ Completed / 已完成' : 'Mark as Complete / 标记完成'}
+        </button>
+      `;
+
+      document.getElementById('modalContent').innerHTML = content;
+      document.getElementById('modalOverlay').classList.add('active');
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
+    }
+
+    // Toggle topic completion
+    function toggleComplete(topicId) {
+      if (completedTopics.includes(topicId)) {
+        completedTopics = completedTopics.filter(id => id !== topicId);
+      } else {
+        completedTopics.push(topicId);
+      }
+      localStorage.setItem('completedTopics', JSON.stringify(completedTopics));
+      renderUnits();
+      updateProgress();
+      closeModal();
+    }
+
+    // Update progress bar
+    function updateProgress() {
+      let totalTopics = 0;
+      curriculum.units.forEach(unit => {
+        totalTopics += unit.topics.length;
+      });
+
+      const completed = completedTopics.length;
+      const percentage = totalTopics > 0 ? (completed / totalTopics) * 100 : 0;
+
+      document.getElementById('progressFill').style.width = percentage + '%';
+      document.getElementById('progressText').textContent =
+        `${completed} / ${totalTopics} topics completed (${Math.round(percentage)}%)`;
+    }
+
+    // Close modal on overlay click
+    document.getElementById('modalOverlay').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+
+    // Create stars
+    function createStars() {
+      const starsContainer = document.getElementById('stars');
+      for (let i = 0; i < 50; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDelay = Math.random() * 2 + 's';
+        starsContainer.appendChild(star);
+      }
+    }
+
+    // Initialize
+    createStars();
+    loadCurriculum();
+  </script>
+</body>
+</html>
