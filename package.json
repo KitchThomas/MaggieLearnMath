@@ -1,10 +1,11 @@
 {
-  "name": "maggiemathlearnapplicaiton",
+  "name": "maggie-math-learning",
   "version": "1.0.0",
-  "description": "GitHub 自动同步工具",
-  "main": "auto-sync.js",
+  "description": "Maggie's Grade 5 Math Learning Application - 五年级数学学习应用",
+  "main": "server.js",
   "scripts": {
-    "start": "node auto-sync.js",
+    "start": "node server.js",
+    "dev": "node server.js",
     "sync": "node auto-sync.js",
     "sync:fast": "SYNC_INTERVAL=60000 node auto-sync.js"
   },

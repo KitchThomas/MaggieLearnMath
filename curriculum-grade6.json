@@ -1,0 +1,1010 @@
+{
+  "grade": 6,
+  "province": "Ontario, Canada",
+  "units": [
+    {
+      "id": "g6-number-sense",
+      "title": "Number Sense - Integers / 数感 - 整数",
+      "description": "理解正负整数，在数轴上表示和比较",
+      "topics": [
+        {
+          "id": "g6-integers-intro",
+          "title": "Introduction to Integers / 整数入门",
+          "description": "理解正数、负数和零的概念",
+          "khanAcademy": [
+            {
+              "title": "Introduction to negative numbers",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-negative-number-topic/cc-6th-negatives-intro/v/negative-numbers-introduction",
+              "type": "video"
+            },
+            {
+              "title": "Negative numbers on the number line",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-negative-number-topic/cc-6th-negatives-on-number-line/v/negative-numbers-on-the-number-line",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Introduction to Integers",
+              "url": "https://www.youtube.com/watch?v=Aq7lPsOGmc4",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Integers Song",
+              "url": "https://www.youtube.com/watch?v=t8m3WgCwrPo",
+              "channel": "Numberock"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Understand integers",
+              "url": "https://ca.ixl.com/math/grade-6/understanding-integers"
+            }
+          ]
+        },
+        {
+          "id": "g6-compare-order-integers",
+          "title": "Comparing and Ordering Integers / 比较和排序整数",
+          "description": "在数轴上比较和排序正负整数",
+          "khanAcademy": [
+            {
+              "title": "Ordering negative numbers",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-negative-number-topic/cc-6th-negatives-on-number-line/v/ordering-negative-numbers",
+              "type": "video"
+            },
+            {
+              "title": "Comparing negative numbers",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-negative-number-topic/cc-6th-ordering-rational-numbers/v/comparing-negative-numbers-on-number-line",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Comparing and Ordering Integers",
+              "url": "https://www.youtube.com/watch?v=2P8siL5IJoA",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Compare and order integers",
+              "url": "https://ca.ixl.com/math/grade-6/compare-and-order-integers"
+            }
+          ]
+        },
+        {
+          "id": "g6-absolute-value",
+          "title": "Absolute Value / 绝对值",
+          "description": "理解数字与零的距离",
+          "khanAcademy": [
+            {
+              "title": "Absolute value",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-negative-number-topic/cc-6th-absolute-value/v/absolute-value-of-integers",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "What is Absolute Value?",
+              "url": "https://www.youtube.com/watch?v=hKkBlcnU9pw",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Absolute value",
+              "url": "https://ca.ixl.com/math/grade-6/absolute-value-and-opposite-integers"
+            }
+          ]
+        },
+        {
+          "id": "g6-add-subtract-integers",
+          "title": "Adding and Subtracting Integers / 整数加减法",
+          "description": "正负整数的加法和减法",
+          "khanAcademy": [
+            {
+              "title": "Adding negative numbers",
+              "url": "https://www.khanacademy.org/math/cc-seventh-grade-math/cc-7th-negative-numbers-add-and-subtract/cc-7th-add-neg-intuition/v/adding-negative-numbers",
+              "type": "video"
+            },
+            {
+              "title": "Subtracting negative numbers",
+              "url": "https://www.khanacademy.org/math/cc-seventh-grade-math/cc-7th-negative-numbers-add-and-subtract/cc-7th-sub-neg-intuition/v/subtracting-a-negative-equal-adding-a-positive",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Adding Integers with Different Signs",
+              "url": "https://www.youtube.com/watch?v=s0L3A3cX1J4",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Subtracting Integers",
+              "url": "https://www.youtube.com/watch?v=iq_c3VXbEG4",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Add and subtract integers",
+              "url": "https://ca.ixl.com/math/grade-6/add-and-subtract-integers"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g6-fractions-advanced",
+      "title": "Fractions - Advanced / 分数进阶",
+      "description": "分数的乘法和除法",
+      "topics": [
+        {
+          "id": "g6-multiply-fractions",
+          "title": "Multiplying Fractions / 分数乘法",
+          "description": "分数乘以分数和整数",
+          "khanAcademy": [
+            {
+              "title": "Multiplying fractions",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-arithmetic-operations/cc-6th-multiply-fractions/v/multiplying-fractions",
+              "type": "video"
+            },
+            {
+              "title": "Multiplying mixed numbers",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-arithmetic-operations/cc-6th-multiply-fractions/v/multiplying-mixed-numbers",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Multiplying Fractions",
+              "url": "https://www.youtube.com/watch?v=qmfXyR7Z6Lk",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Multiplying Mixed Numbers",
+              "url": "https://www.youtube.com/watch?v=vLVbE3R9k1E",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Multiply fractions",
+              "url": "https://ca.ixl.com/math/grade-6/multiply-fractions"
+            }
+          ]
+        },
+        {
+          "id": "g6-divide-fractions",
+          "title": "Dividing Fractions / 分数除法",
+          "description": "分数除以分数和整数",
+          "khanAcademy": [
+            {
+              "title": "Dividing fractions",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-arithmetic-operations/cc-6th-dividing-fractions/v/conceptual-understanding-of-dividing-fractions-by-fractions",
+              "type": "video"
+            },
+            {
+              "title": "Dividing mixed numbers",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-arithmetic-operations/cc-6th-dividing-fractions/v/dividing-mixed-numbers",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Dividing Fractions",
+              "url": "https://www.youtube.com/watch?v=5juto2ze8Lg",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Keep Change Flip Method",
+              "url": "https://www.youtube.com/watch?v=6Lj5jRGYmxY",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Divide fractions",
+              "url": "https://ca.ixl.com/math/grade-6/divide-fractions"
+            }
+          ]
+        },
+        {
+          "id": "g6-fraction-word-problems",
+          "title": "Fraction Word Problems / 分数应用题",
+          "description": "解决涉及分数的实际问题",
+          "khanAcademy": [
+            {
+              "title": "Fraction word problems",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-arithmetic-operations/cc-6th-dividing-fractions/v/dividing-fractions-word-problem",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Fraction Word Problems",
+              "url": "https://www.youtube.com/watch?v=gcnk8TnzsLc",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Fraction word problems",
+              "url": "https://ca.ixl.com/math/grade-6/multiply-and-divide-fractions-word-problems"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g6-ratios",
+      "title": "Ratios and Rates / 比率和比例",
+      "description": "理解比率、比例和单位率",
+      "topics": [
+        {
+          "id": "g6-intro-ratios",
+          "title": "Introduction to Ratios / 比率入门",
+          "description": "理解比率的概念和表示方法",
+          "khanAcademy": [
+            {
+              "title": "Introduction to ratios",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-ratios-prop-topic/cc-6th-intro-ratios/v/introduction-to-ratios",
+              "type": "video"
+            },
+            {
+              "title": "Ratio tables",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-ratios-prop-topic/cc-6th-intro-ratios/v/ratio-tables",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "What is a Ratio?",
+              "url": "https://www.youtube.com/watch?v=DYzkyLE7Hpk",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Ratios Song",
+              "url": "https://www.youtube.com/watch?v=RQ2nYUBVvqI",
+              "channel": "Numberock"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Understanding ratios",
+              "url": "https://ca.ixl.com/math/grade-6/understanding-ratios"
+            }
+          ]
+        },
+        {
+          "id": "g6-equivalent-ratios",
+          "title": "Equivalent Ratios / 等价比率",
+          "description": "找出和创建等价比率",
+          "khanAcademy": [
+            {
+              "title": "Equivalent ratios",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-ratios-prop-topic/cc-6th-equivalent-ratios/v/equivalent-ratios",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Equivalent Ratios",
+              "url": "https://www.youtube.com/watch?v=JnRTl6-LKOA",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Equivalent ratios",
+              "url": "https://ca.ixl.com/math/grade-6/equivalent-ratios"
+            }
+          ]
+        },
+        {
+          "id": "g6-unit-rates",
+          "title": "Unit Rates / 单位比率",
+          "description": "计算和使用单位比率",
+          "khanAcademy": [
+            {
+              "title": "Rates and unit rates",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-ratios-prop-topic/cc-6th-unit-rates/v/introduction-to-rates",
+              "type": "video"
+            },
+            {
+              "title": "Unit rate problems",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-ratios-prop-topic/cc-6th-unit-rates/v/finding-unit-rates",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Unit Rates",
+              "url": "https://www.youtube.com/watch?v=RQ2nYUBVvqI",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Unit rates",
+              "url": "https://ca.ixl.com/math/grade-6/unit-rates"
+            }
+          ]
+        },
+        {
+          "id": "g6-ratio-problems",
+          "title": "Ratio Word Problems / 比率应用题",
+          "description": "用比率解决实际问题",
+          "khanAcademy": [
+            {
+              "title": "Ratio word problems",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-ratios-prop-topic/cc-6th-rates-word-problems/v/solving-ratio-problems-with-tables",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Ratio Word Problems",
+              "url": "https://www.youtube.com/watch?v=NZB0q09uqZk",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Ratio word problems",
+              "url": "https://ca.ixl.com/math/grade-6/ratio-tables"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g6-percent",
+      "title": "Percent / 百分比",
+      "description": "理解和使用百分比",
+      "topics": [
+        {
+          "id": "g6-intro-percent",
+          "title": "Introduction to Percent / 百分比入门",
+          "description": "理解百分比的概念",
+          "khanAcademy": [
+            {
+              "title": "Introduction to percents",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-ratios-prop-topic/cc-6th-percent-visualization/v/describing-the-meaning-of-percent",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "What is Percent?",
+              "url": "https://www.youtube.com/watch?v=JeVSmq1Nrpw",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Percent Song",
+              "url": "https://www.youtube.com/watch?v=JTBgJjKvuOE",
+              "channel": "Numberock"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Introduction to percent",
+              "url": "https://ca.ixl.com/math/grade-6/what-percentage-is-illustrated"
+            }
+          ]
+        },
+        {
+          "id": "g6-percent-fraction-decimal",
+          "title": "Percent, Fraction, Decimal Conversions / 百分比、分数、小数转换",
+          "description": "在百分比、分数和小数之间转换",
+          "khanAcademy": [
+            {
+              "title": "Converting between percent, fraction, and decimal",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-ratios-prop-topic/cc-6th-rates-with-fractions/v/converting-fractions-to-decimals-to-percentages",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Converting Between Fractions, Decimals, and Percents",
+              "url": "https://www.youtube.com/watch?v=HxJ_rVwT9qI",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Convert between percents, fractions, and decimals",
+              "url": "https://ca.ixl.com/math/grade-6/convert-between-percents-fractions-and-decimals"
+            }
+          ]
+        },
+        {
+          "id": "g6-percent-of-number",
+          "title": "Percent of a Number / 一个数的百分比",
+          "description": "计算一个数的百分比",
+          "khanAcademy": [
+            {
+              "title": "Finding a percent of a number",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-ratios-prop-topic/cc-6th-percent-problems/v/finding-a-percent",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Finding Percent of a Number",
+              "url": "https://www.youtube.com/watch?v=rR95Cbcjzus",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Percent of a number",
+              "url": "https://ca.ixl.com/math/grade-6/percent-of-a-number"
+            }
+          ]
+        },
+        {
+          "id": "g6-percent-problems",
+          "title": "Percent Word Problems / 百分比应用题",
+          "description": "解决涉及百分比的实际问题",
+          "khanAcademy": [
+            {
+              "title": "Percent word problems",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-ratios-prop-topic/cc-6th-percent-problems/v/percent-word-problem-example-1",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Percent Word Problems",
+              "url": "https://www.youtube.com/watch?v=p2KHi9N_dP8",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Percent problems",
+              "url": "https://ca.ixl.com/math/grade-6/solve-percent-equations"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g6-decimals",
+      "title": "Decimals Operations / 小数运算",
+      "description": "小数的四则运算",
+      "topics": [
+        {
+          "id": "g6-multiply-decimals",
+          "title": "Multiplying Decimals / 小数乘法",
+          "description": "小数乘以小数",
+          "khanAcademy": [
+            {
+              "title": "Multiplying decimals",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-arithmetic-operations/cc-6th-multiplying-decimals/v/more-intuition-for-multiplying-decimals",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Multiplying Decimals",
+              "url": "https://www.youtube.com/watch?v=XZcl8u9jiDE",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Multiply decimals",
+              "url": "https://ca.ixl.com/math/grade-6/multiply-decimals"
+            }
+          ]
+        },
+        {
+          "id": "g6-divide-decimals",
+          "title": "Dividing Decimals / 小数除法",
+          "description": "小数除以小数",
+          "khanAcademy": [
+            {
+              "title": "Dividing decimals",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-arithmetic-operations/cc-6th-dividing-decimals/v/dividing-decimals",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Dividing Decimals",
+              "url": "https://www.youtube.com/watch?v=S2L8gYEGcYg",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Divide decimals",
+              "url": "https://ca.ixl.com/math/grade-6/divide-decimals"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g6-algebra",
+      "title": "Algebra / 代数",
+      "description": "表达式、方程和不等式",
+      "topics": [
+        {
+          "id": "g6-expressions",
+          "title": "Algebraic Expressions / 代数表达式",
+          "description": "写和计算代数表达式",
+          "khanAcademy": [
+            {
+              "title": "Writing algebraic expressions",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-expressions-and-variables/cc-6th-writing-expressions/v/writing-algebraic-expressions-introduction",
+              "type": "video"
+            },
+            {
+              "title": "Evaluating expressions",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-expressions-and-variables/cc-6th-evaluating-expressions/v/evaluating-an-expression-with-one-variable",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Writing Algebraic Expressions",
+              "url": "https://www.youtube.com/watch?v=3t7Zdx4SJfM",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Write and evaluate expressions",
+              "url": "https://ca.ixl.com/math/grade-6/write-variable-expressions"
+            }
+          ]
+        },
+        {
+          "id": "g6-one-step-equations",
+          "title": "One-Step Equations / 一步方程",
+          "description": "解一步加减乘除方程",
+          "khanAcademy": [
+            {
+              "title": "One-step addition and subtraction equations",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-equations-and-inequalities/cc-6th-one-step-add-sub-equations/v/simple-equations",
+              "type": "video"
+            },
+            {
+              "title": "One-step multiplication and division equations",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-equations-and-inequalities/cc-6th-one-step-mult-div-equations/v/simple-equations-of-the-form-ax-b",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Solving One-Step Equations",
+              "url": "https://www.youtube.com/watch?v=l3XzepN03KQ",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Solve one-step equations",
+              "url": "https://ca.ixl.com/math/grade-6/solve-one-step-equations"
+            }
+          ]
+        },
+        {
+          "id": "g6-inequalities",
+          "title": "Inequalities / 不等式",
+          "description": "理解和表示不等式",
+          "khanAcademy": [
+            {
+              "title": "Introduction to inequalities",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-equations-and-inequalities/cc-6th-inequalities/v/testing-solutions-to-inequalities",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Introduction to Inequalities",
+              "url": "https://www.youtube.com/watch?v=P_-c43dQ3js",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Inequalities",
+              "url": "https://ca.ixl.com/math/grade-6/which-x-satisfies-an-equation"
+            }
+          ]
+        },
+        {
+          "id": "g6-dependent-independent",
+          "title": "Dependent and Independent Variables / 因变量和自变量",
+          "description": "理解变量之间的关系",
+          "khanAcademy": [
+            {
+              "title": "Dependent and independent variables",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-equations-and-inequalities/cc-6th-dependent-independent/v/dependent-and-independent-variables",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Independent and Dependent Variables",
+              "url": "https://www.youtube.com/watch?v=WKlJnYPkdK8",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Independent and dependent variables",
+              "url": "https://ca.ixl.com/math/grade-6/identify-independent-and-dependent-variables"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g6-geometry",
+      "title": "Geometry / 几何",
+      "description": "面积、表面积和体积",
+      "topics": [
+        {
+          "id": "g6-area-triangles",
+          "title": "Area of Triangles / 三角形面积",
+          "description": "计算三角形的面积",
+          "khanAcademy": [
+            {
+              "title": "Area of triangles",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-geometry-topic/cc-6th-area-triangle/v/area-of-a-triangle",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Area of a Triangle",
+              "url": "https://www.youtube.com/watch?v=_E3G-fmLAZ4",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Area of triangles",
+              "url": "https://ca.ixl.com/math/grade-6/area-of-triangles"
+            }
+          ]
+        },
+        {
+          "id": "g6-area-quadrilaterals",
+          "title": "Area of Quadrilaterals / 四边形面积",
+          "description": "计算平行四边形和梯形的面积",
+          "khanAcademy": [
+            {
+              "title": "Area of parallelograms",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-geometry-topic/cc-6th-parallelograms/v/intuition-for-area-of-a-parallelogram",
+              "type": "video"
+            },
+            {
+              "title": "Area of trapezoids",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-geometry-topic/cc-6th-trapezoids/v/area-of-a-trapezoid-1",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Area of Parallelograms",
+              "url": "https://www.youtube.com/watch?v=u6zDpUL5RkU",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Area of Trapezoids",
+              "url": "https://www.youtube.com/watch?v=5gOKe9gkYRk",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Area of parallelograms and trapezoids",
+              "url": "https://ca.ixl.com/math/grade-6/area-of-parallelograms-and-trapezoids"
+            }
+          ]
+        },
+        {
+          "id": "g6-composite-figures",
+          "title": "Area of Composite Figures / 组合图形面积",
+          "description": "计算复杂形状的面积",
+          "khanAcademy": [
+            {
+              "title": "Area of composite shapes",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-geometry-topic/cc-6th-area-composite-figures/v/area-of-composite-shapes",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Area of Composite Figures",
+              "url": "https://www.youtube.com/watch?v=mJMq_9RWfho",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Area of composite figures",
+              "url": "https://ca.ixl.com/math/grade-6/area-of-compound-figures"
+            }
+          ]
+        },
+        {
+          "id": "g6-surface-area",
+          "title": "Surface Area / 表面积",
+          "description": "计算三维图形的表面积",
+          "khanAcademy": [
+            {
+              "title": "Surface area of prisms",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-geometry-topic/cc-6th-surface-area/v/surface-area-of-a-box",
+              "type": "video"
+            },
+            {
+              "title": "Surface area using nets",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-geometry-topic/cc-6th-surface-area/v/surface-area-from-a-net",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Surface Area of Rectangular Prisms",
+              "url": "https://www.youtube.com/watch?v=1TnkA9Ep_tE",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Surface Area Song",
+              "url": "https://www.youtube.com/watch?v=gDYqWcMHvhg",
+              "channel": "Numberock"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Surface area",
+              "url": "https://ca.ixl.com/math/grade-6/surface-area-of-prisms-and-pyramids"
+            }
+          ]
+        },
+        {
+          "id": "g6-volume",
+          "title": "Volume / 体积",
+          "description": "计算棱柱的体积",
+          "khanAcademy": [
+            {
+              "title": "Volume of rectangular prisms",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-geometry-topic/cc-6th-volume/v/volume-of-rectangular-prism-examples",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Volume of Rectangular Prisms",
+              "url": "https://www.youtube.com/watch?v=qJwecTgce6c",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Volume",
+              "url": "https://ca.ixl.com/math/grade-6/volume-of-rectangular-prisms"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g6-coordinate-plane",
+      "title": "Coordinate Plane / 坐标平面",
+      "description": "四象限的坐标平面",
+      "topics": [
+        {
+          "id": "g6-four-quadrants",
+          "title": "Four Quadrants / 四象限",
+          "description": "在四象限坐标平面上绘点",
+          "khanAcademy": [
+            {
+              "title": "Four quadrants",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-negative-number-topic/cc-6th-coordinate-plane/v/four-quadrants",
+              "type": "video"
+            },
+            {
+              "title": "Plotting points in four quadrants",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-negative-number-topic/cc-6th-coordinate-plane/v/plotting-points-on-a-coordinate-plane",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "The Four Quadrants",
+              "url": "https://www.youtube.com/watch?v=4mAc5OL0LTM",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Coordinate plane with all four quadrants",
+              "url": "https://ca.ixl.com/math/grade-6/coordinate-plane-review"
+            }
+          ]
+        },
+        {
+          "id": "g6-distance-coordinate",
+          "title": "Distance on Coordinate Plane / 坐标平面上的距离",
+          "description": "计算坐标平面上两点之间的距离",
+          "khanAcademy": [
+            {
+              "title": "Distance between points",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-negative-number-topic/cc-6th-coordinate-plane-abs-value/v/distance-between-points-on-coordinate-plane",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Finding Distance on Coordinate Plane",
+              "url": "https://www.youtube.com/watch?v=Gh8t8n_B1Fc",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Distance between two points",
+              "url": "https://ca.ixl.com/math/grade-6/distance-between-two-points"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g6-data-statistics",
+      "title": "Data and Statistics / 数据和统计",
+      "description": "统计问题和数据分析",
+      "topics": [
+        {
+          "id": "g6-statistical-questions",
+          "title": "Statistical Questions / 统计问题",
+          "description": "识别统计问题",
+          "khanAcademy": [
+            {
+              "title": "Statistical questions",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-data-statistics/cc-6-statistical-questions/v/statistical-questions",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "What is a Statistical Question?",
+              "url": "https://www.youtube.com/watch?v=PWbzOzK8a9w",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": []
+        },
+        {
+          "id": "g6-mean-median-mode",
+          "title": "Mean, Median, Mode, Range / 平均数、中位数、众数、极差",
+          "description": "计算和理解数据的中心趋势",
+          "khanAcademy": [
+            {
+              "title": "Mean, median, mode",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-data-statistics/cc-6-mean-and-median/v/statistics-intro-mean-median-and-mode",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Mean, Median, Mode, Range",
+              "url": "https://www.youtube.com/watch?v=B1HEzNTGeZ4",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Mean, median, mode, range",
+              "url": "https://ca.ixl.com/math/grade-6/mean-median-mode-and-range"
+            }
+          ]
+        },
+        {
+          "id": "g6-box-plots",
+          "title": "Box Plots / 箱线图",
+          "description": "创建和解读箱线图",
+          "khanAcademy": [
+            {
+              "title": "Box plots",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-data-statistics/cc-6th-box-whisker-plots/v/constructing-a-box-and-whisker-plot",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "How to Make a Box Plot",
+              "url": "https://www.youtube.com/watch?v=b2C9I8HuCe4",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Box plots",
+              "url": "https://ca.ixl.com/math/grade-6/interpret-box-and-whisker-plots"
+            }
+          ]
+        },
+        {
+          "id": "g6-histograms",
+          "title": "Histograms / 直方图",
+          "description": "创建和解读直方图",
+          "khanAcademy": [
+            {
+              "title": "Histograms",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-data-statistics/cc-6th-histograms/v/histograms",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "How to Make a Histogram",
+              "url": "https://www.youtube.com/watch?v=4aGEs0JL4_s",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Histograms",
+              "url": "https://ca.ixl.com/math/grade-6/create-histograms"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g6-financial-literacy",
+      "title": "Financial Literacy / 财务素养",
+      "description": "利息、预算和理财",
+      "topics": [
+        {
+          "id": "g6-simple-interest",
+          "title": "Simple Interest / 单利",
+          "description": "理解和计算单利",
+          "khanAcademy": [
+            {
+              "title": "Introduction to interest",
+              "url": "https://www.khanacademy.org/economics-finance-domain/core-finance/interest-tutorial/interest-basics-tutorial/v/introduction-to-interest",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Simple Interest Formula",
+              "url": "https://www.youtube.com/watch?v=I2e7zz_aPek",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": []
+        },
+        {
+          "id": "g6-budgeting",
+          "title": "Budgeting and Saving / 预算和储蓄",
+          "description": "创建预算和储蓄计划",
+          "khanAcademy": [],
+          "youtube": [
+            {
+              "title": "Budgeting for Kids",
+              "url": "https://www.youtube.com/watch?v=YyOfIj7nWcU",
+              "channel": "FunKidsTV"
+            },
+            {
+              "title": "Saving Money for Kids",
+              "url": "https://www.youtube.com/watch?v=CPQ3PKvdnBw",
+              "channel": "FunKidsTV"
+            }
+          ],
+          "practice": []
+        }
+      ]
+    }
+  ]
+}
