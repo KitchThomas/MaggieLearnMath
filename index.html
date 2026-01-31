@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Maggie's Math Learning - 五年级数学学习</title>
+  <title>Maggie's Math Learning - 数学学习</title>
   <style>
     * {
       margin: 0;
@@ -40,12 +40,68 @@
       opacity: 0.9;
     }
 
+    /* Grade Selector */
+    .grade-selector {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0 30px 0;
+    }
+
+    .grade-btn {
+      padding: 15px 40px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: 3px solid white;
+      border-radius: 50px;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .grade-btn:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+
+    .grade-btn.active {
+      background: white;
+      color: #667eea;
+    }
+
+    .grade-btn .grade-icon {
+      font-size: 1.5rem;
+    }
+
     .progress-section {
       background: white;
       border-radius: 15px;
       padding: 20px;
       margin-bottom: 30px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .progress-header h3 {
+      color: #333;
+    }
+
+    .grade-badge {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: 600;
     }
 
     .progress-bar {
@@ -95,6 +151,10 @@
       padding: 20px;
     }
 
+    .unit-header.grade6 {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    }
+
     .unit-header h2 {
       font-size: 1.3rem;
       margin-bottom: 5px;
@@ -103,6 +163,28 @@
     .unit-header p {
       font-size: 0.9rem;
       opacity: 0.9;
+    }
+
+    .unit-progress {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 0.85rem;
+    }
+
+    .unit-progress-bar {
+      flex: 1;
+      height: 6px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .unit-progress-fill {
+      height: 100%;
+      background: white;
+      border-radius: 3px;
     }
 
     .unit-topics {
@@ -147,6 +229,7 @@
       align-items: center;
       justify-content: center;
       font-size: 12px;
+      flex-shrink: 0;
     }
 
     .topic-title .status.completed {
@@ -196,6 +279,10 @@
       padding: 25px;
       position: sticky;
       top: 0;
+    }
+
+    .modal-header.grade6 {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
     }
 
     .modal-header h2 {
@@ -336,6 +423,17 @@
       .units-grid {
         grid-template-columns: 1fr;
       }
+
+      .grade-selector {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .grade-btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
     }
 
     /* Stars decoration */
@@ -364,6 +462,23 @@
       0%, 100% { opacity: 0.3; }
       50% { opacity: 0.8; }
     }
+
+    /* Grade 6 theme */
+    body.grade6-theme {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    }
+
+    body.grade6-theme .grade-btn.active {
+      color: #11998e;
+    }
+
+    body.grade6-theme .grade-badge {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    }
+
+    body.grade6-theme .resource-item a {
+      color: #11998e;
+    }
   </style>
 </head>
 <body>
@@ -372,11 +487,26 @@
   <div class="container">
     <header>
       <h1>🌟 Maggie's Math Learning 🌟</h1>
-      <p>Grade 5 Ontario Math Curriculum / 五年级安大略省数学课程</p>
+      <p id="headerSubtitle">Ontario Math Curriculum / 安大略省数学课程</p>
     </header>
 
+    <!-- Grade Selector -->
+    <div class="grade-selector">
+      <button class="grade-btn active" onclick="switchGrade(5)" id="grade5Btn">
+        <span class="grade-icon">5️⃣</span>
+        <span>Grade 5 / 五年级</span>
+      </button>
+      <button class="grade-btn" onclick="switchGrade(6)" id="grade6Btn">
+        <span class="grade-icon">6️⃣</span>
+        <span>Grade 6 / 六年级</span>
+      </button>
+    </div>
+
     <div class="progress-section">
-      <h3 style="margin-bottom: 15px; color: #333;">Learning Progress / 学习进度</h3>
+      <div class="progress-header">
+        <h3>Learning Progress / 学习进度</h3>
+        <span class="grade-badge" id="gradeBadge">Grade 5</span>
+      </div>
       <div class="progress-bar">
         <div class="progress-fill" id="progressFill"></div>
       </div>
@@ -391,7 +521,7 @@
   <!-- Modal -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal">
-      <div class="modal-header">
+      <div class="modal-header" id="modalHeader">
         <button class="modal-close" onclick="closeModal()">&times;</button>
         <h2 id="modalTitle">Topic Title</h2>
         <p id="modalDescription">Topic description</p>
@@ -403,14 +533,37 @@
   </div>
 
   <script>
-    // Curriculum data will be loaded from curriculum.js
+    // State
     let curriculum = null;
-    let completedTopics = JSON.parse(localStorage.getItem('completedTopics') || '[]');
+    let currentGrade = 5;
+    let completedTopics = {
+      5: JSON.parse(localStorage.getItem('completedTopics_grade5') || '[]'),
+      6: JSON.parse(localStorage.getItem('completedTopics_grade6') || '[]')
+    };
+
+    // Switch grade
+    async function switchGrade(grade) {
+      currentGrade = grade;
+
+      // Update buttons
+      document.getElementById('grade5Btn').classList.toggle('active', grade === 5);
+      document.getElementById('grade6Btn').classList.toggle('active', grade === 6);
+
+      // Update theme
+      document.body.classList.toggle('grade6-theme', grade === 6);
+
+      // Update badge
+      document.getElementById('gradeBadge').textContent = `Grade ${grade}`;
+
+      // Load curriculum
+      await loadCurriculum();
+    }
 
     // Load curriculum data
     async function loadCurriculum() {
       try {
-        const response = await fetch('curriculum.json');
+        const fileName = currentGrade === 5 ? 'curriculum.json' : 'curriculum-grade6.json';
+        const response = await fetch(fileName);
         curriculum = await response.json();
         renderUnits();
         updateProgress();
@@ -425,12 +578,23 @@
       container.innerHTML = '';
 
       curriculum.units.forEach((unit, unitIndex) => {
+        // Calculate unit progress
+        const completedInUnit = unit.topics.filter(t => isCompleted(t.id)).length;
+        const totalInUnit = unit.topics.length;
+        const unitPercent = totalInUnit > 0 ? (completedInUnit / totalInUnit) * 100 : 0;
+
         const unitCard = document.createElement('div');
         unitCard.className = 'unit-card';
         unitCard.innerHTML = `
-          <div class="unit-header" onclick="toggleUnit(${unitIndex})">
-            <h2>${getUnitEmoji(unitIndex)} ${unit.title}</h2>
+          <div class="unit-header ${currentGrade === 6 ? 'grade6' : ''}" onclick="toggleUnit(${unitIndex})">
+            <h2>${getUnitEmoji(unitIndex, currentGrade)} ${unit.title}</h2>
             <p>${unit.description}</p>
+            <div class="unit-progress">
+              <div class="unit-progress-bar">
+                <div class="unit-progress-fill" style="width: ${unitPercent}%"></div>
+              </div>
+              <span>${completedInUnit}/${totalInUnit}</span>
+            </div>
           </div>
           <div class="unit-topics" id="unit-${unitIndex}">
             ${unit.topics.map((topic, topicIndex) => `
@@ -448,9 +612,11 @@
       });
     }
 
-    // Get emoji for unit
-    function getUnitEmoji(index) {
-      const emojis = ['🔢', '🔵', '🍕', '➕', '📐', '📏', '📊', '💰', '🎯'];
+    // Get emoji for unit based on grade
+    function getUnitEmoji(index, grade) {
+      const emojis5 = ['🔢', '🔵', '🍕', '➕', '📐', '📏', '📊', '💰', '🎯'];
+      const emojis6 = ['🔢', '🍕', '⚖️', '💯', '🔵', '📝', '📐', '🗺️', '📊', '💰'];
+      const emojis = grade === 5 ? emojis5 : emojis6;
       return emojis[index] || '📚';
     }
 
@@ -462,7 +628,7 @@
 
     // Check if topic is completed
     function isCompleted(topicId) {
-      return completedTopics.includes(topicId);
+      return completedTopics[currentGrade].includes(topicId);
     }
 
     // Open topic modal
@@ -474,6 +640,7 @@
 
       document.getElementById('modalTitle').textContent = topic.title;
       document.getElementById('modalDescription').textContent = topic.description;
+      document.getElementById('modalHeader').className = `modal-header ${currentGrade === 6 ? 'grade6' : ''}`;
 
       let content = '';
 
@@ -547,12 +714,12 @@
 
     // Toggle topic completion
     function toggleComplete(topicId) {
-      if (completedTopics.includes(topicId)) {
-        completedTopics = completedTopics.filter(id => id !== topicId);
+      if (completedTopics[currentGrade].includes(topicId)) {
+        completedTopics[currentGrade] = completedTopics[currentGrade].filter(id => id !== topicId);
       } else {
-        completedTopics.push(topicId);
+        completedTopics[currentGrade].push(topicId);
       }
-      localStorage.setItem('completedTopics', JSON.stringify(completedTopics));
+      localStorage.setItem(`completedTopics_grade${currentGrade}`, JSON.stringify(completedTopics[currentGrade]));
       renderUnits();
       updateProgress();
       closeModal();
@@ -565,7 +732,7 @@
         totalTopics += unit.topics.length;
       });
 
-      const completed = completedTopics.length;
+      const completed = completedTopics[currentGrade].length;
       const percentage = totalTopics > 0 ? (completed / totalTopics) * 100 : 0;
 
       document.getElementById('progressFill').style.width = percentage + '%';

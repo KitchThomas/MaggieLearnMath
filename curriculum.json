@@ -37,8 +37,12 @@
           ],
           "practice": [
             {
-              "title": "IXL - Place value",
-              "url": "https://ca.ixl.com/math/grade-5/place-value-names"
+              "title": "Khan Academy - Place Value Practice (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/powers-of-ten/imp-place-value-with-powers-of-10/e/place-value"
+            },
+            {
+              "title": "Math-Drills - Place Value Worksheets (FREE)",
+              "url": "https://www.math-drills.com/placevalue.php"
             }
           ]
         },
@@ -62,8 +66,12 @@
           ],
           "practice": [
             {
-              "title": "IXL - Compare numbers up to millions",
-              "url": "https://ca.ixl.com/math/grade-5/compare-numbers-up-to-millions"
+              "title": "Khan Academy - Compare Numbers Practice (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-place-value-and-rounding-2/imp-comparing-multi-digit-numbers/e/comparing-multi-digit-numbers"
+            },
+            {
+              "title": "Math Games - Comparing Numbers (FREE)",
+              "url": "https://www.mathgames.com/skill/4.2-compare-numbers-up-to-millions"
             }
           ]
         },
@@ -90,7 +98,16 @@
               "channel": "Numberock"
             }
           ],
-          "practice": []
+          "practice": [
+            {
+              "title": "Khan Academy - Rounding Practice (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-place-value-and-rounding-2/imp-rounding-whole-numbers/e/rounding-whole-numbers"
+            },
+            {
+              "title": "Math-Drills - Rounding Worksheets (FREE)",
+              "url": "https://www.math-drills.com/numbersense/rounding_numbers_various_powers_001.php"
+            }
+          ]
         }
       ]
     },
@@ -129,8 +146,12 @@
           ],
           "practice": [
             {
-              "title": "IXL - Decimal place value",
-              "url": "https://ca.ixl.com/math/grade-5/decimal-place-value"
+              "title": "Khan Academy - Decimal Place Value (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-place-value-and-decimals/imp-decimal-place-value-intro/e/decimal-place-value"
+            },
+            {
+              "title": "Math-Drills - Decimal Worksheets (FREE)",
+              "url": "https://www.math-drills.com/decimal.php"
             }
           ]
         },
@@ -164,8 +185,12 @@
           ],
           "practice": [
             {
-              "title": "IXL - Add and subtract decimals",
-              "url": "https://ca.ixl.com/math/grade-5/add-and-subtract-decimals"
+              "title": "Khan Academy - Adding Decimals (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-adding-and-subtracting-decimals/imp-adding-decimals-intro/e/adding-decimals"
+            },
+            {
+              "title": "Math Games - Decimal Operations (FREE)",
+              "url": "https://www.mathgames.com/skill/5.47-add-and-subtract-decimals"
             }
           ]
         },
@@ -189,8 +214,12 @@
           ],
           "practice": [
             {
-              "title": "IXL - Multiply decimals",
-              "url": "https://ca.ixl.com/math/grade-5/multiply-decimals"
+              "title": "Khan Academy - Multiplying Decimals (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multiplying-and-dividing-decimals/imp-multiplying-decimals-strategies/e/multiplying-decimals"
+            },
+            {
+              "title": "Math-Drills - Multiplying Decimals (FREE)",
+              "url": "https://www.math-drills.com/decimal/decimal_multiply.php"
             }
           ]
         },
@@ -214,8 +243,12 @@
           ],
           "practice": [
             {
-              "title": "IXL - Divide decimals",
-              "url": "https://ca.ixl.com/math/grade-5/divide-decimals"
+              "title": "Khan Academy - Dividing Decimals (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multiplying-and-dividing-decimals/imp-dividing-decimals-with-hundredths/e/dividing-decimals-with-hundredths"
+            },
+            {
+              "title": "Math-Drills - Dividing Decimals (FREE)",
+              "url": "https://www.math-drills.com/decimal/decimal_divide.php"
             }
           ]
         }
@@ -254,7 +287,16 @@
               "channel": "Numberock"
             }
           ],
-          "practice": []
+          "practice": [
+            {
+              "title": "Khan Academy - Equivalent Fractions (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-fractions-2/imp-visualizing-equivalent-fractions/e/equivalent-fractions"
+            },
+            {
+              "title": "Math Games - Equivalent Fractions (FREE)",
+              "url": "https://www.mathgames.com/skill/4.62-identify-equivalent-fractions"
+            }
+          ]
         },
         {
           "id": "compare-fractions",
@@ -276,8 +318,12 @@
           ],
           "practice": [
             {
-              "title": "IXL - Compare fractions",
-              "url": "https://ca.ixl.com/math/grade-5/compare-fractions-with-unlike-denominators"
+              "title": "Khan Academy - Compare Fractions (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-fractions-2/imp-common-denominators/e/comparing-fractions-2"
+            },
+            {
+              "title": "Math-Drills - Comparing Fractions (FREE)",
+              "url": "https://www.math-drills.com/fractions/fractions_comparing_visual_001.php"
             }
           ]
         },
@@ -311,8 +357,12 @@
           ],
           "practice": [
             {
-              "title": "IXL - Add fractions with unlike denominators",
-              "url": "https://ca.ixl.com/math/grade-5/add-fractions-with-unlike-denominators"
+              "title": "Khan Academy - Add Fractions (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-add-and-subtract-fractions/imp-adding-fractions-with-unlike-denominators/e/adding-fractions-with-unlike-denominators"
+            },
+            {
+              "title": "Math-Drills - Adding Fractions (FREE)",
+              "url": "https://www.math-drills.com/fractions/fractions_adding_unlike_denominators_001.php"
             }
           ]
         },
@@ -336,8 +386,12 @@
           ],
           "practice": [
             {
-              "title": "IXL - Multiply fractions",
-              "url": "https://ca.ixl.com/math/grade-5/multiply-fractions"
+              "title": "Khan Academy - Multiply Fractions (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multiply-fractions/imp-multiplying-fractions/e/multiplying_fractions"
+            },
+            {
+              "title": "Math-Drills - Multiplying Fractions (FREE)",
+              "url": "https://www.math-drills.com/fractions/fractions_multiply_proper_001.php"
             }
           ]
         },
@@ -359,7 +413,16 @@
               "channel": "Math with Mr. J"
             }
           ],
-          "practice": []
+          "practice": [
+            {
+              "title": "Khan Academy - Divide Fractions (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-dividing-fractions/imp-dividing-unit-fractions-by-whole-numbers/e/dividing-unit-fractions-by-whole-numbers"
+            },
+            {
+              "title": "Math-Drills - Dividing Fractions (FREE)",
+              "url": "https://www.math-drills.com/fractions/fractions_divide_proper_001.php"
+            }
+          ]
         }
       ]
     },
@@ -393,8 +456,16 @@
           ],
           "practice": [
             {
-              "title": "IXL - Multiply 2-digit numbers",
-              "url": "https://ca.ixl.com/math/grade-5/multiply-two-digit-numbers-by-two-digit-numbers"
+              "title": "Khan Academy - Multiplication Practice (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multi-digit-multiplication-and-division/imp-multi-digit-multiplication/e/multiplication-4"
+            },
+            {
+              "title": "Math-Drills - Long Multiplication (FREE)",
+              "url": "https://www.math-drills.com/multiplication/multiplication_long_nohint_0202_001.php"
+            },
+            {
+              "title": "Multiplication.com - Games (FREE)",
+              "url": "https://www.multiplication.com/games/all-games"
             }
           ]
         },
@@ -423,8 +494,12 @@
           ],
           "practice": [
             {
-              "title": "IXL - Divide multi-digit numbers",
-              "url": "https://ca.ixl.com/math/grade-5/divide-larger-numbers"
+              "title": "Khan Academy - Division Practice (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multi-digit-multiplication-and-division/imp-multi-digit-division/e/division-4"
+            },
+            {
+              "title": "Math-Drills - Long Division (FREE)",
+              "url": "https://www.math-drills.com/division/division_long_0402_001.php"
             }
           ]
         },
@@ -453,8 +528,12 @@
           ],
           "practice": [
             {
-              "title": "IXL - Order of operations",
-              "url": "https://ca.ixl.com/math/grade-5/order-of-operations"
+              "title": "Khan Academy - Order of Operations (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-powers-of-ten/imp-order-of-operations-introduction/e/order-of-operations"
+            },
+            {
+              "title": "Math Games - Order of Operations (FREE)",
+              "url": "https://www.mathgames.com/skill/5.91-order-of-operations"
             }
           ]
         }
@@ -483,7 +562,16 @@
               "channel": "Math with Mr. J"
             }
           ],
-          "practice": []
+          "practice": [
+            {
+              "title": "Khan Academy - Number Patterns (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-algebraic-thinking/imp-number-patterns/e/visualizing-and-interpreting-relationships-between-patterns"
+            },
+            {
+              "title": "Math Games - Number Patterns (FREE)",
+              "url": "https://www.mathgames.com/skill/5.115-complete-a-number-pattern"
+            }
+          ]
         },
         {
           "id": "variables",
@@ -503,7 +591,12 @@
               "channel": "Math with Mr. J"
             }
           ],
-          "practice": []
+          "practice": [
+            {
+              "title": "Khan Academy - Variables Practice (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-algebraic-thinking/imp-intro-to-variables/e/evaluating-expressions-with-one-variable"
+            }
+          ]
         },
         {
           "id": "equations",
@@ -525,8 +618,12 @@
           ],
           "practice": [
             {
-              "title": "IXL - Solve one-step equations",
-              "url": "https://ca.ixl.com/math/grade-5/solve-one-step-equations"
+              "title": "Khan Academy - One-Step Equations (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-equations-and-inequalities/cc-6th-one-step-add-sub-equations/e/one-step-equations"
+            },
+            {
+              "title": "Math Games - Solving Equations (FREE)",
+              "url": "https://www.mathgames.com/skill/6.96-solve-one-step-equations"
             }
           ]
         }
@@ -560,7 +657,16 @@
               "channel": "Math with Mr. J"
             }
           ],
-          "practice": []
+          "practice": [
+            {
+              "title": "Khan Academy - Classify Shapes (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-geometry-3/imp-classifying-triangles/e/recognizing-triangles"
+            },
+            {
+              "title": "Math Games - 2D Shapes (FREE)",
+              "url": "https://www.mathgames.com/skill/3.100-identify-two-dimensional-shapes"
+            }
+          ]
         },
         {
           "id": "3d-shapes",
@@ -580,7 +686,12 @@
               "channel": "Math with Mr. J"
             }
           ],
-          "practice": []
+          "practice": [
+            {
+              "title": "Math Games - 3D Shapes (FREE)",
+              "url": "https://www.mathgames.com/skill/2.90-name-the-three-dimensional-shape"
+            }
+          ]
         },
         {
           "id": "angles",
@@ -607,8 +718,12 @@
           ],
           "practice": [
             {
-              "title": "IXL - Measure angles with a protractor",
-              "url": "https://ca.ixl.com/math/grade-5/measure-angles-with-a-protractor"
+              "title": "Khan Academy - Angles Practice (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-geometry-2/imp-measuring-angles/e/measuring-angles"
+            },
+            {
+              "title": "Math Games - Angles (FREE)",
+              "url": "https://www.mathgames.com/skill/4.78-measure-angles-with-a-protractor"
             }
           ]
         },
@@ -632,8 +747,12 @@
           ],
           "practice": [
             {
-              "title": "IXL - Coordinate plane",
-              "url": "https://ca.ixl.com/math/grade-5/graph-points-on-a-coordinate-plane"
+              "title": "Khan Academy - Coordinate Plane (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-geometry-3/imp-intro-to-the-coordinate-plane/e/graphing-points"
+            },
+            {
+              "title": "Math Games - Coordinate Plane (FREE)",
+              "url": "https://www.mathgames.com/skill/5.81-graph-points-on-a-coordinate-plane"
             }
           ]
         }
@@ -664,8 +783,12 @@
           ],
           "practice": [
             {
-              "title": "IXL - Perimeter",
-              "url": "https://ca.ixl.com/math/grade-5/perimeter"
+              "title": "Khan Academy - Perimeter (FREE)",
+              "url": "https://www.khanacademy.org/math/basic-geo/basic-geo-area-and-perimeter/basic-geo-perimeter/e/perimeter-1"
+            },
+            {
+              "title": "Math-Drills - Perimeter Worksheets (FREE)",
+              "url": "https://www.math-drills.com/measurement/perimeter_rectangle_001.php"
             }
           ]
         },
@@ -694,8 +817,12 @@
           ],
           "practice": [
             {
-              "title": "IXL - Area of rectangles and squares",
-              "url": "https://ca.ixl.com/math/grade-5/area-of-rectangles-and-squares"
+              "title": "Khan Academy - Area Practice (FREE)",
+              "url": "https://www.khanacademy.org/math/basic-geo/basic-geo-area-and-perimeter/basic-geo-area-rectangle/e/find-the-area-1"
+            },
+            {
+              "title": "Math-Drills - Area Worksheets (FREE)",
+              "url": "https://www.math-drills.com/measurement/area_rectangle_001.php"
             }
           ]
         },
@@ -724,8 +851,12 @@
           ],
           "practice": [
             {
-              "title": "IXL - Volume of rectangular prisms",
-              "url": "https://ca.ixl.com/math/grade-5/volume-of-rectangular-prisms"
+              "title": "Khan Academy - Volume Practice (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-geometry-3/imp-volume/e/volume-of-rectangular-prisms"
+            },
+            {
+              "title": "Math Games - Volume (FREE)",
+              "url": "https://www.mathgames.com/skill/5.77-find-the-volume-of-a-rectangular-prism"
             }
           ]
         },
@@ -749,8 +880,12 @@
           ],
           "practice": [
             {
-              "title": "IXL - Convert units",
-              "url": "https://ca.ixl.com/math/grade-5/convert-units"
+              "title": "Khan Academy - Unit Conversion (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-measurement-and-data-3/imp-unit-conversion/e/converting-units"
+            },
+            {
+              "title": "Math-Drills - Metric Conversion (FREE)",
+              "url": "https://www.math-drills.com/measurement/measurement_metric_conversion_length_001.php"
             }
           ]
         }
@@ -779,7 +914,16 @@
               "channel": "Math with Mr. J"
             }
           ],
-          "practice": []
+          "practice": [
+            {
+              "title": "Khan Academy - Graphs Practice (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-data-and-statistics/imp-line-plots/e/line-plots"
+            },
+            {
+              "title": "Math Games - Reading Graphs (FREE)",
+              "url": "https://www.mathgames.com/skill/3.52-interpret-bar-graphs"
+            }
+          ]
         },
         {
           "id": "mean-median-mode",
@@ -801,8 +945,12 @@
           ],
           "practice": [
             {
-              "title": "IXL - Mean, median, mode",
-              "url": "https://ca.ixl.com/math/grade-5/mean-median-mode-and-range"
+              "title": "Khan Academy - Mean, Median, Mode (FREE)",
+              "url": "https://www.khanacademy.org/math/statistics-probability/summarizing-quantitative-data/mean-median-basics/e/calculating-the-mean"
+            },
+            {
+              "title": "Math Games - Mean, Median, Mode (FREE)",
+              "url": "https://www.mathgames.com/skill/6.135-calculate-mean-median-mode-and-range"
             }
           ]
         },
@@ -826,8 +974,12 @@
           ],
           "practice": [
             {
-              "title": "IXL - Probability",
-              "url": "https://ca.ixl.com/math/grade-5/probability"
+              "title": "Khan Academy - Probability (FREE)",
+              "url": "https://www.khanacademy.org/math/statistics-probability/probability-library/basic-theoretical-probability/e/probability-of-an-event"
+            },
+            {
+              "title": "Math Games - Probability (FREE)",
+              "url": "https://www.mathgames.com/skill/7.122-simple-probability"
             }
           ]
         }
@@ -856,7 +1008,16 @@
               "channel": "Math with Mr. J"
             }
           ],
-          "practice": []
+          "practice": [
+            {
+              "title": "Math Games - Money (FREE)",
+              "url": "https://www.mathgames.com/skill/2.71-count-money-up-to-1"
+            },
+            {
+              "title": "ABCya - Counting Money (FREE)",
+              "url": "https://www.abcya.com/games/counting_money"
+            }
+          ]
         },
         {
           "id": "budgeting",
@@ -870,7 +1031,12 @@
               "channel": "FunKidsTV"
             }
           ],
-          "practice": []
+          "practice": [
+            {
+              "title": "Practical Money Skills - Games (FREE)",
+              "url": "https://www.practicalmoneyskills.com/play"
+            }
+          ]
         }
       ]
     }
