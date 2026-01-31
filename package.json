@@ -1,0 +1,19 @@
+{
+  "name": "maggiemathlearnapplicaiton",
+  "version": "1.0.0",
+  "description": "GitHub 自动同步工具",
+  "main": "auto-sync.js",
+  "scripts": {
+    "start": "node auto-sync.js",
+    "sync": "node auto-sync.js",
+    "sync:fast": "SYNC_INTERVAL=60000 node auto-sync.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "chokidar": "^4.0.3",
+    "simple-git": "^3.30.0"
+  }
+}
