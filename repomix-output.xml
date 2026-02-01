@@ -1,0 +1,4207 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.claude/
+  settings.local.json
+.gitignore
+auto-sync.js
+curriculum-grade6.json
+curriculum.js
+curriculum.json
+index.html
+package.json
+server.js
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path=".claude/settings.local.json">
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(git init:*)",
+      "Bash(gh auth:*)",
+      "Bash(git remote add:*)",
+      "Bash(git branch:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git remote:*)",
+      "Bash(curl:*)"
+    ]
+  }
+}
+</file>
+
+<file path=".gitignore">
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Build output
+dist/
+build/
+
+# Environment files
+.env
+.env.local
+</file>
+
+<file path="auto-sync.js">
+#!/usr/bin/env node
+
+/**
+ * GitHub 自动同步脚本
+ * 定时检测文件变化并自动 commit 和 push 到 GitHub
+ */
+
+const simpleGit = require('simple-git');
+const chokidar = require('chokidar');
+const path = require('path');
+const fs = require('fs');
+
+// 配置
+const CONFIG = {
+  // 同步间隔（毫秒），默认 5 分钟
+  syncInterval: parseInt(process.env.SYNC_INTERVAL) || 5 * 60 * 1000,
+  // 监控的目录，默认当前目录
+  watchDir: process.env.WATCH_DIR || process.cwd(),
+  // 远程仓库名称
+  remoteName: process.env.REMOTE_NAME || 'origin',
+  // 分支名称
+  branchName: process.env.BRANCH_NAME || 'main',
+  // 忽略的文件/目录模式
+  ignorePatterns: [
+    '**/node_modules/**',
+    '**/.git/**',
+    '**/dist/**',
+    '**/.DS_Store',
+    '**/package-lock.json',
+    '**/*.log'
+  ]
+};
+
+// 状态追踪
+let hasChanges = false;
+let lastSyncTime = null;
+let syncTimer = null;
+
+const git = simpleGit(CONFIG.watchDir);
+
+/**
+ * 检查是否是 Git 仓库
+ */
+async function checkGitRepo() {
+  try {
+    const isRepo = await git.checkIsRepo();
+    if (!isRepo) {
+      console.error('错误: 当前目录不是 Git 仓库');
+      console.log('请先运行: git init && git remote add origin <你的GitHub仓库URL>');
+      process.exit(1);
+    }
+    return true;
+  } catch (error) {
+    console.error('检查 Git 仓库失败:', error.message);
+    process.exit(1);
+  }
+}
+
+/**
+ * 检查远程仓库配置
+ */
+async function checkRemote() {
+  try {
+    const remotes = await git.getRemotes(true);
+    const remote = remotes.find(r => r.name === CONFIG.remoteName);
+    if (!remote) {
+      console.error(`错误: 未找到远程仓库 '${CONFIG.remoteName}'`);
+      console.log('请先运行: git remote add origin <你的GitHub仓库URL>');
+      process.exit(1);
+    }
+    console.log(`远程仓库: ${remote.refs.push || remote.refs.fetch}`);
+    return true;
+  } catch (error) {
+    console.error('检查远程仓库失败:', error.message);
+    process.exit(1);
+  }
+}
+
+/**
+ * 执行同步操作
+ */
+async function syncToGitHub() {
+  if (!hasChanges) {
+    console.log(`[${new Date().toLocaleTimeString()}] 没有检测到变化，跳过同步`);
+    return;
+  }
+
+  console.log(`\n[${new Date().toLocaleTimeString()}] 开始同步到 GitHub...`);
+
+  try {
+    // 获取状态
+    const status = await git.status();
+
+    if (status.files.length === 0) {
+      console.log('没有需要提交的文件');
+      hasChanges = false;
+      return;
+    }
+
+    // 显示变化的文件
+    console.log(`检测到 ${status.files.length} 个文件变化:`);
+    status.files.slice(0, 10).forEach(file => {
+      const indicator = file.index === '?' ? '新增' :
+                       file.index === 'M' ? '修改' :
+                       file.index === 'D' ? '删除' : '变化';
+      console.log(`  [${indicator}] ${file.path}`);
+    });
+    if (status.files.length > 10) {
+      console.log(`  ... 还有 ${status.files.length - 10} 个文件`);
+    }
+
+    // 添加所有更改
+    await git.add('.');
+    console.log('已添加所有更改到暂存区');
+
+    // 创建 commit
+    const timestamp = new Date().toLocaleString('zh-CN');
+    const commitMessage = `自动同步: ${timestamp}`;
+    await git.commit(commitMessage);
+    console.log(`已创建 commit: ${commitMessage}`);
+
+    // Push 到远程
+    await git.push(CONFIG.remoteName, CONFIG.branchName);
+    console.log(`已推送到 ${CONFIG.remoteName}/${CONFIG.branchName}`);
+
+    hasChanges = false;
+    lastSyncTime = new Date();
+    console.log('同步完成!\n');
+
+  } catch (error) {
+    console.error('同步失败:', error.message);
+
+    // 如果是因为没有 upstream，尝试设置
+    if (error.message.includes('no upstream')) {
+      try {
+        console.log('尝试设置 upstream...');
+        await git.push(['-u', CONFIG.remoteName, CONFIG.branchName]);
+        console.log('设置 upstream 成功并已推送');
+        hasChanges = false;
+        lastSyncTime = new Date();
+      } catch (e) {
+        console.error('设置 upstream 失败:', e.message);
+      }
+    }
+  }
+}
+
+/**
+ * 设置文件监控
+ */
+function setupWatcher() {
+  console.log(`开始监控目录: ${CONFIG.watchDir}`);
+  console.log(`忽略模式: ${CONFIG.ignorePatterns.join(', ')}`);
+
+  const watcher = chokidar.watch(CONFIG.watchDir, {
+    ignored: CONFIG.ignorePatterns,
+    persistent: true,
+    ignoreInitial: true,
+    awaitWriteFinish: {
+      stabilityThreshold: 2000,
+      pollInterval: 100
+    }
+  });
+
+  watcher
+    .on('add', path => {
+      console.log(`[新增] ${path}`);
+      hasChanges = true;
+    })
+    .on('change', path => {
+      console.log(`[修改] ${path}`);
+      hasChanges = true;
+    })
+    .on('unlink', path => {
+      console.log(`[删除] ${path}`);
+      hasChanges = true;
+    })
+    .on('error', error => {
+      console.error('监控错误:', error);
+    });
+
+  return watcher;
+}
+
+/**
+ * 启动定时同步
+ */
+function startSyncScheduler() {
+  const intervalMinutes = CONFIG.syncInterval / 1000 / 60;
+  console.log(`定时同步已启动，每 ${intervalMinutes} 分钟检查一次\n`);
+
+  // 立即执行一次
+  syncToGitHub();
+
+  // 设置定时器
+  syncTimer = setInterval(syncToGitHub, CONFIG.syncInterval);
+}
+
+/**
+ * 显示使用说明
+ */
+function showUsage() {
+  console.log(`
+╔════════════════════════════════════════════════════╗
+║          GitHub 自动同步工具 v1.0                  ║
+╠════════════════════════════════════════════════════╣
+║  监控本地文件变化，定时自动同步到 GitHub           ║
+╚════════════════════════════════════════════════════╝
+
+环境变量配置:
+  SYNC_INTERVAL  - 同步间隔（毫秒），默认 300000 (5分钟)
+  WATCH_DIR      - 监控目录，默认当前目录
+  REMOTE_NAME    - 远程仓库名，默认 origin
+  BRANCH_NAME    - 分支名，默认 main
+
+使用示例:
+  node auto-sync.js                    # 使用默认配置
+  SYNC_INTERVAL=60000 node auto-sync.js # 每分钟同步一次
+
+按 Ctrl+C 停止同步
+`);
+}
+
+/**
+ * 优雅退出
+ */
+function gracefulShutdown() {
+  console.log('\n正在停止同步服务...');
+
+  if (syncTimer) {
+    clearInterval(syncTimer);
+  }
+
+  // 退出前执行最后一次同步
+  if (hasChanges) {
+    console.log('检测到未同步的更改，正在执行最后一次同步...');
+    syncToGitHub().then(() => {
+      console.log('同步服务已停止');
+      process.exit(0);
+    });
+  } else {
+    console.log('同步服务已停止');
+    process.exit(0);
+  }
+}
+
+/**
+ * 主函数
+ */
+async function main() {
+  showUsage();
+
+  // 检查 Git 配置
+  await checkGitRepo();
+  await checkRemote();
+
+  // 设置文件监控
+  setupWatcher();
+
+  // 启动定时同步
+  startSyncScheduler();
+
+  // 处理退出信号
+  process.on('SIGINT', gracefulShutdown);
+  process.on('SIGTERM', gracefulShutdown);
+}
+
+// 启动
+main().catch(error => {
+  console.error('启动失败:', error);
+  process.exit(1);
+});
+</file>
+
+<file path="curriculum-grade6.json">
+{
+  "grade": 6,
+  "province": "Ontario, Canada",
+  "units": [
+    {
+      "id": "g6-number-sense",
+      "title": "Number Sense - Integers / 数感 - 整数",
+      "description": "理解正负整数，在数轴上表示和比较",
+      "topics": [
+        {
+          "id": "g6-integers-intro",
+          "title": "Introduction to Integers / 整数入门",
+          "description": "理解正数、负数和零的概念",
+          "khanAcademy": [
+            {
+              "title": "Introduction to negative numbers",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-negative-number-topic/cc-6th-negatives-intro/v/negative-numbers-introduction",
+              "type": "video"
+            },
+            {
+              "title": "Negative numbers on the number line",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-negative-number-topic/cc-6th-negatives-on-number-line/v/negative-numbers-on-the-number-line",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Introduction to Integers",
+              "url": "https://www.youtube.com/watch?v=Aq7lPsOGmc4",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Integers Song",
+              "url": "https://www.youtube.com/watch?v=t8m3WgCwrPo",
+              "channel": "Numberock"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Understand integers",
+              "url": "https://ca.ixl.com/math/grade-6/understanding-integers"
+            }
+          ]
+        },
+        {
+          "id": "g6-compare-order-integers",
+          "title": "Comparing and Ordering Integers / 比较和排序整数",
+          "description": "在数轴上比较和排序正负整数",
+          "khanAcademy": [
+            {
+              "title": "Ordering negative numbers",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-negative-number-topic/cc-6th-negatives-on-number-line/v/ordering-negative-numbers",
+              "type": "video"
+            },
+            {
+              "title": "Comparing negative numbers",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-negative-number-topic/cc-6th-ordering-rational-numbers/v/comparing-negative-numbers-on-number-line",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Comparing and Ordering Integers",
+              "url": "https://www.youtube.com/watch?v=2P8siL5IJoA",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Compare and order integers",
+              "url": "https://ca.ixl.com/math/grade-6/compare-and-order-integers"
+            }
+          ]
+        },
+        {
+          "id": "g6-absolute-value",
+          "title": "Absolute Value / 绝对值",
+          "description": "理解数字与零的距离",
+          "khanAcademy": [
+            {
+              "title": "Absolute value",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-negative-number-topic/cc-6th-absolute-value/v/absolute-value-of-integers",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "What is Absolute Value?",
+              "url": "https://www.youtube.com/watch?v=hKkBlcnU9pw",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Absolute value",
+              "url": "https://ca.ixl.com/math/grade-6/absolute-value-and-opposite-integers"
+            }
+          ]
+        },
+        {
+          "id": "g6-add-subtract-integers",
+          "title": "Adding and Subtracting Integers / 整数加减法",
+          "description": "正负整数的加法和减法",
+          "khanAcademy": [
+            {
+              "title": "Adding negative numbers",
+              "url": "https://www.khanacademy.org/math/cc-seventh-grade-math/cc-7th-negative-numbers-add-and-subtract/cc-7th-add-neg-intuition/v/adding-negative-numbers",
+              "type": "video"
+            },
+            {
+              "title": "Subtracting negative numbers",
+              "url": "https://www.khanacademy.org/math/cc-seventh-grade-math/cc-7th-negative-numbers-add-and-subtract/cc-7th-sub-neg-intuition/v/subtracting-a-negative-equal-adding-a-positive",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Adding Integers with Different Signs",
+              "url": "https://www.youtube.com/watch?v=s0L3A3cX1J4",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Subtracting Integers",
+              "url": "https://www.youtube.com/watch?v=iq_c3VXbEG4",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Add and subtract integers",
+              "url": "https://ca.ixl.com/math/grade-6/add-and-subtract-integers"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g6-fractions-advanced",
+      "title": "Fractions - Advanced / 分数进阶",
+      "description": "分数的乘法和除法",
+      "topics": [
+        {
+          "id": "g6-multiply-fractions",
+          "title": "Multiplying Fractions / 分数乘法",
+          "description": "分数乘以分数和整数",
+          "khanAcademy": [
+            {
+              "title": "Multiplying fractions",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-arithmetic-operations/cc-6th-multiply-fractions/v/multiplying-fractions",
+              "type": "video"
+            },
+            {
+              "title": "Multiplying mixed numbers",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-arithmetic-operations/cc-6th-multiply-fractions/v/multiplying-mixed-numbers",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Multiplying Fractions",
+              "url": "https://www.youtube.com/watch?v=qmfXyR7Z6Lk",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Multiplying Mixed Numbers",
+              "url": "https://www.youtube.com/watch?v=vLVbE3R9k1E",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Multiply fractions",
+              "url": "https://ca.ixl.com/math/grade-6/multiply-fractions"
+            }
+          ]
+        },
+        {
+          "id": "g6-divide-fractions",
+          "title": "Dividing Fractions / 分数除法",
+          "description": "分数除以分数和整数",
+          "khanAcademy": [
+            {
+              "title": "Dividing fractions",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-arithmetic-operations/cc-6th-dividing-fractions/v/conceptual-understanding-of-dividing-fractions-by-fractions",
+              "type": "video"
+            },
+            {
+              "title": "Dividing mixed numbers",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-arithmetic-operations/cc-6th-dividing-fractions/v/dividing-mixed-numbers",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Dividing Fractions",
+              "url": "https://www.youtube.com/watch?v=5juto2ze8Lg",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Keep Change Flip Method",
+              "url": "https://www.youtube.com/watch?v=6Lj5jRGYmxY",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Divide fractions",
+              "url": "https://ca.ixl.com/math/grade-6/divide-fractions"
+            }
+          ]
+        },
+        {
+          "id": "g6-fraction-word-problems",
+          "title": "Fraction Word Problems / 分数应用题",
+          "description": "解决涉及分数的实际问题",
+          "khanAcademy": [
+            {
+              "title": "Fraction word problems",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-arithmetic-operations/cc-6th-dividing-fractions/v/dividing-fractions-word-problem",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Fraction Word Problems",
+              "url": "https://www.youtube.com/watch?v=gcnk8TnzsLc",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Fraction word problems",
+              "url": "https://ca.ixl.com/math/grade-6/multiply-and-divide-fractions-word-problems"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g6-ratios",
+      "title": "Ratios and Rates / 比率和比例",
+      "description": "理解比率、比例和单位率",
+      "topics": [
+        {
+          "id": "g6-intro-ratios",
+          "title": "Introduction to Ratios / 比率入门",
+          "description": "理解比率的概念和表示方法",
+          "khanAcademy": [
+            {
+              "title": "Introduction to ratios",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-ratios-prop-topic/cc-6th-intro-ratios/v/introduction-to-ratios",
+              "type": "video"
+            },
+            {
+              "title": "Ratio tables",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-ratios-prop-topic/cc-6th-intro-ratios/v/ratio-tables",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "What is a Ratio?",
+              "url": "https://www.youtube.com/watch?v=DYzkyLE7Hpk",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Ratios Song",
+              "url": "https://www.youtube.com/watch?v=RQ2nYUBVvqI",
+              "channel": "Numberock"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Understanding ratios",
+              "url": "https://ca.ixl.com/math/grade-6/understanding-ratios"
+            }
+          ]
+        },
+        {
+          "id": "g6-equivalent-ratios",
+          "title": "Equivalent Ratios / 等价比率",
+          "description": "找出和创建等价比率",
+          "khanAcademy": [
+            {
+              "title": "Equivalent ratios",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-ratios-prop-topic/cc-6th-equivalent-ratios/v/equivalent-ratios",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Equivalent Ratios",
+              "url": "https://www.youtube.com/watch?v=JnRTl6-LKOA",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Equivalent ratios",
+              "url": "https://ca.ixl.com/math/grade-6/equivalent-ratios"
+            }
+          ]
+        },
+        {
+          "id": "g6-unit-rates",
+          "title": "Unit Rates / 单位比率",
+          "description": "计算和使用单位比率",
+          "khanAcademy": [
+            {
+              "title": "Rates and unit rates",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-ratios-prop-topic/cc-6th-unit-rates/v/introduction-to-rates",
+              "type": "video"
+            },
+            {
+              "title": "Unit rate problems",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-ratios-prop-topic/cc-6th-unit-rates/v/finding-unit-rates",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Unit Rates",
+              "url": "https://www.youtube.com/watch?v=RQ2nYUBVvqI",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Unit rates",
+              "url": "https://ca.ixl.com/math/grade-6/unit-rates"
+            }
+          ]
+        },
+        {
+          "id": "g6-ratio-problems",
+          "title": "Ratio Word Problems / 比率应用题",
+          "description": "用比率解决实际问题",
+          "khanAcademy": [
+            {
+              "title": "Ratio word problems",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-ratios-prop-topic/cc-6th-rates-word-problems/v/solving-ratio-problems-with-tables",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Ratio Word Problems",
+              "url": "https://www.youtube.com/watch?v=NZB0q09uqZk",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Ratio word problems",
+              "url": "https://ca.ixl.com/math/grade-6/ratio-tables"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g6-percent",
+      "title": "Percent / 百分比",
+      "description": "理解和使用百分比",
+      "topics": [
+        {
+          "id": "g6-intro-percent",
+          "title": "Introduction to Percent / 百分比入门",
+          "description": "理解百分比的概念",
+          "khanAcademy": [
+            {
+              "title": "Introduction to percents",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-ratios-prop-topic/cc-6th-percent-visualization/v/describing-the-meaning-of-percent",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "What is Percent?",
+              "url": "https://www.youtube.com/watch?v=JeVSmq1Nrpw",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Percent Song",
+              "url": "https://www.youtube.com/watch?v=JTBgJjKvuOE",
+              "channel": "Numberock"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Introduction to percent",
+              "url": "https://ca.ixl.com/math/grade-6/what-percentage-is-illustrated"
+            }
+          ]
+        },
+        {
+          "id": "g6-percent-fraction-decimal",
+          "title": "Percent, Fraction, Decimal Conversions / 百分比、分数、小数转换",
+          "description": "在百分比、分数和小数之间转换",
+          "khanAcademy": [
+            {
+              "title": "Converting between percent, fraction, and decimal",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-ratios-prop-topic/cc-6th-rates-with-fractions/v/converting-fractions-to-decimals-to-percentages",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Converting Between Fractions, Decimals, and Percents",
+              "url": "https://www.youtube.com/watch?v=HxJ_rVwT9qI",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Convert between percents, fractions, and decimals",
+              "url": "https://ca.ixl.com/math/grade-6/convert-between-percents-fractions-and-decimals"
+            }
+          ]
+        },
+        {
+          "id": "g6-percent-of-number",
+          "title": "Percent of a Number / 一个数的百分比",
+          "description": "计算一个数的百分比",
+          "khanAcademy": [
+            {
+              "title": "Finding a percent of a number",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-ratios-prop-topic/cc-6th-percent-problems/v/finding-a-percent",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Finding Percent of a Number",
+              "url": "https://www.youtube.com/watch?v=rR95Cbcjzus",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Percent of a number",
+              "url": "https://ca.ixl.com/math/grade-6/percent-of-a-number"
+            }
+          ]
+        },
+        {
+          "id": "g6-percent-problems",
+          "title": "Percent Word Problems / 百分比应用题",
+          "description": "解决涉及百分比的实际问题",
+          "khanAcademy": [
+            {
+              "title": "Percent word problems",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-ratios-prop-topic/cc-6th-percent-problems/v/percent-word-problem-example-1",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Percent Word Problems",
+              "url": "https://www.youtube.com/watch?v=p2KHi9N_dP8",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Percent problems",
+              "url": "https://ca.ixl.com/math/grade-6/solve-percent-equations"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g6-decimals",
+      "title": "Decimals Operations / 小数运算",
+      "description": "小数的四则运算",
+      "topics": [
+        {
+          "id": "g6-multiply-decimals",
+          "title": "Multiplying Decimals / 小数乘法",
+          "description": "小数乘以小数",
+          "khanAcademy": [
+            {
+              "title": "Multiplying decimals",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-arithmetic-operations/cc-6th-multiplying-decimals/v/more-intuition-for-multiplying-decimals",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Multiplying Decimals",
+              "url": "https://www.youtube.com/watch?v=XZcl8u9jiDE",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Multiply decimals",
+              "url": "https://ca.ixl.com/math/grade-6/multiply-decimals"
+            }
+          ]
+        },
+        {
+          "id": "g6-divide-decimals",
+          "title": "Dividing Decimals / 小数除法",
+          "description": "小数除以小数",
+          "khanAcademy": [
+            {
+              "title": "Dividing decimals",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-arithmetic-operations/cc-6th-dividing-decimals/v/dividing-decimals",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Dividing Decimals",
+              "url": "https://www.youtube.com/watch?v=S2L8gYEGcYg",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Divide decimals",
+              "url": "https://ca.ixl.com/math/grade-6/divide-decimals"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g6-algebra",
+      "title": "Algebra / 代数",
+      "description": "表达式、方程和不等式",
+      "topics": [
+        {
+          "id": "g6-expressions",
+          "title": "Algebraic Expressions / 代数表达式",
+          "description": "写和计算代数表达式",
+          "khanAcademy": [
+            {
+              "title": "Writing algebraic expressions",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-expressions-and-variables/cc-6th-writing-expressions/v/writing-algebraic-expressions-introduction",
+              "type": "video"
+            },
+            {
+              "title": "Evaluating expressions",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-expressions-and-variables/cc-6th-evaluating-expressions/v/evaluating-an-expression-with-one-variable",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Writing Algebraic Expressions",
+              "url": "https://www.youtube.com/watch?v=3t7Zdx4SJfM",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Write and evaluate expressions",
+              "url": "https://ca.ixl.com/math/grade-6/write-variable-expressions"
+            }
+          ]
+        },
+        {
+          "id": "g6-one-step-equations",
+          "title": "One-Step Equations / 一步方程",
+          "description": "解一步加减乘除方程",
+          "khanAcademy": [
+            {
+              "title": "One-step addition and subtraction equations",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-equations-and-inequalities/cc-6th-one-step-add-sub-equations/v/simple-equations",
+              "type": "video"
+            },
+            {
+              "title": "One-step multiplication and division equations",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-equations-and-inequalities/cc-6th-one-step-mult-div-equations/v/simple-equations-of-the-form-ax-b",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Solving One-Step Equations",
+              "url": "https://www.youtube.com/watch?v=l3XzepN03KQ",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Solve one-step equations",
+              "url": "https://ca.ixl.com/math/grade-6/solve-one-step-equations"
+            }
+          ]
+        },
+        {
+          "id": "g6-inequalities",
+          "title": "Inequalities / 不等式",
+          "description": "理解和表示不等式",
+          "khanAcademy": [
+            {
+              "title": "Introduction to inequalities",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-equations-and-inequalities/cc-6th-inequalities/v/testing-solutions-to-inequalities",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Introduction to Inequalities",
+              "url": "https://www.youtube.com/watch?v=P_-c43dQ3js",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Inequalities",
+              "url": "https://ca.ixl.com/math/grade-6/which-x-satisfies-an-equation"
+            }
+          ]
+        },
+        {
+          "id": "g6-dependent-independent",
+          "title": "Dependent and Independent Variables / 因变量和自变量",
+          "description": "理解变量之间的关系",
+          "khanAcademy": [
+            {
+              "title": "Dependent and independent variables",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-equations-and-inequalities/cc-6th-dependent-independent/v/dependent-and-independent-variables",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Independent and Dependent Variables",
+              "url": "https://www.youtube.com/watch?v=WKlJnYPkdK8",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Independent and dependent variables",
+              "url": "https://ca.ixl.com/math/grade-6/identify-independent-and-dependent-variables"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g6-geometry",
+      "title": "Geometry / 几何",
+      "description": "面积、表面积和体积",
+      "topics": [
+        {
+          "id": "g6-area-triangles",
+          "title": "Area of Triangles / 三角形面积",
+          "description": "计算三角形的面积",
+          "khanAcademy": [
+            {
+              "title": "Area of triangles",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-geometry-topic/cc-6th-area-triangle/v/area-of-a-triangle",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Area of a Triangle",
+              "url": "https://www.youtube.com/watch?v=_E3G-fmLAZ4",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Area of triangles",
+              "url": "https://ca.ixl.com/math/grade-6/area-of-triangles"
+            }
+          ]
+        },
+        {
+          "id": "g6-area-quadrilaterals",
+          "title": "Area of Quadrilaterals / 四边形面积",
+          "description": "计算平行四边形和梯形的面积",
+          "khanAcademy": [
+            {
+              "title": "Area of parallelograms",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-geometry-topic/cc-6th-parallelograms/v/intuition-for-area-of-a-parallelogram",
+              "type": "video"
+            },
+            {
+              "title": "Area of trapezoids",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-geometry-topic/cc-6th-trapezoids/v/area-of-a-trapezoid-1",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Area of Parallelograms",
+              "url": "https://www.youtube.com/watch?v=u6zDpUL5RkU",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Area of Trapezoids",
+              "url": "https://www.youtube.com/watch?v=5gOKe9gkYRk",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Area of parallelograms and trapezoids",
+              "url": "https://ca.ixl.com/math/grade-6/area-of-parallelograms-and-trapezoids"
+            }
+          ]
+        },
+        {
+          "id": "g6-composite-figures",
+          "title": "Area of Composite Figures / 组合图形面积",
+          "description": "计算复杂形状的面积",
+          "khanAcademy": [
+            {
+              "title": "Area of composite shapes",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-geometry-topic/cc-6th-area-composite-figures/v/area-of-composite-shapes",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Area of Composite Figures",
+              "url": "https://www.youtube.com/watch?v=mJMq_9RWfho",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Area of composite figures",
+              "url": "https://ca.ixl.com/math/grade-6/area-of-compound-figures"
+            }
+          ]
+        },
+        {
+          "id": "g6-surface-area",
+          "title": "Surface Area / 表面积",
+          "description": "计算三维图形的表面积",
+          "khanAcademy": [
+            {
+              "title": "Surface area of prisms",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-geometry-topic/cc-6th-surface-area/v/surface-area-of-a-box",
+              "type": "video"
+            },
+            {
+              "title": "Surface area using nets",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-geometry-topic/cc-6th-surface-area/v/surface-area-from-a-net",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Surface Area of Rectangular Prisms",
+              "url": "https://www.youtube.com/watch?v=1TnkA9Ep_tE",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Surface Area Song",
+              "url": "https://www.youtube.com/watch?v=gDYqWcMHvhg",
+              "channel": "Numberock"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Surface area",
+              "url": "https://ca.ixl.com/math/grade-6/surface-area-of-prisms-and-pyramids"
+            }
+          ]
+        },
+        {
+          "id": "g6-volume",
+          "title": "Volume / 体积",
+          "description": "计算棱柱的体积",
+          "khanAcademy": [
+            {
+              "title": "Volume of rectangular prisms",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-geometry-topic/cc-6th-volume/v/volume-of-rectangular-prism-examples",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Volume of Rectangular Prisms",
+              "url": "https://www.youtube.com/watch?v=qJwecTgce6c",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Volume",
+              "url": "https://ca.ixl.com/math/grade-6/volume-of-rectangular-prisms"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g6-coordinate-plane",
+      "title": "Coordinate Plane / 坐标平面",
+      "description": "四象限的坐标平面",
+      "topics": [
+        {
+          "id": "g6-four-quadrants",
+          "title": "Four Quadrants / 四象限",
+          "description": "在四象限坐标平面上绘点",
+          "khanAcademy": [
+            {
+              "title": "Four quadrants",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-negative-number-topic/cc-6th-coordinate-plane/v/four-quadrants",
+              "type": "video"
+            },
+            {
+              "title": "Plotting points in four quadrants",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-negative-number-topic/cc-6th-coordinate-plane/v/plotting-points-on-a-coordinate-plane",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "The Four Quadrants",
+              "url": "https://www.youtube.com/watch?v=4mAc5OL0LTM",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Coordinate plane with all four quadrants",
+              "url": "https://ca.ixl.com/math/grade-6/coordinate-plane-review"
+            }
+          ]
+        },
+        {
+          "id": "g6-distance-coordinate",
+          "title": "Distance on Coordinate Plane / 坐标平面上的距离",
+          "description": "计算坐标平面上两点之间的距离",
+          "khanAcademy": [
+            {
+              "title": "Distance between points",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-negative-number-topic/cc-6th-coordinate-plane-abs-value/v/distance-between-points-on-coordinate-plane",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Finding Distance on Coordinate Plane",
+              "url": "https://www.youtube.com/watch?v=Gh8t8n_B1Fc",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Distance between two points",
+              "url": "https://ca.ixl.com/math/grade-6/distance-between-two-points"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g6-data-statistics",
+      "title": "Data and Statistics / 数据和统计",
+      "description": "统计问题和数据分析",
+      "topics": [
+        {
+          "id": "g6-statistical-questions",
+          "title": "Statistical Questions / 统计问题",
+          "description": "识别统计问题",
+          "khanAcademy": [
+            {
+              "title": "Statistical questions",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-data-statistics/cc-6-statistical-questions/v/statistical-questions",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "What is a Statistical Question?",
+              "url": "https://www.youtube.com/watch?v=PWbzOzK8a9w",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": []
+        },
+        {
+          "id": "g6-mean-median-mode",
+          "title": "Mean, Median, Mode, Range / 平均数、中位数、众数、极差",
+          "description": "计算和理解数据的中心趋势",
+          "khanAcademy": [
+            {
+              "title": "Mean, median, mode",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-data-statistics/cc-6-mean-and-median/v/statistics-intro-mean-median-and-mode",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Mean, Median, Mode, Range",
+              "url": "https://www.youtube.com/watch?v=B1HEzNTGeZ4",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Mean, median, mode, range",
+              "url": "https://ca.ixl.com/math/grade-6/mean-median-mode-and-range"
+            }
+          ]
+        },
+        {
+          "id": "g6-box-plots",
+          "title": "Box Plots / 箱线图",
+          "description": "创建和解读箱线图",
+          "khanAcademy": [
+            {
+              "title": "Box plots",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-data-statistics/cc-6th-box-whisker-plots/v/constructing-a-box-and-whisker-plot",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "How to Make a Box Plot",
+              "url": "https://www.youtube.com/watch?v=b2C9I8HuCe4",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Box plots",
+              "url": "https://ca.ixl.com/math/grade-6/interpret-box-and-whisker-plots"
+            }
+          ]
+        },
+        {
+          "id": "g6-histograms",
+          "title": "Histograms / 直方图",
+          "description": "创建和解读直方图",
+          "khanAcademy": [
+            {
+              "title": "Histograms",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-data-statistics/cc-6th-histograms/v/histograms",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "How to Make a Histogram",
+              "url": "https://www.youtube.com/watch?v=4aGEs0JL4_s",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "IXL - Histograms",
+              "url": "https://ca.ixl.com/math/grade-6/create-histograms"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g6-financial-literacy",
+      "title": "Financial Literacy / 财务素养",
+      "description": "利息、预算和理财",
+      "topics": [
+        {
+          "id": "g6-simple-interest",
+          "title": "Simple Interest / 单利",
+          "description": "理解和计算单利",
+          "khanAcademy": [
+            {
+              "title": "Introduction to interest",
+              "url": "https://www.khanacademy.org/economics-finance-domain/core-finance/interest-tutorial/interest-basics-tutorial/v/introduction-to-interest",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Simple Interest Formula",
+              "url": "https://www.youtube.com/watch?v=I2e7zz_aPek",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": []
+        },
+        {
+          "id": "g6-budgeting",
+          "title": "Budgeting and Saving / 预算和储蓄",
+          "description": "创建预算和储蓄计划",
+          "khanAcademy": [],
+          "youtube": [
+            {
+              "title": "Budgeting for Kids",
+              "url": "https://www.youtube.com/watch?v=YyOfIj7nWcU",
+              "channel": "FunKidsTV"
+            },
+            {
+              "title": "Saving Money for Kids",
+              "url": "https://www.youtube.com/watch?v=CPQ3PKvdnBw",
+              "channel": "FunKidsTV"
+            }
+          ],
+          "practice": []
+        }
+      ]
+    }
+  ]
+}
+</file>
+
+<file path="curriculum.js">
+/**
+ * 加拿大安大略省五年级数学课程大纲
+ * 基于 Ontario Grade 5 Mathematics Curriculum
+ */
+
+const curriculum = {
+  grade: 5,
+  province: "Ontario, Canada",
+
+  units: [
+    // ============ 单元1: 数感 - 整数 ============
+    {
+      id: "number-sense-whole",
+      title: "Number Sense - Whole Numbers / 数感 - 整数",
+      description: "理解和运用大数字，包括读、写、比较和排序",
+      topics: [
+        {
+          id: "place-value",
+          title: "Place Value / 位值",
+          description: "理解到百万位的位值系统",
+          khanAcademy: [
+            {
+              title: "Place value with whole numbers",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/powers-of-ten/imp-place-value-with-powers-of-10/v/place-value-with-whole-numbers",
+              type: "video"
+            },
+            {
+              title: "Place value practice",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/powers-of-ten/imp-place-value-with-powers-of-10/e/place-value",
+              type: "practice"
+            }
+          ],
+          youtube: [
+            {
+              title: "Place Value Song For Kids | Ones, Tens, Hundreds",
+              url: "https://www.youtube.com/watch?v=5W47G-h7myY",
+              channel: "Scratch Garden"
+            },
+            {
+              title: "Place Value Through Millions",
+              url: "https://www.youtube.com/watch?v=_8xGqn8Nfcs",
+              channel: "Math with Mr. J"
+            }
+          ],
+          practice: [
+            {
+              title: "IXL - Place value",
+              url: "https://ca.ixl.com/math/grade-5/place-value-names"
+            }
+          ]
+        },
+        {
+          id: "compare-order",
+          title: "Comparing and Ordering Numbers / 比较和排序数字",
+          description: "比较和排序大数字",
+          khanAcademy: [
+            {
+              title: "Comparing whole numbers",
+              url: "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-place-value-and-rounding-2/imp-comparing-multi-digit-numbers/v/comparing-whole-numbers",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "Comparing and Ordering Whole Numbers",
+              url: "https://www.youtube.com/watch?v=WLgU3hHLH-4",
+              channel: "Math with Mr. J"
+            }
+          ],
+          practice: [
+            {
+              title: "IXL - Compare numbers up to millions",
+              url: "https://ca.ixl.com/math/grade-5/compare-numbers-up-to-millions"
+            }
+          ]
+        },
+        {
+          id: "rounding",
+          title: "Rounding Numbers / 四舍五入",
+          description: "四舍五入到不同位值",
+          khanAcademy: [
+            {
+              title: "Rounding whole numbers",
+              url: "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-place-value-and-rounding-2/imp-rounding-whole-numbers/v/rounding-whole-numbers",
+              type: "video"
+            },
+            {
+              title: "Rounding practice",
+              url: "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-place-value-and-rounding-2/imp-rounding-whole-numbers/e/rounding-whole-numbers",
+              type: "practice"
+            }
+          ],
+          youtube: [
+            {
+              title: "Rounding Numbers Song",
+              url: "https://www.youtube.com/watch?v=UP7YmXJc7Ik",
+              channel: "Numberock"
+            }
+          ],
+          practice: []
+        }
+      ]
+    },
+
+    // ============ 单元2: 数感 - 小数 ============
+    {
+      id: "number-sense-decimals",
+      title: "Number Sense - Decimals / 数感 - 小数",
+      description: "理解和运用小数，包括加减乘除",
+      topics: [
+        {
+          id: "decimal-place-value",
+          title: "Decimal Place Value / 小数位值",
+          description: "理解小数位值到千分位",
+          khanAcademy: [
+            {
+              title: "Decimal place value intro",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-place-value-and-decimals/imp-decimal-place-value-intro/v/decimal-place-value",
+              type: "video"
+            },
+            {
+              title: "Decimals on the number line",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-place-value-and-decimals/imp-decimals-on-the-number-line/v/decimals-on-a-number-line",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "Understanding Decimal Place Value",
+              url: "https://www.youtube.com/watch?v=OqiWuUfLvdc",
+              channel: "Math with Mr. J"
+            },
+            {
+              title: "Decimal Place Value Song",
+              url: "https://www.youtube.com/watch?v=dXh8MX-fJRo",
+              channel: "Numberock"
+            }
+          ],
+          practice: [
+            {
+              title: "IXL - Decimal place value",
+              url: "https://ca.ixl.com/math/grade-5/decimal-place-value"
+            }
+          ]
+        },
+        {
+          id: "add-subtract-decimals",
+          title: "Adding and Subtracting Decimals / 小数加减法",
+          description: "小数的加法和减法运算",
+          khanAcademy: [
+            {
+              title: "Adding decimals",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-adding-and-subtracting-decimals/imp-adding-decimals-intro/v/adding-decimals-example-1",
+              type: "video"
+            },
+            {
+              title: "Subtracting decimals",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-adding-and-subtracting-decimals/imp-subtracting-decimals-intro/v/subtracting-decimals",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "Adding Decimals | Math with Mr. J",
+              url: "https://www.youtube.com/watch?v=9GlvJ-XRvno",
+              channel: "Math with Mr. J"
+            },
+            {
+              title: "Subtracting Decimals | Math with Mr. J",
+              url: "https://www.youtube.com/watch?v=6HMdL9nB4s4",
+              channel: "Math with Mr. J"
+            }
+          ],
+          practice: [
+            {
+              title: "IXL - Add and subtract decimals",
+              url: "https://ca.ixl.com/math/grade-5/add-and-subtract-decimals"
+            }
+          ]
+        },
+        {
+          id: "multiply-decimals",
+          title: "Multiplying Decimals / 小数乘法",
+          description: "小数的乘法运算",
+          khanAcademy: [
+            {
+              title: "Multiplying decimals",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multiplying-and-dividing-decimals/imp-multiplying-decimals-strategies/v/multiplying-decimals-example",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "Multiplying Decimals",
+              url: "https://www.youtube.com/watch?v=JETRf1mFnHM",
+              channel: "Math with Mr. J"
+            }
+          ],
+          practice: [
+            {
+              title: "IXL - Multiply decimals",
+              url: "https://ca.ixl.com/math/grade-5/multiply-decimals"
+            }
+          ]
+        },
+        {
+          id: "divide-decimals",
+          title: "Dividing Decimals / 小数除法",
+          description: "小数的除法运算",
+          khanAcademy: [
+            {
+              title: "Dividing decimals",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multiplying-and-dividing-decimals/imp-dividing-decimals-with-hundredths/v/dividing-decimals",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "Dividing Decimals",
+              url: "https://www.youtube.com/watch?v=wOUkBkLPCGI",
+              channel: "Math with Mr. J"
+            }
+          ],
+          practice: [
+            {
+              title: "IXL - Divide decimals",
+              url: "https://ca.ixl.com/math/grade-5/divide-decimals"
+            }
+          ]
+        }
+      ]
+    },
+
+    // ============ 单元3: 数感 - 分数 ============
+    {
+      id: "number-sense-fractions",
+      title: "Number Sense - Fractions / 数感 - 分数",
+      description: "理解和运用分数",
+      topics: [
+        {
+          id: "equivalent-fractions",
+          title: "Equivalent Fractions / 等值分数",
+          description: "找出和创建等值分数",
+          khanAcademy: [
+            {
+              title: "Equivalent fractions",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-fractions-2/imp-visualizing-equivalent-fractions/v/equivalent-fractions",
+              type: "video"
+            },
+            {
+              title: "Equivalent fractions practice",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-fractions-2/imp-visualizing-equivalent-fractions/e/equivalent-fractions",
+              type: "practice"
+            }
+          ],
+          youtube: [
+            {
+              title: "Equivalent Fractions | Math with Mr. J",
+              url: "https://www.youtube.com/watch?v=qcHHhd6HizI",
+              channel: "Math with Mr. J"
+            },
+            {
+              title: "Equivalent Fractions Song",
+              url: "https://www.youtube.com/watch?v=Bss4F1LZsTA",
+              channel: "Numberock"
+            }
+          ],
+          practice: []
+        },
+        {
+          id: "compare-fractions",
+          title: "Comparing Fractions / 比较分数",
+          description: "比较不同分母的分数",
+          khanAcademy: [
+            {
+              title: "Comparing fractions with different denominators",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-fractions-2/imp-common-denominators/v/comparing-fractions-with-different-denominators",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "Comparing Fractions",
+              url: "https://www.youtube.com/watch?v=UA0MjzKmwhg",
+              channel: "Math with Mr. J"
+            }
+          ],
+          practice: [
+            {
+              title: "IXL - Compare fractions",
+              url: "https://ca.ixl.com/math/grade-5/compare-fractions-with-unlike-denominators"
+            }
+          ]
+        },
+        {
+          id: "add-subtract-fractions",
+          title: "Adding and Subtracting Fractions / 分数加减法",
+          description: "不同分母分数的加减法",
+          khanAcademy: [
+            {
+              title: "Adding fractions with unlike denominators",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-add-and-subtract-fractions/imp-adding-fractions-with-unlike-denominators/v/adding-fractions-with-unlike-denominators",
+              type: "video"
+            },
+            {
+              title: "Subtracting fractions with unlike denominators",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-add-and-subtract-fractions/imp-subtracting-fractions-with-unlike-denominators-2/v/subtracting-fractions-with-unlike-denominators",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "Adding Fractions with Unlike Denominators",
+              url: "https://www.youtube.com/watch?v=52ZlXsFJULI",
+              channel: "Math with Mr. J"
+            },
+            {
+              title: "Subtracting Fractions with Unlike Denominators",
+              url: "https://www.youtube.com/watch?v=BvHkjxcPOOI",
+              channel: "Math with Mr. J"
+            }
+          ],
+          practice: [
+            {
+              title: "IXL - Add fractions with unlike denominators",
+              url: "https://ca.ixl.com/math/grade-5/add-fractions-with-unlike-denominators"
+            }
+          ]
+        },
+        {
+          id: "multiply-fractions",
+          title: "Multiplying Fractions / 分数乘法",
+          description: "分数与整数和分数的乘法",
+          khanAcademy: [
+            {
+              title: "Multiplying fractions",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multiply-fractions/imp-multiplying-fractions/v/multiplying-fractions",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "Multiplying Fractions",
+              url: "https://www.youtube.com/watch?v=bX95hmVmDjY",
+              channel: "Math with Mr. J"
+            }
+          ],
+          practice: [
+            {
+              title: "IXL - Multiply fractions",
+              url: "https://ca.ixl.com/math/grade-5/multiply-fractions"
+            }
+          ]
+        },
+        {
+          id: "divide-fractions",
+          title: "Dividing Fractions / 分数除法",
+          description: "分数的除法运算",
+          khanAcademy: [
+            {
+              title: "Dividing fractions",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-dividing-fractions/imp-dividing-unit-fractions-by-whole-numbers/v/dividing-unit-fractions-by-whole-numbers",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "Dividing Fractions",
+              url: "https://www.youtube.com/watch?v=5juto2ze8Lg",
+              channel: "Math with Mr. J"
+            }
+          ],
+          practice: []
+        }
+      ]
+    },
+
+    // ============ 单元4: 运算 ============
+    {
+      id: "operations",
+      title: "Operations / 运算",
+      description: "多位数的乘法和除法",
+      topics: [
+        {
+          id: "multi-digit-multiplication",
+          title: "Multi-digit Multiplication / 多位数乘法",
+          description: "两位数和三位数的乘法",
+          khanAcademy: [
+            {
+              title: "Multi-digit multiplication",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multi-digit-multiplication-and-division/imp-multi-digit-multiplication/v/multiplication-5-2-digit-times-a-2-digit-number",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "2-Digit by 2-Digit Multiplication",
+              url: "https://www.youtube.com/watch?v=mQH4YXQFL0U",
+              channel: "Math with Mr. J"
+            },
+            {
+              title: "Multiplication Song",
+              url: "https://www.youtube.com/watch?v=6pSAT7X1SOs",
+              channel: "Numberock"
+            }
+          ],
+          practice: [
+            {
+              title: "IXL - Multiply 2-digit numbers",
+              url: "https://ca.ixl.com/math/grade-5/multiply-two-digit-numbers-by-two-digit-numbers"
+            }
+          ]
+        },
+        {
+          id: "long-division",
+          title: "Long Division / 长除法",
+          description: "多位数除以一位数和两位数",
+          khanAcademy: [
+            {
+              title: "Long division",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multi-digit-multiplication-and-division/imp-multi-digit-division/v/long-division-without-remainder",
+              type: "video"
+            },
+            {
+              title: "Division with remainders",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multi-digit-multiplication-and-division/imp-multi-digit-division/v/long-division-with-remainder-example",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "Long Division - Easy Method",
+              url: "https://www.youtube.com/watch?v=LGqBQrUYua4",
+              channel: "Math with Mr. J"
+            }
+          ],
+          practice: [
+            {
+              title: "IXL - Divide multi-digit numbers",
+              url: "https://ca.ixl.com/math/grade-5/divide-larger-numbers"
+            }
+          ]
+        },
+        {
+          id: "order-of-operations",
+          title: "Order of Operations (BEDMAS) / 运算顺序",
+          description: "按正确顺序计算表达式",
+          khanAcademy: [
+            {
+              title: "Order of operations introduction",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-powers-of-ten/imp-order-of-operations-introduction/v/introduction-to-order-of-operations",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "Order of Operations | PEMDAS",
+              url: "https://www.youtube.com/watch?v=dAgfnK528RA",
+              channel: "Math with Mr. J"
+            },
+            {
+              title: "PEMDAS Song",
+              url: "https://www.youtube.com/watch?v=JVFyMT5C3Nk",
+              channel: "Numberock"
+            }
+          ],
+          practice: [
+            {
+              title: "IXL - Order of operations",
+              url: "https://ca.ixl.com/math/grade-5/order-of-operations"
+            }
+          ]
+        }
+      ]
+    },
+
+    // ============ 单元5: 代数 ============
+    {
+      id: "algebra",
+      title: "Algebra - Patterns and Equations / 代数 - 规律和方程",
+      description: "识别规律，解简单方程",
+      topics: [
+        {
+          id: "patterns",
+          title: "Number Patterns / 数字规律",
+          description: "识别和延续数字规律",
+          khanAcademy: [
+            {
+              title: "Number patterns",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-algebraic-thinking/imp-number-patterns/v/practice-finding-patterns-in-numbers",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "Number Patterns",
+              url: "https://www.youtube.com/watch?v=F9G1yOCH1B0",
+              channel: "Math with Mr. J"
+            }
+          ],
+          practice: []
+        },
+        {
+          id: "variables",
+          title: "Variables and Expressions / 变量和表达式",
+          description: "用字母代表未知数",
+          khanAcademy: [
+            {
+              title: "Variables and expressions",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-algebraic-thinking/imp-intro-to-variables/v/what-is-a-variable",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "What is a Variable?",
+              url: "https://www.youtube.com/watch?v=Xmt6cRRKP1k",
+              channel: "Math with Mr. J"
+            }
+          ],
+          practice: []
+        },
+        {
+          id: "equations",
+          title: "Simple Equations / 简单方程",
+          description: "解简单的一步方程",
+          khanAcademy: [
+            {
+              title: "One-step equations",
+              url: "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-equations-and-inequalities/cc-6th-one-step-add-sub-equations/v/simple-equations",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "Solving One-Step Equations",
+              url: "https://www.youtube.com/watch?v=l3XzepN03KQ",
+              channel: "Math with Mr. J"
+            }
+          ],
+          practice: [
+            {
+              title: "IXL - Solve one-step equations",
+              url: "https://ca.ixl.com/math/grade-5/solve-one-step-equations"
+            }
+          ]
+        }
+      ]
+    },
+
+    // ============ 单元6: 几何 ============
+    {
+      id: "geometry",
+      title: "Geometry / 几何",
+      description: "二维和三维图形",
+      topics: [
+        {
+          id: "2d-shapes",
+          title: "2D Shapes / 二维图形",
+          description: "识别和分类多边形",
+          khanAcademy: [
+            {
+              title: "Classifying shapes",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-geometry-3/imp-classifying-triangles/v/classifying-triangles",
+              type: "video"
+            },
+            {
+              title: "Quadrilaterals",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-geometry-3/imp-classifying-quadrilaterals/v/classifying-quadrilaterals",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "Types of Quadrilaterals",
+              url: "https://www.youtube.com/watch?v=Byd5ACrCYcY",
+              channel: "Math with Mr. J"
+            }
+          ],
+          practice: []
+        },
+        {
+          id: "3d-shapes",
+          title: "3D Shapes / 三维图形",
+          description: "识别立体图形及其特征",
+          khanAcademy: [
+            {
+              title: "Intro to 3D shapes",
+              url: "https://www.khanacademy.org/math/basic-geo/basic-geo-volume/basic-geo-volumes-rectangular-prism/v/introduction-to-3d-solids",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "3D Shapes",
+              url: "https://www.youtube.com/watch?v=2cg-Uc556-Q",
+              channel: "Math with Mr. J"
+            }
+          ],
+          practice: []
+        },
+        {
+          id: "angles",
+          title: "Angles / 角度",
+          description: "测量和分类角度",
+          khanAcademy: [
+            {
+              title: "Measuring angles",
+              url: "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-geometry-2/imp-measuring-angles/v/using-a-protractor-to-measure-angles",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "Types of Angles",
+              url: "https://www.youtube.com/watch?v=Rp2-1a0LgtM",
+              channel: "Math with Mr. J"
+            },
+            {
+              title: "How to Use a Protractor",
+              url: "https://www.youtube.com/watch?v=2TqOh4TQMW4",
+              channel: "Math with Mr. J"
+            }
+          ],
+          practice: [
+            {
+              title: "IXL - Measure angles with a protractor",
+              url: "https://ca.ixl.com/math/grade-5/measure-angles-with-a-protractor"
+            }
+          ]
+        },
+        {
+          id: "coordinate-plane",
+          title: "Coordinate Plane / 坐标平面",
+          description: "在坐标平面上绘制和读取点",
+          khanAcademy: [
+            {
+              title: "Coordinate plane",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-geometry-3/imp-intro-to-the-coordinate-plane/v/coordinate-plane-graphing-points-intro",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "Coordinate Plane Basics",
+              url: "https://www.youtube.com/watch?v=9Uc62CuQjc4",
+              channel: "Math with Mr. J"
+            }
+          ],
+          practice: [
+            {
+              title: "IXL - Coordinate plane",
+              url: "https://ca.ixl.com/math/grade-5/graph-points-on-a-coordinate-plane"
+            }
+          ]
+        }
+      ]
+    },
+
+    // ============ 单元7: 测量 ============
+    {
+      id: "measurement",
+      title: "Measurement / 测量",
+      description: "周长、面积和体积",
+      topics: [
+        {
+          id: "perimeter",
+          title: "Perimeter / 周长",
+          description: "计算多边形的周长",
+          khanAcademy: [
+            {
+              title: "Perimeter",
+              url: "https://www.khanacademy.org/math/basic-geo/basic-geo-area-and-perimeter/basic-geo-perimeter/v/perimeter-and-area-basics",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "How to Find Perimeter",
+              url: "https://www.youtube.com/watch?v=AAY1bpsiaps",
+              channel: "Math with Mr. J"
+            }
+          ],
+          practice: [
+            {
+              title: "IXL - Perimeter",
+              url: "https://ca.ixl.com/math/grade-5/perimeter"
+            }
+          ]
+        },
+        {
+          id: "area",
+          title: "Area / 面积",
+          description: "计算长方形和三角形的面积",
+          khanAcademy: [
+            {
+              title: "Area of rectangles",
+              url: "https://www.khanacademy.org/math/basic-geo/basic-geo-area-and-perimeter/basic-geo-area-rectangle/v/area-of-a-rectangle",
+              type: "video"
+            },
+            {
+              title: "Area of triangles",
+              url: "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-geometry-topic/cc-6th-area-triangle/v/area-of-a-triangle",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "How to Find Area",
+              url: "https://www.youtube.com/watch?v=_uKKl8R1xBM",
+              channel: "Math with Mr. J"
+            }
+          ],
+          practice: [
+            {
+              title: "IXL - Area of rectangles and squares",
+              url: "https://ca.ixl.com/math/grade-5/area-of-rectangles-and-squares"
+            }
+          ]
+        },
+        {
+          id: "volume",
+          title: "Volume / 体积",
+          description: "计算长方体的体积",
+          khanAcademy: [
+            {
+              title: "Volume of rectangular prisms",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-geometry-3/imp-volume/v/volume-of-a-rectangular-prism",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "How to Find Volume",
+              url: "https://www.youtube.com/watch?v=qJwecTgce6c",
+              channel: "Math with Mr. J"
+            },
+            {
+              title: "Volume Song",
+              url: "https://www.youtube.com/watch?v=7eItzklm0Tg",
+              channel: "Numberock"
+            }
+          ],
+          practice: [
+            {
+              title: "IXL - Volume of rectangular prisms",
+              url: "https://ca.ixl.com/math/grade-5/volume-of-rectangular-prisms"
+            }
+          ]
+        },
+        {
+          id: "unit-conversion",
+          title: "Unit Conversion / 单位换算",
+          description: "公制和英制单位转换",
+          khanAcademy: [
+            {
+              title: "Converting units",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-measurement-and-data-3/imp-unit-conversion/v/converting-pounds-to-ounces",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "Metric System Conversions",
+              url: "https://www.youtube.com/watch?v=O0pDVbKb5rs",
+              channel: "Math with Mr. J"
+            }
+          ],
+          practice: [
+            {
+              title: "IXL - Convert units",
+              url: "https://ca.ixl.com/math/grade-5/convert-units"
+            }
+          ]
+        }
+      ]
+    },
+
+    // ============ 单元8: 数据和概率 ============
+    {
+      id: "data-probability",
+      title: "Data and Probability / 数据和概率",
+      description: "收集、整理和分析数据",
+      topics: [
+        {
+          id: "graphs",
+          title: "Graphs and Charts / 图表",
+          description: "创建和解读各种图表",
+          khanAcademy: [
+            {
+              title: "Reading bar graphs",
+              url: "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-data-and-statistics/imp-line-plots/v/line-plots",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "Reading Bar Graphs",
+              url: "https://www.youtube.com/watch?v=7jqGF8wvMYI",
+              channel: "Math with Mr. J"
+            }
+          ],
+          practice: []
+        },
+        {
+          id: "mean-median-mode",
+          title: "Mean, Median, Mode / 平均数、中位数、众数",
+          description: "计算和理解数据的中心趋势",
+          khanAcademy: [
+            {
+              title: "Mean, median, and mode",
+              url: "https://www.khanacademy.org/math/statistics-probability/summarizing-quantitative-data/mean-median-basics/v/statistics-intro-mean-median-and-mode",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "Mean, Median, Mode, and Range",
+              url: "https://www.youtube.com/watch?v=B1HEzNTGeZ4",
+              channel: "Math with Mr. J"
+            }
+          ],
+          practice: [
+            {
+              title: "IXL - Mean, median, mode",
+              url: "https://ca.ixl.com/math/grade-5/mean-median-mode-and-range"
+            }
+          ]
+        },
+        {
+          id: "probability",
+          title: "Probability / 概率",
+          description: "基本概率概念",
+          khanAcademy: [
+            {
+              title: "Basic probability",
+              url: "https://www.khanacademy.org/math/statistics-probability/probability-library/basic-theoretical-probability/v/basic-probability",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "Introduction to Probability",
+              url: "https://www.youtube.com/watch?v=SkidyDQuupA",
+              channel: "Math with Mr. J"
+            }
+          ],
+          practice: [
+            {
+              title: "IXL - Probability",
+              url: "https://ca.ixl.com/math/grade-5/probability"
+            }
+          ]
+        }
+      ]
+    },
+
+    // ============ 单元9: 财务素养 ============
+    {
+      id: "financial-literacy",
+      title: "Financial Literacy / 财务素养",
+      description: "基本理财知识",
+      topics: [
+        {
+          id: "money-calculations",
+          title: "Money Calculations / 金钱计算",
+          description: "计算价格、找零和折扣",
+          khanAcademy: [
+            {
+              title: "Money word problems",
+              url: "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-place-value-and-rounding-2/imp-rounding-whole-numbers/v/rounding-to-nearest-dollar",
+              type: "video"
+            }
+          ],
+          youtube: [
+            {
+              title: "Counting Money",
+              url: "https://www.youtube.com/watch?v=WlbGTsX2BPM",
+              channel: "Math with Mr. J"
+            }
+          ],
+          practice: []
+        },
+        {
+          id: "budgeting",
+          title: "Budgeting / 预算编制",
+          description: "创建简单预算",
+          khanAcademy: [],
+          youtube: [
+            {
+              title: "Budgeting for Kids",
+              url: "https://www.youtube.com/watch?v=YyOfIj7nWcU",
+              channel: "FunKidsTV"
+            }
+          ],
+          practice: []
+        }
+      ]
+    }
+  ]
+};
+
+module.exports = curriculum;
+</file>
+
+<file path="server.js">
+#!/usr/bin/env node
+
+/**
+ * 简单的本地服务器，用于运行 Maggie's Math Learning 应用
+ */
+
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+
+const PORT = process.env.PORT || 3000;
+
+const MIME_TYPES = {
+  '.html': 'text/html',
+  '.css': 'text/css',
+  '.js': 'application/javascript',
+  '.json': 'application/json',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.gif': 'image/gif',
+  '.svg': 'image/svg+xml',
+  '.ico': 'image/x-icon'
+};
+
+const server = http.createServer((req, res) => {
+  // 默认请求 index.html
+  let filePath = req.url === '/' ? '/index.html' : req.url;
+  filePath = path.join(__dirname, filePath);
+
+  // 获取文件扩展名
+  const ext = path.extname(filePath).toLowerCase();
+  const contentType = MIME_TYPES[ext] || 'application/octet-stream';
+
+  // 读取并返回文件
+  fs.readFile(filePath, (err, content) => {
+    if (err) {
+      if (err.code === 'ENOENT') {
+        res.writeHead(404, { 'Content-Type': 'text/html' });
+        res.end('<h1>404 - File Not Found</h1>');
+      } else {
+        res.writeHead(500, { 'Content-Type': 'text/html' });
+        res.end('<h1>500 - Server Error</h1>');
+      }
+    } else {
+      res.writeHead(200, { 'Content-Type': contentType });
+      res.end(content);
+    }
+  });
+});
+
+server.listen(PORT, () => {
+  console.log(`
+╔═══════════════════════════════════════════════════════════╗
+║                                                           ║
+║   🌟 Maggie's Math Learning Server Started! 🌟            ║
+║                                                           ║
+║   Open your browser and visit:                            ║
+║   http://localhost:${PORT}                                    ║
+║                                                           ║
+║   Press Ctrl+C to stop the server                         ║
+║                                                           ║
+╚═══════════════════════════════════════════════════════════╝
+  `);
+});
+</file>
+
+<file path="curriculum.json">
+{
+  "grade": 5,
+  "province": "Ontario, Canada",
+  "units": [
+    {
+      "id": "number-sense-whole",
+      "title": "Number Sense - Whole Numbers / 数感 - 整数",
+      "description": "理解和运用大数字，包括读、写、比较和排序",
+      "topics": [
+        {
+          "id": "place-value",
+          "title": "Place Value / 位值",
+          "description": "理解到百万位的位值系统",
+          "khanAcademy": [
+            {
+              "title": "Place value with whole numbers",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/powers-of-ten/imp-place-value-with-powers-of-10/v/place-value-with-whole-numbers",
+              "type": "video"
+            },
+            {
+              "title": "Place value practice",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/powers-of-ten/imp-place-value-with-powers-of-10/e/place-value",
+              "type": "practice"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Place Value Song For Kids | Ones, Tens, Hundreds",
+              "url": "https://www.youtube.com/watch?v=5W47G-h7myY",
+              "channel": "Scratch Garden"
+            },
+            {
+              "title": "Place Value Through Millions",
+              "url": "https://www.youtube.com/watch?v=_8xGqn8Nfcs",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Place Value Practice (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/powers-of-ten/imp-place-value-with-powers-of-10/e/place-value"
+            },
+            {
+              "title": "Math-Drills - Place Value Worksheets (FREE)",
+              "url": "https://www.math-drills.com/placevalue.php"
+            }
+          ]
+        },
+        {
+          "id": "compare-order",
+          "title": "Comparing and Ordering Numbers / 比较和排序数字",
+          "description": "比较和排序大数字",
+          "khanAcademy": [
+            {
+              "title": "Comparing whole numbers",
+              "url": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-place-value-and-rounding-2/imp-comparing-multi-digit-numbers/v/comparing-whole-numbers",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Comparing and Ordering Whole Numbers",
+              "url": "https://www.youtube.com/watch?v=WLgU3hHLH-4",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Compare Numbers Practice (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-place-value-and-rounding-2/imp-comparing-multi-digit-numbers/e/comparing-multi-digit-numbers"
+            },
+            {
+              "title": "Math Games - Comparing Numbers (FREE)",
+              "url": "https://www.mathgames.com/skill/4.2-compare-numbers-up-to-millions"
+            }
+          ]
+        },
+        {
+          "id": "rounding",
+          "title": "Rounding Numbers / 四舍五入",
+          "description": "四舍五入到不同位值",
+          "khanAcademy": [
+            {
+              "title": "Rounding whole numbers",
+              "url": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-place-value-and-rounding-2/imp-rounding-whole-numbers/v/rounding-whole-numbers",
+              "type": "video"
+            },
+            {
+              "title": "Rounding practice",
+              "url": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-place-value-and-rounding-2/imp-rounding-whole-numbers/e/rounding-whole-numbers",
+              "type": "practice"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Rounding Numbers Song",
+              "url": "https://www.youtube.com/watch?v=UP7YmXJc7Ik",
+              "channel": "Numberock"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Rounding Practice (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-place-value-and-rounding-2/imp-rounding-whole-numbers/e/rounding-whole-numbers"
+            },
+            {
+              "title": "Math-Drills - Rounding Worksheets (FREE)",
+              "url": "https://www.math-drills.com/numbersense/rounding_numbers_various_powers_001.php"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "number-sense-decimals",
+      "title": "Number Sense - Decimals / 数感 - 小数",
+      "description": "理解和运用小数，包括加减乘除",
+      "topics": [
+        {
+          "id": "decimal-place-value",
+          "title": "Decimal Place Value / 小数位值",
+          "description": "理解小数位值到千分位",
+          "khanAcademy": [
+            {
+              "title": "Decimal place value intro",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-place-value-and-decimals/imp-decimal-place-value-intro/v/decimal-place-value",
+              "type": "video"
+            },
+            {
+              "title": "Decimals on the number line",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-place-value-and-decimals/imp-decimals-on-the-number-line/v/decimals-on-a-number-line",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Understanding Decimal Place Value",
+              "url": "https://www.youtube.com/watch?v=OqiWuUfLvdc",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Decimal Place Value Song",
+              "url": "https://www.youtube.com/watch?v=dXh8MX-fJRo",
+              "channel": "Numberock"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Decimal Place Value (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-place-value-and-decimals/imp-decimal-place-value-intro/e/decimal-place-value"
+            },
+            {
+              "title": "Math-Drills - Decimal Worksheets (FREE)",
+              "url": "https://www.math-drills.com/decimal.php"
+            }
+          ]
+        },
+        {
+          "id": "add-subtract-decimals",
+          "title": "Adding and Subtracting Decimals / 小数加减法",
+          "description": "小数的加法和减法运算",
+          "khanAcademy": [
+            {
+              "title": "Adding decimals",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-adding-and-subtracting-decimals/imp-adding-decimals-intro/v/adding-decimals-example-1",
+              "type": "video"
+            },
+            {
+              "title": "Subtracting decimals",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-adding-and-subtracting-decimals/imp-subtracting-decimals-intro/v/subtracting-decimals",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Adding Decimals | Math with Mr. J",
+              "url": "https://www.youtube.com/watch?v=9GlvJ-XRvno",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Subtracting Decimals | Math with Mr. J",
+              "url": "https://www.youtube.com/watch?v=6HMdL9nB4s4",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Adding Decimals (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-adding-and-subtracting-decimals/imp-adding-decimals-intro/e/adding-decimals"
+            },
+            {
+              "title": "Math Games - Decimal Operations (FREE)",
+              "url": "https://www.mathgames.com/skill/5.47-add-and-subtract-decimals"
+            }
+          ]
+        },
+        {
+          "id": "multiply-decimals",
+          "title": "Multiplying Decimals / 小数乘法",
+          "description": "小数的乘法运算",
+          "khanAcademy": [
+            {
+              "title": "Multiplying decimals",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multiplying-and-dividing-decimals/imp-multiplying-decimals-strategies/v/multiplying-decimals-example",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Multiplying Decimals",
+              "url": "https://www.youtube.com/watch?v=JETRf1mFnHM",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Multiplying Decimals (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multiplying-and-dividing-decimals/imp-multiplying-decimals-strategies/e/multiplying-decimals"
+            },
+            {
+              "title": "Math-Drills - Multiplying Decimals (FREE)",
+              "url": "https://www.math-drills.com/decimal/decimal_multiply.php"
+            }
+          ]
+        },
+        {
+          "id": "divide-decimals",
+          "title": "Dividing Decimals / 小数除法",
+          "description": "小数的除法运算",
+          "khanAcademy": [
+            {
+              "title": "Dividing decimals",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multiplying-and-dividing-decimals/imp-dividing-decimals-with-hundredths/v/dividing-decimals",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Dividing Decimals",
+              "url": "https://www.youtube.com/watch?v=wOUkBkLPCGI",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Dividing Decimals (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multiplying-and-dividing-decimals/imp-dividing-decimals-with-hundredths/e/dividing-decimals-with-hundredths"
+            },
+            {
+              "title": "Math-Drills - Dividing Decimals (FREE)",
+              "url": "https://www.math-drills.com/decimal/decimal_divide.php"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "number-sense-fractions",
+      "title": "Number Sense - Fractions / 数感 - 分数",
+      "description": "理解和运用分数",
+      "topics": [
+        {
+          "id": "equivalent-fractions",
+          "title": "Equivalent Fractions / 等值分数",
+          "description": "找出和创建等值分数",
+          "khanAcademy": [
+            {
+              "title": "Equivalent fractions",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-fractions-2/imp-visualizing-equivalent-fractions/v/equivalent-fractions",
+              "type": "video"
+            },
+            {
+              "title": "Equivalent fractions practice",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-fractions-2/imp-visualizing-equivalent-fractions/e/equivalent-fractions",
+              "type": "practice"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Equivalent Fractions | Math with Mr. J",
+              "url": "https://www.youtube.com/watch?v=qcHHhd6HizI",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Equivalent Fractions Song",
+              "url": "https://www.youtube.com/watch?v=Bss4F1LZsTA",
+              "channel": "Numberock"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Equivalent Fractions (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-fractions-2/imp-visualizing-equivalent-fractions/e/equivalent-fractions"
+            },
+            {
+              "title": "Math Games - Equivalent Fractions (FREE)",
+              "url": "https://www.mathgames.com/skill/4.62-identify-equivalent-fractions"
+            }
+          ]
+        },
+        {
+          "id": "compare-fractions",
+          "title": "Comparing Fractions / 比较分数",
+          "description": "比较不同分母的分数",
+          "khanAcademy": [
+            {
+              "title": "Comparing fractions with different denominators",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-fractions-2/imp-common-denominators/v/comparing-fractions-with-different-denominators",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Comparing Fractions",
+              "url": "https://www.youtube.com/watch?v=UA0MjzKmwhg",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Compare Fractions (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-fractions-2/imp-common-denominators/e/comparing-fractions-2"
+            },
+            {
+              "title": "Math-Drills - Comparing Fractions (FREE)",
+              "url": "https://www.math-drills.com/fractions/fractions_comparing_visual_001.php"
+            }
+          ]
+        },
+        {
+          "id": "add-subtract-fractions",
+          "title": "Adding and Subtracting Fractions / 分数加减法",
+          "description": "不同分母分数的加减法",
+          "khanAcademy": [
+            {
+              "title": "Adding fractions with unlike denominators",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-add-and-subtract-fractions/imp-adding-fractions-with-unlike-denominators/v/adding-fractions-with-unlike-denominators",
+              "type": "video"
+            },
+            {
+              "title": "Subtracting fractions with unlike denominators",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-add-and-subtract-fractions/imp-subtracting-fractions-with-unlike-denominators-2/v/subtracting-fractions-with-unlike-denominators",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Adding Fractions with Unlike Denominators",
+              "url": "https://www.youtube.com/watch?v=52ZlXsFJULI",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Subtracting Fractions with Unlike Denominators",
+              "url": "https://www.youtube.com/watch?v=BvHkjxcPOOI",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Add Fractions (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-add-and-subtract-fractions/imp-adding-fractions-with-unlike-denominators/e/adding-fractions-with-unlike-denominators"
+            },
+            {
+              "title": "Math-Drills - Adding Fractions (FREE)",
+              "url": "https://www.math-drills.com/fractions/fractions_adding_unlike_denominators_001.php"
+            }
+          ]
+        },
+        {
+          "id": "multiply-fractions",
+          "title": "Multiplying Fractions / 分数乘法",
+          "description": "分数与整数和分数的乘法",
+          "khanAcademy": [
+            {
+              "title": "Multiplying fractions",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multiply-fractions/imp-multiplying-fractions/v/multiplying-fractions",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Multiplying Fractions",
+              "url": "https://www.youtube.com/watch?v=bX95hmVmDjY",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Multiply Fractions (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multiply-fractions/imp-multiplying-fractions/e/multiplying_fractions"
+            },
+            {
+              "title": "Math-Drills - Multiplying Fractions (FREE)",
+              "url": "https://www.math-drills.com/fractions/fractions_multiply_proper_001.php"
+            }
+          ]
+        },
+        {
+          "id": "divide-fractions",
+          "title": "Dividing Fractions / 分数除法",
+          "description": "分数的除法运算",
+          "khanAcademy": [
+            {
+              "title": "Dividing fractions",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-dividing-fractions/imp-dividing-unit-fractions-by-whole-numbers/v/dividing-unit-fractions-by-whole-numbers",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Dividing Fractions",
+              "url": "https://www.youtube.com/watch?v=5juto2ze8Lg",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Divide Fractions (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-dividing-fractions/imp-dividing-unit-fractions-by-whole-numbers/e/dividing-unit-fractions-by-whole-numbers"
+            },
+            {
+              "title": "Math-Drills - Dividing Fractions (FREE)",
+              "url": "https://www.math-drills.com/fractions/fractions_divide_proper_001.php"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "operations",
+      "title": "Operations / 运算",
+      "description": "多位数的乘法和除法",
+      "topics": [
+        {
+          "id": "multi-digit-multiplication",
+          "title": "Multi-digit Multiplication / 多位数乘法",
+          "description": "两位数和三位数的乘法",
+          "khanAcademy": [
+            {
+              "title": "Multi-digit multiplication",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multi-digit-multiplication-and-division/imp-multi-digit-multiplication/v/multiplication-5-2-digit-times-a-2-digit-number",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "2-Digit by 2-Digit Multiplication",
+              "url": "https://www.youtube.com/watch?v=mQH4YXQFL0U",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Multiplication Song",
+              "url": "https://www.youtube.com/watch?v=6pSAT7X1SOs",
+              "channel": "Numberock"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Multiplication Practice (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multi-digit-multiplication-and-division/imp-multi-digit-multiplication/e/multiplication-4"
+            },
+            {
+              "title": "Math-Drills - Long Multiplication (FREE)",
+              "url": "https://www.math-drills.com/multiplication/multiplication_long_nohint_0202_001.php"
+            },
+            {
+              "title": "Multiplication.com - Games (FREE)",
+              "url": "https://www.multiplication.com/games/all-games"
+            }
+          ]
+        },
+        {
+          "id": "long-division",
+          "title": "Long Division / 长除法",
+          "description": "多位数除以一位数和两位数",
+          "khanAcademy": [
+            {
+              "title": "Long division",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multi-digit-multiplication-and-division/imp-multi-digit-division/v/long-division-without-remainder",
+              "type": "video"
+            },
+            {
+              "title": "Division with remainders",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multi-digit-multiplication-and-division/imp-multi-digit-division/v/long-division-with-remainder-example",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Long Division - Easy Method",
+              "url": "https://www.youtube.com/watch?v=LGqBQrUYua4",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Division Practice (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multi-digit-multiplication-and-division/imp-multi-digit-division/e/division-4"
+            },
+            {
+              "title": "Math-Drills - Long Division (FREE)",
+              "url": "https://www.math-drills.com/division/division_long_0402_001.php"
+            }
+          ]
+        },
+        {
+          "id": "order-of-operations",
+          "title": "Order of Operations (BEDMAS) / 运算顺序",
+          "description": "按正确顺序计算表达式",
+          "khanAcademy": [
+            {
+              "title": "Order of operations introduction",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-powers-of-ten/imp-order-of-operations-introduction/v/introduction-to-order-of-operations",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Order of Operations | PEMDAS",
+              "url": "https://www.youtube.com/watch?v=dAgfnK528RA",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "PEMDAS Song",
+              "url": "https://www.youtube.com/watch?v=JVFyMT5C3Nk",
+              "channel": "Numberock"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Order of Operations (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-powers-of-ten/imp-order-of-operations-introduction/e/order-of-operations"
+            },
+            {
+              "title": "Math Games - Order of Operations (FREE)",
+              "url": "https://www.mathgames.com/skill/5.91-order-of-operations"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "algebra",
+      "title": "Algebra - Patterns and Equations / 代数 - 规律和方程",
+      "description": "识别规律，解简单方程",
+      "topics": [
+        {
+          "id": "patterns",
+          "title": "Number Patterns / 数字规律",
+          "description": "识别和延续数字规律",
+          "khanAcademy": [
+            {
+              "title": "Number patterns",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-algebraic-thinking/imp-number-patterns/v/practice-finding-patterns-in-numbers",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Number Patterns",
+              "url": "https://www.youtube.com/watch?v=F9G1yOCH1B0",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Number Patterns (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-algebraic-thinking/imp-number-patterns/e/visualizing-and-interpreting-relationships-between-patterns"
+            },
+            {
+              "title": "Math Games - Number Patterns (FREE)",
+              "url": "https://www.mathgames.com/skill/5.115-complete-a-number-pattern"
+            }
+          ]
+        },
+        {
+          "id": "variables",
+          "title": "Variables and Expressions / 变量和表达式",
+          "description": "用字母代表未知数",
+          "khanAcademy": [
+            {
+              "title": "Variables and expressions",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-algebraic-thinking/imp-intro-to-variables/v/what-is-a-variable",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "What is a Variable?",
+              "url": "https://www.youtube.com/watch?v=Xmt6cRRKP1k",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Variables Practice (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-algebraic-thinking/imp-intro-to-variables/e/evaluating-expressions-with-one-variable"
+            }
+          ]
+        },
+        {
+          "id": "equations",
+          "title": "Simple Equations / 简单方程",
+          "description": "解简单的一步方程",
+          "khanAcademy": [
+            {
+              "title": "One-step equations",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-equations-and-inequalities/cc-6th-one-step-add-sub-equations/v/simple-equations",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Solving One-Step Equations",
+              "url": "https://www.youtube.com/watch?v=l3XzepN03KQ",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - One-Step Equations (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-equations-and-inequalities/cc-6th-one-step-add-sub-equations/e/one-step-equations"
+            },
+            {
+              "title": "Math Games - Solving Equations (FREE)",
+              "url": "https://www.mathgames.com/skill/6.96-solve-one-step-equations"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "geometry",
+      "title": "Geometry / 几何",
+      "description": "二维和三维图形",
+      "topics": [
+        {
+          "id": "2d-shapes",
+          "title": "2D Shapes / 二维图形",
+          "description": "识别和分类多边形",
+          "khanAcademy": [
+            {
+              "title": "Classifying shapes",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-geometry-3/imp-classifying-triangles/v/classifying-triangles",
+              "type": "video"
+            },
+            {
+              "title": "Quadrilaterals",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-geometry-3/imp-classifying-quadrilaterals/v/classifying-quadrilaterals",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Types of Quadrilaterals",
+              "url": "https://www.youtube.com/watch?v=Byd5ACrCYcY",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Classify Shapes (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-geometry-3/imp-classifying-triangles/e/recognizing-triangles"
+            },
+            {
+              "title": "Math Games - 2D Shapes (FREE)",
+              "url": "https://www.mathgames.com/skill/3.100-identify-two-dimensional-shapes"
+            }
+          ]
+        },
+        {
+          "id": "3d-shapes",
+          "title": "3D Shapes / 三维图形",
+          "description": "识别立体图形及其特征",
+          "khanAcademy": [
+            {
+              "title": "Intro to 3D shapes",
+              "url": "https://www.khanacademy.org/math/basic-geo/basic-geo-volume/basic-geo-volumes-rectangular-prism/v/introduction-to-3d-solids",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "3D Shapes",
+              "url": "https://www.youtube.com/watch?v=2cg-Uc556-Q",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Math Games - 3D Shapes (FREE)",
+              "url": "https://www.mathgames.com/skill/2.90-name-the-three-dimensional-shape"
+            }
+          ]
+        },
+        {
+          "id": "angles",
+          "title": "Angles / 角度",
+          "description": "测量和分类角度",
+          "khanAcademy": [
+            {
+              "title": "Measuring angles",
+              "url": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-geometry-2/imp-measuring-angles/v/using-a-protractor-to-measure-angles",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Types of Angles",
+              "url": "https://www.youtube.com/watch?v=Rp2-1a0LgtM",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "How to Use a Protractor",
+              "url": "https://www.youtube.com/watch?v=2TqOh4TQMW4",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Angles Practice (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-geometry-2/imp-measuring-angles/e/measuring-angles"
+            },
+            {
+              "title": "Math Games - Angles (FREE)",
+              "url": "https://www.mathgames.com/skill/4.78-measure-angles-with-a-protractor"
+            }
+          ]
+        },
+        {
+          "id": "coordinate-plane",
+          "title": "Coordinate Plane / 坐标平面",
+          "description": "在坐标平面上绘制和读取点",
+          "khanAcademy": [
+            {
+              "title": "Coordinate plane",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-geometry-3/imp-intro-to-the-coordinate-plane/v/coordinate-plane-graphing-points-intro",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Coordinate Plane Basics",
+              "url": "https://www.youtube.com/watch?v=9Uc62CuQjc4",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Coordinate Plane (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-geometry-3/imp-intro-to-the-coordinate-plane/e/graphing-points"
+            },
+            {
+              "title": "Math Games - Coordinate Plane (FREE)",
+              "url": "https://www.mathgames.com/skill/5.81-graph-points-on-a-coordinate-plane"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "measurement",
+      "title": "Measurement / 测量",
+      "description": "周长、面积和体积",
+      "topics": [
+        {
+          "id": "perimeter",
+          "title": "Perimeter / 周长",
+          "description": "计算多边形的周长",
+          "khanAcademy": [
+            {
+              "title": "Perimeter",
+              "url": "https://www.khanacademy.org/math/basic-geo/basic-geo-area-and-perimeter/basic-geo-perimeter/v/perimeter-and-area-basics",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "How to Find Perimeter",
+              "url": "https://www.youtube.com/watch?v=AAY1bpsiaps",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Perimeter (FREE)",
+              "url": "https://www.khanacademy.org/math/basic-geo/basic-geo-area-and-perimeter/basic-geo-perimeter/e/perimeter-1"
+            },
+            {
+              "title": "Math-Drills - Perimeter Worksheets (FREE)",
+              "url": "https://www.math-drills.com/measurement/perimeter_rectangle_001.php"
+            }
+          ]
+        },
+        {
+          "id": "area",
+          "title": "Area / 面积",
+          "description": "计算长方形和三角形的面积",
+          "khanAcademy": [
+            {
+              "title": "Area of rectangles",
+              "url": "https://www.khanacademy.org/math/basic-geo/basic-geo-area-and-perimeter/basic-geo-area-rectangle/v/area-of-a-rectangle",
+              "type": "video"
+            },
+            {
+              "title": "Area of triangles",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-geometry-topic/cc-6th-area-triangle/v/area-of-a-triangle",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "How to Find Area",
+              "url": "https://www.youtube.com/watch?v=_uKKl8R1xBM",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Area Practice (FREE)",
+              "url": "https://www.khanacademy.org/math/basic-geo/basic-geo-area-and-perimeter/basic-geo-area-rectangle/e/find-the-area-1"
+            },
+            {
+              "title": "Math-Drills - Area Worksheets (FREE)",
+              "url": "https://www.math-drills.com/measurement/area_rectangle_001.php"
+            }
+          ]
+        },
+        {
+          "id": "volume",
+          "title": "Volume / 体积",
+          "description": "计算长方体的体积",
+          "khanAcademy": [
+            {
+              "title": "Volume of rectangular prisms",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-geometry-3/imp-volume/v/volume-of-a-rectangular-prism",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "How to Find Volume",
+              "url": "https://www.youtube.com/watch?v=qJwecTgce6c",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Volume Song",
+              "url": "https://www.youtube.com/watch?v=7eItzklm0Tg",
+              "channel": "Numberock"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Volume Practice (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-geometry-3/imp-volume/e/volume-of-rectangular-prisms"
+            },
+            {
+              "title": "Math Games - Volume (FREE)",
+              "url": "https://www.mathgames.com/skill/5.77-find-the-volume-of-a-rectangular-prism"
+            }
+          ]
+        },
+        {
+          "id": "unit-conversion",
+          "title": "Unit Conversion / 单位换算",
+          "description": "公制和英制单位转换",
+          "khanAcademy": [
+            {
+              "title": "Converting units",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-measurement-and-data-3/imp-unit-conversion/v/converting-pounds-to-ounces",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Metric System Conversions",
+              "url": "https://www.youtube.com/watch?v=O0pDVbKb5rs",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Unit Conversion (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-measurement-and-data-3/imp-unit-conversion/e/converting-units"
+            },
+            {
+              "title": "Math-Drills - Metric Conversion (FREE)",
+              "url": "https://www.math-drills.com/measurement/measurement_metric_conversion_length_001.php"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "data-probability",
+      "title": "Data and Probability / 数据和概率",
+      "description": "收集、整理和分析数据",
+      "topics": [
+        {
+          "id": "graphs",
+          "title": "Graphs and Charts / 图表",
+          "description": "创建和解读各种图表",
+          "khanAcademy": [
+            {
+              "title": "Reading bar graphs",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-data-and-statistics/imp-line-plots/v/line-plots",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Reading Bar Graphs",
+              "url": "https://www.youtube.com/watch?v=7jqGF8wvMYI",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Graphs Practice (FREE)",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-data-and-statistics/imp-line-plots/e/line-plots"
+            },
+            {
+              "title": "Math Games - Reading Graphs (FREE)",
+              "url": "https://www.mathgames.com/skill/3.52-interpret-bar-graphs"
+            }
+          ]
+        },
+        {
+          "id": "mean-median-mode",
+          "title": "Mean, Median, Mode / 平均数、中位数、众数",
+          "description": "计算和理解数据的中心趋势",
+          "khanAcademy": [
+            {
+              "title": "Mean, median, and mode",
+              "url": "https://www.khanacademy.org/math/statistics-probability/summarizing-quantitative-data/mean-median-basics/v/statistics-intro-mean-median-and-mode",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Mean, Median, Mode, and Range",
+              "url": "https://www.youtube.com/watch?v=B1HEzNTGeZ4",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Mean, Median, Mode (FREE)",
+              "url": "https://www.khanacademy.org/math/statistics-probability/summarizing-quantitative-data/mean-median-basics/e/calculating-the-mean"
+            },
+            {
+              "title": "Math Games - Mean, Median, Mode (FREE)",
+              "url": "https://www.mathgames.com/skill/6.135-calculate-mean-median-mode-and-range"
+            }
+          ]
+        },
+        {
+          "id": "probability",
+          "title": "Probability / 概率",
+          "description": "基本概率概念",
+          "khanAcademy": [
+            {
+              "title": "Basic probability",
+              "url": "https://www.khanacademy.org/math/statistics-probability/probability-library/basic-theoretical-probability/v/basic-probability",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Introduction to Probability",
+              "url": "https://www.youtube.com/watch?v=SkidyDQuupA",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Khan Academy - Probability (FREE)",
+              "url": "https://www.khanacademy.org/math/statistics-probability/probability-library/basic-theoretical-probability/e/probability-of-an-event"
+            },
+            {
+              "title": "Math Games - Probability (FREE)",
+              "url": "https://www.mathgames.com/skill/7.122-simple-probability"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "financial-literacy",
+      "title": "Financial Literacy / 财务素养",
+      "description": "基本理财知识",
+      "topics": [
+        {
+          "id": "money-calculations",
+          "title": "Money Calculations / 金钱计算",
+          "description": "计算价格、找零和折扣",
+          "khanAcademy": [
+            {
+              "title": "Money word problems",
+              "url": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-place-value-and-rounding-2/imp-rounding-whole-numbers/v/rounding-to-nearest-dollar",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Counting Money",
+              "url": "https://www.youtube.com/watch?v=WlbGTsX2BPM",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Math Games - Money (FREE)",
+              "url": "https://www.mathgames.com/skill/2.71-count-money-up-to-1"
+            },
+            {
+              "title": "ABCya - Counting Money (FREE)",
+              "url": "https://www.abcya.com/games/counting_money"
+            }
+          ]
+        },
+        {
+          "id": "budgeting",
+          "title": "Budgeting / 预算编制",
+          "description": "创建简单预算",
+          "khanAcademy": [],
+          "youtube": [
+            {
+              "title": "Budgeting for Kids",
+              "url": "https://www.youtube.com/watch?v=YyOfIj7nWcU",
+              "channel": "FunKidsTV"
+            }
+          ],
+          "practice": [
+            {
+              "title": "Practical Money Skills - Games (FREE)",
+              "url": "https://www.practicalmoneyskills.com/play"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+</file>
+
+<file path="index.html">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maggie's Math Learning - 数学学习</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      color: white;
+      padding: 30px 0;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    /* Grade Selector */
+    .grade-selector {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0 30px 0;
+    }
+
+    .grade-btn {
+      padding: 15px 40px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: 3px solid white;
+      border-radius: 50px;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .grade-btn:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+
+    .grade-btn.active {
+      background: white;
+      color: #667eea;
+    }
+
+    .grade-btn .grade-icon {
+      font-size: 1.5rem;
+    }
+
+    .progress-section {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .progress-header h3 {
+      color: #333;
+    }
+
+    .grade-badge {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .progress-bar {
+      height: 20px;
+      background: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #4CAF50, #8BC34A);
+      width: 0%;
+      transition: width 0.5s ease;
+      border-radius: 10px;
+    }
+
+    .progress-text {
+      text-align: center;
+      margin-top: 10px;
+      color: #666;
+    }
+
+    .units-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 20px;
+    }
+
+    .unit-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .unit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    }
+
+    .unit-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px;
+    }
+
+    .unit-header.grade6 {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    }
+
+    .unit-header h2 {
+      font-size: 1.3rem;
+      margin-bottom: 5px;
+    }
+
+    .unit-header p {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .unit-progress {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 0.85rem;
+    }
+
+    .unit-progress-bar {
+      flex: 1;
+      height: 6px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .unit-progress-fill {
+      height: 100%;
+      background: white;
+      border-radius: 3px;
+    }
+
+    .unit-topics {
+      padding: 15px;
+      display: none;
+    }
+
+    .unit-card.expanded .unit-topics {
+      display: block;
+    }
+
+    .topic-item {
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .topic-item:hover {
+      background: #f5f5f5;
+    }
+
+    .topic-item:last-child {
+      border-bottom: none;
+    }
+
+    .topic-title {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .topic-title .status {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #ddd;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .topic-title .status.completed {
+      background: #4CAF50;
+      border-color: #4CAF50;
+      color: white;
+    }
+
+    .topic-description {
+      font-size: 0.85rem;
+      color: #666;
+      margin-left: 30px;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: white;
+      border-radius: 15px;
+      max-width: 800px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .modal-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 25px;
+      position: sticky;
+      top: 0;
+    }
+
+    .modal-header.grade6 {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    }
+
+    .modal-header h2 {
+      margin-bottom: 5px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-close:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .modal-content {
+      padding: 25px;
+    }
+
+    .resource-section {
+      margin-bottom: 25px;
+    }
+
+    .resource-section h3 {
+      color: #333;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .resource-section h3 .icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+    }
+
+    .khan-icon { background: #14bf96; }
+    .youtube-icon { background: #ff0000; }
+    .practice-icon { background: #ff9800; }
+
+    .resource-list {
+      list-style: none;
+    }
+
+    .resource-item {
+      padding: 12px 15px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.2s;
+    }
+
+    .resource-item:hover {
+      background: #e9ecef;
+    }
+
+    .resource-item a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 500;
+      flex: 1;
+    }
+
+    .resource-item a:hover {
+      text-decoration: underline;
+    }
+
+    .resource-item .type-badge {
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 12px;
+      background: #e0e0e0;
+      color: #666;
+      margin-left: 10px;
+    }
+
+    .resource-item .channel {
+      font-size: 0.8rem;
+      color: #888;
+      margin-left: 10px;
+    }
+
+    .mark-complete-btn {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .mark-complete-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+    }
+
+    .mark-complete-btn.completed {
+      background: linear-gradient(135deg, #9e9e9e 0%, #757575 100%);
+    }
+
+    .no-resources {
+      color: #999;
+      font-style: italic;
+      padding: 10px 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+
+      .units-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .grade-selector {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .grade-btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+    }
+
+    /* Stars decoration */
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .star {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.5;
+      animation: twinkle 2s infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.8; }
+    }
+
+    /* Grade 6 theme */
+    body.grade6-theme {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    }
+
+    body.grade6-theme .grade-btn.active {
+      color: #11998e;
+    }
+
+    body.grade6-theme .grade-badge {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    }
+
+    body.grade6-theme .resource-item a {
+      color: #11998e;
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" id="stars"></div>
+
+  <div class="container">
+    <header>
+      <h1>🌟 Maggie's Math Learning 🌟</h1>
+      <p id="headerSubtitle">Ontario Math Curriculum / 安大略省数学课程</p>
+    </header>
+
+    <!-- Grade Selector -->
+    <div class="grade-selector">
+      <button class="grade-btn active" onclick="switchGrade(5)" id="grade5Btn">
+        <span class="grade-icon">5️⃣</span>
+        <span>Grade 5 / 五年级</span>
+      </button>
+      <button class="grade-btn" onclick="switchGrade(6)" id="grade6Btn">
+        <span class="grade-icon">6️⃣</span>
+        <span>Grade 6 / 六年级</span>
+      </button>
+    </div>
+
+    <div class="progress-section">
+      <div class="progress-header">
+        <h3>Learning Progress / 学习进度</h3>
+        <span class="grade-badge" id="gradeBadge">Grade 5</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <p class="progress-text" id="progressText">0 / 0 topics completed</p>
+    </div>
+
+    <div class="units-grid" id="unitsContainer">
+      <!-- Units will be loaded here -->
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-header" id="modalHeader">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <h2 id="modalTitle">Topic Title</h2>
+        <p id="modalDescription">Topic description</p>
+      </div>
+      <div class="modal-content" id="modalContent">
+        <!-- Resources will be loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // State
+    let curriculum = null;
+    let currentGrade = 5;
+    let completedTopics = {
+      5: JSON.parse(localStorage.getItem('completedTopics_grade5') || '[]'),
+      6: JSON.parse(localStorage.getItem('completedTopics_grade6') || '[]')
+    };
+
+    // Switch grade
+    async function switchGrade(grade) {
+      currentGrade = grade;
+
+      // Update buttons
+      document.getElementById('grade5Btn').classList.toggle('active', grade === 5);
+      document.getElementById('grade6Btn').classList.toggle('active', grade === 6);
+
+      // Update theme
+      document.body.classList.toggle('grade6-theme', grade === 6);
+
+      // Update badge
+      document.getElementById('gradeBadge').textContent = `Grade ${grade}`;
+
+      // Load curriculum
+      await loadCurriculum();
+    }
+
+    // Load curriculum data
+    async function loadCurriculum() {
+      try {
+        const fileName = currentGrade === 5 ? 'curriculum.json' : 'curriculum-grade6.json';
+        const response = await fetch(fileName);
+        curriculum = await response.json();
+        renderUnits();
+        updateProgress();
+      } catch (error) {
+        console.error('Failed to load curriculum:', error);
+      }
+    }
+
+    // Render all units
+    function renderUnits() {
+      const container = document.getElementById('unitsContainer');
+      container.innerHTML = '';
+
+      curriculum.units.forEach((unit, unitIndex) => {
+        // Calculate unit progress
+        const completedInUnit = unit.topics.filter(t => isCompleted(t.id)).length;
+        const totalInUnit = unit.topics.length;
+        const unitPercent = totalInUnit > 0 ? (completedInUnit / totalInUnit) * 100 : 0;
+
+        const unitCard = document.createElement('div');
+        unitCard.className = 'unit-card';
+        unitCard.innerHTML = `
+          <div class="unit-header ${currentGrade === 6 ? 'grade6' : ''}" onclick="toggleUnit(${unitIndex})">
+            <h2>${getUnitEmoji(unitIndex, currentGrade)} ${unit.title}</h2>
+            <p>${unit.description}</p>
+            <div class="unit-progress">
+              <div class="unit-progress-bar">
+                <div class="unit-progress-fill" style="width: ${unitPercent}%"></div>
+              </div>
+              <span>${completedInUnit}/${totalInUnit}</span>
+            </div>
+          </div>
+          <div class="unit-topics" id="unit-${unitIndex}">
+            ${unit.topics.map((topic, topicIndex) => `
+              <div class="topic-item" onclick="openTopic('${unit.id}', '${topic.id}', event)">
+                <div class="topic-title">
+                  <span class="status ${isCompleted(topic.id) ? 'completed' : ''}">${isCompleted(topic.id) ? '✓' : ''}</span>
+                  ${topic.title}
+                </div>
+                <div class="topic-description">${topic.description}</div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        container.appendChild(unitCard);
+      });
+    }
+
+    // Get emoji for unit based on grade
+    function getUnitEmoji(index, grade) {
+      const emojis5 = ['🔢', '🔵', '🍕', '➕', '📐', '📏', '📊', '💰', '🎯'];
+      const emojis6 = ['🔢', '🍕', '⚖️', '💯', '🔵', '📝', '📐', '🗺️', '📊', '💰'];
+      const emojis = grade === 5 ? emojis5 : emojis6;
+      return emojis[index] || '📚';
+    }
+
+    // Toggle unit expansion
+    function toggleUnit(unitIndex) {
+      const unitCards = document.querySelectorAll('.unit-card');
+      unitCards[unitIndex].classList.toggle('expanded');
+    }
+
+    // Check if topic is completed
+    function isCompleted(topicId) {
+      return completedTopics[currentGrade].includes(topicId);
+    }
+
+    // Open topic modal
+    function openTopic(unitId, topicId, event) {
+      event.stopPropagation();
+
+      const unit = curriculum.units.find(u => u.id === unitId);
+      const topic = unit.topics.find(t => t.id === topicId);
+
+      document.getElementById('modalTitle').textContent = topic.title;
+      document.getElementById('modalDescription').textContent = topic.description;
+      document.getElementById('modalHeader').className = `modal-header ${currentGrade === 6 ? 'grade6' : ''}`;
+
+      let content = '';
+
+      // Khan Academy resources
+      if (topic.khanAcademy && topic.khanAcademy.length > 0) {
+        content += `
+          <div class="resource-section">
+            <h3><span class="icon khan-icon">K</span> Khan Academy</h3>
+            <ul class="resource-list">
+              ${topic.khanAcademy.map(resource => `
+                <li class="resource-item">
+                  <a href="${resource.url}" target="_blank">${resource.title}</a>
+                  <span class="type-badge">${resource.type || 'video'}</span>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+        `;
+      }
+
+      // YouTube resources
+      if (topic.youtube && topic.youtube.length > 0) {
+        content += `
+          <div class="resource-section">
+            <h3><span class="icon youtube-icon">▶</span> YouTube Videos</h3>
+            <ul class="resource-list">
+              ${topic.youtube.map(resource => `
+                <li class="resource-item">
+                  <a href="${resource.url}" target="_blank">${resource.title}</a>
+                  <span class="channel">${resource.channel}</span>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+        `;
+      }
+
+      // Practice resources
+      if (topic.practice && topic.practice.length > 0) {
+        content += `
+          <div class="resource-section">
+            <h3><span class="icon practice-icon">✎</span> Practice / 练习</h3>
+            <ul class="resource-list">
+              ${topic.practice.map(resource => `
+                <li class="resource-item">
+                  <a href="${resource.url}" target="_blank">${resource.title}</a>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+        `;
+      }
+
+      // Mark complete button
+      const isComplete = isCompleted(topicId);
+      content += `
+        <button class="mark-complete-btn ${isComplete ? 'completed' : ''}"
+                onclick="toggleComplete('${topicId}')">
+          ${isComplete ? '✓ Completed / 已完成' : 'Mark as Complete / 标记完成'}
+        </button>
+      `;
+
+      document.getElementById('modalContent').innerHTML = content;
+      document.getElementById('modalOverlay').classList.add('active');
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
+    }
+
+    // Toggle topic completion
+    function toggleComplete(topicId) {
+      if (completedTopics[currentGrade].includes(topicId)) {
+        completedTopics[currentGrade] = completedTopics[currentGrade].filter(id => id !== topicId);
+      } else {
+        completedTopics[currentGrade].push(topicId);
+      }
+      localStorage.setItem(`completedTopics_grade${currentGrade}`, JSON.stringify(completedTopics[currentGrade]));
+      renderUnits();
+      updateProgress();
+      closeModal();
+    }
+
+    // Update progress bar
+    function updateProgress() {
+      let totalTopics = 0;
+      curriculum.units.forEach(unit => {
+        totalTopics += unit.topics.length;
+      });
+
+      const completed = completedTopics[currentGrade].length;
+      const percentage = totalTopics > 0 ? (completed / totalTopics) * 100 : 0;
+
+      document.getElementById('progressFill').style.width = percentage + '%';
+      document.getElementById('progressText').textContent =
+        `${completed} / ${totalTopics} topics completed (${Math.round(percentage)}%)`;
+    }
+
+    // Close modal on overlay click
+    document.getElementById('modalOverlay').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+
+    // Create stars
+    function createStars() {
+      const starsContainer = document.getElementById('stars');
+      for (let i = 0; i < 50; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDelay = Math.random() * 2 + 's';
+        starsContainer.appendChild(star);
+      }
+    }
+
+    // Initialize
+    createStars();
+    loadCurriculum();
+  </script>
+</body>
+</html>
+</file>
+
+<file path="package.json">
+{
+  "name": "maggie-math-learning",
+  "version": "1.0.0",
+  "description": "Maggie's Grade 5 Math Learning Application - 五年级数学学习应用",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "sync": "node auto-sync.js",
+    "sync:fast": "SYNC_INTERVAL=60000 node auto-sync.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "chokidar": "^4.0.3",
+    "simple-git": "^3.30.0"
+  }
+}
+</file>
+
+</files>
