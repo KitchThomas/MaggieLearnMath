@@ -7,7 +7,8 @@
     "start": "node server.js",
     "dev": "node server.js",
     "sync": "node auto-sync.js",
-    "sync:fast": "SYNC_INTERVAL=60000 node auto-sync.js"
+    "sync:fast": "SYNC_INTERVAL=60000 node auto-sync.js",
+    "deploy": "firebase deploy --only hosting"
   },
   "keywords": [],
   "author": "",
