@@ -667,6 +667,174 @@
       padding: 10px 0;
     }
 
+    /* Examples Section */
+    .examples-section {
+      margin-bottom: 25px;
+    }
+
+    .examples-section h3 {
+      color: #333;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .examples-section h3 .icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+      background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+    }
+
+    .example-item {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+      border: 2px solid #e9ecef;
+      transition: border-color 0.3s;
+    }
+
+    .example-item.answered {
+      border-color: #4CAF50;
+    }
+
+    .example-item.wrong {
+      border-color: #f44336;
+    }
+
+    .example-question {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .example-question-en {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+
+    .example-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .example-option {
+      padding: 10px 15px;
+      background: white;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    .example-option:hover:not(.disabled) {
+      background: #f0f0f0;
+      border-color: #667eea;
+    }
+
+    .example-option.selected {
+      background: #e3f2fd;
+      border-color: #2196F3;
+    }
+
+    .example-option.correct {
+      background: #e8f5e9;
+      border-color: #4CAF50;
+      color: #2e7d32;
+    }
+
+    .example-option.incorrect {
+      background: #ffebee;
+      border-color: #f44336;
+      color: #c62828;
+    }
+
+    .example-option.disabled {
+      cursor: default;
+      opacity: 0.7;
+    }
+
+    .example-input-container {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .example-input {
+      flex: 1;
+      padding: 10px 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    .example-input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .example-check-btn {
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: transform 0.2s;
+    }
+
+    .example-check-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .example-feedback {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: 500;
+      display: none;
+    }
+
+    .example-feedback.show {
+      display: block;
+    }
+
+    .example-feedback.correct {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .example-feedback.incorrect {
+      background: #ffebee;
+      color: #c62828;
+    }
+
+    .example-progress {
+      text-align: center;
+      padding: 10px;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .example-progress strong {
+      color: #4CAF50;
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       header h1 {
@@ -1216,6 +1384,39 @@
 
       let content = '';
 
+      // Examples section - show first, before resources
+      if (topic.examples && topic.examples.length > 0) {
+        content += `
+          <div class="examples-section">
+            <h3><span class="icon">✎</span> Interactive Examples / 互动练习</h3>
+            <div class="example-progress" id="exampleProgress-${topicId}">
+              Answer the questions to practice / 完成以下问题来练习
+            </div>
+            ${topic.examples.map((example, index) => `
+              <div class="example-item" id="example-item-${topicId}-${index}">
+                <div class="example-question">${index + 1}. ${example.question}</div>
+                ${example.questionEn ? `<div class="example-question-en">${example.questionEn}</div>` : ''}
+                ${example.type === 'choice' ? `
+                  <div class="example-options">
+                    ${example.options.map((option, optIndex) => `
+                      <button class="example-option" onclick="checkAnswer('${topicId}', ${index}, ${optIndex}, ${example.correctAnswer}, event)">
+                        ${String.fromCharCode(65 + optIndex)}. ${option}
+                      </button>
+                    `).join('')}
+                  </div>
+                ` : `
+                  <div class="example-input-container">
+                    <input type="text" class="example-input" id="input-${topicId}-${index}" placeholder="输入答案 / Enter answer">
+                    <button class="example-check-btn" onclick="checkInputAnswer('${topicId}', ${index}, '${example.correctAnswer}', ${JSON.stringify(example.answers || []).replace(/"/g, '&quot;')}, event)">检查 / Check</button>
+                  </div>
+                `}
+                <div class="example-feedback" id="feedback-${topicId}-${index}"></div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
       // Khan Academy resources
       if (topic.khanAcademy && topic.khanAcademy.length > 0) {
         content += `
@@ -1277,6 +1478,76 @@
 
       document.getElementById('modalContent').innerHTML = content;
       document.getElementById('modalOverlay').classList.add('active');
+    }
+
+    // Check answer for choice questions
+    function checkAnswer(topicId, exampleIndex, selectedAnswer, correctAnswer, event) {
+      event.stopPropagation();
+      const exampleItem = document.getElementById(`example-item-${topicId}-${exampleIndex}`);
+      const options = exampleItem.querySelectorAll('.example-option');
+      const feedback = document.getElementById(`feedback-${topicId}-${exampleIndex}`);
+
+      // Disable all options
+      options.forEach((opt, idx) => {
+        opt.classList.add('disabled');
+        if (idx === correctAnswer) {
+          opt.classList.add('correct');
+        } else if (idx === selectedAnswer && selectedAnswer !== correctAnswer) {
+          opt.classList.add('incorrect');
+        }
+      });
+
+      // Show feedback
+      feedback.className = 'example-feedback show ' + (selectedAnswer === correctAnswer ? 'correct' : 'incorrect');
+      feedback.textContent = selectedAnswer === correctAnswer
+        ? '✓ Correct! / 答对了！'
+        : `✗ Incorrect. 正确答案是: ${String.fromCharCode(65 + correctAnswer)}`;
+
+      // Update item style
+      exampleItem.classList.add('answered');
+      if (selectedAnswer !== correctAnswer) {
+        exampleItem.classList.add('wrong');
+      }
+
+      // Update progress
+      updateExampleProgress(topicId);
+    }
+
+    // Check answer for input questions
+    function checkInputAnswer(topicId, exampleIndex, correctAnswer, alternativeAnswers, event) {
+      event.stopPropagation();
+      const input = document.getElementById(`input-${topicId}-${exampleIndex}`);
+      const feedback = document.getElementById(`feedback-${topicId}-${exampleIndex}`);
+      const exampleItem = document.getElementById(`example-item-${topicId}-${exampleIndex}`);
+      const userAnswer = input.value.trim().replace(/[,\s]/g, '');
+
+      const isCorrect = userAnswer === correctAnswer.replace(/[,\s]/g, '') ||
+                       (alternativeAnswers && alternativeAnswers.includes(userAnswer));
+
+      feedback.className = 'example-feedback show ' + (isCorrect ? 'correct' : 'incorrect');
+      feedback.textContent = isCorrect
+        ? '✓ Correct! / 答对了！'
+        : `✗ Incorrect. 正确答案是: ${correctAnswer}`;
+
+      exampleItem.classList.add('answered');
+      if (!isCorrect) {
+        exampleItem.classList.add('wrong');
+      }
+
+      input.disabled = true;
+      updateExampleProgress(topicId);
+    }
+
+    // Update example progress
+    function updateExampleProgress(topicId) {
+      const exampleItems = document.querySelectorAll(`[id^="example-item-${topicId}"]`);
+      const answered = document.querySelectorAll(`[id^="example-item-${topicId}"].answered`);
+
+      if (exampleItems.length > 0) {
+        const progressEl = document.getElementById(`exampleProgress-${topicId}`);
+        const correct = document.querySelectorAll(`[id^="example-item-${topicId}"].answered:not(.wrong)`).length;
+        progressEl.innerHTML = `Progress / 进度: <strong>${answered.length}/${exampleItems.length}</strong> answered, <strong>${correct}</strong> correct`;
+      }
     }
 
     // Close modal

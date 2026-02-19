@@ -367,6 +367,43 @@ const curriculum = {
           id: "multiply-decimals",
           title: "Multiplying Decimals / 小数乘法",
           description: "小数的乘法运算",
+          examples: [
+            {
+              question: "计算：0.5 × 0.3 = ?",
+              questionEn: "Calculate: 0.5 × 0.3 = ?",
+              type: "choice",
+              options: ["0.15", "0.015", "1.5", "0.8"],
+              correctAnswer: 0
+            },
+            {
+              question: "计算：2.5 × 4 = ?",
+              questionEn: "Calculate: 2.5 × 4 = ?",
+              type: "choice",
+              options: ["10", "100", "1.0", "6.5"],
+              correctAnswer: 0
+            },
+            {
+              question: "计算：1.2 × 0.11 = ?",
+              questionEn: "Calculate: 1.2 × 0.11 = ?",
+              type: "choice",
+              options: ["0.132", "0.0132", "1.32", "0.022"],
+              correctAnswer: 0
+            },
+            {
+              question: "一个苹果 0.5 千克，6 个苹果多少千克？",
+              questionEn: "An apple weighs 0.5 kg. How much do 6 apples weigh?",
+              type: "choice",
+              options: ["3 kg", "0.3 kg", "5.5 kg", "30 kg"],
+              correctAnswer: 0
+            },
+            {
+              question: "计算：3.4 × 2.5 = ?",
+              questionEn: "Calculate: 3.4 × 2.5 = ?",
+              type: "choice",
+              options: ["8.5", "0.85", "85", "5.9"],
+              correctAnswer: 0
+            }
+          ],
           khanAcademy: [
             {
               title: "Multiplying decimals",
@@ -392,6 +429,43 @@ const curriculum = {
           id: "divide-decimals",
           title: "Dividing Decimals / 小数除法",
           description: "小数的除法运算",
+          examples: [
+            {
+              question: "计算：4.8 ÷ 2 = ?",
+              questionEn: "Calculate: 4.8 ÷ 2 = ?",
+              type: "choice",
+              options: ["2.4", "0.24", "24", "4.2"],
+              correctAnswer: 0
+            },
+            {
+              question: "计算：0.36 ÷ 0.6 = ?",
+              questionEn: "Calculate: 0.36 ÷ 0.6 = ?",
+              type: "choice",
+              options: ["0.6", "0.06", "6", "0.006"],
+              correctAnswer: 0
+            },
+            {
+              question: "计算：7.2 ÷ 0.9 = ?",
+              questionEn: "Calculate: 7.2 ÷ 0.9 = ?",
+              type: "choice",
+              options: ["0.8", "8", "80", "7.11"],
+              correctAnswer: 1
+            },
+            {
+              question: "5.6 米长的绳子平均分成 4 段，每段多少米？",
+              questionEn: "A 5.6 m rope is cut into 4 equal pieces. How long is each piece?",
+              type: "choice",
+              options: ["1.4 m", "0.14 m", "14 m", "1.11 m"],
+              correctAnswer: 0
+            },
+            {
+              question: "计算：12.6 ÷ 3 = ?",
+              questionEn: "Calculate: 12.6 ÷ 3 = ?",
+              type: "choice",
+              options: ["4.2", "0.42", "42", "3.2"],
+              correctAnswer: 0
+            }
+          ],
           khanAcademy: [
             {
               title: "Dividing decimals",
@@ -426,6 +500,43 @@ const curriculum = {
           id: "equivalent-fractions",
           title: "Equivalent Fractions / 等值分数",
           description: "找出和创建等值分数",
+          examples: [
+            {
+              question: "哪个分数等于 1/2？",
+              questionEn: "Which fraction is equal to 1/2?",
+              type: "choice",
+              options: ["2/5", "3/6", "2/3", "3/8"],
+              correctAnswer: 1
+            },
+            {
+              question: "2/3 的分子分母同时乘 3，得到的新分数是？",
+              questionEn: "Multiply numerator and denominator of 2/3 by 3, you get:",
+              type: "choice",
+              options: ["5/6", "6/9", "2/9", "6/3"],
+              correctAnswer: 1
+            },
+            {
+              question: "填空：3/4 = ?/8",
+              questionEn: "Fill in: 3/4 = ?/8",
+              type: "choice",
+              options: ["4", "5", "6", "7"],
+              correctAnswer: 2
+            },
+            {
+              question: "哪个分数和 4/6 相等？",
+              questionEn: "Which fraction equals 4/6?",
+              type: "choice",
+              options: ["3/4", "2/3", "4/8", "6/4"],
+              correctAnswer: 1
+            },
+            {
+              question: "把 5/10 化成最简分数是？",
+              questionEn: "Simplify 5/10 to lowest terms:",
+              type: "choice",
+              options: ["1/5", "1/3", "1/2", "5/1"],
+              correctAnswer: 2
+            }
+          ],
           khanAcademy: [
             {
               title: "Equivalent fractions",
@@ -456,6 +567,43 @@ const curriculum = {
           id: "compare-fractions",
           title: "Comparing Fractions / 比较分数",
           description: "比较不同分母的分数",
+          examples: [
+            {
+              question: "哪个分数更大：3/4 还是 2/3？",
+              questionEn: "Which is larger: 3/4 or 2/3?",
+              type: "choice",
+              options: ["3/4", "2/3", "它们相等 / Equal"],
+              correctAnswer: 0
+            },
+            {
+              question: "比较：1/2 ___ 3/8",
+              questionEn: "Compare: 1/2 ___ 3/8",
+              type: "choice",
+              options: [">", "<", "="],
+              correctAnswer: 0
+            },
+            {
+              question: "把分数从小到大排列：2/5, 1/2, 3/5",
+              questionEn: "Order from smallest to largest: 2/5, 1/2, 3/5",
+              type: "choice",
+              options: ["2/5 < 1/2 < 3/5", "1/2 < 2/5 < 3/5", "3/5 < 1/2 < 2/5"],
+              correctAnswer: 0
+            },
+            {
+              question: "哪个分数小于 4/5？",
+              questionEn: "Which fraction is less than 4/5?",
+              type: "choice",
+              options: ["5/6", "3/4", "9/10", "4/4"],
+              correctAnswer: 1
+            },
+            {
+              question: "比较：5/6 和 7/8",
+              questionEn: "Compare: 5/6 and 7/8",
+              type: "choice",
+              options: ["5/6 > 7/8", "5/6 < 7/8", "5/6 = 7/8"],
+              correctAnswer: 1
+            }
+          ],
           khanAcademy: [
             {
               title: "Comparing fractions with different denominators",
@@ -481,6 +629,43 @@ const curriculum = {
           id: "add-subtract-fractions",
           title: "Adding and Subtracting Fractions / 分数加减法",
           description: "不同分母分数的加减法",
+          examples: [
+            {
+              question: "计算：1/4 + 1/4 = ?",
+              questionEn: "Calculate: 1/4 + 1/4 = ?",
+              type: "choice",
+              options: ["2/8", "1/2", "2/4", "1/8"],
+              correctAnswer: 1
+            },
+            {
+              question: "计算：1/2 + 1/3 = ?",
+              questionEn: "Calculate: 1/2 + 1/3 = ?",
+              type: "choice",
+              options: ["2/5", "5/6", "2/6", "1/5"],
+              correctAnswer: 1
+            },
+            {
+              question: "计算：3/4 - 1/4 = ?",
+              questionEn: "Calculate: 3/4 - 1/4 = ?",
+              type: "choice",
+              options: ["2/4", "1/2", "2/8", "1/4"],
+              correctAnswer: 1
+            },
+            {
+              question: "计算：5/6 - 1/3 = ?",
+              questionEn: "Calculate: 5/6 - 1/3 = ?",
+              type: "choice",
+              options: ["4/3", "3/6", "1/2", "2/3"],
+              correctAnswer: 2
+            },
+            {
+              question: "小明吃了 1/4 个披萨，小红吃了 1/3 个披萨，他们一共吃了多少？",
+              questionEn: "Xiao Ming ate 1/4 pizza, Xiao Hong ate 1/3 pizza. How much total?",
+              type: "choice",
+              options: ["2/7", "7/12", "1/6", "2/12"],
+              correctAnswer: 1
+            }
+          ],
           khanAcademy: [
             {
               title: "Adding fractions with unlike denominators",
@@ -516,6 +701,43 @@ const curriculum = {
           id: "multiply-fractions",
           title: "Multiplying Fractions / 分数乘法",
           description: "分数与整数和分数的乘法",
+          examples: [
+            {
+              question: "计算：1/2 × 1/3 = ?",
+              questionEn: "Calculate: 1/2 × 1/3 = ?",
+              type: "choice",
+              options: ["2/6", "1/6", "1/5", "2/3"],
+              correctAnswer: 1
+            },
+            {
+              question: "计算：3/4 × 2 = ?",
+              questionEn: "Calculate: 3/4 × 2 = ?",
+              type: "choice",
+              options: ["6/4", "3/2", "5/4", "6/8"],
+              correctAnswer: 1
+            },
+            {
+              question: "计算：2/3 × 3/5 = ?",
+              questionEn: "Calculate: 2/3 × 3/5 = ?",
+              type: "choice",
+              options: ["6/15", "5/15", "2/5", "6/8"],
+              correctAnswer: 2
+            },
+            {
+              question: "一桶水的 1/2 再取 1/3 是多少？",
+              questionEn: "Take 1/2 of a bucket, then 1/3 of that. How much?",
+              type: "choice",
+              options: ["1/5", "2/5", "1/6", "1/3"],
+              correctAnswer: 2
+            },
+            {
+              question: "计算：4 × 1/4 = ?",
+              questionEn: "Calculate: 4 × 1/4 = ?",
+              type: "choice",
+              options: ["4/4", "1", "1/16", "4/16"],
+              correctAnswer: 1
+            }
+          ],
           khanAcademy: [
             {
               title: "Multiplying fractions",
@@ -541,6 +763,43 @@ const curriculum = {
           id: "divide-fractions",
           title: "Dividing Fractions / 分数除法",
           description: "分数的除法运算",
+          examples: [
+            {
+              question: "计算：1 ÷ 1/2 = ?",
+              questionEn: "Calculate: 1 ÷ 1/2 = ?",
+              type: "choice",
+              options: ["1/2", "1", "2", "1/4"],
+              correctAnswer: 2
+            },
+            {
+              question: "计算：1/2 ÷ 4 = ?",
+              questionEn: "Calculate: 1/2 ÷ 4 = ?",
+              type: "choice",
+              options: ["1/8", "2", "4/2", "1/6"],
+              correctAnswer: 0
+            },
+            {
+              question: "把 3/4 平均分成 3 份，每份是多少？",
+              questionEn: "Divide 3/4 into 3 equal parts. What is each part?",
+              type: "choice",
+              options: ["3/12", "1/4", "9/4", "1/12"],
+              correctAnswer: 1
+            },
+            {
+              question: "计算：2/3 ÷ 1/3 = ?",
+              questionEn: "Calculate: 2/3 ÷ 1/3 = ?",
+              type: "choice",
+              options: ["2/9", "2", "1/3", "2/6"],
+              correctAnswer: 1
+            },
+            {
+              question: "一块蛋糕的 1/2 分给 4 个人，每人得到多少？",
+              questionEn: "Divide 1/2 of a cake among 4 people. How much does each get?",
+              type: "choice",
+              options: ["1/8", "1/6", "1/4", "1/2"],
+              correctAnswer: 0
+            }
+          ],
           khanAcademy: [
             {
               title: "Dividing fractions",
