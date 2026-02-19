@@ -18,6 +18,43 @@ const curriculum = {
           id: "place-value",
           title: "Place Value / 位值",
           description: "理解到百万位的位值系统",
+          examples: [
+            {
+              question: "在数字 456,789 中，7 在哪一位？",
+              questionEn: "In the number 456,789, what place value is the digit 7 in?",
+              type: "choice",
+              options: ["百位 / Hundreds", "十位 / Tens", "千位 / Thousands", "万位 / Ten Thousands"],
+              correctAnswer: 1
+            },
+            {
+              question: "3,456,789 中，5 代表多少？",
+              questionEn: "In 3,456,789, what value does the digit 5 represent?",
+              type: "choice",
+              options: ["5", "50", "500", "5,000"],
+              correctAnswer: 3
+            },
+            {
+              question: "下面哪个数字有 7 个十万？",
+              questionEn: "Which number has 7 in the hundred thousands place?",
+              type: "choice",
+              options: ["789,456", "678,912", "978,564", "567,891"],
+              correctAnswer: 0
+            },
+            {
+              question: "写出这个数字：三百二十万五千六百零七",
+              questionEn: "Write this number: 三百二十万五千六百零七",
+              type: "input",
+              correctAnswer: "3,205,607",
+              answers: ["3205607", "3,205,607", "3 205 607"]
+            },
+            {
+              question: "在 9,876,543 中，8 代表多少？",
+              questionEn: "In 9,876,543, what value does the digit 8 represent?",
+              type: "choice",
+              options: ["800", "8,000", "80,000", "800,000"],
+              correctAnswer: 2
+            }
+          ],
           khanAcademy: [
             {
               title: "Place value with whole numbers",
@@ -53,6 +90,43 @@ const curriculum = {
           id: "compare-order",
           title: "Comparing and Ordering Numbers / 比较和排序数字",
           description: "比较和排序大数字",
+          examples: [
+            {
+              question: "哪个数字更大？456,789 还是 465,432？",
+              questionEn: "Which number is larger? 456,789 or 465,432?",
+              type: "choice",
+              options: ["456,789", "465,432", "它们相等 / They are equal"],
+              correctAnswer: 1
+            },
+            {
+              question: "把下面数字从小到大排序：789,456 / 987,654 / 678,912",
+              questionEn: "Order these numbers from smallest to largest",
+              type: "choice",
+              options: ["678,912 < 789,456 < 987,654", "789,456 < 678,912 < 987,654", "987,654 < 789,456 < 678,912"],
+              correctAnswer: 0
+            },
+            {
+              question: "在 >、<、= 中选择正确的符号：234,567 ___ 243,567",
+              questionEn: "Choose the correct symbol: 234,567 ___ 243,567",
+              type: "choice",
+              options: [">", "<", "="],
+              correctAnswer: 1
+            },
+            {
+              question: "下面哪组数字是按从大到小排列的？",
+              questionEn: "Which group is ordered from largest to smallest?",
+              type: "choice",
+              options: ["123,456 < 234,567 < 345,678", "345,678 > 234,567 > 123,456", "234,567 > 345,678 > 123,456"],
+              correctAnswer: 1
+            },
+            {
+              question: "比较：890,123 和 890,132",
+              questionEn: "Compare: 890,123 and 890,132",
+              type: "choice",
+              options: ["890,123 > 890,132", "890,123 < 890,132", "890,123 = 890,132"],
+              correctAnswer: 1
+            }
+          ],
           khanAcademy: [
             {
               title: "Comparing whole numbers",
@@ -78,6 +152,43 @@ const curriculum = {
           id: "rounding",
           title: "Rounding Numbers / 四舍五入",
           description: "四舍五入到不同位值",
+          examples: [
+            {
+              question: "把 4,567 四舍五入到最近的百位",
+              questionEn: "Round 4,567 to the nearest hundred",
+              type: "choice",
+              options: ["4,500", "4,600", "4,570", "5,000"],
+              correctAnswer: 1
+            },
+            {
+              question: "把 78,945 四舍五入到最近的千位",
+              questionEn: "Round 78,945 to the nearest thousand",
+              type: "choice",
+              options: ["78,000", "78,900", "79,000", "80,000"],
+              correctAnswer: 2
+            },
+            {
+              question: "把 234,567 四舍五入到最近的万位",
+              questionEn: "Round 234,567 to the nearest ten thousand",
+              type: "choice",
+              options: ["230,000", "234,000", "235,000", "240,000"],
+              correctAnswer: 0
+            },
+            {
+              question: "下面哪个数字四舍五入到千位后是 56,000？",
+              questionEn: "Which number rounds to 56,000 to the nearest thousand?",
+              type: "choice",
+              options: ["56,499", "55,499", "56,500", "55,500"],
+              correctAnswer: 0
+            },
+            {
+              question: "把 9,876 四舍五入到最近的百位是？",
+              questionEn: "Round 9,876 to the nearest hundred",
+              type: "choice",
+              options: ["9,800", "9,880", "9,900", "10,000"],
+              correctAnswer: 2
+            }
+          ],
           khanAcademy: [
             {
               title: "Rounding whole numbers",
@@ -112,6 +223,43 @@ const curriculum = {
           id: "decimal-place-value",
           title: "Decimal Place Value / 小数位值",
           description: "理解小数位值到千分位",
+          examples: [
+            {
+              question: "在 0.456 中，5 在哪一位？",
+              questionEn: "In 0.456, what place value is the digit 5 in?",
+              type: "choice",
+              options: ["十分位 / Tenths", "百分位 / Hundredths", "千分位 / Thousandths", "个位 / Ones"],
+              correctAnswer: 1
+            },
+            {
+              question: "0.3 中的 3 代表多少？",
+              questionEn: "What value does the digit 3 represent in 0.3?",
+              type: "choice",
+              options: ["0.003", "0.03", "0.3", "3"],
+              correctAnswer: 2
+            },
+            {
+              question: "哪个小数有 6 个百分之一？",
+              questionEn: "Which decimal has 6 in the hundredths place?",
+              type: "choice",
+              options: ["0.065", "0.65", "0.605", "6.5"],
+              correctAnswer: 0
+            },
+            {
+              question: "0.789 中，8 代表多少？",
+              questionEn: "In 0.789, what value does the digit 8 represent?",
+              type: "choice",
+              options: ["0.008", "0.08", "0.8", "8"],
+              correctAnswer: 1
+            },
+            {
+              question: "比较大小：0.45 和 0.405",
+              questionEn: "Compare: 0.45 and 0.405",
+              type: "choice",
+              options: ["0.45 > 0.405", "0.45 < 0.405", "0.45 = 0.405"],
+              correctAnswer: 0
+            }
+          ],
           khanAcademy: [
             {
               title: "Decimal place value intro",
@@ -147,6 +295,43 @@ const curriculum = {
           id: "add-subtract-decimals",
           title: "Adding and Subtracting Decimals / 小数加减法",
           description: "小数的加法和减法运算",
+          examples: [
+            {
+              question: "计算：3.45 + 2.3 = ?",
+              questionEn: "Calculate: 3.45 + 2.3 = ?",
+              type: "choice",
+              options: ["5.48", "5.75", "5.78", "6.75"],
+              correctAnswer: 1
+            },
+            {
+              question: "计算：8.56 - 3.24 = ?",
+              questionEn: "Calculate: 8.56 - 3.24 = ?",
+              type: "choice",
+              options: ["5.22", "5.32", "5.42", "11.8"],
+              correctAnswer: 1
+            },
+            {
+              question: "计算：12.5 + 6.75 = ?",
+              questionEn: "Calculate: 12.5 + 6.75 = ?",
+              type: "choice",
+              options: ["18.25", "19.00", "19.25", "18.75"],
+              correctAnswer: 2
+            },
+            {
+              question: "计算：10 - 4.56 = ?",
+              questionEn: "Calculate: 10 - 4.56 = ?",
+              type: "choice",
+              options: ["5.44", "5.54", "6.44", "14.56"],
+              correctAnswer: 0
+            },
+            {
+              question: "小红有 5.5 元，小刚有 3.75 元，他们一共有多少元？",
+              questionEn: "Xiao Hong has $5.5, Xiao Gang has $3.75. How much do they have together?",
+              type: "choice",
+              options: ["8.25", "9.25", "9.75", "8.75"],
+              correctAnswer: 1
+            }
+          ],
           khanAcademy: [
             {
               title: "Adding decimals",
