@@ -11,6 +11,43 @@
           "id": "place-value",
           "title": "Place Value / 位值",
           "description": "理解到百万位的位值系统",
+          "examples": [
+            {
+              "question": "在数字 456,789 中，7 在哪一位？",
+              "questionEn": "In the number 456,789, what place value is the digit 7 in?",
+              "type": "choice",
+              "options": ["百位 / Hundreds", "十位 / Tens", "千位 / Thousands", "万位 / Ten Thousands"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "3,456,789 中，5 代表多少？",
+              "questionEn": "In 3,456,789, what value does the digit 5 represent?",
+              "type": "choice",
+              "options": ["5", "50", "500", "5,000"],
+              "correctAnswer": 3
+            },
+            {
+              "question": "下面哪个数字有 7 个十万？",
+              "questionEn": "Which number has 7 in the hundred thousands place?",
+              "type": "choice",
+              "options": ["789,456", "678,912", "978,564", "567,891"],
+              "correctAnswer": 0
+            },
+            {
+              "question": "写出这个数字：三百二十万五千六百零七",
+              "questionEn": "Write this number: 三百二十万五千六百零七",
+              "type": "input",
+              "correctAnswer": "3,205,607",
+              "answers": ["3205607", "3,205,607", "3 205 607"]
+            },
+            {
+              "question": "在 9,876,543 中，8 代表多少？",
+              "questionEn": "In 9,876,543, what value does the digit 8 represent?",
+              "type": "choice",
+              "options": ["800", "8,000", "80,000", "800,000"],
+              "correctAnswer": 2
+            }
+          ],
           "khanAcademy": [
             {
               "title": "Place value with whole numbers",
@@ -50,6 +87,43 @@
           "id": "compare-order",
           "title": "Comparing and Ordering Numbers / 比较和排序数字",
           "description": "比较和排序大数字",
+          "examples": [
+            {
+              "question": "哪个数字更大？456,789 还是 465,432？",
+              "questionEn": "Which number is larger? 456,789 or 465,432?",
+              "type": "choice",
+              "options": ["456,789", "465,432", "它们相等 / They are equal"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "把下面数字从小到大排序：789,456 / 987,654 / 678,912",
+              "questionEn": "Order these numbers from smallest to largest",
+              "type": "choice",
+              "options": ["678,912 < 789,456 < 987,654", "789,456 < 678,912 < 987,654", "987,654 < 789,456 < 678,912"],
+              "correctAnswer": 0
+            },
+            {
+              "question": "在 >、<、= 中选择正确的符号：234,567 ___ 243,567",
+              "questionEn": "Choose the correct symbol: 234,567 ___ 243,567",
+              "type": "choice",
+              "options": [">", "<", "="],
+              "correctAnswer": 1
+            },
+            {
+              "question": "下面哪组数字是按从大到小排列的？",
+              "questionEn": "Which group is ordered from largest to smallest?",
+              "type": "choice",
+              "options": ["123,456 < 234,567 < 345,678", "345,678 > 234,567 > 123,456", "234,567 > 345,678 > 123,456"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "比较：890,123 和 890,132",
+              "questionEn": "Compare: 890,123 and 890,132",
+              "type": "choice",
+              "options": ["890,123 > 890,132", "890,123 < 890,132", "890,123 = 890,132"],
+              "correctAnswer": 1
+            }
+          ],
           "khanAcademy": [
             {
               "title": "Comparing whole numbers",
@@ -79,6 +153,43 @@
           "id": "rounding",
           "title": "Rounding Numbers / 四舍五入",
           "description": "四舍五入到不同位值",
+          "examples": [
+            {
+              "question": "把 4,567 四舍五入到最近的百位",
+              "questionEn": "Round 4,567 to the nearest hundred",
+              "type": "choice",
+              "options": ["4,500", "4,600", "4,570", "5,000"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "把 78,945 四舍五入到最近的千位",
+              "questionEn": "Round 78,945 to the nearest thousand",
+              "type": "choice",
+              "options": ["78,000", "78,900", "79,000", "80,000"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "把 234,567 四舍五入到最近的万位",
+              "questionEn": "Round 234,567 to the nearest ten thousand",
+              "type": "choice",
+              "options": ["230,000", "234,000", "235,000", "240,000"],
+              "correctAnswer": 0
+            },
+            {
+              "question": "下面哪个数字四舍五入到千位后是 56,000？",
+              "questionEn": "Which number rounds to 56,000 to the nearest thousand?",
+              "type": "choice",
+              "options": ["56,499", "55,499", "56,500", "55,500"],
+              "correctAnswer": 0
+            },
+            {
+              "question": "把 9,876 四舍五入到最近的百位是？",
+              "questionEn": "Round 9,876 to the nearest hundred",
+              "type": "choice",
+              "options": ["9,800", "9,880", "9,900", "10,000"],
+              "correctAnswer": 2
+            }
+          ],
           "khanAcademy": [
             {
               "title": "Rounding whole numbers",
@@ -120,6 +231,43 @@
           "id": "decimal-place-value",
           "title": "Decimal Place Value / 小数位值",
           "description": "理解小数位值到千分位",
+          "examples": [
+            {
+              "question": "在 0.456 中，5 在哪一位？",
+              "questionEn": "In 0.456, what place value is the digit 5 in?",
+              "type": "choice",
+              "options": ["十分位 / Tenths", "百分位 / Hundredths", "千分位 / Thousandths", "个位 / Ones"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "0.3 中的 3 代表多少？",
+              "questionEn": "What value does the digit 3 represent in 0.3?",
+              "type": "choice",
+              "options": ["0.003", "0.03", "0.3", "3"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "哪个小数有 6 个百分之一？",
+              "questionEn": "Which decimal has 6 in the hundredths place?",
+              "type": "choice",
+              "options": ["0.065", "0.65", "0.605", "6.5"],
+              "correctAnswer": 0
+            },
+            {
+              "question": "0.789 中，8 代表多少？",
+              "questionEn": "In 0.789, what value does the digit 8 represent?",
+              "type": "choice",
+              "options": ["0.008", "0.08", "0.8", "8"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "比较大小：0.45 和 0.405",
+              "questionEn": "Compare: 0.45 and 0.405",
+              "type": "choice",
+              "options": ["0.45 > 0.405", "0.45 < 0.405", "0.45 = 0.405"],
+              "correctAnswer": 0
+            }
+          ],
           "khanAcademy": [
             {
               "title": "Decimal place value intro",
@@ -159,6 +307,43 @@
           "id": "add-subtract-decimals",
           "title": "Adding and Subtracting Decimals / 小数加减法",
           "description": "小数的加法和减法运算",
+          "examples": [
+            {
+              "question": "计算：3.45 + 2.3 = ?",
+              "questionEn": "Calculate: 3.45 + 2.3 = ?",
+              "type": "choice",
+              "options": ["5.48", "5.75", "5.78", "6.75"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "计算：8.56 - 3.24 = ?",
+              "questionEn": "Calculate: 8.56 - 3.24 = ?",
+              "type": "choice",
+              "options": ["5.22", "5.32", "5.42", "11.8"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "计算：12.5 + 6.75 = ?",
+              "questionEn": "Calculate: 12.5 + 6.75 = ?",
+              "type": "choice",
+              "options": ["18.25", "19.00", "19.25", "18.75"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "计算：10 - 4.56 = ?",
+              "questionEn": "Calculate: 10 - 4.56 = ?",
+              "type": "choice",
+              "options": ["5.44", "5.54", "6.44", "14.56"],
+              "correctAnswer": 0
+            },
+            {
+              "question": "小红有 5.5 元，小刚有 3.75 元，他们一共有多少元？",
+              "questionEn": "Xiao Hong has $5.5, Xiao Gang has $3.75. How much do they have together?",
+              "type": "choice",
+              "options": ["8.25", "9.25", "9.75", "8.75"],
+              "correctAnswer": 1
+            }
+          ],
           "khanAcademy": [
             {
               "title": "Adding decimals",
@@ -198,6 +383,43 @@
           "id": "multiply-decimals",
           "title": "Multiplying Decimals / 小数乘法",
           "description": "小数的乘法运算",
+          "examples": [
+            {
+              "question": "计算：0.5 × 0.3 = ?",
+              "questionEn": "Calculate: 0.5 × 0.3 = ?",
+              "type": "choice",
+              "options": ["0.15", "0.015", "1.5", "0.8"],
+              "correctAnswer": 0
+            },
+            {
+              "question": "计算：2.5 × 4 = ?",
+              "questionEn": "Calculate: 2.5 × 4 = ?",
+              "type": "choice",
+              "options": ["10", "100", "1.0", "6.5"],
+              "correctAnswer": 0
+            },
+            {
+              "question": "计算：1.2 × 0.11 = ?",
+              "questionEn": "Calculate: 1.2 × 0.11 = ?",
+              "type": "choice",
+              "options": ["0.132", "0.0132", "1.32", "0.022"],
+              "correctAnswer": 0
+            },
+            {
+              "question": "一个苹果 0.5 千克，6 个苹果多少千克？",
+              "questionEn": "An apple weighs 0.5 kg. How much do 6 apples weigh?",
+              "type": "choice",
+              "options": ["3 kg", "0.3 kg", "5.5 kg", "30 kg"],
+              "correctAnswer": 0
+            },
+            {
+              "question": "计算：3.4 × 2.5 = ?",
+              "questionEn": "Calculate: 3.4 × 2.5 = ?",
+              "type": "choice",
+              "options": ["8.5", "0.85", "85", "5.9"],
+              "correctAnswer": 0
+            }
+          ],
           "khanAcademy": [
             {
               "title": "Multiplying decimals",
@@ -227,6 +449,43 @@
           "id": "divide-decimals",
           "title": "Dividing Decimals / 小数除法",
           "description": "小数的除法运算",
+          "examples": [
+            {
+              "question": "计算：4.8 ÷ 2 = ?",
+              "questionEn": "Calculate: 4.8 ÷ 2 = ?",
+              "type": "choice",
+              "options": ["2.4", "0.24", "24", "4.2"],
+              "correctAnswer": 0
+            },
+            {
+              "question": "计算：0.36 ÷ 0.6 = ?",
+              "questionEn": "Calculate: 0.36 ÷ 0.6 = ?",
+              "type": "choice",
+              "options": ["0.6", "0.06", "6", "0.006"],
+              "correctAnswer": 0
+            },
+            {
+              "question": "计算：7.2 ÷ 0.9 = ?",
+              "questionEn": "Calculate: 7.2 ÷ 0.9 = ?",
+              "type": "choice",
+              "options": ["0.8", "8", "80", "7.11"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "5.6 米长的绳子平均分成 4 段，每段多少米？",
+              "questionEn": "A 5.6 m rope is cut into 4 equal pieces. How long is each piece?",
+              "type": "choice",
+              "options": ["1.4 m", "0.14 m", "14 m", "1.11 m"],
+              "correctAnswer": 0
+            },
+            {
+              "question": "计算：12.6 ÷ 3 = ?",
+              "questionEn": "Calculate: 12.6 ÷ 3 = ?",
+              "type": "choice",
+              "options": ["4.2", "0.42", "42", "3.2"],
+              "correctAnswer": 0
+            }
+          ],
           "khanAcademy": [
             {
               "title": "Dividing decimals",
@@ -263,6 +522,43 @@
           "id": "equivalent-fractions",
           "title": "Equivalent Fractions / 等值分数",
           "description": "找出和创建等值分数",
+          "examples": [
+            {
+              "question": "哪个分数等于 1/2？",
+              "questionEn": "Which fraction is equal to 1/2?",
+              "type": "choice",
+              "options": ["2/5", "3/6", "2/3", "3/8"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "2/3 的分子分母同时乘 3，得到的新分数是？",
+              "questionEn": "Multiply numerator and denominator of 2/3 by 3, you get:",
+              "type": "choice",
+              "options": ["5/6", "6/9", "2/9", "6/3"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "填空：3/4 = ?/8",
+              "questionEn": "Fill in: 3/4 = ?/8",
+              "type": "choice",
+              "options": ["4", "5", "6", "7"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "哪个分数和 4/6 相等？",
+              "questionEn": "Which fraction equals 4/6?",
+              "type": "choice",
+              "options": ["3/4", "2/3", "4/8", "6/4"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "把 5/10 化成最简分数是？",
+              "questionEn": "Simplify 5/10 to lowest terms:",
+              "type": "choice",
+              "options": ["1/5", "1/3", "1/2", "5/1"],
+              "correctAnswer": 2
+            }
+          ],
           "khanAcademy": [
             {
               "title": "Equivalent fractions",
@@ -302,6 +598,43 @@
           "id": "compare-fractions",
           "title": "Comparing Fractions / 比较分数",
           "description": "比较不同分母的分数",
+          "examples": [
+            {
+              "question": "哪个分数更大：3/4 还是 2/3？",
+              "questionEn": "Which is larger: 3/4 or 2/3?",
+              "type": "choice",
+              "options": ["3/4", "2/3", "它们相等 / Equal"],
+              "correctAnswer": 0
+            },
+            {
+              "question": "比较：1/2 ___ 3/8",
+              "questionEn": "Compare: 1/2 ___ 3/8",
+              "type": "choice",
+              "options": [">", "<", "="],
+              "correctAnswer": 0
+            },
+            {
+              "question": "把分数从小到大排列：2/5, 1/2, 3/5",
+              "questionEn": "Order from smallest to largest: 2/5, 1/2, 3/5",
+              "type": "choice",
+              "options": ["2/5 < 1/2 < 3/5", "1/2 < 2/5 < 3/5", "3/5 < 1/2 < 2/5"],
+              "correctAnswer": 0
+            },
+            {
+              "question": "哪个分数小于 4/5？",
+              "questionEn": "Which fraction is less than 4/5?",
+              "type": "choice",
+              "options": ["5/6", "3/4", "9/10", "4/4"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "比较：5/6 和 7/8",
+              "questionEn": "Compare: 5/6 and 7/8",
+              "type": "choice",
+              "options": ["5/6 > 7/8", "5/6 < 7/8", "5/6 = 7/8"],
+              "correctAnswer": 1
+            }
+          ],
           "khanAcademy": [
             {
               "title": "Comparing fractions with different denominators",
@@ -331,6 +664,43 @@
           "id": "add-subtract-fractions",
           "title": "Adding and Subtracting Fractions / 分数加减法",
           "description": "不同分母分数的加减法",
+          "examples": [
+            {
+              "question": "计算：1/4 + 1/4 = ?",
+              "questionEn": "Calculate: 1/4 + 1/4 = ?",
+              "type": "choice",
+              "options": ["2/8", "1/2", "2/4", "1/8"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "计算：1/2 + 1/3 = ?",
+              "questionEn": "Calculate: 1/2 + 1/3 = ?",
+              "type": "choice",
+              "options": ["2/5", "5/6", "2/6", "1/5"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "计算：3/4 - 1/4 = ?",
+              "questionEn": "Calculate: 3/4 - 1/4 = ?",
+              "type": "choice",
+              "options": ["2/4", "1/2", "2/8", "1/4"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "计算：5/6 - 1/3 = ?",
+              "questionEn": "Calculate: 5/6 - 1/3 = ?",
+              "type": "choice",
+              "options": ["4/3", "3/6", "1/2", "2/3"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "小明吃了 1/4 个披萨，小红吃了 1/3 个披萨，他们一共吃了多少？",
+              "questionEn": "Xiao Ming ate 1/4 pizza, Xiao Hong ate 1/3 pizza. How much total?",
+              "type": "choice",
+              "options": ["2/7", "7/12", "1/6", "2/12"],
+              "correctAnswer": 1
+            }
+          ],
           "khanAcademy": [
             {
               "title": "Adding fractions with unlike denominators",
@@ -370,6 +740,43 @@
           "id": "multiply-fractions",
           "title": "Multiplying Fractions / 分数乘法",
           "description": "分数与整数和分数的乘法",
+          "examples": [
+            {
+              "question": "计算：1/2 × 1/3 = ?",
+              "questionEn": "Calculate: 1/2 × 1/3 = ?",
+              "type": "choice",
+              "options": ["2/6", "1/6", "1/5", "2/3"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "计算：3/4 × 2 = ?",
+              "questionEn": "Calculate: 3/4 × 2 = ?",
+              "type": "choice",
+              "options": ["6/4", "3/2", "5/4", "6/8"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "计算：2/3 × 3/5 = ?",
+              "questionEn": "Calculate: 2/3 × 3/5 = ?",
+              "type": "choice",
+              "options": ["6/15", "5/15", "2/5", "6/8"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "一桶水的 1/2 再取 1/3 是多少？",
+              "questionEn": "Take 1/2 of a bucket, then 1/3 of that. How much?",
+              "type": "choice",
+              "options": ["1/5", "2/5", "1/6", "1/3"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "计算：4 × 1/4 = ?",
+              "questionEn": "Calculate: 4 × 1/4 = ?",
+              "type": "choice",
+              "options": ["4/4", "1", "1/16", "4/16"],
+              "correctAnswer": 1
+            }
+          ],
           "khanAcademy": [
             {
               "title": "Multiplying fractions",
