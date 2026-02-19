@@ -806,6 +806,43 @@
           "id": "divide-fractions",
           "title": "Dividing Fractions / 分数除法",
           "description": "分数的除法运算",
+          "examples": [
+            {
+              "question": "计算：1 ÷ 1/2 = ?",
+              "questionEn": "Calculate: 1 ÷ 1/2 = ?",
+              "type": "choice",
+              "options": ["1/2", "1", "2", "1/4"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "计算：1/2 ÷ 4 = ?",
+              "questionEn": "Calculate: 1/2 ÷ 4 = ?",
+              "type": "choice",
+              "options": ["1/8", "2", "4/2", "1/6"],
+              "correctAnswer": 0
+            },
+            {
+              "question": "把 3/4 平均分成 3 份，每份是多少？",
+              "questionEn": "Divide 3/4 into 3 equal parts. What is each part?",
+              "type": "choice",
+              "options": ["3/12", "1/4", "9/4", "1/12"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "计算：2/3 ÷ 1/3 = ?",
+              "questionEn": "Calculate: 2/3 ÷ 1/3 = ?",
+              "type": "choice",
+              "options": ["2/9", "2", "1/3", "2/6"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "一块蛋糕的 1/2 分给 4 个人，每人得到多少？",
+              "questionEn": "Divide 1/2 of a cake among 4 people. How much does each get?",
+              "type": "choice",
+              "options": ["1/8", "1/6", "1/4", "1/2"],
+              "correctAnswer": 0
+            }
+          ],
           "khanAcademy": [
             {
               "title": "Dividing fractions",
@@ -842,6 +879,43 @@
           "id": "multi-digit-multiplication",
           "title": "Multi-digit Multiplication / 多位数乘法",
           "description": "两位数和三位数的乘法",
+          "examples": [
+            {
+              "question": "计算：23 × 4 = ?",
+              "questionEn": "Calculate: 23 × 4 = ?",
+              "type": "choice",
+              "options": ["72", "82", "92", "102"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "计算：45 × 23 = ?",
+              "questionEn": "Calculate: 45 × 23 = ?",
+              "type": "choice",
+              "options": ["935", "1035", "1135", "1235"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "计算：123 × 5 = ?",
+              "questionEn": "Calculate: 123 × 5 = ?",
+              "type": "choice",
+              "options": ["515", "615", "625", "715"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "一个盒子装 24 个苹果，35 个盒子能装多少个苹果？",
+              "questionEn": "A box holds 24 apples. How many apples in 35 boxes?",
+              "type": "choice",
+              "options": ["740", "780", "840", "940"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "计算：56 × 42 = ?",
+              "questionEn": "Calculate: 56 × 42 = ?",
+              "type": "choice",
+              "options": ["2252", "2352", "2452", "2552"],
+              "correctAnswer": 1
+            }
+          ],
           "khanAcademy": [
             {
               "title": "Multi-digit multiplication",
@@ -880,6 +954,43 @@
           "id": "long-division",
           "title": "Long Division / 长除法",
           "description": "多位数除以一位数和两位数",
+          "examples": [
+            {
+              "question": "计算：96 ÷ 4 = ?",
+              "questionEn": "Calculate: 96 ÷ 4 = ?",
+              "type": "choice",
+              "options": ["22", "23", "24", "25"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "计算：144 ÷ 12 = ?",
+              "questionEn": "Calculate: 144 ÷ 12 = ?",
+              "type": "choice",
+              "options": ["10", "11", "12", "13"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "计算：525 ÷ 5 = ?",
+              "questionEn": "Calculate: 525 ÷ 5 = ?",
+              "type": "choice",
+              "options": ["95", "105", "115", "125"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "把 168 个糖果平均分给 14 个小朋友，每人得多少？",
+              "questionEn": "Divide 168 candies equally among 14 kids. How many each?",
+              "type": "choice",
+              "options": ["10", "11", "12", "13"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "计算：392 ÷ 7 = ?",
+              "questionEn": "Calculate: 392 ÷ 7 = ?",
+              "type": "choice",
+              "options": ["46", "52", "56", "62"],
+              "correctAnswer": 2
+            }
+          ],
           "khanAcademy": [
             {
               "title": "Long division",
@@ -914,6 +1025,43 @@
           "id": "order-of-operations",
           "title": "Order of Operations (BEDMAS) / 运算顺序",
           "description": "按正确顺序计算表达式",
+          "examples": [
+            {
+              "question": "计算：3 + 4 × 2 = ?",
+              "questionEn": "Calculate: 3 + 4 × 2 = ?",
+              "type": "choice",
+              "options": ["11", "14", "8", "9"],
+              "correctAnswer": 0
+            },
+            {
+              "question": "计算：(5 + 3) × 2 = ?",
+              "questionEn": "Calculate: (5 + 3) × 2 = ?",
+              "type": "choice",
+              "options": ["10", "11", "16", "13"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "计算：20 - 3 × 4 = ?",
+              "questionEn": "Calculate: 20 - 3 × 4 = ?",
+              "type": "choice",
+              "options": ["8", "68", "12", "17"],
+              "correctAnswer": 0
+            },
+            {
+              "question": "计算：24 ÷ (3 + 1) = ?",
+              "questionEn": "Calculate: 24 ÷ (3 + 1) = ?",
+              "type": "choice",
+              "options": ["8", "6", "4", "7"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "计算：5 + 6 × 2 - 3 = ?",
+              "questionEn": "Calculate: 5 + 6 × 2 - 3 = ?",
+              "type": "choice",
+              "options": ["10", "14", "22", "13"],
+              "correctAnswer": 1
+            }
+          ],
           "khanAcademy": [
             {
               "title": "Order of operations introduction",
@@ -955,6 +1103,43 @@
           "id": "patterns",
           "title": "Number Patterns / 数字规律",
           "description": "识别和延续数字规律",
+          "examples": [
+            {
+              "question": "找规律：2, 5, 8, 11, ___",
+              "questionEn": "Find the pattern: 2, 5, 8, 11, ___",
+              "type": "choice",
+              "options": ["12", "13", "14", "15"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "找规律：5, 10, 15, 20, ___",
+              "questionEn": "Find the pattern: 5, 10, 15, 20, ___",
+              "type": "choice",
+              "options": ["21", "22", "25", "30"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "找规律：1, 4, 9, 16, ___",
+              "questionEn": "Find the pattern: 1, 4, 9, 16, ___",
+              "type": "choice",
+              "options": ["20", "21", "24", "25"],
+              "correctAnswer": 3
+            },
+            {
+              "question": "找规律：100, 95, 90, 85, ___",
+              "questionEn": "Find the pattern: 100, 95, 90, 85, ___",
+              "type": "choice",
+              "options": ["75", "80", "82", "90"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "找规律：3, 6, 12, 24, ___",
+              "questionEn": "Find the pattern: 3, 6, 12, 24, ___",
+              "type": "choice",
+              "options": ["36", "42", "48", "54"],
+              "correctAnswer": 2
+            }
+          ],
           "khanAcademy": [
             {
               "title": "Number patterns",
@@ -984,6 +1169,43 @@
           "id": "variables",
           "title": "Variables and Expressions / 变量和表达式",
           "description": "用字母代表未知数",
+          "examples": [
+            {
+              "question": "如果 x = 5，那么 3x = ?",
+              "questionEn": "If x = 5, then 3x = ?",
+              "type": "choice",
+              "options": ["8", "10", "15", "35"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "如果 n = 8，那么 n + 7 = ?",
+              "questionEn": "If n = 8, then n + 7 = ?",
+              "type": "choice",
+              "options": ["14", "15", "16", "17"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "如果 y = 12，那么 y ÷ 3 = ?",
+              "questionEn": "If y = 12, then y ÷ 3 = ?",
+              "type": "choice",
+              "options": ["3", "4", "5", "6"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "如果 a = 4, b = 3，那么 a + b = ?",
+              "questionEn": "If a = 4, b = 3, then a + b = ?",
+              "type": "choice",
+              "options": ["6", "7", "8", "9"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "如果 x = 10，那么 2x - 3 = ?",
+              "questionEn": "If x = 10, then 2x - 3 = ?",
+              "type": "choice",
+              "options": ["15", "17", "20", "23"],
+              "correctAnswer": 1
+            }
+          ],
           "khanAcademy": [
             {
               "title": "Variables and expressions",
@@ -1009,6 +1231,43 @@
           "id": "equations",
           "title": "Simple Equations / 简单方程",
           "description": "解简单的一步方程",
+          "examples": [
+            {
+              "question": "解方程：x + 5 = 12，x = ?",
+              "questionEn": "Solve: x + 5 = 12, x = ?",
+              "type": "choice",
+              "options": ["5", "6", "7", "8"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "解方程：x - 7 = 9，x = ?",
+              "questionEn": "Solve: x - 7 = 9, x = ?",
+              "type": "choice",
+              "options": ["14", "15", "16", "17"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "解方程：3x = 18，x = ?",
+              "questionEn": "Solve: 3x = 18, x = ?",
+              "type": "choice",
+              "options": ["4", "5", "6", "7"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "解方程：x ÷ 4 = 5，x = ?",
+              "questionEn": "Solve: x ÷ 4 = 5, x = ?",
+              "type": "choice",
+              "options": ["15", "18", "20", "25"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "解方程：2x + 3 = 11，x = ?",
+              "questionEn": "Solve: 2x + 3 = 11, x = ?",
+              "type": "choice",
+              "options": ["3", "4", "5", "6"],
+              "correctAnswer": 1
+            }
+          ],
           "khanAcademy": [
             {
               "title": "One-step equations",
@@ -1045,6 +1304,43 @@
           "id": "2d-shapes",
           "title": "2D Shapes / 二维图形",
           "description": "识别和分类多边形",
+          "examples": [
+            {
+              "question": "一个正方形有几条边？",
+              "questionEn": "How many sides does a square have?",
+              "type": "choice",
+              "options": ["3", "4", "5", "6"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "三角形有几个角？",
+              "questionEn": "How many angles does a triangle have?",
+              "type": "choice",
+              "options": ["2", "3", "4", "5"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "哪个图形有 4 条相等的边和 4 个直角？",
+              "questionEn": "Which shape has 4 equal sides and 4 right angles?",
+              "type": "choice",
+              "options": ["长方形 / Rectangle", "正方形 / Square", "梯形 / Trapezoid", "菱形 / Rhombus"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "五边形有多少条边？",
+              "questionEn": "How many sides does a pentagon have?",
+              "type": "choice",
+              "options": ["4", "5", "6", "8"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "平行四边形的特点是什么？",
+              "questionEn": "What is special about a parallelogram?",
+              "type": "choice",
+              "options": ["所有边相等 / All sides equal", "两组对边平行 / Two pairs of parallel sides", "所有角都是直角 / All right angles", "没有平行边 / No parallel sides"],
+              "correctAnswer": 1
+            }
+          ],
           "khanAcademy": [
             {
               "title": "Classifying shapes",
@@ -1079,6 +1375,43 @@
           "id": "3d-shapes",
           "title": "3D Shapes / 三维图形",
           "description": "识别立体图形及其特征",
+          "examples": [
+            {
+              "question": "正方体有几个面？",
+              "questionEn": "How many faces does a cube have?",
+              "type": "choice",
+              "options": ["4", "5", "6", "8"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "球体有几个顶点？",
+              "questionEn": "How many vertices does a sphere have?",
+              "type": "choice",
+              "options": ["0", "1", "2", "4"],
+              "correctAnswer": 0
+            },
+            {
+              "question": "圆柱体的上下底面是什么形状？",
+              "questionEn": "What shape are the top and bottom of a cylinder?",
+              "type": "choice",
+              "options": ["正方形 / Square", "三角形 / Triangle", "圆形 / Circle", "长方形 / Rectangle"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "哪个图形有 6 个面、12 条边、8 个顶点？",
+              "questionEn": "Which shape has 6 faces, 12 edges, 8 vertices?",
+              "type": "choice",
+              "options": ["球体 / Sphere", "圆锥体 / Cone", "长方体 / Rectangular prism", "圆柱体 / Cylinder"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "金字塔的底面通常是？",
+              "questionEn": "The base of a pyramid is usually:",
+              "type": "choice",
+              "options": ["圆形 / Circular", "三角形 / Triangular", "方形 / Square", "椭圆形 / Oval"],
+              "correctAnswer": 2
+            }
+          ],
           "khanAcademy": [
             {
               "title": "Intro to 3D shapes",
@@ -1104,6 +1437,43 @@
           "id": "angles",
           "title": "Angles / 角度",
           "description": "测量和分类角度",
+          "examples": [
+            {
+              "question": "直角是多少度？",
+              "questionEn": "How many degrees is a right angle?",
+              "type": "choice",
+              "options": ["45°", "90°", "180°", "360°"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "哪个角比直角大？",
+              "questionEn": "Which angle is larger than a right angle?",
+              "type": "choice",
+              "options": ["锐角 / Acute", "钝角 / Obtuse", "平角 / Straight", "直角 / Right"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "30° 角是什么类型的角？",
+              "questionEn": "What type of angle is 30°?",
+              "type": "choice",
+              "options": ["锐角 / Acute", "直角 / Right", "钝角 / Obtuse", "平角 / Straight"],
+              "correctAnswer": 0
+            },
+            {
+              "question": "一个圆周是多少度？",
+              "questionEn": "How many degrees in a full circle?",
+              "type": "choice",
+              "options": ["180°", "270°", "360°", "90°"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "120° 是什么类型的角？",
+              "questionEn": "What type of angle is 120°?",
+              "type": "choice",
+              "options": ["锐角 / Acute", "直角 / Right", "钝角 / Obtuse", "平角 / Straight"],
+              "correctAnswer": 2
+            }
+          ],
           "khanAcademy": [
             {
               "title": "Measuring angles",
@@ -1138,6 +1508,43 @@
           "id": "coordinate-plane",
           "title": "Coordinate Plane / 坐标平面",
           "description": "在坐标平面上绘制和读取点",
+          "examples": [
+            {
+              "question": "点 (3, 4) 的 x 坐标是多少？",
+              "questionEn": "What is the x-coordinate of point (3, 4)?",
+              "type": "choice",
+              "options": ["1", "2", "3", "4"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "在坐标平面上，原点的坐标是？",
+              "questionEn": "What are the coordinates of the origin?",
+              "type": "choice",
+              "options": ["(1, 0)", "(0, 1)", "(1, 1)", "(0, 0)"],
+              "correctAnswer": 3
+            },
+            {
+              "question": "点 (5, 2) 在哪个象限？（假设有象限）",
+              "questionEn": "Which quadrant is point (5, 2) in?",
+              "type": "choice",
+              "options": ["第一象限 / First", "第二象限 / Second", "第三象限 / Third", "第四象限 / Fourth"],
+              "correctAnswer": 0
+            },
+            {
+              "question": "y 轴上的点的 x 坐标是？",
+              "questionEn": "What is the x-coordinate of points on the y-axis?",
+              "type": "choice",
+              "options": ["0", "1", "-1", "取决于点 / Depends on point"],
+              "correctAnswer": 0
+            },
+            {
+              "question": "点 (-2, 3) 的 y 坐标是？",
+              "questionEn": "What is the y-coordinate of point (-2, 3)?",
+              "type": "choice",
+              "options": ["-2", "2", "3", "-3"],
+              "correctAnswer": 2
+            }
+          ],
           "khanAcademy": [
             {
               "title": "Coordinate plane",
