@@ -896,6 +896,11 @@
       75% { transform: translateX(10px); }
     }
 
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     /* Grade 6 theme */
     body.grade6-theme {
       background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
@@ -1609,17 +1614,21 @@
         const actualIndex = startIndex + index;
         const hint = example.hint || 'Think about the concept and try again / 想想这个概念，再试一次';
         const escapedHint = hint.replace(/`/g, '\\`').replace(/"/g, '&quot;');
+        const isExtra = example.isExtra ? 'true' : 'false';
+        const templateIndex = example.templateIndex !== undefined ? example.templateIndex : 'null';
+        const extraClass = example.isExtra ? ' style="border-color: #667eea;"' : '';
+        const extraPrefix = example.isExtra ? '🔄 ' : '';
 
         return `
           <div class="example-item" id="example-item-${topicId}-${actualIndex}"
                data-attempts="0" data-correct="false"
-               data-template-index="${example.templateIndex !== undefined ? example.templateIndex : ''}">
-            <div class="example-question">${actualIndex + 1}. ${example.question}</div>
+               data-is-extra="${isExtra}"${extraClass}>
+            <div class="example-question">${actualIndex + 1}. ${extraPrefix}${example.question}</div>
             ${example.questionEn ? `<div class="example-question-en">${example.questionEn}</div>` : ''}
             ${example.type === 'choice' ? `
               <div class="example-options" id="options-${topicId}-${actualIndex}">
                 ${example.options.map((option, optIndex) => `
-                  <button class="example-option" onclick="checkAnswer('${topicId}', ${actualIndex}, ${optIndex}, ${example.correctAnswer}, event, '${escapedHint}', ${example.templateIndex !== undefined ? example.templateIndex : 'null'})">
+                  <button class="example-option" onclick="checkAnswer('${topicId}', ${actualIndex}, ${optIndex}, ${example.correctAnswer}, event, '${escapedHint}', ${templateIndex})">
                     ${String.fromCharCode(65 + optIndex)}. ${option}
                   </button>
                 `).join('')}
@@ -1794,16 +1803,16 @@
         updateExampleProgress(topicId);
         checkTopicCompletion(topicId);
       } else {
-        // Wrong answer - for dynamic questions, regenerate after showing hint
+        // Wrong answer - show hint and add a new practice question at the end
         const selectedOption = options[selectedAnswer];
-        selectedOption.classList.add('incorrect', 'attempted-wrong');
+        selectedOption.classList.add('incorrect');
 
-        // Disable all options temporarily
+        // Disable this question (it's wrong, need to try a similar one)
         options.forEach(opt => opt.classList.add('disabled'));
 
         // Show hint
         feedback.className = 'example-feedback show incorrect';
-        feedback.innerHTML = `✗ Not quite. / 不太对。<br><strong>💡 Hint / 提示:</strong> ${hint}<br><small>New question coming... / 正在生成新题...</small>`;
+        feedback.innerHTML = `✗ Not quite. / 不太对。<br><strong>💡 Hint / 提示:</strong> ${hint}<br><small>A similar question has been added at the end / 已在末尾添加相似题目</small>`;
 
         // Add shake animation
         exampleItem.style.animation = 'none';
@@ -1811,67 +1820,74 @@
           exampleItem.style.animation = 'shake 0.5s ease';
         }, 10);
 
-        // For dynamic questions, regenerate after delay
+        // For dynamic questions, add a new similar question at the end
         if (templateIndex !== null && templateIndex !== undefined && window.currentDynamicTemplates && window.currentDynamicTemplates[topicId]) {
-          setTimeout(() => {
-            regenerateQuestion(topicId, exampleIndex, templateIndex);
-          }, 2000); // Wait 2 seconds before regenerating
+          addNewPracticeQuestion(topicId, templateIndex);
         } else {
-          // For static questions, allow retry with same options
+          // For static questions, just allow retry after a delay
           setTimeout(() => {
             options.forEach(opt => opt.classList.remove('disabled'));
-            selectedOption.classList.remove('incorrect', 'attempted-wrong');
-          }, 1500);
+            selectedOption.classList.remove('incorrect');
+          }, 2000);
         }
 
         updateExampleProgress(topicId);
       }
     }
 
-    // Regenerate a dynamic question (with new random values)
-    function regenerateQuestion(topicId, exampleIndex, templateIndex) {
+    // Add a new practice question at the end (for wrong answers)
+    function addNewPracticeQuestion(topicId, templateIndex) {
       if (!window.currentDynamicTemplates || !window.currentDynamicTemplates[topicId]) {
         return;
       }
 
       const template = window.currentDynamicTemplates[topicId][templateIndex];
       const newQuestion = window.QuestionGenerator.generateChoiceQuestion(template);
+      newQuestion.templateIndex = templateIndex;
+      newQuestion.isExtra = true; // Mark as extra practice question
 
-      // Update the example item with new question
-      const exampleItem = document.getElementById(`example-item-${topicId}-${exampleIndex}`);
+      // Add to the examples array
+      if (!window.currentTopicExamples) window.currentTopicExamples = {};
+      if (!window.currentTopicExamples[topicId]) window.currentTopicExamples[topicId] = [];
+      window.currentTopicExamples[topicId].push(newQuestion);
 
-      // Reset state
-      exampleItem.dataset.attempts = '0';
-      exampleItem.dataset.correct = 'false';
+      // Get the container and add the new question HTML
+      const container = document.getElementById(`examplesContainer-${topicId}`);
+      if (container) {
+        const newIndex = window.currentTopicExamples[topicId].length - 1;
+        const escapedHint = (newQuestion.hint || 'Think about the concept and try again').replace(/`/g, '\\`').replace(/"/g, '&quot;');
 
-      // Update question text
-      const questionEl = exampleItem.querySelector('.example-question');
-      const questionEnEl = exampleItem.querySelector('.example-question-en');
-      questionEl.textContent = `${exampleIndex + 1}. ${newQuestion.question}`;
-      if (questionEnEl) {
-        questionEnEl.textContent = newQuestion.questionEn;
+        const newQuestionHTML = `
+          <div class="example-item" id="example-item-${topicId}-${newIndex}"
+               data-attempts="0" data-correct="false" data-is-extra="true"
+               data-template-index="${templateIndex}"
+               style="animation: fadeIn 0.5s ease; border-color: #667eea;">
+            <div class="example-question">🔄 ${newQuestion.question}</div>
+            ${newQuestion.questionEn ? `<div class="example-question-en">${newQuestion.questionEn}</div>` : ''}
+            <div class="example-options" id="options-${topicId}-${newIndex}">
+              ${newQuestion.options.map((option, optIndex) => `
+                <button class="example-option" onclick="checkAnswer('${topicId}', ${newIndex}, ${optIndex}, ${newQuestion.correctAnswer}, event, '${escapedHint}', ${templateIndex})">
+                  ${String.fromCharCode(65 + optIndex)}. ${option}
+                </button>
+              `).join('')}
+            </div>
+            <div class="example-feedback" id="feedback-${topicId}-${newIndex}"></div>
+          </div>
+        `;
+
+        container.insertAdjacentHTML('beforeend', newQuestionHTML);
+
+        // Scroll to the new question smoothly
+        setTimeout(() => {
+          const newElement = document.getElementById(`example-item-${topicId}-${newIndex}`);
+          if (newElement) {
+            newElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 100);
       }
 
-      // Update options
-      const optionsContainer = exampleItem.querySelector('.example-options');
-      const escapedHint = (newQuestion.hint || 'Think about the concept and try again').replace(/`/g, '\\`').replace(/"/g, '&quot;');
-      optionsContainer.innerHTML = newQuestion.options.map((option, optIndex) => `
-        <button class="example-option" onclick="checkAnswer('${topicId}', ${exampleIndex}, ${optIndex}, ${newQuestion.correctAnswer}, event, '${escapedHint}', ${templateIndex})">
-          ${String.fromCharCode(65 + optIndex)}. ${option}
-        </button>
-      `).join('');
-
-      // Update feedback
-      const feedback = document.getElementById(`feedback-${topicId}-${exampleIndex}`);
-      feedback.className = 'example-feedback';
-      feedback.innerHTML = '<span style="color: #667eea;">🔄 New question! Try again / 新题目！再试一次</span>';
-      setTimeout(() => {
-        feedback.className = 'example-feedback';
-        feedback.textContent = '';
-      }, 1500);
-
-      // Store new question data for answer checking
-      window.currentTopicExamples[topicId][exampleIndex] = newQuestion;
+      // Update progress to show more questions
+      updateExampleProgress(topicId);
     }
 
     // Check answer for input questions
@@ -1935,23 +1951,39 @@
       if (exampleItems.length > 0) {
         const progressEl = document.getElementById(`exampleProgress-${topicId}`);
 
-        // Count correct answers (data-correct="true")
+        // Count correct answers (only count original questions, not extra practice)
         let correct = 0;
+        let totalOriginal = 0;
         let totalAttempts = 0;
+        let extraCount = 0;
+
         exampleItems.forEach(item => {
-          if (item.dataset.correct === 'true') {
-            correct++;
-          }
           totalAttempts += parseInt(item.dataset.attempts || 0);
+          if (item.dataset.isExtra !== 'true') {
+            totalOriginal++;
+            if (item.dataset.correct === 'true') {
+              correct++;
+            }
+          } else {
+            extraCount++;
+          }
         });
 
-        let message = `Progress / 进度: <strong>${correct}/${exampleItems.length}</strong> correct`;
+        let message = `Progress / 进度: <strong>${correct}/${totalOriginal}</strong> correct`;
 
-        if (correct === exampleItems.length) {
-          // All correct! checkTopicCompletion will handle the celebration
-          message = `<span style="color: #4CAF50;">🎉 All correct! Total attempts: ${totalAttempts} / 全部正确！共尝试 ${totalAttempts} 次</span>`;
+        if (extraCount > 0) {
+          message += ` <small style="color: #667eea;">(+${extraCount} practice / +${extraCount} 道练习)</small>`;
+        }
+
+        if (correct === totalOriginal && totalOriginal > 0) {
+          // All original questions correct!
+          message = `<span style="color: #4CAF50;">🎉 All ${totalOriginal} questions correct! / 全部 ${totalOriginal} 题正确！`;
+          if (extraCount > 0) {
+            message += ` <small>(${extraCount} practice completed / ${extraCount} 道练习)</small>`;
+          }
+          message += `</span>`;
         } else {
-          const remaining = exampleItems.length - correct;
+          const remaining = totalOriginal - correct;
           message += `<br><small>${remaining} more to go / 还剩 ${remaining} 题</small>`;
         }
 
@@ -1963,17 +1995,22 @@
     async function checkTopicCompletion(topicId) {
       const exampleItems = document.querySelectorAll(`[id^="example-item-${topicId}"]`);
 
-      // Count correct answers using data-correct attribute
+      // Count correct answers (only original questions, not extra practice)
       let correctCount = 0;
+      let totalCount = 0;
+
       exampleItems.forEach(item => {
-        if (item.dataset.correct === 'true') {
-          correctCount++;
+        if (item.dataset.isExtra !== 'true') {
+          totalCount++;
+          if (item.dataset.correct === 'true') {
+            correctCount++;
+          }
         }
       });
 
-      // Check if all examples are answered correctly
-      if (exampleItems.length > 0 && correctCount === exampleItems.length) {
-        // All examples answered correctly!
+      // Check if all original examples are answered correctly
+      if (totalCount > 0 && correctCount === totalCount) {
+        // All original examples answered correctly!
         if (!isCompleted(topicId)) {
           await markTopicComplete(topicId);
         }
