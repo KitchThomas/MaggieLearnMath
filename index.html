@@ -1043,6 +1043,9 @@
 
   <!-- Firebase SDK -->
   <script type="module">
+    // Detect if Firebase loads
+    window.firebaseLoadStart = Date.now();
+    console.log('Loading Firebase...');
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, updateProfile } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
     import { getFirestore, doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
@@ -1092,8 +1095,21 @@
 
     // Check if Firebase is properly configured
     setTimeout(() => {
-      console.log('Firebase initialized. Auth:', auth);
+      console.log('=== Firebase Status Check ===');
+      console.log('Firebase loaded in:', Date.now() - window.firebaseLoadStart, 'ms');
+      console.log('Firebase Auth:', auth);
+      console.log('Firebase DB:', db);
+      console.log('Config:', firebaseConfig);
       console.log('Current user:', window.currentUser);
+
+      // Test if auth methods are available
+      console.log('signInWithEmailAndPassword available:', typeof signInWithEmailAndPassword !== 'undefined');
+      console.log('createUserWithEmailAndPassword available:', typeof createUserWithEmailAndPassword !== 'undefined');
+
+      if (typeof signInWithEmailAndPassword === 'undefined') {
+        console.error('Firebase Auth methods not loaded!');
+        showAuthError('Firebase 加载失败！请检查网络连接或刷新页面 / Firebase failed to load!');
+      }
     }, 2000);
   </script>
 
@@ -1152,9 +1168,13 @@
     }
 
     // Show error
-    function showAuthError(message) {
+    function showAuthError(message, fullError = null) {
       const errorEl = document.getElementById('authError');
       errorEl.textContent = message;
+      if (fullError) {
+        errorEl.innerHTML += '<br><small style="color: #666;">详细信息: ' + JSON.stringify(fullError) + '</small>';
+        console.error('Full error object:', fullError);
+      }
       errorEl.classList.add('show');
     }
 
@@ -1177,7 +1197,11 @@
         console.error('Login error:', error);
         console.error('Error code:', error.code);
         console.error('Error message:', error.message);
-        showAuthError(getErrorMessage(error.code) + ' (' + error.code + ')');
+        showAuthError(getErrorMessage(error.code) + ' (' + error.code + ')', {
+          code: error.code,
+          message: error.message,
+          name: error.name
+        });
       } finally {
         btn.disabled = false;
         btn.textContent = 'Login / 登录';
@@ -1198,6 +1222,7 @@
 
       try {
         console.log('Attempting registration for:', email);
+        console.log('Password length:', password.length);
         const userCredential = await window.createUserWithEmailAndPassword(window.firebaseAuth, email, password);
         console.log('Registration successful! User:', userCredential.user);
         await window.updateProfile(userCredential.user, { displayName: name });
@@ -1207,7 +1232,11 @@
         console.error('Registration error:', error);
         console.error('Error code:', error.code);
         console.error('Error message:', error.message);
-        showAuthError(getErrorMessage(error.code) + ' (' + error.code + ')');
+        showAuthError(getErrorMessage(error.code) + ' (' + error.code + ')', {
+          code: error.code,
+          message: error.message,
+          name: error.name
+        });
       } finally {
         btn.disabled = false;
         btn.textContent = 'Register / 注册';
