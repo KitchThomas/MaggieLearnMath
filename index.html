@@ -1079,6 +1079,7 @@
 
     // Listen for auth state changes
     onAuthStateChanged(auth, (user) => {
+      console.log('Auth state changed. User:', user ? user.email : 'null');
       if (user) {
         window.currentUser = user;
         updateUIForLoggedInUser(user);
@@ -1088,6 +1089,12 @@
         updateUIForLoggedOutUser();
       }
     });
+
+    // Check if Firebase is properly configured
+    setTimeout(() => {
+      console.log('Firebase initialized. Auth:', auth);
+      console.log('Current user:', window.currentUser);
+    }, 2000);
   </script>
 
   <script>
@@ -1160,11 +1167,17 @@
 
       btn.disabled = true;
       btn.textContent = 'Logging in...';
+      document.getElementById('authError').classList.remove('show');
 
       try {
+        console.log('Attempting login with:', email);
         await window.signInWithEmailAndPassword(window.firebaseAuth, email, password);
+        console.log('Login successful!');
       } catch (error) {
-        showAuthError(getErrorMessage(error.code));
+        console.error('Login error:', error);
+        console.error('Error code:', error.code);
+        console.error('Error message:', error.message);
+        showAuthError(getErrorMessage(error.code) + ' (' + error.code + ')');
       } finally {
         btn.disabled = false;
         btn.textContent = 'Login / 登录';
@@ -1181,14 +1194,20 @@
 
       btn.disabled = true;
       btn.textContent = 'Creating account...';
+      document.getElementById('authError').classList.remove('show');
 
       try {
+        console.log('Attempting registration for:', email);
         const userCredential = await window.createUserWithEmailAndPassword(window.firebaseAuth, email, password);
+        console.log('Registration successful! User:', userCredential.user);
         await window.updateProfile(userCredential.user, { displayName: name });
         // Save initial progress to cloud
         await saveProgressToCloud();
       } catch (error) {
-        showAuthError(getErrorMessage(error.code));
+        console.error('Registration error:', error);
+        console.error('Error code:', error.code);
+        console.error('Error message:', error.message);
+        showAuthError(getErrorMessage(error.code) + ' (' + error.code + ')');
       } finally {
         btn.disabled = false;
         btn.textContent = 'Register / 注册';
@@ -1224,9 +1243,15 @@
         'auth/user-not-found': 'User not found / 用户不存在',
         'auth/wrong-password': 'Incorrect password / 密码错误',
         'auth/invalid-credential': 'Invalid email or password / 邮箱或密码错误',
-        'auth/too-many-requests': 'Too many attempts. Please try later / 尝试次数过多，请稍后再试'
+        'auth/too-many-requests': 'Too many attempts. Please try later / 尝试次数过多，请稍后再试',
+        'auth/configuration-not-found': 'Firebase Auth not configured. Please enable Email/Password in Firebase Console / Firebase未配置，请在控制台启用邮箱密码登录',
+        'auth/operation-not-allowed': 'Email/Password sign-in is not enabled. Please enable in Firebase Console / 邮箱密码登录未启用',
+        'auth/network-request-failed': 'Network error. Please check your connection / 网络错误，请检查网络连接',
+        'auth/unauthorized-domain': 'This domain is not authorized in Firebase Console / 此域名未被授权',
+        'auth/api-key-not-allowed': 'API key restrictions. Please check Firebase Console / API密钥限制',
+        'auth/quota-exceeded': 'Quota exceeded. Please try later / 配额已用完，请稍后再试'
       };
-      return messages[code] || 'An error occurred / 发生错误';
+      return messages[code] || 'An error occurred / 发生错误: ' + code;
     }
 
     // Save progress to cloud
