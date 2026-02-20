@@ -1521,12 +1521,11 @@
         `;
       }
 
-      // Mark complete button
+      // Mark complete button - shows status, not clickable (must complete all examples correctly)
       const isComplete = isCompleted(topicId);
       content += `
-        <button class="mark-complete-btn ${isComplete ? 'completed' : ''}"
-                onclick="toggleComplete('${topicId}')">
-          ${isComplete ? '✓ Completed / 已完成' : 'Mark as Complete / 标记完成'}
+        <button class="mark-complete-btn ${isComplete ? 'completed' : ''}" id="completeBtn-${topicId}" style="cursor: default;">
+          ${isComplete ? '✓ Completed! All answers correct! / 已完成！全部答对！' : '⏳ Complete all examples correctly to finish / 正确完成所有练习题后自动完成'}
         </button>
       `;
 
@@ -1563,8 +1562,9 @@
         exampleItem.classList.add('wrong');
       }
 
-      // Update progress
+      // Update progress and check if all correct
       updateExampleProgress(topicId);
+      checkTopicCompletion(topicId);
     }
 
     // Check answer for input questions
@@ -1590,6 +1590,7 @@
 
       input.disabled = true;
       updateExampleProgress(topicId);
+      checkTopicCompletion(topicId);
     }
 
     // Update example progress
@@ -1600,7 +1601,70 @@
       if (exampleItems.length > 0) {
         const progressEl = document.getElementById(`exampleProgress-${topicId}`);
         const correct = document.querySelectorAll(`[id^="example-item-${topicId}"].answered:not(.wrong)`).length;
-        progressEl.innerHTML = `Progress / 进度: <strong>${answered.length}/${exampleItems.length}</strong> answered, <strong>${correct}</strong> correct`;
+        const wrong = answered.length - correct;
+
+        let message = `Progress / 进度: <strong>${answered.length}/${exampleItems.length}</strong> answered, <strong>${correct}</strong> correct`;
+
+        if (wrong > 0) {
+          message += ` <span style="color: #f44336;">(${wrong} wrong / 答错)</span>`;
+          message += `<br><small>Answer all correctly to complete / 全部答对才能完成本节</small>`;
+        } else if (answered.length === exampleItems.length && correct === exampleItems.length) {
+          // All correct! checkTopicCompletion will handle the celebration
+        } else {
+          message += `<br><small>Keep going! / 继续加油！</small>`;
+        }
+
+        progressEl.innerHTML = message;
+      }
+    }
+
+    // Check if all examples are answered correctly and mark topic as complete
+    async function checkTopicCompletion(topicId) {
+      const exampleItems = document.querySelectorAll(`[id^="example-item-${topicId}"]`);
+      const correct = document.querySelectorAll(`[id^="example-item-${topicId}"].answered:not(.wrong)`);
+
+      // Check if all examples exist, are answered, and all are correct
+      if (exampleItems.length > 0 && correct.length === exampleItems.length) {
+        // All examples answered correctly!
+        if (!isCompleted(topicId)) {
+          await markTopicComplete(topicId);
+        }
+      }
+    }
+
+    // Mark topic as complete (called automatically when all examples are correct)
+    async function markTopicComplete(topicId) {
+      if (!completedTopics[currentGrade]) {
+        completedTopics[currentGrade] = [];
+      }
+
+      if (!completedTopics[currentGrade].includes(topicId)) {
+        completedTopics[currentGrade].push(topicId);
+
+        // Save to localStorage
+        localStorage.setItem(`completedTopics_grade${currentGrade}`, JSON.stringify(completedTopics[currentGrade]));
+
+        // Save to cloud if logged in
+        if (window.currentUser) {
+          await saveProgressToCloud();
+        }
+
+        // Update UI
+        renderUnits();
+        updateProgress();
+
+        // Update the complete button in modal
+        const completeBtn = document.getElementById(`completeBtn-${topicId}`);
+        if (completeBtn) {
+          completeBtn.classList.add('completed');
+          completeBtn.textContent = '✓ Completed! All answers correct! / 已完成！全部答对！';
+        }
+
+        // Show celebration message
+        const progressEl = document.getElementById(`exampleProgress-${topicId}`);
+        if (progressEl) {
+          progressEl.innerHTML = `<span style="color: #4CAF50; font-size: 1.1rem;">🎉 Excellent! All correct! Topic completed! / 太棒了！全部正确！本节完成！</span>`;
+        }
       }
     }
 

@@ -16,35 +16,60 @@
               "question": "下面哪个是负数？",
               "questionEn": "Which number is negative?",
               "type": "choice",
-              "options": ["0", "5", "-3", "+2"],
+              "options": [
+                "0",
+                "5",
+                "-3",
+                "+2"
+              ],
               "correctAnswer": 2
             },
             {
               "question": "-5 读作？",
               "questionEn": "How do you read -5?",
               "type": "choice",
-              "options": ["五 / Five", "正五 / Positive five", "负五 / Negative five", "零五 / Zero five"],
+              "options": [
+                "五 / Five",
+                "正五 / Positive five",
+                "负五 / Negative five",
+                "零五 / Zero five"
+              ],
               "correctAnswer": 2
             },
             {
               "question": "在数轴上，-3 在哪一边？",
               "questionEn": "On the number line, where is -3 located?",
               "type": "choice",
-              "options": ["0 的右边 / Right of 0", "0 的左边 / Left of 0", "0 的上面 / Above 0", "0 的下面 / Below 0"],
+              "options": [
+                "0 的右边 / Right of 0",
+                "0 的左边 / Left of 0",
+                "0 的上面 / Above 0",
+                "0 的下面 / Below 0"
+              ],
               "correctAnswer": 1
             },
             {
               "question": "温度 -5°C 比 -2°C 热还是冷？",
               "questionEn": "Is -5°C warmer or colder than -2°C?",
               "type": "choice",
-              "options": ["更热 / Warmer", "更冷 / Colder", "一样 / Same", "无法比较 / Cannot compare"],
+              "options": [
+                "更热 / Warmer",
+                "更冷 / Colder",
+                "一样 / Same",
+                "无法比较 / Cannot compare"
+              ],
               "correctAnswer": 1
             },
             {
               "question": "海平面以下 20 米可以表示为？",
               "questionEn": "20 meters below sea level can be written as:",
               "type": "choice",
-              "options": ["+20 m", "20 m", "-20 m", "0 m"],
+              "options": [
+                "+20 m",
+                "20 m",
+                "-20 m",
+                "0 m"
+              ],
               "correctAnswer": 2
             }
           ],
@@ -71,12 +96,6 @@
               "url": "https://www.youtube.com/watch?v=t8m3WgCwrPo",
               "channel": "Numberock"
             }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Understand integers",
-              "url": "https://ca.ixl.com/math/grade-6/understanding-integers"
-            }
           ]
         },
         {
@@ -88,35 +107,58 @@
               "question": "哪个数字更大：-3 还是 -5？",
               "questionEn": "Which is larger: -3 or -5?",
               "type": "choice",
-              "options": ["-5", "-3", "它们相等 / Equal", "无法比较"],
+              "options": [
+                "-5",
+                "-3",
+                "它们相等 / Equal",
+                "无法比较"
+              ],
               "correctAnswer": 1
             },
             {
               "question": "比较：-4 ___ -2",
               "questionEn": "Compare: -4 ___ -2",
               "type": "choice",
-              "options": [">", "<", "="],
+              "options": [
+                ">",
+                "<",
+                "="
+              ],
               "correctAnswer": 1
             },
             {
               "question": "把下面数字从大到小排列：-1, -5, 3, -2",
               "questionEn": "Order from largest to smallest: -1, -5, 3, -2",
               "type": "choice",
-              "options": ["3 > -1 > -2 > -5", "3 > -2 > -1 > -5", "-5 > -2 > -1 > 3", "3 > -5 > -2 > -1"],
+              "options": [
+                "3 > -1 > -2 > -5",
+                "3 > -2 > -1 > -5",
+                "-5 > -2 > -1 > 3",
+                "3 > -5 > -2 > -1"
+              ],
               "correctAnswer": 0
             },
             {
               "question": "0 和 -3 相比，哪个更大？",
               "questionEn": "Which is larger: 0 or -3?",
               "type": "choice",
-              "options": ["0", "-3", "它们相等 / Equal"],
+              "options": [
+                "0",
+                "-3",
+                "它们相等 / Equal"
+              ],
               "correctAnswer": 0
             },
             {
               "question": "在数轴上，哪个数字在最右边？",
               "questionEn": "On the number line, which number is furthest right?",
               "type": "choice",
-              "options": ["-10", "-5", "0", "5"],
+              "options": [
+                "-10",
+                "-5",
+                "0",
+                "5"
+              ],
               "correctAnswer": 3
             }
           ],
@@ -138,12 +180,6 @@
               "url": "https://www.youtube.com/watch?v=2P8siL5IJoA",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Compare and order integers",
-              "url": "https://ca.ixl.com/math/grade-6/compare-and-order-integers"
-            }
           ]
         },
         {
@@ -151,11 +187,65 @@
           "title": "Absolute Value / 绝对值",
           "description": "理解数字与零的距离",
           "examples": [
-            {"question": "|-5| = ?", "questionEn": "|-5| = ?", "type": "choice", "options": ["-5", "0", "5", "10"], "correctAnswer": 2},
-            {"question": "|7| = ?", "questionEn": "|7| = ?", "type": "choice", "options": ["-7", "0", "7", "14"], "correctAnswer": 2},
-            {"question": "|0| = ?", "questionEn": "|0| = ?", "type": "choice", "options": ["-1", "0", "1", "不存在"], "correctAnswer": 1},
-            {"question": "绝对值一定是正数吗？", "questionEn": "Is absolute value always positive?", "type": "choice", "options": ["是 / Yes", "否 / No", "可以是负数 / Can be negative"], "correctAnswer": 0},
-            {"question": "|-100| = ?", "questionEn": "|-100| = ?", "type": "choice", "options": ["-100", "0", "100", "1000"], "correctAnswer": 2}
+            {
+              "question": "|-5| = ?",
+              "questionEn": "|-5| = ?",
+              "type": "choice",
+              "options": [
+                "-5",
+                "0",
+                "5",
+                "10"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "|7| = ?",
+              "questionEn": "|7| = ?",
+              "type": "choice",
+              "options": [
+                "-7",
+                "0",
+                "7",
+                "14"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "|0| = ?",
+              "questionEn": "|0| = ?",
+              "type": "choice",
+              "options": [
+                "-1",
+                "0",
+                "1",
+                "不存在"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "绝对值一定是正数吗？",
+              "questionEn": "Is absolute value always positive?",
+              "type": "choice",
+              "options": [
+                "是 / Yes",
+                "否 / No",
+                "可以是负数 / Can be negative"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "|-100| = ?",
+              "questionEn": "|-100| = ?",
+              "type": "choice",
+              "options": [
+                "-100",
+                "0",
+                "100",
+                "1000"
+              ],
+              "correctAnswer": 2
+            }
           ],
           "khanAcademy": [
             {
@@ -170,12 +260,6 @@
               "url": "https://www.youtube.com/watch?v=hKkBlcnU9pw",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Absolute value",
-              "url": "https://ca.ixl.com/math/grade-6/absolute-value-and-opposite-integers"
-            }
           ]
         },
         {
@@ -183,11 +267,66 @@
           "title": "Adding and Subtracting Integers / 整数加减法",
           "description": "正负整数的加法和减法",
           "examples": [
-            {"question": "-3 + 5 = ?", "questionEn": "-3 + 5 = ?", "type": "choice", "options": ["-8", "-2", "2", "8"], "correctAnswer": 2},
-            {"question": "5 + (-7) = ?", "questionEn": "5 + (-7) = ?", "type": "choice", "options": ["-12", "-2", "2", "12"], "correctAnswer": 1},
-            {"question": "-4 - (-3) = ?", "questionEn": "-4 - (-3) = ?", "type": "choice", "options": ["-7", "-1", "1", "7"], "correctAnswer": 1},
-            {"question": "6 - (-2) = ?", "questionEn": "6 - (-2) = ?", "type": "choice", "options": ["-8", "4", "8", "12"], "correctAnswer": 2},
-            {"question": "-5 + (-3) = ?", "questionEn": "-5 + (-3) = ?", "type": "choice", "options": ["-8", "-2", "2", "8"], "correctAnswer": 0}
+            {
+              "question": "-3 + 5 = ?",
+              "questionEn": "-3 + 5 = ?",
+              "type": "choice",
+              "options": [
+                "-8",
+                "-2",
+                "2",
+                "8"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "5 + (-7) = ?",
+              "questionEn": "5 + (-7) = ?",
+              "type": "choice",
+              "options": [
+                "-12",
+                "-2",
+                "2",
+                "12"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "-4 - (-3) = ?",
+              "questionEn": "-4 - (-3) = ?",
+              "type": "choice",
+              "options": [
+                "-7",
+                "-1",
+                "1",
+                "7"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "6 - (-2) = ?",
+              "questionEn": "6 - (-2) = ?",
+              "type": "choice",
+              "options": [
+                "-8",
+                "4",
+                "8",
+                "12"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "-5 + (-3) = ?",
+              "questionEn": "-5 + (-3) = ?",
+              "type": "choice",
+              "options": [
+                "-8",
+                "-2",
+                "2",
+                "8"
+              ],
+              "correctAnswer": 0
+            }
           ],
           "khanAcademy": [
             {
@@ -212,12 +351,6 @@
               "url": "https://www.youtube.com/watch?v=iq_c3VXbEG4",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Add and subtract integers",
-              "url": "https://ca.ixl.com/math/grade-6/add-and-subtract-integers"
-            }
           ]
         }
       ]
@@ -232,11 +365,66 @@
           "title": "Multiplying Fractions / 分数乘法",
           "description": "分数乘以分数和整数",
           "examples": [
-            {"question": "2/3 × 3/4 = ?", "questionEn": "2/3 × 3/4 = ?", "type": "choice", "options": ["6/12", "5/12", "1/2", "6/7"], "correctAnswer": 2},
-            {"question": "1/2 × 4 = ?", "questionEn": "1/2 × 4 = ?", "type": "choice", "options": ["1/8", "1/4", "2", "4"], "correctAnswer": 2},
-            {"question": "3/5 × 5/6 = ?", "questionEn": "3/5 × 5/6 = ?", "type": "choice", "options": ["15/30", "1/2", "8/11", "3/6"], "correctAnswer": 1},
-            {"question": "4 × 2/3 = ?", "questionEn": "4 × 2/3 = ?", "type": "choice", "options": ["6/3", "8/3", "6/12", "4/3"], "correctAnswer": 1},
-            {"question": "1/2 × 1/2 × 1/2 = ?", "questionEn": "1/2 × 1/2 × 1/2 = ?", "type": "choice", "options": ["1/4", "1/6", "1/8", "3/8"], "correctAnswer": 2}
+            {
+              "question": "2/3 × 3/4 = ?",
+              "questionEn": "2/3 × 3/4 = ?",
+              "type": "choice",
+              "options": [
+                "6/12",
+                "5/12",
+                "1/2",
+                "6/7"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "1/2 × 4 = ?",
+              "questionEn": "1/2 × 4 = ?",
+              "type": "choice",
+              "options": [
+                "1/8",
+                "1/4",
+                "2",
+                "4"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "3/5 × 5/6 = ?",
+              "questionEn": "3/5 × 5/6 = ?",
+              "type": "choice",
+              "options": [
+                "15/30",
+                "1/2",
+                "8/11",
+                "3/6"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "4 × 2/3 = ?",
+              "questionEn": "4 × 2/3 = ?",
+              "type": "choice",
+              "options": [
+                "6/3",
+                "8/3",
+                "6/12",
+                "4/3"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "1/2 × 1/2 × 1/2 = ?",
+              "questionEn": "1/2 × 1/2 × 1/2 = ?",
+              "type": "choice",
+              "options": [
+                "1/4",
+                "1/6",
+                "1/8",
+                "3/8"
+              ],
+              "correctAnswer": 2
+            }
           ],
           "khanAcademy": [
             {
@@ -261,12 +449,6 @@
               "url": "https://www.youtube.com/watch?v=vLVbE3R9k1E",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Multiply fractions",
-              "url": "https://ca.ixl.com/math/grade-6/multiply-fractions"
-            }
           ]
         },
         {
@@ -274,11 +456,66 @@
           "title": "Dividing Fractions / 分数除法",
           "description": "分数除以分数和整数",
           "examples": [
-            {"question": "1/2 ÷ 1/4 = ?", "questionEn": "1/2 ÷ 1/4 = ?", "type": "choice", "options": ["1/8", "1/6", "2", "4"], "correctAnswer": 2},
-            {"question": "3/4 ÷ 3 = ?", "questionEn": "3/4 ÷ 3 = ?", "type": "choice", "options": ["9/4", "1/4", "1/12", "1"], "correctAnswer": 1},
-            {"question": "2 ÷ 1/2 = ?", "questionEn": "2 ÷ 1/2 = ?", "type": "choice", "options": ["1", "2", "3", "4"], "correctAnswer": 3},
-            {"question": "5/6 ÷ 1/3 = ?", "questionEn": "5/6 ÷ 1/3 = ?", "type": "choice", "options": ["5/18", "5/9", "2/6", "5/2"], "correctAnswer": 3},
-            {"question": "1 ÷ 3/4 = ?", "questionEn": "1 ÷ 3/4 = ?", "type": "choice", "options": ["3/4", "4/3", "1/3", "3"], "correctAnswer": 1}
+            {
+              "question": "1/2 ÷ 1/4 = ?",
+              "questionEn": "1/2 ÷ 1/4 = ?",
+              "type": "choice",
+              "options": [
+                "1/8",
+                "1/6",
+                "2",
+                "4"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "3/4 ÷ 3 = ?",
+              "questionEn": "3/4 ÷ 3 = ?",
+              "type": "choice",
+              "options": [
+                "9/4",
+                "1/4",
+                "1/12",
+                "1"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "2 ÷ 1/2 = ?",
+              "questionEn": "2 ÷ 1/2 = ?",
+              "type": "choice",
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4"
+              ],
+              "correctAnswer": 3
+            },
+            {
+              "question": "5/6 ÷ 1/3 = ?",
+              "questionEn": "5/6 ÷ 1/3 = ?",
+              "type": "choice",
+              "options": [
+                "5/18",
+                "5/9",
+                "2/6",
+                "5/2"
+              ],
+              "correctAnswer": 3
+            },
+            {
+              "question": "1 ÷ 3/4 = ?",
+              "questionEn": "1 ÷ 3/4 = ?",
+              "type": "choice",
+              "options": [
+                "3/4",
+                "4/3",
+                "1/3",
+                "3"
+              ],
+              "correctAnswer": 1
+            }
           ],
           "khanAcademy": [
             {
@@ -303,12 +540,6 @@
               "url": "https://www.youtube.com/watch?v=6Lj5jRGYmxY",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Divide fractions",
-              "url": "https://ca.ixl.com/math/grade-6/divide-fractions"
-            }
           ]
         },
         {
@@ -316,11 +547,66 @@
           "title": "Fraction Word Problems / 分数应用题",
           "description": "解决涉及分数的实际问题",
           "examples": [
-            {"question": "一本书有 120 页，读了 2/3，读了多少页？", "questionEn": "A book has 120 pages. You read 2/3. How many pages read?", "type": "choice", "options": ["60", "80", "90", "100"], "correctAnswer": 1},
-            {"question": "一根绳子 12 米长，剪去 1/4，剩下多少米？", "questionEn": "A rope is 12 m long. Cut off 1/4. How much left?", "type": "choice", "options": ["3 m", "6 m", "8 m", "9 m"], "correctAnswer": 3},
-            {"question": "50 个苹果的 3/5 是多少个？", "questionEn": "What is 3/5 of 50 apples?", "type": "choice", "options": ["20", "25", "30", "35"], "correctAnswer": 2},
-            {"question": "一个数的 1/3 是 8，这个数是多少？", "questionEn": "If 1/3 of a number is 8, what is the number?", "type": "choice", "options": ["16", "24", "32", "40"], "correctAnswer": 1},
-            {"question": "半小时是多少小时？", "questionEn": "Half an hour is what fraction of an hour?", "type": "choice", "options": ["1/2", "1/3", "1/4", "1/6"], "correctAnswer": 0}
+            {
+              "question": "一本书有 120 页，读了 2/3，读了多少页？",
+              "questionEn": "A book has 120 pages. You read 2/3. How many pages read?",
+              "type": "choice",
+              "options": [
+                "60",
+                "80",
+                "90",
+                "100"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "一根绳子 12 米长，剪去 1/4，剩下多少米？",
+              "questionEn": "A rope is 12 m long. Cut off 1/4. How much left?",
+              "type": "choice",
+              "options": [
+                "3 m",
+                "6 m",
+                "8 m",
+                "9 m"
+              ],
+              "correctAnswer": 3
+            },
+            {
+              "question": "50 个苹果的 3/5 是多少个？",
+              "questionEn": "What is 3/5 of 50 apples?",
+              "type": "choice",
+              "options": [
+                "20",
+                "25",
+                "30",
+                "35"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "一个数的 1/3 是 8，这个数是多少？",
+              "questionEn": "If 1/3 of a number is 8, what is the number?",
+              "type": "choice",
+              "options": [
+                "16",
+                "24",
+                "32",
+                "40"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "半小时是多少小时？",
+              "questionEn": "Half an hour is what fraction of an hour?",
+              "type": "choice",
+              "options": [
+                "1/2",
+                "1/3",
+                "1/4",
+                "1/6"
+              ],
+              "correctAnswer": 0
+            }
           ],
           "khanAcademy": [
             {
@@ -334,12 +620,6 @@
               "title": "Fraction Word Problems",
               "url": "https://www.youtube.com/watch?v=gcnk8TnzsLc",
               "channel": "Math with Mr. J"
-            }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Fraction word problems",
-              "url": "https://ca.ixl.com/math/grade-6/multiply-and-divide-fractions-word-problems"
             }
           ]
         }
@@ -355,11 +635,65 @@
           "title": "Introduction to Ratios / 比率入门",
           "description": "理解比率的概念和表示方法",
           "examples": [
-            {"question": "有 3 个苹果和 5 个橘子，苹果和橘子的比率是？", "questionEn": "3 apples and 5 oranges. Ratio of apples to oranges?", "type": "choice", "options": ["3:5", "5:3", "3:8", "8:3"], "correctAnswer": 0},
-            {"question": "比率 2:3 可以写成？", "questionEn": "Ratio 2:3 can be written as:", "type": "choice", "options": ["2/3", "3/2", "2:5", "5:2"], "correctAnswer": 0},
-            {"question": "如果比率是 4:1，意味着什么？", "questionEn": "If ratio is 4:1, it means:", "type": "choice", "options": ["两部分相等 / Two equal parts", "第一部分是第二部分的4倍 / First is 4 times second", "第二部分是第一部分的4倍 / Second is 4 times first"], "correctAnswer": 1},
-            {"question": "一个篮球队赢了8场，输了2场，胜负比是？", "questionEn": "Team won 8, lost 2. Win-loss ratio?", "type": "choice", "options": ["8:2", "2:8", "4:1", "1:4"], "correctAnswer": 0},
-            {"question": "6 个女孩和 3 个男孩，女孩占总人数的比率是？", "questionEn": "6 girls and 3 boys. Girls to total ratio?", "type": "choice", "options": ["6:3", "6:9", "3:9", "2:3"], "correctAnswer": 1}
+            {
+              "question": "有 3 个苹果和 5 个橘子，苹果和橘子的比率是？",
+              "questionEn": "3 apples and 5 oranges. Ratio of apples to oranges?",
+              "type": "choice",
+              "options": [
+                "3:5",
+                "5:3",
+                "3:8",
+                "8:3"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "比率 2:3 可以写成？",
+              "questionEn": "Ratio 2:3 can be written as:",
+              "type": "choice",
+              "options": [
+                "2/3",
+                "3/2",
+                "2:5",
+                "5:2"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "如果比率是 4:1，意味着什么？",
+              "questionEn": "If ratio is 4:1, it means:",
+              "type": "choice",
+              "options": [
+                "两部分相等 / Two equal parts",
+                "第一部分是第二部分的4倍 / First is 4 times second",
+                "第二部分是第一部分的4倍 / Second is 4 times first"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "一个篮球队赢了8场，输了2场，胜负比是？",
+              "questionEn": "Team won 8, lost 2. Win-loss ratio?",
+              "type": "choice",
+              "options": [
+                "8:2",
+                "2:8",
+                "4:1",
+                "1:4"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "6 个女孩和 3 个男孩，女孩占总人数的比率是？",
+              "questionEn": "6 girls and 3 boys. Girls to total ratio?",
+              "type": "choice",
+              "options": [
+                "6:3",
+                "6:9",
+                "3:9",
+                "2:3"
+              ],
+              "correctAnswer": 1
+            }
           ],
           "khanAcademy": [
             {
@@ -384,12 +718,6 @@
               "url": "https://www.youtube.com/watch?v=RQ2nYUBVvqI",
               "channel": "Numberock"
             }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Understanding ratios",
-              "url": "https://ca.ixl.com/math/grade-6/understanding-ratios"
-            }
           ]
         },
         {
@@ -397,11 +725,70 @@
           "title": "Equivalent Ratios / 等价比率",
           "description": "找出和创建等价比率",
           "examples": [
-            {"question": "2:3 = ?:6，问号处应该填什么数？", "questionEn": "2:3 = ?:6, what number goes in the blank?", "type": "choice", "options": ["2", "3", "4", "5"], "correctAnswer": 2},
-            {"question": "哪个比率与 3:4 等价？", "questionEn": "Which ratio is equivalent to 3:4?", "type": "choice", "options": ["6:7", "9:12", "12:16", "Both B and C", "只有B", "只有C", "B和C都是", "都不等价"], "correctAnswer": 3},
-            {"question": "一个配方需要 2 杯糖和 3 杯面粉。如果用 6 杯糖，需要多少杯面粉？", "questionEn": "A recipe needs 2 cups sugar and 3 cups flour. If you use 6 cups sugar, how much flour?", "type": "choice", "options": ["6 cups / 杯", "9 cups / 杯", "12 cups / 杯", "4 cups / 杯"], "correctAnswer": 1},
-            {"question": "5:10 与哪个比率等价？", "questionEn": "5:10 is equivalent to which ratio?", "type": "choice", "options": ["1:2", "2:4", "10:20", "以上都是 / All of the above"], "correctAnswer": 3},
-            {"question": "如果 4:6 = 8:x，那么 x 等于多少？", "questionEn": "If 4:6 = 8:x, then x equals?", "type": "choice", "options": ["10", "12", "14", "16"], "correctAnswer": 1}
+            {
+              "question": "2:3 = ?:6，问号处应该填什么数？",
+              "questionEn": "2:3 = ?:6, what number goes in the blank?",
+              "type": "choice",
+              "options": [
+                "2",
+                "3",
+                "4",
+                "5"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "哪个比率与 3:4 等价？",
+              "questionEn": "Which ratio is equivalent to 3:4?",
+              "type": "choice",
+              "options": [
+                "6:7",
+                "9:12",
+                "12:16",
+                "Both B and C",
+                "只有B",
+                "只有C",
+                "B和C都是",
+                "都不等价"
+              ],
+              "correctAnswer": 3
+            },
+            {
+              "question": "一个配方需要 2 杯糖和 3 杯面粉。如果用 6 杯糖，需要多少杯面粉？",
+              "questionEn": "A recipe needs 2 cups sugar and 3 cups flour. If you use 6 cups sugar, how much flour?",
+              "type": "choice",
+              "options": [
+                "6 cups / 杯",
+                "9 cups / 杯",
+                "12 cups / 杯",
+                "4 cups / 杯"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "5:10 与哪个比率等价？",
+              "questionEn": "5:10 is equivalent to which ratio?",
+              "type": "choice",
+              "options": [
+                "1:2",
+                "2:4",
+                "10:20",
+                "以上都是 / All of the above"
+              ],
+              "correctAnswer": 3
+            },
+            {
+              "question": "如果 4:6 = 8:x，那么 x 等于多少？",
+              "questionEn": "If 4:6 = 8:x, then x equals?",
+              "type": "choice",
+              "options": [
+                "10",
+                "12",
+                "14",
+                "16"
+              ],
+              "correctAnswer": 1
+            }
           ],
           "khanAcademy": [
             {
@@ -416,12 +803,6 @@
               "url": "https://www.youtube.com/watch?v=JnRTl6-LKOA",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Equivalent ratios",
-              "url": "https://ca.ixl.com/math/grade-6/equivalent-ratios"
-            }
           ]
         },
         {
@@ -429,11 +810,66 @@
           "title": "Unit Rates / 单位比率",
           "description": "计算和使用单位比率",
           "examples": [
-            {"question": "如果 3 个苹果卖 $6，每个苹果多少钱？", "questionEn": "If 3 apples cost $6, how much does one apple cost?", "type": "choice", "options": ["$1", "$2", "$3", "$4"], "correctAnswer": 1},
-            {"question": "一辆车 2 小时行驶 120 公里，这辆车的速度是每小时多少公里？", "questionEn": "A car travels 120 km in 2 hours. What is the speed in km per hour?", "type": "choice", "options": ["50 km/h", "60 km/h", "70 km/h", "80 km/h"], "correctAnswer": 1},
-            {"question": "5 个同样的笔记本卖 $15，买 8 个需要多少钱？", "questionEn": "5 identical notebooks cost $15. How much for 8 notebooks?", "type": "choice", "options": ["$20", "$22", "$24", "$26"], "correctAnswer": 2},
-            {"question": "哪个是更好的购买选择？", "questionEn": "Which is the better buy?", "type": "choice", "options": ["6 个 $12 / 6 for $12", "8 个 $20 / 8 for $20", "4 个 $10 / 4 for $10", "10 个 $30 / 10 for $30"], "correctAnswer": 0},
-            {"question": "如果 100 克糖果有 400 卡路里，每克糖果有多少卡路里？", "questionEn": "If 100g of candy has 400 calories, how many calories per gram?", "type": "choice", "options": ["3 cal/g", "4 cal/g", "5 cal/g", "6 cal/g"], "correctAnswer": 1}
+            {
+              "question": "如果 3 个苹果卖 $6，每个苹果多少钱？",
+              "questionEn": "If 3 apples cost $6, how much does one apple cost?",
+              "type": "choice",
+              "options": [
+                "$1",
+                "$2",
+                "$3",
+                "$4"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "一辆车 2 小时行驶 120 公里，这辆车的速度是每小时多少公里？",
+              "questionEn": "A car travels 120 km in 2 hours. What is the speed in km per hour?",
+              "type": "choice",
+              "options": [
+                "50 km/h",
+                "60 km/h",
+                "70 km/h",
+                "80 km/h"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "5 个同样的笔记本卖 $15，买 8 个需要多少钱？",
+              "questionEn": "5 identical notebooks cost $15. How much for 8 notebooks?",
+              "type": "choice",
+              "options": [
+                "$20",
+                "$22",
+                "$24",
+                "$26"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "哪个是更好的购买选择？",
+              "questionEn": "Which is the better buy?",
+              "type": "choice",
+              "options": [
+                "6 个 $12 / 6 for $12",
+                "8 个 $20 / 8 for $20",
+                "4 个 $10 / 4 for $10",
+                "10 个 $30 / 10 for $30"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "如果 100 克糖果有 400 卡路里，每克糖果有多少卡路里？",
+              "questionEn": "If 100g of candy has 400 calories, how many calories per gram?",
+              "type": "choice",
+              "options": [
+                "3 cal/g",
+                "4 cal/g",
+                "5 cal/g",
+                "6 cal/g"
+              ],
+              "correctAnswer": 1
+            }
           ],
           "khanAcademy": [
             {
@@ -453,12 +889,6 @@
               "url": "https://www.youtube.com/watch?v=RQ2nYUBVvqI",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Unit rates",
-              "url": "https://ca.ixl.com/math/grade-6/unit-rates"
-            }
           ]
         },
         {
@@ -466,11 +896,66 @@
           "title": "Ratio Word Problems / 比率应用题",
           "description": "用比率解决实际问题",
           "examples": [
-            {"question": "一个班级男女比例是 3:2。如果有 15 个男生，有多少个女生？", "questionEn": "A class has boy:girl ratio of 3:2. If there are 15 boys, how many girls?", "type": "choice", "options": ["8", "10", "12", "14"], "correctAnswer": 1},
-            {"question": "一个水果篮中苹果和橘子的比例是 4:3。如果有 28 个苹果，有多少个橘子？", "questionEn": "A fruit basket has apple:orange ratio of 4:3. If there are 28 apples, how many oranges?", "type": "choice", "options": ["18", "21", "24", "27"], "correctAnswer": 1},
-            {"question": "画家用红色和蓝色颜料调制紫色，比例是 5:3。如果用了 20 毫升红色，需要多少蓝色？", "questionEn": "A painter mixes red:blue at 5:3 for purple. If 20ml red used, how much blue?", "type": "choice", "options": ["10 ml", "12 ml", "15 ml", "18 ml"], "correctAnswer": 1},
-            {"question": "一个面包店用 2:1 的比例混合面粉和糖。如果用了 12 杯面粉，需要多少杯糖？", "questionEn": "A bakery mixes flour:sugar at 2:1. If 12 cups flour used, how much sugar?", "type": "choice", "options": ["4 cups", "5 cups", "6 cups", "8 cups"], "correctAnswer": 2},
-            {"question": "动物园里狮子和老虎的比例是 3:4。如果有 12 只狮子，一共有多少只狮子和老虎？", "questionEn": "Zoo has lion:tiger ratio of 3:4. If 12 lions, total lions and tigers?", "type": "choice", "options": ["24", "28", "32", "36"], "correctAnswer": 1}
+            {
+              "question": "一个班级男女比例是 3:2。如果有 15 个男生，有多少个女生？",
+              "questionEn": "A class has boy:girl ratio of 3:2. If there are 15 boys, how many girls?",
+              "type": "choice",
+              "options": [
+                "8",
+                "10",
+                "12",
+                "14"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "一个水果篮中苹果和橘子的比例是 4:3。如果有 28 个苹果，有多少个橘子？",
+              "questionEn": "A fruit basket has apple:orange ratio of 4:3. If there are 28 apples, how many oranges?",
+              "type": "choice",
+              "options": [
+                "18",
+                "21",
+                "24",
+                "27"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "画家用红色和蓝色颜料调制紫色，比例是 5:3。如果用了 20 毫升红色，需要多少蓝色？",
+              "questionEn": "A painter mixes red:blue at 5:3 for purple. If 20ml red used, how much blue?",
+              "type": "choice",
+              "options": [
+                "10 ml",
+                "12 ml",
+                "15 ml",
+                "18 ml"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "一个面包店用 2:1 的比例混合面粉和糖。如果用了 12 杯面粉，需要多少杯糖？",
+              "questionEn": "A bakery mixes flour:sugar at 2:1. If 12 cups flour used, how much sugar?",
+              "type": "choice",
+              "options": [
+                "4 cups",
+                "5 cups",
+                "6 cups",
+                "8 cups"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "动物园里狮子和老虎的比例是 3:4。如果有 12 只狮子，一共有多少只狮子和老虎？",
+              "questionEn": "Zoo has lion:tiger ratio of 3:4. If 12 lions, total lions and tigers?",
+              "type": "choice",
+              "options": [
+                "24",
+                "28",
+                "32",
+                "36"
+              ],
+              "correctAnswer": 1
+            }
           ],
           "khanAcademy": [
             {
@@ -484,12 +969,6 @@
               "title": "Ratio Word Problems",
               "url": "https://www.youtube.com/watch?v=NZB0q09uqZk",
               "channel": "Math with Mr. J"
-            }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Ratio word problems",
-              "url": "https://ca.ixl.com/math/grade-6/ratio-tables"
             }
           ]
         }
@@ -505,11 +984,66 @@
           "title": "Introduction to Percent / 百分比入门",
           "description": "理解百分比的概念",
           "examples": [
-            {"question": "50% 等于什么分数？", "questionEn": "50% equals what fraction?", "type": "choice", "options": ["1/2", "1/3", "1/4", "1/5"], "correctAnswer": 0},
-            {"question": "25% 的意思是？", "questionEn": "25% means?", "type": "choice", "options": ["四分之一 / One fourth", "三分之一 / One third", "一半 / One half", "十分之一 / One tenth"], "correctAnswer": 0},
-            {"question": "100% 的阴影格子是？", "questionEn": "100% shaded means?", "type": "choice", "options": ["没有格子 / No squares", "一半格子 / Half squares", "全部格子 / All squares", "四分之三格子 / Three-fourths squares"], "correctAnswer": 2},
-            {"question": "哪个等于 75%？", "questionEn": "Which equals 75%?", "type": "choice", "options": ["3/5", "3/4", "4/5", "2/3"], "correctAnswer": 1},
-            {"question": "10% 写成小数是？", "questionEn": "10% written as a decimal is?", "type": "choice", "options": ["0.01", "0.1", "1.0", "10.0"], "correctAnswer": 1}
+            {
+              "question": "50% 等于什么分数？",
+              "questionEn": "50% equals what fraction?",
+              "type": "choice",
+              "options": [
+                "1/2",
+                "1/3",
+                "1/4",
+                "1/5"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "25% 的意思是？",
+              "questionEn": "25% means?",
+              "type": "choice",
+              "options": [
+                "四分之一 / One fourth",
+                "三分之一 / One third",
+                "一半 / One half",
+                "十分之一 / One tenth"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "100% 的阴影格子是？",
+              "questionEn": "100% shaded means?",
+              "type": "choice",
+              "options": [
+                "没有格子 / No squares",
+                "一半格子 / Half squares",
+                "全部格子 / All squares",
+                "四分之三格子 / Three-fourths squares"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "哪个等于 75%？",
+              "questionEn": "Which equals 75%?",
+              "type": "choice",
+              "options": [
+                "3/5",
+                "3/4",
+                "4/5",
+                "2/3"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "10% 写成小数是？",
+              "questionEn": "10% written as a decimal is?",
+              "type": "choice",
+              "options": [
+                "0.01",
+                "0.1",
+                "1.0",
+                "10.0"
+              ],
+              "correctAnswer": 1
+            }
           ],
           "khanAcademy": [
             {
@@ -529,12 +1063,6 @@
               "url": "https://www.youtube.com/watch?v=JTBgJjKvuOE",
               "channel": "Numberock"
             }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Introduction to percent",
-              "url": "https://ca.ixl.com/math/grade-6/what-percentage-is-illustrated"
-            }
           ]
         },
         {
@@ -542,11 +1070,66 @@
           "title": "Percent, Fraction, Decimal Conversions / 百分比、分数、小数转换",
           "description": "在百分比、分数和小数之间转换",
           "examples": [
-            {"question": "1/4 写成百分比是多少？", "questionEn": "1/4 as a percent is?", "type": "choice", "options": ["20%", "25%", "30%", "40%"], "correctAnswer": 1},
-            {"question": "0.5 写成百分比是多少？", "questionEn": "0.5 as a percent is?", "type": "choice", "options": ["40%", "45%", "50%", "55%"], "correctAnswer": 2},
-            {"question": "60% 写成分数是？", "questionEn": "60% as a fraction is?", "type": "choice", "options": ["3/5", "2/3", "5/8", "4/5"], "correctAnswer": 0},
-            {"question": "0.75 写成百分比是多少？", "questionEn": "0.75 as a percent is?", "type": "choice", "options": ["65%", "70%", "75%", "80%"], "correctAnswer": 2},
-            {"question": "20% 写成小数是？", "questionEn": "20% as a decimal is?", "type": "choice", "options": ["0.02", "0.2", "2.0", "20"], "correctAnswer": 1}
+            {
+              "question": "1/4 写成百分比是多少？",
+              "questionEn": "1/4 as a percent is?",
+              "type": "choice",
+              "options": [
+                "20%",
+                "25%",
+                "30%",
+                "40%"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "0.5 写成百分比是多少？",
+              "questionEn": "0.5 as a percent is?",
+              "type": "choice",
+              "options": [
+                "40%",
+                "45%",
+                "50%",
+                "55%"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "60% 写成分数是？",
+              "questionEn": "60% as a fraction is?",
+              "type": "choice",
+              "options": [
+                "3/5",
+                "2/3",
+                "5/8",
+                "4/5"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "0.75 写成百分比是多少？",
+              "questionEn": "0.75 as a percent is?",
+              "type": "choice",
+              "options": [
+                "65%",
+                "70%",
+                "75%",
+                "80%"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "20% 写成小数是？",
+              "questionEn": "20% as a decimal is?",
+              "type": "choice",
+              "options": [
+                "0.02",
+                "0.2",
+                "2.0",
+                "20"
+              ],
+              "correctAnswer": 1
+            }
           ],
           "khanAcademy": [
             {
@@ -561,12 +1144,6 @@
               "url": "https://www.youtube.com/watch?v=HxJ_rVwT9qI",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Convert between percents, fractions, and decimals",
-              "url": "https://ca.ixl.com/math/grade-6/convert-between-percents-fractions-and-decimals"
-            }
           ]
         },
         {
@@ -574,11 +1151,66 @@
           "title": "Percent of a Number / 一个数的百分比",
           "description": "计算一个数的百分比",
           "examples": [
-            {"question": "50 的 20% 是多少？", "questionEn": "What is 20% of 50?", "type": "choice", "options": ["5", "10", "15", "20"], "correctAnswer": 1},
-            {"question": "100 的 25% 是多少？", "questionEn": "What is 25% of 100?", "type": "choice", "options": ["20", "25", "30", "35"], "correctAnswer": 1},
-            {"question": "80 的 10% 是多少？", "questionEn": "What is 10% of 80?", "type": "choice", "options": ["6", "7", "8", "9"], "correctAnswer": 2},
-            {"question": "200 的 50% 是多少？", "questionEn": "What is 50% of 200?", "type": "choice", "options": ["50", "75", "100", "150"], "correctAnswer": 2},
-            {"question": "60 的 75% 是多少？", "questionEn": "What is 75% of 60?", "type": "choice", "options": ["40", "42", "45", "48"], "correctAnswer": 2}
+            {
+              "question": "50 的 20% 是多少？",
+              "questionEn": "What is 20% of 50?",
+              "type": "choice",
+              "options": [
+                "5",
+                "10",
+                "15",
+                "20"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "100 的 25% 是多少？",
+              "questionEn": "What is 25% of 100?",
+              "type": "choice",
+              "options": [
+                "20",
+                "25",
+                "30",
+                "35"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "80 的 10% 是多少？",
+              "questionEn": "What is 10% of 80?",
+              "type": "choice",
+              "options": [
+                "6",
+                "7",
+                "8",
+                "9"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "200 的 50% 是多少？",
+              "questionEn": "What is 50% of 200?",
+              "type": "choice",
+              "options": [
+                "50",
+                "75",
+                "100",
+                "150"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "60 的 75% 是多少？",
+              "questionEn": "What is 75% of 60?",
+              "type": "choice",
+              "options": [
+                "40",
+                "42",
+                "45",
+                "48"
+              ],
+              "correctAnswer": 2
+            }
           ],
           "khanAcademy": [
             {
@@ -593,12 +1225,6 @@
               "url": "https://www.youtube.com/watch?v=rR95Cbcjzus",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Percent of a number",
-              "url": "https://ca.ixl.com/math/grade-6/percent-of-a-number"
-            }
           ]
         },
         {
@@ -606,11 +1232,66 @@
           "title": "Percent Word Problems / 百分比应用题",
           "description": "解决涉及百分比的实际问题",
           "examples": [
-            {"question": "一件衣服原价 $100，现在打 8 折（20% 优惠），现价是多少？", "questionEn": "A shirt costs $100, now 20% off. What's the sale price?", "type": "choice", "options": ["$70", "$75", "$80", "$85"], "correctAnswer": 2},
-            {"question": "一个班有 30 个学生，其中 60% 是女生。有多少个女生？", "questionEn": "A class has 30 students, 60% are girls. How many girls?", "type": "choice", "options": ["12", "15", "18", "20"], "correctAnswer": 2},
-            {"question": "你考试答对 40 题，得了 80% 的分数。总共有多少题？", "questionEn": "You got 40 questions right, scoring 80%. How many total questions?", "type": "choice", "options": ["45", "48", "50", "52"], "correctAnswer": 2},
-            {"question": "一个图书馆有 500 本书，其中 40% 是小说。有多少本小说？", "questionEn": "A library has 500 books, 40% are novels. How many novels?", "type": "choice", "options": ["180", "200", "220", "240"], "correctAnswer": 1},
-            {"question": "一个数的 25% 是 15，这个数是多少？", "questionEn": "25% of a number is 15. What is the number?", "type": "choice", "options": ["40", "50", "60", "75"], "correctAnswer": 2}
+            {
+              "question": "一件衣服原价 $100，现在打 8 折（20% 优惠），现价是多少？",
+              "questionEn": "A shirt costs $100, now 20% off. What's the sale price?",
+              "type": "choice",
+              "options": [
+                "$70",
+                "$75",
+                "$80",
+                "$85"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "一个班有 30 个学生，其中 60% 是女生。有多少个女生？",
+              "questionEn": "A class has 30 students, 60% are girls. How many girls?",
+              "type": "choice",
+              "options": [
+                "12",
+                "15",
+                "18",
+                "20"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "你考试答对 40 题，得了 80% 的分数。总共有多少题？",
+              "questionEn": "You got 40 questions right, scoring 80%. How many total questions?",
+              "type": "choice",
+              "options": [
+                "45",
+                "48",
+                "50",
+                "52"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "一个图书馆有 500 本书，其中 40% 是小说。有多少本小说？",
+              "questionEn": "A library has 500 books, 40% are novels. How many novels?",
+              "type": "choice",
+              "options": [
+                "180",
+                "200",
+                "220",
+                "240"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "一个数的 25% 是 15，这个数是多少？",
+              "questionEn": "25% of a number is 15. What is the number?",
+              "type": "choice",
+              "options": [
+                "40",
+                "50",
+                "60",
+                "75"
+              ],
+              "correctAnswer": 2
+            }
           ],
           "khanAcademy": [
             {
@@ -624,12 +1305,6 @@
               "title": "Percent Word Problems",
               "url": "https://www.youtube.com/watch?v=p2KHi9N_dP8",
               "channel": "Math with Mr. J"
-            }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Percent problems",
-              "url": "https://ca.ixl.com/math/grade-6/solve-percent-equations"
             }
           ]
         }
@@ -645,11 +1320,66 @@
           "title": "Multiplying Decimals / 小数乘法",
           "description": "小数乘以小数",
           "examples": [
-            {"question": "0.5 × 0.4 = ?", "questionEn": "0.5 × 0.4 = ?", "type": "choice", "options": ["0.02", "0.2", "0.02", "2.0"], "correctAnswer": 1},
-            {"question": "1.2 × 3 = ?", "questionEn": "1.2 × 3 = ?", "type": "choice", "options": ["3.2", "3.6", "4.2", "4.6"], "correctAnswer": 1},
-            {"question": "0.25 × 4 = ?", "questionEn": "0.25 × 4 = ?", "type": "choice", "options": ["0.8", "1.0", "1.2", "1.5"], "correctAnswer": 1},
-            {"question": "2.5 × 2.5 = ?", "questionEn": "2.5 × 2.5 = ?", "type": "choice", "options": ["5.25", "6.0", "6.25", "7.0"], "correctAnswer": 2},
-            {"question": "0.1 × 0.1 = ?", "questionEn": "0.1 × 0.1 = ?", "type": "choice", "options": ["0.001", "0.01", "0.1", "1.0"], "correctAnswer": 1}
+            {
+              "question": "0.5 × 0.4 = ?",
+              "questionEn": "0.5 × 0.4 = ?",
+              "type": "choice",
+              "options": [
+                "0.02",
+                "0.2",
+                "0.02",
+                "2.0"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "1.2 × 3 = ?",
+              "questionEn": "1.2 × 3 = ?",
+              "type": "choice",
+              "options": [
+                "3.2",
+                "3.6",
+                "4.2",
+                "4.6"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "0.25 × 4 = ?",
+              "questionEn": "0.25 × 4 = ?",
+              "type": "choice",
+              "options": [
+                "0.8",
+                "1.0",
+                "1.2",
+                "1.5"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "2.5 × 2.5 = ?",
+              "questionEn": "2.5 × 2.5 = ?",
+              "type": "choice",
+              "options": [
+                "5.25",
+                "6.0",
+                "6.25",
+                "7.0"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "0.1 × 0.1 = ?",
+              "questionEn": "0.1 × 0.1 = ?",
+              "type": "choice",
+              "options": [
+                "0.001",
+                "0.01",
+                "0.1",
+                "1.0"
+              ],
+              "correctAnswer": 1
+            }
           ],
           "khanAcademy": [
             {
@@ -664,12 +1394,6 @@
               "url": "https://www.youtube.com/watch?v=XZcl8u9jiDE",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Multiply decimals",
-              "url": "https://ca.ixl.com/math/grade-6/multiply-decimals"
-            }
           ]
         },
         {
@@ -677,11 +1401,66 @@
           "title": "Dividing Decimals / 小数除法",
           "description": "小数除以小数",
           "examples": [
-            {"question": "1.2 ÷ 0.6 = ?", "questionEn": "1.2 ÷ 0.6 = ?", "type": "choice", "options": ["0.2", "2", "3", "4"], "correctAnswer": 1},
-            {"question": "4.5 ÷ 0.5 = ?", "questionEn": "4.5 ÷ 0.5 = ?", "type": "choice", "options": ["8", "9", "10", "11"], "correctAnswer": 1},
-            {"question": "0.8 ÷ 0.2 = ?", "questionEn": "0.8 ÷ 0.2 = ?", "type": "choice", "options": ["3", "4", "5", "6"], "correctAnswer": 1},
-            {"question": "6 ÷ 0.3 = ?", "questionEn": "6 ÷ 0.3 = ?", "type": "choice", "options": ["15", "18", "20", "22"], "correctAnswer": 2},
-            {"question": "0.24 ÷ 0.6 = ?", "questionEn": "0.24 ÷ 0.6 = ?", "type": "choice", "options": ["0.3", "0.4", "0.5", "0.6"], "correctAnswer": 1}
+            {
+              "question": "1.2 ÷ 0.6 = ?",
+              "questionEn": "1.2 ÷ 0.6 = ?",
+              "type": "choice",
+              "options": [
+                "0.2",
+                "2",
+                "3",
+                "4"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "4.5 ÷ 0.5 = ?",
+              "questionEn": "4.5 ÷ 0.5 = ?",
+              "type": "choice",
+              "options": [
+                "8",
+                "9",
+                "10",
+                "11"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "0.8 ÷ 0.2 = ?",
+              "questionEn": "0.8 ÷ 0.2 = ?",
+              "type": "choice",
+              "options": [
+                "3",
+                "4",
+                "5",
+                "6"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "6 ÷ 0.3 = ?",
+              "questionEn": "6 ÷ 0.3 = ?",
+              "type": "choice",
+              "options": [
+                "15",
+                "18",
+                "20",
+                "22"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "0.24 ÷ 0.6 = ?",
+              "questionEn": "0.24 ÷ 0.6 = ?",
+              "type": "choice",
+              "options": [
+                "0.3",
+                "0.4",
+                "0.5",
+                "0.6"
+              ],
+              "correctAnswer": 1
+            }
           ],
           "khanAcademy": [
             {
@@ -695,12 +1474,6 @@
               "title": "Dividing Decimals",
               "url": "https://www.youtube.com/watch?v=S2L8gYEGcYg",
               "channel": "Math with Mr. J"
-            }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Divide decimals",
-              "url": "https://ca.ixl.com/math/grade-6/divide-decimals"
             }
           ]
         }
@@ -716,11 +1489,66 @@
           "title": "Algebraic Expressions / 代数表达式",
           "description": "写和计算代数表达式",
           "examples": [
-            {"question": "\"一个数加 5\" 写成代数表达式是？", "questionEn": "\"A number plus 5\" as an algebraic expression is?", "type": "choice", "options": ["x - 5", "x + 5", "5x", "x ÷ 5"], "correctAnswer": 1},
-            {"question": "如果 x = 3，那么 2x + 1 等于多少？", "questionEn": "If x = 3, what is 2x + 1?", "type": "choice", "options": ["6", "7", "8", "9"], "correctAnswer": 1},
-            {"question": "\"一个数的 3 倍\" 写成代数表达式是？", "questionEn": "\"3 times a number\" as an algebraic expression is?", "type": "choice", "options": ["x + 3", "x - 3", "3x", "x ÷ 3"], "correctAnswer": 2},
-            {"question": "如果 y = 4，那么 5y - 3 等于多少？", "questionEn": "If y = 4, what is 5y - 3?", "type": "choice", "options": ["15", "16", "17", "18"], "correctAnswer": 2},
-            {"question": "\"一个数减 8\" 写成代数表达式是？", "questionEn": "\"A number minus 8\" as an algebraic expression is?", "type": "choice", "options": ["x - 8", "8 - x", "x + 8", "8x"], "correctAnswer": 0}
+            {
+              "question": "\"一个数加 5\" 写成代数表达式是？",
+              "questionEn": "\"A number plus 5\" as an algebraic expression is?",
+              "type": "choice",
+              "options": [
+                "x - 5",
+                "x + 5",
+                "5x",
+                "x ÷ 5"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "如果 x = 3，那么 2x + 1 等于多少？",
+              "questionEn": "If x = 3, what is 2x + 1?",
+              "type": "choice",
+              "options": [
+                "6",
+                "7",
+                "8",
+                "9"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "\"一个数的 3 倍\" 写成代数表达式是？",
+              "questionEn": "\"3 times a number\" as an algebraic expression is?",
+              "type": "choice",
+              "options": [
+                "x + 3",
+                "x - 3",
+                "3x",
+                "x ÷ 3"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "如果 y = 4，那么 5y - 3 等于多少？",
+              "questionEn": "If y = 4, what is 5y - 3?",
+              "type": "choice",
+              "options": [
+                "15",
+                "16",
+                "17",
+                "18"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "\"一个数减 8\" 写成代数表达式是？",
+              "questionEn": "\"A number minus 8\" as an algebraic expression is?",
+              "type": "choice",
+              "options": [
+                "x - 8",
+                "8 - x",
+                "x + 8",
+                "8x"
+              ],
+              "correctAnswer": 0
+            }
           ],
           "khanAcademy": [
             {
@@ -740,12 +1568,6 @@
               "url": "https://www.youtube.com/watch?v=3t7Zdx4SJfM",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Write and evaluate expressions",
-              "url": "https://ca.ixl.com/math/grade-6/write-variable-expressions"
-            }
           ]
         },
         {
@@ -753,11 +1575,66 @@
           "title": "One-Step Equations / 一步方程",
           "description": "解一步加减乘除方程",
           "examples": [
-            {"question": "解方程：x + 5 = 12，x 等于多少？", "questionEn": "Solve: x + 5 = 12, what is x?", "type": "choice", "options": ["5", "6", "7", "8"], "correctAnswer": 2},
-            {"question": "解方程：x - 3 = 7，x 等于多少？", "questionEn": "Solve: x - 3 = 7, what is x?", "type": "choice", "options": ["9", "10", "11", "12"], "correctAnswer": 1},
-            {"question": "解方程：2x = 10，x 等于多少？", "questionEn": "Solve: 2x = 10, what is x?", "type": "choice", "options": ["3", "4", "5", "6"], "correctAnswer": 2},
-            {"question": "解方程：x ÷ 4 = 3，x 等于多少？", "questionEn": "Solve: x ÷ 4 = 3, what is x?", "type": "choice", "options": ["8", "10", "12", "14"], "correctAnswer": 2},
-            {"question": "解方程：x + 8 = 15，x 等于多少？", "questionEn": "Solve: x + 8 = 15, what is x?", "type": "choice", "options": ["5", "6", "7", "8"], "correctAnswer": 2}
+            {
+              "question": "解方程：x + 5 = 12，x 等于多少？",
+              "questionEn": "Solve: x + 5 = 12, what is x?",
+              "type": "choice",
+              "options": [
+                "5",
+                "6",
+                "7",
+                "8"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "解方程：x - 3 = 7，x 等于多少？",
+              "questionEn": "Solve: x - 3 = 7, what is x?",
+              "type": "choice",
+              "options": [
+                "9",
+                "10",
+                "11",
+                "12"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "解方程：2x = 10，x 等于多少？",
+              "questionEn": "Solve: 2x = 10, what is x?",
+              "type": "choice",
+              "options": [
+                "3",
+                "4",
+                "5",
+                "6"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "解方程：x ÷ 4 = 3，x 等于多少？",
+              "questionEn": "Solve: x ÷ 4 = 3, what is x?",
+              "type": "choice",
+              "options": [
+                "8",
+                "10",
+                "12",
+                "14"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "解方程：x + 8 = 15，x 等于多少？",
+              "questionEn": "Solve: x + 8 = 15, what is x?",
+              "type": "choice",
+              "options": [
+                "5",
+                "6",
+                "7",
+                "8"
+              ],
+              "correctAnswer": 2
+            }
           ],
           "khanAcademy": [
             {
@@ -777,12 +1654,6 @@
               "url": "https://www.youtube.com/watch?v=l3XzepN03KQ",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Solve one-step equations",
-              "url": "https://ca.ixl.com/math/grade-6/solve-one-step-equations"
-            }
           ]
         },
         {
@@ -790,11 +1661,66 @@
           "title": "Inequalities / 不等式",
           "description": "理解和表示不等式",
           "examples": [
-            {"question": "x > 5 表示什么？", "questionEn": "What does x > 5 mean?", "type": "choice", "options": ["x 等于 5 / x equals 5", "x 大于 5 / x is greater than 5", "x 小于 5 / x is less than 5", "x 不等于 5 / x is not equal to 5"], "correctAnswer": 1},
-            {"question": "哪个数字满足 x < 3？", "questionEn": "Which number satisfies x < 3?", "type": "choice", "options": ["1", "3", "5", "7"], "correctAnswer": 0},
-            {"question": "如果 x ≥ 10，哪个数字可能是 x？", "questionEn": "If x ≥ 10, which number could x be?", "type": "choice", "options": ["5", "8", "10", "9"], "correctAnswer": 2},
-            {"question": "x ≤ 7 表示什么？", "questionEn": "What does x ≤ 7 mean?", "type": "choice", "options": ["x 等于 7 / x equals 7", "x 大于等于 7 / x is greater than or equal to 7", "x 小于等于 7 / x is less than or equal to 7", "x 不等于 7 / x is not equal to 7"], "correctAnswer": 2},
-            {"question": "哪个数字不满足 x > 4？", "questionEn": "Which number does NOT satisfy x > 4?", "type": "choice", "options": ["5", "6", "7", "3"], "correctAnswer": 3}
+            {
+              "question": "x > 5 表示什么？",
+              "questionEn": "What does x > 5 mean?",
+              "type": "choice",
+              "options": [
+                "x 等于 5 / x equals 5",
+                "x 大于 5 / x is greater than 5",
+                "x 小于 5 / x is less than 5",
+                "x 不等于 5 / x is not equal to 5"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "哪个数字满足 x < 3？",
+              "questionEn": "Which number satisfies x < 3?",
+              "type": "choice",
+              "options": [
+                "1",
+                "3",
+                "5",
+                "7"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "如果 x ≥ 10，哪个数字可能是 x？",
+              "questionEn": "If x ≥ 10, which number could x be?",
+              "type": "choice",
+              "options": [
+                "5",
+                "8",
+                "10",
+                "9"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "x ≤ 7 表示什么？",
+              "questionEn": "What does x ≤ 7 mean?",
+              "type": "choice",
+              "options": [
+                "x 等于 7 / x equals 7",
+                "x 大于等于 7 / x is greater than or equal to 7",
+                "x 小于等于 7 / x is less than or equal to 7",
+                "x 不等于 7 / x is not equal to 7"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "哪个数字不满足 x > 4？",
+              "questionEn": "Which number does NOT satisfy x > 4?",
+              "type": "choice",
+              "options": [
+                "5",
+                "6",
+                "7",
+                "3"
+              ],
+              "correctAnswer": 3
+            }
           ],
           "khanAcademy": [
             {
@@ -809,12 +1735,6 @@
               "url": "https://www.youtube.com/watch?v=P_-c43dQ3js",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Inequalities",
-              "url": "https://ca.ixl.com/math/grade-6/which-x-satisfies-an-equation"
-            }
           ]
         },
         {
@@ -822,11 +1742,66 @@
           "title": "Dependent and Independent Variables / 因变量和自变量",
           "description": "理解变量之间的关系",
           "examples": [
-            {"question": "你工作时，工作的小时数和赚的钱。哪个是自变量？", "questionEn": "When working, hours worked and money earned. Which is independent?", "type": "choice", "options": ["赚的钱 / Money earned", "工作小时数 / Hours worked", "两者都是 / Both", "两者都不是 / Neither"], "correctAnswer": 1},
-            {"question": "y = 3x + 1 中，哪个是因变量？", "questionEn": "In y = 3x + 1, which is the dependent variable?", "type": "choice", "options": ["x", "y", "两者都是 / Both", "都不是 / Neither"], "correctAnswer": 1},
-            {"question": "汽车行驶的距离和时间。距离是什么变量？", "questionEn": "Car distance and time. Distance is what kind of variable?", "type": "choice", "options": ["自变量 / Independent", "因变量 / Dependent", "两者都是 / Both", "都不是 / Neither"], "correctAnswer": 1},
-            {"question": "买苹果，买的数量和总价。数量是什么变量？", "questionEn": "Buying apples, quantity and total cost. Quantity is what kind of variable?", "type": "choice", "options": ["自变量 / Independent", "因变量 / Dependent", "两者都是 / Both", "都不是 / Neither"], "correctAnswer": 0},
-            {"question": "温度和时间，如果时间影响温度测量。哪个是自变量？", "questionEn": "Temperature and time, if time affects temperature. Which is independent?", "type": "choice", "options": ["温度 / Temperature", "时间 / Time", "两者都是 / Both", "都不是 / Neither"], "correctAnswer": 1}
+            {
+              "question": "你工作时，工作的小时数和赚的钱。哪个是自变量？",
+              "questionEn": "When working, hours worked and money earned. Which is independent?",
+              "type": "choice",
+              "options": [
+                "赚的钱 / Money earned",
+                "工作小时数 / Hours worked",
+                "两者都是 / Both",
+                "两者都不是 / Neither"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "y = 3x + 1 中，哪个是因变量？",
+              "questionEn": "In y = 3x + 1, which is the dependent variable?",
+              "type": "choice",
+              "options": [
+                "x",
+                "y",
+                "两者都是 / Both",
+                "都不是 / Neither"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "汽车行驶的距离和时间。距离是什么变量？",
+              "questionEn": "Car distance and time. Distance is what kind of variable?",
+              "type": "choice",
+              "options": [
+                "自变量 / Independent",
+                "因变量 / Dependent",
+                "两者都是 / Both",
+                "都不是 / Neither"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "买苹果，买的数量和总价。数量是什么变量？",
+              "questionEn": "Buying apples, quantity and total cost. Quantity is what kind of variable?",
+              "type": "choice",
+              "options": [
+                "自变量 / Independent",
+                "因变量 / Dependent",
+                "两者都是 / Both",
+                "都不是 / Neither"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "温度和时间，如果时间影响温度测量。哪个是自变量？",
+              "questionEn": "Temperature and time, if time affects temperature. Which is independent?",
+              "type": "choice",
+              "options": [
+                "温度 / Temperature",
+                "时间 / Time",
+                "两者都是 / Both",
+                "都不是 / Neither"
+              ],
+              "correctAnswer": 1
+            }
           ],
           "khanAcademy": [
             {
@@ -840,12 +1815,6 @@
               "title": "Independent and Dependent Variables",
               "url": "https://www.youtube.com/watch?v=WKlJnYPkdK8",
               "channel": "Math with Mr. J"
-            }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Independent and dependent variables",
-              "url": "https://ca.ixl.com/math/grade-6/identify-independent-and-dependent-variables"
             }
           ]
         }
@@ -861,11 +1830,66 @@
           "title": "Area of Triangles / 三角形面积",
           "description": "计算三角形的面积",
           "examples": [
-            {"question": "一个三角形底 6 厘米，高 4 厘米，面积是多少平方厘米？", "questionEn": "Triangle base 6cm, height 4cm. Area in square cm?", "type": "choice", "options": ["10", "12", "14", "24"], "correctAnswer": 1},
-            {"question": "三角形面积公式是？", "questionEn": "Triangle area formula is?", "type": "choice", "options": ["底 × 高 / base × height", "(底 × 高) ÷ 2 / (base × height) ÷ 2", "底 + 高 / base + height", "(底 + 高) × 2 / (base + height) × 2"], "correctAnswer": 1},
-            {"question": "一个三角形面积是 20 平方厘米，底是 8 厘米，高是多少厘米？", "questionEn": "Triangle area 20 sq cm, base 8cm. Height in cm?", "type": "choice", "options": ["3", "4", "5", "6"], "correctAnswer": 2},
-            {"question": "一个三角形底 10 厘米，高 5 厘米，面积是多少？", "questionEn": "Triangle base 10cm, height 5cm. Area?", "type": "choice", "options": ["15 sq cm", "20 sq cm", "25 sq cm", "50 sq cm"], "correctAnswer": 2},
-            {"question": "如果一个三角形底 12 厘米，高 6 厘米，面积是多少平方厘米？", "questionEn": "Triangle base 12cm, height 6cm. Area in sq cm?", "type": "choice", "options": ["30", "36", "42", "72"], "correctAnswer": 1}
+            {
+              "question": "一个三角形底 6 厘米，高 4 厘米，面积是多少平方厘米？",
+              "questionEn": "Triangle base 6cm, height 4cm. Area in square cm?",
+              "type": "choice",
+              "options": [
+                "10",
+                "12",
+                "14",
+                "24"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "三角形面积公式是？",
+              "questionEn": "Triangle area formula is?",
+              "type": "choice",
+              "options": [
+                "底 × 高 / base × height",
+                "(底 × 高) ÷ 2 / (base × height) ÷ 2",
+                "底 + 高 / base + height",
+                "(底 + 高) × 2 / (base + height) × 2"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "一个三角形面积是 20 平方厘米，底是 8 厘米，高是多少厘米？",
+              "questionEn": "Triangle area 20 sq cm, base 8cm. Height in cm?",
+              "type": "choice",
+              "options": [
+                "3",
+                "4",
+                "5",
+                "6"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "一个三角形底 10 厘米，高 5 厘米，面积是多少？",
+              "questionEn": "Triangle base 10cm, height 5cm. Area?",
+              "type": "choice",
+              "options": [
+                "15 sq cm",
+                "20 sq cm",
+                "25 sq cm",
+                "50 sq cm"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "如果一个三角形底 12 厘米，高 6 厘米，面积是多少平方厘米？",
+              "questionEn": "Triangle base 12cm, height 6cm. Area in sq cm?",
+              "type": "choice",
+              "options": [
+                "30",
+                "36",
+                "42",
+                "72"
+              ],
+              "correctAnswer": 1
+            }
           ],
           "khanAcademy": [
             {
@@ -880,12 +1904,6 @@
               "url": "https://www.youtube.com/watch?v=_E3G-fmLAZ4",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Area of triangles",
-              "url": "https://ca.ixl.com/math/grade-6/area-of-triangles"
-            }
           ]
         },
         {
@@ -893,11 +1911,66 @@
           "title": "Area of Quadrilaterals / 四边形面积",
           "description": "计算平行四边形和梯形的面积",
           "examples": [
-            {"question": "一个平行四边形底 8 厘米，高 5 厘米，面积是多少平方厘米？", "questionEn": "Parallelogram base 8cm, height 5cm. Area in sq cm?", "type": "choice", "options": ["13", "20", "40", "80"], "correctAnswer": 2},
-            {"question": "平行四边形面积公式是？", "questionEn": "Parallelogram area formula is?", "type": "choice", "options": ["底 × 高 / base × height", "(底 × 高) ÷ 2 / (base × height) ÷ 2", "底 + 高 / base + height", "2 × (底 + 高) / 2 × (base + height)"], "correctAnswer": 0},
-            {"question": "一个梯形上底 4 厘米，下底 6 厘米，高 5 厘米，面积是多少？", "questionEn": "Trapezoid top base 4cm, bottom 6cm, height 5cm. Area?", "type": "choice", "options": ["20 sq cm", "25 sq cm", "30 sq cm", "35 sq cm"], "correctAnswer": 1},
-            {"question": "一个平行四边形面积 48 平方厘米，底 8 厘米，高是多少厘米？", "questionEn": "Parallelogram area 48 sq cm, base 8cm. Height in cm?", "type": "choice", "options": ["4", "5", "6", "7"], "correctAnswer": 2},
-            {"question": "梯形面积公式是？", "questionEn": "Trapezoid area formula is?", "type": "choice", "options": ["(上底 + 下底) × 高 / (top + bottom) × height", "(上底 + 下底) × 高 ÷ 2 / (top + bottom) × height ÷ 2", "上底 × 下底 × 高 / top × bottom × height", "(上底 × 下底) ÷ 高 / (top × bottom) ÷ height"], "correctAnswer": 1}
+            {
+              "question": "一个平行四边形底 8 厘米，高 5 厘米，面积是多少平方厘米？",
+              "questionEn": "Parallelogram base 8cm, height 5cm. Area in sq cm?",
+              "type": "choice",
+              "options": [
+                "13",
+                "20",
+                "40",
+                "80"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "平行四边形面积公式是？",
+              "questionEn": "Parallelogram area formula is?",
+              "type": "choice",
+              "options": [
+                "底 × 高 / base × height",
+                "(底 × 高) ÷ 2 / (base × height) ÷ 2",
+                "底 + 高 / base + height",
+                "2 × (底 + 高) / 2 × (base + height)"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "一个梯形上底 4 厘米，下底 6 厘米，高 5 厘米，面积是多少？",
+              "questionEn": "Trapezoid top base 4cm, bottom 6cm, height 5cm. Area?",
+              "type": "choice",
+              "options": [
+                "20 sq cm",
+                "25 sq cm",
+                "30 sq cm",
+                "35 sq cm"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "一个平行四边形面积 48 平方厘米，底 8 厘米，高是多少厘米？",
+              "questionEn": "Parallelogram area 48 sq cm, base 8cm. Height in cm?",
+              "type": "choice",
+              "options": [
+                "4",
+                "5",
+                "6",
+                "7"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "梯形面积公式是？",
+              "questionEn": "Trapezoid area formula is?",
+              "type": "choice",
+              "options": [
+                "(上底 + 下底) × 高 / (top + bottom) × height",
+                "(上底 + 下底) × 高 ÷ 2 / (top + bottom) × height ÷ 2",
+                "上底 × 下底 × 高 / top × bottom × height",
+                "(上底 × 下底) ÷ 高 / (top × bottom) ÷ height"
+              ],
+              "correctAnswer": 1
+            }
           ],
           "khanAcademy": [
             {
@@ -922,12 +1995,6 @@
               "url": "https://www.youtube.com/watch?v=5gOKe9gkYRk",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Area of parallelograms and trapezoids",
-              "url": "https://ca.ixl.com/math/grade-6/area-of-parallelograms-and-trapezoids"
-            }
           ]
         },
         {
@@ -935,11 +2002,66 @@
           "title": "Area of Composite Figures / 组合图形面积",
           "description": "计算复杂形状的面积",
           "examples": [
-            {"question": "一个形状由两个 3×4 的矩形组成，总面积是多少？", "questionEn": "Shape made of two 3×4 rectangles. Total area?", "type": "choice", "options": ["12", "14", "24", "28"], "correctAnswer": 2},
-            {"question": "一个L形由3×3正方形和2×2正方形组成，面积是多少？", "questionEn": "L-shape from 3×3 and 2×2 squares. Area?", "type": "choice", "options": ["9", "13", "15", "17"], "correctAnswer": 1},
-            {"question": "一个组合图形由4×6矩形和2×3矩形组成，总面积是多少？", "questionEn": "Composite of 4×6 and 2×3 rectangles. Total area?", "type": "choice", "options": ["24", "27", "30", "33"], "correctAnswer": 2},
-            {"question": "计算组合图形面积的第一步通常是？", "questionEn": "First step to find composite area is usually?", "type": "choice", "options": ["分割成简单图形 / Divide into simple shapes", "猜测 / Guess", "测量周长 / Measure perimeter", "画圆 / Draw circles"], "correctAnswer": 0},
-            {"question": "一个形状是5×5正方形加3×2矩形，总面积是多少？", "questionEn": "Shape of 5×5 square plus 3×2 rectangle. Total area?", "type": "choice", "options": ["25", "28", "31", "34"], "correctAnswer": 2}
+            {
+              "question": "一个形状由两个 3×4 的矩形组成，总面积是多少？",
+              "questionEn": "Shape made of two 3×4 rectangles. Total area?",
+              "type": "choice",
+              "options": [
+                "12",
+                "14",
+                "24",
+                "28"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "一个L形由3×3正方形和2×2正方形组成，面积是多少？",
+              "questionEn": "L-shape from 3×3 and 2×2 squares. Area?",
+              "type": "choice",
+              "options": [
+                "9",
+                "13",
+                "15",
+                "17"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "一个组合图形由4×6矩形和2×3矩形组成，总面积是多少？",
+              "questionEn": "Composite of 4×6 and 2×3 rectangles. Total area?",
+              "type": "choice",
+              "options": [
+                "24",
+                "27",
+                "30",
+                "33"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "计算组合图形面积的第一步通常是？",
+              "questionEn": "First step to find composite area is usually?",
+              "type": "choice",
+              "options": [
+                "分割成简单图形 / Divide into simple shapes",
+                "猜测 / Guess",
+                "测量周长 / Measure perimeter",
+                "画圆 / Draw circles"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "一个形状是5×5正方形加3×2矩形，总面积是多少？",
+              "questionEn": "Shape of 5×5 square plus 3×2 rectangle. Total area?",
+              "type": "choice",
+              "options": [
+                "25",
+                "28",
+                "31",
+                "34"
+              ],
+              "correctAnswer": 2
+            }
           ],
           "khanAcademy": [
             {
@@ -954,12 +2076,6 @@
               "url": "https://www.youtube.com/watch?v=mJMq_9RWfho",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Area of composite figures",
-              "url": "https://ca.ixl.com/math/grade-6/area-of-compound-figures"
-            }
           ]
         },
         {
@@ -967,11 +2083,66 @@
           "title": "Surface Area / 表面积",
           "description": "计算三维图形的表面积",
           "examples": [
-            {"question": "一个立方体边长 3 厘米，表面积是多少平方厘米？", "questionEn": "Cube with edge 3cm. Surface area in sq cm?", "type": "choice", "options": ["27", "36", "54", "81"], "correctAnswer": 2},
-            {"question": "一个长方体长 4、宽 3、高 2 厘米，表面积是多少？", "questionEn": "Rectangular prism 4×3×2cm. Surface area?", "type": "choice", "options": ["36 sq cm", "42 sq cm", "52 sq cm", "60 sq cm"], "correctAnswer": 2},
-            {"question": "表面积是指？", "questionEn": "Surface area is?", "type": "choice", "options": ["内部的面积 / Inside area", "所有面的总面积 / Total area of all faces", "底面积 / Base area only", "侧面积 / Side area only"], "correctAnswer": 1},
-            {"question": "一个立方体边长 5 厘米，表面积是多少平方厘米？", "questionEn": "Cube with edge 5cm. Surface area in sq cm?", "type": "choice", "options": ["100", "125", "150", "175"], "correctAnswer": 2},
-            {"question": "长方体长 6、宽 4、高 3 厘米，表面积是多少？", "questionEn": "Rectangular prism 6×4×3cm. Surface area?", "type": "choice", "options": ["72 sq cm", "84 sq cm", "96 sq cm", "108 sq cm"], "correctAnswer": 3}
+            {
+              "question": "一个立方体边长 3 厘米，表面积是多少平方厘米？",
+              "questionEn": "Cube with edge 3cm. Surface area in sq cm?",
+              "type": "choice",
+              "options": [
+                "27",
+                "36",
+                "54",
+                "81"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "一个长方体长 4、宽 3、高 2 厘米，表面积是多少？",
+              "questionEn": "Rectangular prism 4×3×2cm. Surface area?",
+              "type": "choice",
+              "options": [
+                "36 sq cm",
+                "42 sq cm",
+                "52 sq cm",
+                "60 sq cm"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "表面积是指？",
+              "questionEn": "Surface area is?",
+              "type": "choice",
+              "options": [
+                "内部的面积 / Inside area",
+                "所有面的总面积 / Total area of all faces",
+                "底面积 / Base area only",
+                "侧面积 / Side area only"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "一个立方体边长 5 厘米，表面积是多少平方厘米？",
+              "questionEn": "Cube with edge 5cm. Surface area in sq cm?",
+              "type": "choice",
+              "options": [
+                "100",
+                "125",
+                "150",
+                "175"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "长方体长 6、宽 4、高 3 厘米，表面积是多少？",
+              "questionEn": "Rectangular prism 6×4×3cm. Surface area?",
+              "type": "choice",
+              "options": [
+                "72 sq cm",
+                "84 sq cm",
+                "96 sq cm",
+                "108 sq cm"
+              ],
+              "correctAnswer": 3
+            }
           ],
           "khanAcademy": [
             {
@@ -996,12 +2167,6 @@
               "url": "https://www.youtube.com/watch?v=gDYqWcMHvhg",
               "channel": "Numberock"
             }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Surface area",
-              "url": "https://ca.ixl.com/math/grade-6/surface-area-of-prisms-and-pyramids"
-            }
           ]
         },
         {
@@ -1009,11 +2174,66 @@
           "title": "Volume / 体积",
           "description": "计算棱柱的体积",
           "examples": [
-            {"question": "一个长方体长 5、宽 3、高 4 厘米，体积是多少立方厘米？", "questionEn": "Rectangular prism 5×3×4cm. Volume in cubic cm?", "type": "choice", "options": ["30", "45", "60", "75"], "correctAnswer": 2},
-            {"question": "体积公式是？", "questionEn": "Volume formula is?", "type": "choice", "options": ["长 + 宽 + 高 / length + width + height", "长 × 宽 × 高 / length × width × height", "2 × (长 + 宽 + 高) / 2 × (l + w + h)", "(长 × 宽) + 高 / (length × width) + height"], "correctAnswer": 1},
-            {"question": "一个立方体边长 4 厘米，体积是多少立方厘米？", "questionEn": "Cube with edge 4cm. Volume in cubic cm?", "type": "choice", "options": ["16", "32", "48", "64"], "correctAnswer": 3},
-            {"question": "体积的单位是？", "questionEn": "Volume units are?", "type": "choice", "options": ["平方单位 / square units", "立方单位 / cubic units", "线性单位 / linear units", "角度单位 / angle units"], "correctAnswer": 1},
-            {"question": "一个长方体长 10、宽 5、高 2 厘米，体积是多少？", "questionEn": "Rectangular prism 10×5×2cm. Volume?", "type": "choice", "options": ["50 cubic cm", "100 cubic cm", "150 cubic cm", "200 cubic cm"], "correctAnswer": 1}
+            {
+              "question": "一个长方体长 5、宽 3、高 4 厘米，体积是多少立方厘米？",
+              "questionEn": "Rectangular prism 5×3×4cm. Volume in cubic cm?",
+              "type": "choice",
+              "options": [
+                "30",
+                "45",
+                "60",
+                "75"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "体积公式是？",
+              "questionEn": "Volume formula is?",
+              "type": "choice",
+              "options": [
+                "长 + 宽 + 高 / length + width + height",
+                "长 × 宽 × 高 / length × width × height",
+                "2 × (长 + 宽 + 高) / 2 × (l + w + h)",
+                "(长 × 宽) + 高 / (length × width) + height"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "一个立方体边长 4 厘米，体积是多少立方厘米？",
+              "questionEn": "Cube with edge 4cm. Volume in cubic cm?",
+              "type": "choice",
+              "options": [
+                "16",
+                "32",
+                "48",
+                "64"
+              ],
+              "correctAnswer": 3
+            },
+            {
+              "question": "体积的单位是？",
+              "questionEn": "Volume units are?",
+              "type": "choice",
+              "options": [
+                "平方单位 / square units",
+                "立方单位 / cubic units",
+                "线性单位 / linear units",
+                "角度单位 / angle units"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "一个长方体长 10、宽 5、高 2 厘米，体积是多少？",
+              "questionEn": "Rectangular prism 10×5×2cm. Volume?",
+              "type": "choice",
+              "options": [
+                "50 cubic cm",
+                "100 cubic cm",
+                "150 cubic cm",
+                "200 cubic cm"
+              ],
+              "correctAnswer": 1
+            }
           ],
           "khanAcademy": [
             {
@@ -1027,12 +2247,6 @@
               "title": "Volume of Rectangular Prisms",
               "url": "https://www.youtube.com/watch?v=qJwecTgce6c",
               "channel": "Math with Mr. J"
-            }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Volume",
-              "url": "https://ca.ixl.com/math/grade-6/volume-of-rectangular-prisms"
             }
           ]
         }
@@ -1048,11 +2262,66 @@
           "title": "Four Quadrants / 四象限",
           "description": "在四象限坐标平面上绘点",
           "examples": [
-            {"question": "点 (3, 4) 在哪个象限？", "questionEn": "Point (3, 4) is in which quadrant?", "type": "choice", "options": ["第一象限 / Quadrant I", "第二象限 / Quadrant II", "第三象限 / Quadrant III", "第四象限 / Quadrant IV"], "correctAnswer": 0},
-            {"question": "点 (-2, 5) 的 x 坐标是？", "questionEn": "Point (-2, 5) has x-coordinate of?", "type": "choice", "options": ["-2", "2", "5", "-5"], "correctAnswer": 0},
-            {"question": "原点 (0, 0) 在哪里？", "questionEn": "Where is the origin (0, 0)?", "type": "choice", "options": ["左上角 / Top left", "右下角 / Bottom right", "中心 / Center", "右上角 / Top right"], "correctAnswer": 2},
-            {"question": "点 (-3, -4) 在哪个象限？", "questionEn": "Point (-3, -4) is in which quadrant?", "type": "choice", "options": ["第一象限 / Quadrant I", "第二象限 / Quadrant II", "第三象限 / Quadrant III", "第四象限 / Quadrant IV"], "correctAnswer": 2},
-            {"question": "哪个点在 y 轴上？", "questionEn": "Which point is on the y-axis?", "type": "choice", "options": ["(0, 3)", "(3, 0)", "(3, 3)", "(3, -3)"], "correctAnswer": 0}
+            {
+              "question": "点 (3, 4) 在哪个象限？",
+              "questionEn": "Point (3, 4) is in which quadrant?",
+              "type": "choice",
+              "options": [
+                "第一象限 / Quadrant I",
+                "第二象限 / Quadrant II",
+                "第三象限 / Quadrant III",
+                "第四象限 / Quadrant IV"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "点 (-2, 5) 的 x 坐标是？",
+              "questionEn": "Point (-2, 5) has x-coordinate of?",
+              "type": "choice",
+              "options": [
+                "-2",
+                "2",
+                "5",
+                "-5"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "原点 (0, 0) 在哪里？",
+              "questionEn": "Where is the origin (0, 0)?",
+              "type": "choice",
+              "options": [
+                "左上角 / Top left",
+                "右下角 / Bottom right",
+                "中心 / Center",
+                "右上角 / Top right"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "点 (-3, -4) 在哪个象限？",
+              "questionEn": "Point (-3, -4) is in which quadrant?",
+              "type": "choice",
+              "options": [
+                "第一象限 / Quadrant I",
+                "第二象限 / Quadrant II",
+                "第三象限 / Quadrant III",
+                "第四象限 / Quadrant IV"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "哪个点在 y 轴上？",
+              "questionEn": "Which point is on the y-axis?",
+              "type": "choice",
+              "options": [
+                "(0, 3)",
+                "(3, 0)",
+                "(3, 3)",
+                "(3, -3)"
+              ],
+              "correctAnswer": 0
+            }
           ],
           "khanAcademy": [
             {
@@ -1072,12 +2341,6 @@
               "url": "https://www.youtube.com/watch?v=4mAc5OL0LTM",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Coordinate plane with all four quadrants",
-              "url": "https://ca.ixl.com/math/grade-6/coordinate-plane-review"
-            }
           ]
         },
         {
@@ -1085,11 +2348,66 @@
           "title": "Distance on Coordinate Plane / 坐标平面上的距离",
           "description": "计算坐标平面上两点之间的距离",
           "examples": [
-            {"question": "点 (2, 3) 和点 (2, 7) 之间的距离是多少？", "questionEn": "Distance between (2, 3) and (2, 7)?", "type": "choice", "options": ["3", "4", "5", "6"], "correctAnswer": 1},
-            {"question": "点 (1, 4) 和点 (5, 4) 之间的距离是多少？", "questionEn": "Distance between (1, 4) and (5, 4)?", "type": "choice", "options": ["3", "4", "5", "6"], "correctAnswer": 1},
-            {"question": "如果两点在同一水平线上，如何计算距离？", "questionEn": "If two points are horizontal, how to find distance?", "type": "choice", "options": ["x 坐标相减 / Subtract x-coordinates", "y 坐标相减 / Subtract y-coordinates", "x 和 y 相加 / Add x and y", "坐标相乘 / Multiply coordinates"], "correctAnswer": 0},
-            {"question": "点 (-2, 0) 和点 (3, 0) 之间的距离是多少？", "questionEn": "Distance between (-2, 0) and (3, 0)?", "type": "choice", "options": ["3", "4", "5", "6"], "correctAnswer": 2},
-            {"question": "点 (0, -3) 和点 (0, 2) 之间的距离是多少？", "questionEn": "Distance between (0, -3) and (0, 2)?", "type": "choice", "options": ["3", "4", "5", "6"], "correctAnswer": 2}
+            {
+              "question": "点 (2, 3) 和点 (2, 7) 之间的距离是多少？",
+              "questionEn": "Distance between (2, 3) and (2, 7)?",
+              "type": "choice",
+              "options": [
+                "3",
+                "4",
+                "5",
+                "6"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "点 (1, 4) 和点 (5, 4) 之间的距离是多少？",
+              "questionEn": "Distance between (1, 4) and (5, 4)?",
+              "type": "choice",
+              "options": [
+                "3",
+                "4",
+                "5",
+                "6"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "如果两点在同一水平线上，如何计算距离？",
+              "questionEn": "If two points are horizontal, how to find distance?",
+              "type": "choice",
+              "options": [
+                "x 坐标相减 / Subtract x-coordinates",
+                "y 坐标相减 / Subtract y-coordinates",
+                "x 和 y 相加 / Add x and y",
+                "坐标相乘 / Multiply coordinates"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "点 (-2, 0) 和点 (3, 0) 之间的距离是多少？",
+              "questionEn": "Distance between (-2, 0) and (3, 0)?",
+              "type": "choice",
+              "options": [
+                "3",
+                "4",
+                "5",
+                "6"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "点 (0, -3) 和点 (0, 2) 之间的距离是多少？",
+              "questionEn": "Distance between (0, -3) and (0, 2)?",
+              "type": "choice",
+              "options": [
+                "3",
+                "4",
+                "5",
+                "6"
+              ],
+              "correctAnswer": 2
+            }
           ],
           "khanAcademy": [
             {
@@ -1103,12 +2421,6 @@
               "title": "Finding Distance on Coordinate Plane",
               "url": "https://www.youtube.com/watch?v=Gh8t8n_B1Fc",
               "channel": "Math with Mr. J"
-            }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Distance between two points",
-              "url": "https://ca.ixl.com/math/grade-6/distance-between-two-points"
             }
           ]
         }
@@ -1124,11 +2436,66 @@
           "title": "Statistical Questions / 统计问题",
           "description": "识别统计问题",
           "examples": [
-            {"question": "下面哪个是统计问题？", "questionEn": "Which is a statistical question?", "type": "choice", "options": ["你多高？ / How tall are you?", "你班同学的平均身高是多少？ / What's avg height in your class?", "你生日是什么时候？ / When is your birthday?", "你住在哪里？ / Where do you live?"], "correctAnswer": 1},
-            {"question": "统计问题的特点是什么？", "questionEn": "What makes a question statistical?", "type": "choice", "options": ["只有一个答案 / Has one answer", "有多个不同答案 / Has different answers", "不需要数据 / Needs no data", "太复杂 / Too complex"], "correctAnswer": 1},
-            {"question": "\"我们学校最受欢迎的运动是什么？\" 这是统计问题吗？", "questionEn": "\"What's most popular sport in our school?\" Statistical?", "type": "choice", "options": ["是 / Yes", "否 / No", "有时候 / Sometimes", "不确定 / Not sure"], "correctAnswer": 0},
-            {"question": "哪个不是统计问题？", "questionEn": "Which is NOT a statistical question?", "type": "choice", "options": ["班里学生身高范围 / Height range in class", "你最喜欢的颜色是什么？ / What's your favorite color?", "班里同学平均年龄 / Average age in class", "班级有多少学生？ / How many students in class?"], "correctAnswer": 3},
-            {"question": "\"6年级学生通常几点睡觉？\" 这是统计问题吗？", "questionEn": "\"What time do 6th graders sleep?\" Statistical?", "type": "choice", "options": ["是 / Yes", "否 / No", "取决于情况 / Depends", "无法判断 / Can't tell"], "correctAnswer": 0}
+            {
+              "question": "下面哪个是统计问题？",
+              "questionEn": "Which is a statistical question?",
+              "type": "choice",
+              "options": [
+                "你多高？ / How tall are you?",
+                "你班同学的平均身高是多少？ / What's avg height in your class?",
+                "你生日是什么时候？ / When is your birthday?",
+                "你住在哪里？ / Where do you live?"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "统计问题的特点是什么？",
+              "questionEn": "What makes a question statistical?",
+              "type": "choice",
+              "options": [
+                "只有一个答案 / Has one answer",
+                "有多个不同答案 / Has different answers",
+                "不需要数据 / Needs no data",
+                "太复杂 / Too complex"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "\"我们学校最受欢迎的运动是什么？\" 这是统计问题吗？",
+              "questionEn": "\"What's most popular sport in our school?\" Statistical?",
+              "type": "choice",
+              "options": [
+                "是 / Yes",
+                "否 / No",
+                "有时候 / Sometimes",
+                "不确定 / Not sure"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "哪个不是统计问题？",
+              "questionEn": "Which is NOT a statistical question?",
+              "type": "choice",
+              "options": [
+                "班里学生身高范围 / Height range in class",
+                "你最喜欢的颜色是什么？ / What's your favorite color?",
+                "班里同学平均年龄 / Average age in class",
+                "班级有多少学生？ / How many students in class?"
+              ],
+              "correctAnswer": 3
+            },
+            {
+              "question": "\"6年级学生通常几点睡觉？\" 这是统计问题吗？",
+              "questionEn": "\"What time do 6th graders sleep?\" Statistical?",
+              "type": "choice",
+              "options": [
+                "是 / Yes",
+                "否 / No",
+                "取决于情况 / Depends",
+                "无法判断 / Can't tell"
+              ],
+              "correctAnswer": 0
+            }
           ],
           "khanAcademy": [
             {
@@ -1143,19 +2510,73 @@
               "url": "https://www.youtube.com/watch?v=PWbzOzK8a9w",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": []
+          ]
         },
         {
           "id": "g6-mean-median-mode",
           "title": "Mean, Median, Mode, Range / 平均数、中位数、众数、极差",
           "description": "计算和理解数据的中心趋势",
           "examples": [
-            {"question": "数据集 2, 4, 6, 8, 10 的平均数是多少？", "questionEn": "What's the mean of 2, 4, 6, 8, 10?", "type": "choice", "options": ["4", "5", "6", "7"], "correctAnswer": 2},
-            {"question": "数据集 3, 7, 5, 9, 1 的中位数是多少？", "questionEn": "What's the median of 3, 7, 5, 9, 1?", "type": "choice", "options": ["3", "5", "7", "9"], "correctAnswer": 1},
-            {"question": "数据集 2, 3, 3, 4, 5 的众数是多少？", "questionEn": "What's the mode of 2, 3, 3, 4, 5?", "type": "choice", "options": ["2", "3", "4", "5"], "correctAnswer": 1},
-            {"question": "数据集 4, 8, 6, 2, 10 的极差是多少？", "questionEn": "What's the range of 4, 8, 6, 2, 10?", "type": "choice", "options": ["6", "7", "8", "10"], "correctAnswer": 2},
-            {"question": "哪个是\"平均值\"的另一个叫法？", "questionEn": "What's another name for \"average\"?", "type": "choice", "options": ["中位数 / Median", "众数 / Mode", "平均数 / Mean", "极差 / Range"], "correctAnswer": 2}
+            {
+              "question": "数据集 2, 4, 6, 8, 10 的平均数是多少？",
+              "questionEn": "What's the mean of 2, 4, 6, 8, 10?",
+              "type": "choice",
+              "options": [
+                "4",
+                "5",
+                "6",
+                "7"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "数据集 3, 7, 5, 9, 1 的中位数是多少？",
+              "questionEn": "What's the median of 3, 7, 5, 9, 1?",
+              "type": "choice",
+              "options": [
+                "3",
+                "5",
+                "7",
+                "9"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "数据集 2, 3, 3, 4, 5 的众数是多少？",
+              "questionEn": "What's the mode of 2, 3, 3, 4, 5?",
+              "type": "choice",
+              "options": [
+                "2",
+                "3",
+                "4",
+                "5"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "数据集 4, 8, 6, 2, 10 的极差是多少？",
+              "questionEn": "What's the range of 4, 8, 6, 2, 10?",
+              "type": "choice",
+              "options": [
+                "6",
+                "7",
+                "8",
+                "10"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "哪个是\"平均值\"的另一个叫法？",
+              "questionEn": "What's another name for \"average\"?",
+              "type": "choice",
+              "options": [
+                "中位数 / Median",
+                "众数 / Mode",
+                "平均数 / Mean",
+                "极差 / Range"
+              ],
+              "correctAnswer": 2
+            }
           ],
           "khanAcademy": [
             {
@@ -1170,12 +2591,6 @@
               "url": "https://www.youtube.com/watch?v=B1HEzNTGeZ4",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Mean, median, mode, range",
-              "url": "https://ca.ixl.com/math/grade-6/mean-median-mode-and-range"
-            }
           ]
         },
         {
@@ -1183,11 +2598,66 @@
           "title": "Box Plots / 箱线图",
           "description": "创建和解读箱线图",
           "examples": [
-            {"question": "箱线图中的\"箱子\"表示什么？", "questionEn": "What does the \"box\" in a box plot represent?", "type": "choice", "options": ["最小值和最大值 / Min and max", "中位数 / Median only", "四分位数范围 / Interquartile range", "平均值 / Mean"], "correctAnswer": 2},
-            {"question": "箱线图中的中线表示什么？", "questionEn": "What does the middle line in a box plot show?", "type": "choice", "options": ["平均数 / Mean", "中位数 / Median", "众数 / Mode", "极差 / Range"], "correctAnswer": 1},
-            {"question": "箱线图的\"须\"延伸到？", "questionEn": "Box plot \"whiskers\" extend to?", "type": "choice", "options": ["只有中位数 / Median only", "最小和最大值 / Min and max values", "只有平均值 / Mean only", "四分位数 / Quartiles only"], "correctAnswer": 1},
-            {"question": "箱线图显示数据的哪些部分？", "questionEn": "What parts of data does a box plot show?", "type": "choice", "options": ["只有平均值 / Mean only", "四分位数和中位数 / Quartiles and median", "只有众数 / Mode only", "只有极差 / Range only"], "correctAnswer": 1},
-            {"question": "如果一个箱线图的中位数在箱子的中间，说明数据？", "questionEn": "If median is center of box, data is?", "type": "choice", "options": ["偏向左边 / Skewed left", "偏向右边 / Skewed right", "对称 / Symmetric", "无法判断 / Can't tell"], "correctAnswer": 2}
+            {
+              "question": "箱线图中的\"箱子\"表示什么？",
+              "questionEn": "What does the \"box\" in a box plot represent?",
+              "type": "choice",
+              "options": [
+                "最小值和最大值 / Min and max",
+                "中位数 / Median only",
+                "四分位数范围 / Interquartile range",
+                "平均值 / Mean"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "箱线图中的中线表示什么？",
+              "questionEn": "What does the middle line in a box plot show?",
+              "type": "choice",
+              "options": [
+                "平均数 / Mean",
+                "中位数 / Median",
+                "众数 / Mode",
+                "极差 / Range"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "箱线图的\"须\"延伸到？",
+              "questionEn": "Box plot \"whiskers\" extend to?",
+              "type": "choice",
+              "options": [
+                "只有中位数 / Median only",
+                "最小和最大值 / Min and max values",
+                "只有平均值 / Mean only",
+                "四分位数 / Quartiles only"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "箱线图显示数据的哪些部分？",
+              "questionEn": "What parts of data does a box plot show?",
+              "type": "choice",
+              "options": [
+                "只有平均值 / Mean only",
+                "四分位数和中位数 / Quartiles and median",
+                "只有众数 / Mode only",
+                "只有极差 / Range only"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "如果一个箱线图的中位数在箱子的中间，说明数据？",
+              "questionEn": "If median is center of box, data is?",
+              "type": "choice",
+              "options": [
+                "偏向左边 / Skewed left",
+                "偏向右边 / Skewed right",
+                "对称 / Symmetric",
+                "无法判断 / Can't tell"
+              ],
+              "correctAnswer": 2
+            }
           ],
           "khanAcademy": [
             {
@@ -1202,12 +2672,6 @@
               "url": "https://www.youtube.com/watch?v=b2C9I8HuCe4",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Box plots",
-              "url": "https://ca.ixl.com/math/grade-6/interpret-box-and-whisker-plots"
-            }
           ]
         },
         {
@@ -1215,11 +2679,66 @@
           "title": "Histograms / 直方图",
           "description": "创建和解读直方图",
           "examples": [
-            {"question": "直方图用来显示什么？", "questionEn": "What does a histogram show?", "type": "choice", "options": ["分类数据 / Categorical data", "数据的分布 / Data distribution", "只显示平均值 / Mean only", "只显示中位数 / Median only"], "correctAnswer": 1},
-            {"question": "直方图的柱子之间有间隙吗？", "questionEn": "Do histogram bars have gaps?", "type": "choice", "options": ["有 / Yes", "没有 / No", "有时候有 / Sometimes", "取决于数据 / Depends on data"], "correctAnswer": 1},
-            {"question": "直方图的柱子高度代表什么？", "questionEn": "What does bar height in histogram represent?", "type": "choice", "options": ["数据类别 / Data categories", "频数（数量） / Frequency (count)", "平均值 / Mean", "百分比 / Percentage"], "correctAnswer": 1},
-            {"question": "直方图和条形图的主要区别是什么？", "questionEn": "Main difference between histogram and bar graph?", "type": "choice", "options": ["颜色不同 / Different colors", "直方图用于数值数据 / Histogram for numerical data", "大小不同 / Different sizes", "文字不同 / Different labels"], "correctAnswer": 1},
-            {"question": "如果直方图中一个柱子高度为 5，表示什么？", "questionEn": "If histogram bar height is 5, what does it mean?", "type": "choice", "options": ["5 类别 / 5 categories", "5 个数据点 / 5 data points", "平均值是 5 / Mean is 5", "中位数是 5 / Median is 5"], "correctAnswer": 1}
+            {
+              "question": "直方图用来显示什么？",
+              "questionEn": "What does a histogram show?",
+              "type": "choice",
+              "options": [
+                "分类数据 / Categorical data",
+                "数据的分布 / Data distribution",
+                "只显示平均值 / Mean only",
+                "只显示中位数 / Median only"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "直方图的柱子之间有间隙吗？",
+              "questionEn": "Do histogram bars have gaps?",
+              "type": "choice",
+              "options": [
+                "有 / Yes",
+                "没有 / No",
+                "有时候有 / Sometimes",
+                "取决于数据 / Depends on data"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "直方图的柱子高度代表什么？",
+              "questionEn": "What does bar height in histogram represent?",
+              "type": "choice",
+              "options": [
+                "数据类别 / Data categories",
+                "频数（数量） / Frequency (count)",
+                "平均值 / Mean",
+                "百分比 / Percentage"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "直方图和条形图的主要区别是什么？",
+              "questionEn": "Main difference between histogram and bar graph?",
+              "type": "choice",
+              "options": [
+                "颜色不同 / Different colors",
+                "直方图用于数值数据 / Histogram for numerical data",
+                "大小不同 / Different sizes",
+                "文字不同 / Different labels"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "如果直方图中一个柱子高度为 5，表示什么？",
+              "questionEn": "If histogram bar height is 5, what does it mean?",
+              "type": "choice",
+              "options": [
+                "5 类别 / 5 categories",
+                "5 个数据点 / 5 data points",
+                "平均值是 5 / Mean is 5",
+                "中位数是 5 / Median is 5"
+              ],
+              "correctAnswer": 1
+            }
           ],
           "khanAcademy": [
             {
@@ -1233,12 +2752,6 @@
               "title": "How to Make a Histogram",
               "url": "https://www.youtube.com/watch?v=4aGEs0JL4_s",
               "channel": "Math with Mr. J"
-            }
-          ],
-          "practice": [
-            {
-              "title": "IXL - Histograms",
-              "url": "https://ca.ixl.com/math/grade-6/create-histograms"
             }
           ]
         }
@@ -1254,11 +2767,66 @@
           "title": "Simple Interest / 单利",
           "description": "理解和计算单利",
           "examples": [
-            {"question": "如果你存 $100，利率 5%，1 年后单利是多少？", "questionEn": "Save $100 at 5% for 1 year. Simple interest?", "type": "choice", "options": ["$3", "$4", "$5", "$10"], "correctAnswer": 2},
-            {"question": "单利公式中，I = P × R × T，T 代表什么？", "questionEn": "In I = P × R × T, what does T represent?", "type": "choice", "options": ["本金 / Principal", "利率 / Rate", "时间 / Time", "利息 / Interest"], "correctAnswer": 2},
-            {"question": "本金 $200，利率 4%，2 年单利是多少？", "questionEn": "Principal $200, rate 4%, 2 years. Simple interest?", "type": "choice", "options": ["$8", "$12", "$16", "$24"], "correctAnswer": 2},
-            {"question": "如果你借 $500，利率 6%，1 年要还多少利息？", "questionEn": "Borrow $500 at 6% for 1 year. Interest owed?", "type": "choice", "options": ["$20", "$25", "$30", "$35"], "correctAnswer": 2},
-            {"question": "哪个因素不影响单利计算？", "questionEn": "What doesn't affect simple interest calculation?", "type": "choice", "options": ["本金 / Principal", "利率 / Rate", "时间 / Time", "银行名称 / Bank name"], "correctAnswer": 3}
+            {
+              "question": "如果你存 $100，利率 5%，1 年后单利是多少？",
+              "questionEn": "Save $100 at 5% for 1 year. Simple interest?",
+              "type": "choice",
+              "options": [
+                "$3",
+                "$4",
+                "$5",
+                "$10"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "单利公式中，I = P × R × T，T 代表什么？",
+              "questionEn": "In I = P × R × T, what does T represent?",
+              "type": "choice",
+              "options": [
+                "本金 / Principal",
+                "利率 / Rate",
+                "时间 / Time",
+                "利息 / Interest"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "本金 $200，利率 4%，2 年单利是多少？",
+              "questionEn": "Principal $200, rate 4%, 2 years. Simple interest?",
+              "type": "choice",
+              "options": [
+                "$8",
+                "$12",
+                "$16",
+                "$24"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "如果你借 $500，利率 6%，1 年要还多少利息？",
+              "questionEn": "Borrow $500 at 6% for 1 year. Interest owed?",
+              "type": "choice",
+              "options": [
+                "$20",
+                "$25",
+                "$30",
+                "$35"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "哪个因素不影响单利计算？",
+              "questionEn": "What doesn't affect simple interest calculation?",
+              "type": "choice",
+              "options": [
+                "本金 / Principal",
+                "利率 / Rate",
+                "时间 / Time",
+                "银行名称 / Bank name"
+              ],
+              "correctAnswer": 3
+            }
           ],
           "khanAcademy": [
             {
@@ -1273,19 +2841,73 @@
               "url": "https://www.youtube.com/watch?v=I2e7zz_aPek",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": []
+          ]
         },
         {
           "id": "g6-budgeting",
           "title": "Budgeting and Saving / 预算和储蓄",
           "description": "创建预算和储蓄计划",
           "examples": [
-            {"question": "如果你每周赚 $50，花 $35，可以存多少？", "questionEn": "Earn $50/week, spend $35. How much can you save?", "type": "choice", "options": ["$10", "$15", "$20", "$25"], "correctAnswer": 1},
-            {"question": "预算的主要目的是什么？", "questionEn": "Main purpose of a budget is?", "type": "choice", "options": ["花更多钱 / Spend more", "计划收入和支出 / Plan income and expenses", "不工作 / Not work", "借钱 / Borrow money"], "correctAnswer": 1},
-            {"question": "如果你每月收入 $200，应该花多少？", "questionEn": "If monthly income is $200, how much should you spend?", "type": "choice", "options": ["全部 $200 / All $200", "多于 $200 / More than $200", "少于 $200 / Less than $200", "$0"], "correctAnswer": 2},
-            {"question": "\"需要\"和\"想要\"的区别是什么？", "questionEn": "Difference between \"needs\" and \"wants\"?", "type": "choice", "options": ["没有区别 / No difference", "需要是必需的，想要是可选的 / Needs essential, wants optional", "想要更重要 / Wants more important", "需要更便宜 / Needs cheaper"], "correctAnswer": 1},
-            {"question": "储蓄率 20% 意味着什么？", "questionEn": "Saving rate 20% means?", "type": "choice", "options": ["花 20% / Spend 20%", "存 20% / Save 20%", "花 80% / Spend 80%", "存 80% / Save 80%"], "correctAnswer": 1}
+            {
+              "question": "如果你每周赚 $50，花 $35，可以存多少？",
+              "questionEn": "Earn $50/week, spend $35. How much can you save?",
+              "type": "choice",
+              "options": [
+                "$10",
+                "$15",
+                "$20",
+                "$25"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "预算的主要目的是什么？",
+              "questionEn": "Main purpose of a budget is?",
+              "type": "choice",
+              "options": [
+                "花更多钱 / Spend more",
+                "计划收入和支出 / Plan income and expenses",
+                "不工作 / Not work",
+                "借钱 / Borrow money"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "如果你每月收入 $200，应该花多少？",
+              "questionEn": "If monthly income is $200, how much should you spend?",
+              "type": "choice",
+              "options": [
+                "全部 $200 / All $200",
+                "多于 $200 / More than $200",
+                "少于 $200 / Less than $200",
+                "$0"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "\"需要\"和\"想要\"的区别是什么？",
+              "questionEn": "Difference between \"needs\" and \"wants\"?",
+              "type": "choice",
+              "options": [
+                "没有区别 / No difference",
+                "需要是必需的，想要是可选的 / Needs essential, wants optional",
+                "想要更重要 / Wants more important",
+                "需要更便宜 / Needs cheaper"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "储蓄率 20% 意味着什么？",
+              "questionEn": "Saving rate 20% means?",
+              "type": "choice",
+              "options": [
+                "花 20% / Spend 20%",
+                "存 20% / Save 20%",
+                "花 80% / Spend 80%",
+                "存 80% / Save 80%"
+              ],
+              "correctAnswer": 1
+            }
           ],
           "khanAcademy": [],
           "youtube": [
@@ -1299,8 +2921,7 @@
               "url": "https://www.youtube.com/watch?v=CPQ3PKvdnBw",
               "channel": "FunKidsTV"
             }
-          ],
-          "practice": []
+          ]
         }
       ]
     }
