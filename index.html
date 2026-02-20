@@ -1120,6 +1120,178 @@
   </script>
 
   <script>
+    // ========================================
+    // 动态题目生成系统 / Dynamic Question Generator
+    // ========================================
+
+    window.QuestionGenerator = {
+      // 生成随机整数
+      randomInt: function(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      },
+
+      // 生成随机小数
+      randomDecimal: function(min, max, decimals = 1) {
+        const num = Math.random() * (max - min) + min;
+        return Number(num.toFixed(decimals));
+      },
+
+      // 生成随机分数
+      randomFraction: function(minNum, maxNum, minDen, maxDen) {
+        const num = this.randomInt(minNum, maxNum);
+        let den = this.randomInt(minDen, maxDen);
+        while (den === num || den === 0) {
+          den = this.randomInt(minDen, maxDen);
+        }
+        return { num, den };
+      },
+
+      // 格式化分数
+      formatFraction: function(frac) {
+        return `${frac.num}/${frac.den}`;
+      },
+
+      // 计算表达式的值
+      evaluate: function(expr, vars) {
+        let result = expr;
+        for (const [key, value] of Object.entries(vars)) {
+          const regex = new RegExp(`\\b${key}\\b`, 'g');
+          if (typeof value === 'object' && value.num !== undefined) {
+            result = result.replace(regex, `(${value.num}/${value.den})`);
+          } else {
+            result = result.replace(regex, value);
+          }
+        }
+        try {
+          return eval(result);
+        } catch (e) {
+          console.error('Error evaluating:', expr, result);
+          return null;
+        }
+      },
+
+      // 替换模板中的变量
+      fillTemplate: function(template, vars, formatFuncs = {}) {
+        let result = template;
+        for (const [key, value] of Object.entries(vars)) {
+          const regex = new RegExp(`\\{${key}\\}`, 'g');
+          let displayValue = value;
+          if (typeof value === 'object' && value.num !== undefined) {
+            displayValue = formatFuncs.fraction ? formatFuncs.fraction(value) : `${value.num}/${value.den}`;
+          }
+          result = result.replace(regex, displayValue);
+        }
+        return result;
+      },
+
+      // 生成动态选择题
+      generateChoiceQuestion: function(template) {
+        const vars = {};
+        const formatFuncs = { fraction: this.formatFraction.bind(this) };
+
+        // 生成变量值
+        for (const [key, config] of Object.entries(template.variables || {})) {
+          if (config.type === 'integer') {
+            vars[key] = this.randomInt(config.min, config.max);
+          } else if (config.type === 'decimal') {
+            vars[key] = this.randomDecimal(config.min, config.max, config.decimals || 1);
+          } else if (config.type === 'fraction') {
+            vars[key] = this.randomFraction(config.minNum, config.maxNum, config.minDen, config.maxDen);
+          }
+        }
+
+        // 生成题目文本
+        const question = this.fillTemplate(template.question, vars, formatFuncs);
+        const questionEn = template.questionEn ? this.fillTemplate(template.questionEn, vars, formatFuncs) : '';
+        const hint = this.fillTemplate(template.hint, vars, formatFuncs);
+        const hintEn = template.hintEn ? this.fillTemplate(template.hintEn, vars, formatFuncs) : hint;
+
+        // 计算正确答案
+        const correctAnswer = this.evaluate(template.answer, vars);
+
+        // 生成选项
+        let options = [];
+        const usedValues = new Set();
+
+        // 添加正确答案
+        let correctDisplay = correctAnswer;
+        if (template.answerFormat === 'fraction' || (typeof correctAnswer === 'number' && !Number.isInteger(correctAnswer))) {
+          // 转换为分数显示
+          const tolerance = 0.0001;
+          for (let d = 2; d <= 10; d++) {
+            for (let n = 1; n < d * 10; n++) {
+              if (Math.abs(n/d - correctAnswer) < tolerance) {
+                correctDisplay = `${n}/${d}`;
+                break;
+              }
+            }
+            if (typeof correctDisplay === 'string') break;
+          }
+        }
+        options.push(correctDisplay);
+        usedValues.add(String(correctAnswer));
+
+        // 生成干扰项
+        for (const wrongExpr of (template.wrongOptions || [])) {
+          const wrongValue = this.evaluate(wrongExpr, vars);
+          if (wrongValue !== null && !usedValues.has(String(wrongValue))) {
+            let wrongDisplay = wrongValue;
+            if (typeof wrongValue === 'number' && !Number.isInteger(wrongValue)) {
+              const tolerance = 0.0001;
+              for (let d = 2; d <= 10; d++) {
+                for (let n = 1; n < d * 10; n++) {
+                  if (Math.abs(n/d - wrongValue) < tolerance) {
+                    wrongDisplay = `${n}/${d}`;
+                    break;
+                  }
+                }
+                if (typeof wrongDisplay === 'string') break;
+              }
+            }
+            options.push(wrongDisplay);
+            usedValues.add(String(wrongValue));
+          }
+        }
+
+        // 如果选项不够，添加随机干扰项
+        while (options.length < 4) {
+          const randomOffset = this.randomInt(-10, 10);
+          const wrongValue = correctAnswer + randomOffset;
+          if (!usedValues.has(String(wrongValue))) {
+            options.push(wrongValue);
+            usedValues.add(String(wrongValue));
+          }
+        }
+
+        // 打乱选项顺序
+        const correctIndex = 0;
+        for (let i = options.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [options[i], options[j]] = [options[j], options[i]];
+        }
+        const newCorrectIndex = options.indexOf(correctDisplay);
+
+        return {
+          question,
+          questionEn,
+          hint,
+          type: 'choice',
+          options,
+          correctAnswer: newCorrectIndex
+        };
+      },
+
+      // 为题目生成新版本（用于答错后重新生成）
+      regenerateQuestion: function(example, topicId, exampleIndex) {
+        if (example.dynamicTemplate) {
+          return this.generateChoiceQuestion(example.dynamicTemplate);
+        }
+        return example;
+      }
+    };
+  </script>
+
+  <script>
     // State
     let curriculum = null;
     let currentGrade = 5;
@@ -1431,6 +1603,39 @@
       return (completedTopics[currentGrade] || []).includes(topicId);
     }
 
+    // Generate examples HTML
+    function generateExamplesHTML(topicId, examples, startIndex = 0) {
+      return examples.map((example, index) => {
+        const actualIndex = startIndex + index;
+        const hint = example.hint || 'Think about the concept and try again / 想想这个概念，再试一次';
+        const escapedHint = hint.replace(/`/g, '\\`').replace(/"/g, '&quot;');
+
+        return `
+          <div class="example-item" id="example-item-${topicId}-${actualIndex}"
+               data-attempts="0" data-correct="false"
+               data-template-index="${example.templateIndex !== undefined ? example.templateIndex : ''}">
+            <div class="example-question">${actualIndex + 1}. ${example.question}</div>
+            ${example.questionEn ? `<div class="example-question-en">${example.questionEn}</div>` : ''}
+            ${example.type === 'choice' ? `
+              <div class="example-options" id="options-${topicId}-${actualIndex}">
+                ${example.options.map((option, optIndex) => `
+                  <button class="example-option" onclick="checkAnswer('${topicId}', ${actualIndex}, ${optIndex}, ${example.correctAnswer}, event, '${escapedHint}', ${example.templateIndex !== undefined ? example.templateIndex : 'null'})">
+                    ${String.fromCharCode(65 + optIndex)}. ${option}
+                  </button>
+                `).join('')}
+              </div>
+            ` : `
+              <div class="example-input-container">
+                <input type="text" class="example-input" id="input-${topicId}-${actualIndex}" placeholder="输入答案 / Enter answer">
+                <button class="example-check-btn" onclick="checkInputAnswer('${topicId}', ${actualIndex}, '${example.correctAnswer}', ${JSON.stringify(example.answers || []).replace(/"/g, '&quot;')}, event, '${escapedHint}')">检查 / Check</button>
+              </div>
+            `}
+            <div class="example-feedback" id="feedback-${topicId}-${actualIndex}"></div>
+          </div>
+        `;
+      }).join('');
+    }
+
     // Open topic modal
     function openTopic(unitId, topicId, event) {
       event.stopPropagation();
@@ -1446,35 +1651,56 @@
 
       // Examples section - show first, before resources
       if (topic.examples && topic.examples.length > 0) {
+        // Store examples for regeneration
+        window.currentTopicExamples = window.currentTopicExamples || {};
+        window.currentTopicExamples[topicId] = JSON.parse(JSON.stringify(topic.examples));
+
         content += `
           <div class="examples-section">
             <h3><span class="icon">✎</span> Interactive Examples / 互动练习</h3>
             <div class="example-progress" id="exampleProgress-${topicId}">
               Answer the questions to practice / 完成以下问题来练习
             </div>
-            ${topic.examples.map((example, index) => `
-              <div class="example-item" id="example-item-${topicId}-${index}" data-attempts="0" data-correct="false">
-                <div class="example-question">${index + 1}. ${example.question}</div>
-                ${example.questionEn ? `<div class="example-question-en">${example.questionEn}</div>` : ''}
-                ${example.type === 'choice' ? `
-                  <div class="example-options" id="options-${topicId}-${index}">
-                    ${example.options.map((option, optIndex) => `
-                      <button class="example-option" onclick="checkAnswer('${topicId}', ${index}, ${optIndex}, ${example.correctAnswer}, event, \`${(example.hint || 'Think about the concept and try again / 想想这个概念，再试一次').replace(/`/g, '\\`')}\`)">
-                        ${String.fromCharCode(65 + optIndex)}. ${option}
-                      </button>
-                    `).join('')}
-                  </div>
-                ` : `
-                  <div class="example-input-container">
-                    <input type="text" class="example-input" id="input-${topicId}-${index}" placeholder="输入答案 / Enter answer">
-                    <button class="example-check-btn" onclick="checkInputAnswer('${topicId}', ${index}, '${example.correctAnswer}', ${JSON.stringify(example.answers || []).replace(/"/g, '&quot;')}, event, \`${(example.hint || 'Check your calculation and try again / 检查你的计算，再试一次').replace(/`/g, '\\`')}\`)">检查 / Check</button>
-                  </div>
-                `}
-                <div class="example-feedback" id="feedback-${topicId}-${index}"></div>
-              </div>
-            `).join('')}
+            <div id="examplesContainer-${topicId}">
+              ${generateExamplesHTML(topicId, topic.examples)}
+            </div>
           </div>
         `;
+      }
+
+      // Dynamic examples section (if any)
+      if (topic.dynamicExamples && topic.dynamicExamples.length > 0) {
+        // Generate dynamic questions
+        const generatedQuestions = topic.dynamicExamples.map(template =>
+          window.QuestionGenerator.generateChoiceQuestion(template)
+        );
+
+        window.currentTopicExamples = window.currentTopicExamples || {};
+        window.currentTopicExamples[topicId] = (window.currentTopicExamples[topicId] || []).concat(generatedQuestions);
+        window.currentDynamicTemplates = window.currentDynamicTemplates || {};
+        window.currentDynamicTemplates[topicId] = topic.dynamicExamples;
+
+        if (!content.includes('examples-section')) {
+          content += `
+            <div class="examples-section">
+              <h3><span class="icon">✎</span> Interactive Examples / 互动练习</h3>
+              <div class="example-progress" id="exampleProgress-${topicId}">
+                Answer the questions to practice / 完成以下问题来练习
+              </div>
+              <div id="examplesContainer-${topicId}">
+                ${generateExamplesHTML(topicId, generatedQuestions)}
+              </div>
+            </div>
+          `;
+        } else {
+          // Append to existing section
+          const existingHTML = generateExamplesHTML(topicId, generatedQuestions,
+            (window.currentTopicExamples[topicId] || []).length);
+          content = content.replace(
+            `</div>\n          </div>\n        `,
+            existingHTML + `</div>\n          </div>\n        `
+          );
+        }
       }
 
       // Khan Academy resources
@@ -1696,10 +1922,17 @@
     // Check if all examples are answered correctly and mark topic as complete
     async function checkTopicCompletion(topicId) {
       const exampleItems = document.querySelectorAll(`[id^="example-item-${topicId}"]`);
-      const correct = document.querySelectorAll(`[id^="example-item-${topicId}"].answered:not(.wrong)`);
 
-      // Check if all examples exist, are answered, and all are correct
-      if (exampleItems.length > 0 && correct.length === exampleItems.length) {
+      // Count correct answers using data-correct attribute
+      let correctCount = 0;
+      exampleItems.forEach(item => {
+        if (item.dataset.correct === 'true') {
+          correctCount++;
+        }
+      });
+
+      // Check if all examples are answered correctly
+      if (exampleItems.length > 0 && correctCount === exampleItems.length) {
         // All examples answered correctly!
         if (!isCompleted(topicId)) {
           await markTopicComplete(topicId);
