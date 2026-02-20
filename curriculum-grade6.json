@@ -1150,6 +1150,13 @@
           "id": "g6-mean-median-mode",
           "title": "Mean, Median, Mode, Range / 平均数、中位数、众数、极差",
           "description": "计算和理解数据的中心趋势",
+          "examples": [
+            {"question": "数据集 2, 4, 6, 8, 10 的平均数是多少？", "questionEn": "What's the mean of 2, 4, 6, 8, 10?", "type": "choice", "options": ["4", "5", "6", "7"], "correctAnswer": 2},
+            {"question": "数据集 3, 7, 5, 9, 1 的中位数是多少？", "questionEn": "What's the median of 3, 7, 5, 9, 1?", "type": "choice", "options": ["3", "5", "7", "9"], "correctAnswer": 1},
+            {"question": "数据集 2, 3, 3, 4, 5 的众数是多少？", "questionEn": "What's the mode of 2, 3, 3, 4, 5?", "type": "choice", "options": ["2", "3", "4", "5"], "correctAnswer": 1},
+            {"question": "数据集 4, 8, 6, 2, 10 的极差是多少？", "questionEn": "What's the range of 4, 8, 6, 2, 10?", "type": "choice", "options": ["6", "7", "8", "10"], "correctAnswer": 2},
+            {"question": "哪个是\"平均值\"的另一个叫法？", "questionEn": "What's another name for \"average\"?", "type": "choice", "options": ["中位数 / Median", "众数 / Mode", "平均数 / Mean", "极差 / Range"], "correctAnswer": 2}
+          ],
           "khanAcademy": [
             {
               "title": "Mean, median, mode",
@@ -1175,6 +1182,13 @@
           "id": "g6-box-plots",
           "title": "Box Plots / 箱线图",
           "description": "创建和解读箱线图",
+          "examples": [
+            {"question": "箱线图中的\"箱子\"表示什么？", "questionEn": "What does the \"box\" in a box plot represent?", "type": "choice", "options": ["最小值和最大值 / Min and max", "中位数 / Median only", "四分位数范围 / Interquartile range", "平均值 / Mean"], "correctAnswer": 2},
+            {"question": "箱线图中的中线表示什么？", "questionEn": "What does the middle line in a box plot show?", "type": "choice", "options": ["平均数 / Mean", "中位数 / Median", "众数 / Mode", "极差 / Range"], "correctAnswer": 1},
+            {"question": "箱线图的\"须\"延伸到？", "questionEn": "Box plot \"whiskers\" extend to?", "type": "choice", "options": ["只有中位数 / Median only", "最小和最大值 / Min and max values", "只有平均值 / Mean only", "四分位数 / Quartiles only"], "correctAnswer": 1},
+            {"question": "箱线图显示数据的哪些部分？", "questionEn": "What parts of data does a box plot show?", "type": "choice", "options": ["只有平均值 / Mean only", "四分位数和中位数 / Quartiles and median", "只有众数 / Mode only", "只有极差 / Range only"], "correctAnswer": 1},
+            {"question": "如果一个箱线图的中位数在箱子的中间，说明数据？", "questionEn": "If median is center of box, data is?", "type": "choice", "options": ["偏向左边 / Skewed left", "偏向右边 / Skewed right", "对称 / Symmetric", "无法判断 / Can't tell"], "correctAnswer": 2}
+          ],
           "khanAcademy": [
             {
               "title": "Box plots",
@@ -1200,6 +1214,13 @@
           "id": "g6-histograms",
           "title": "Histograms / 直方图",
           "description": "创建和解读直方图",
+          "examples": [
+            {"question": "直方图用来显示什么？", "questionEn": "What does a histogram show?", "type": "choice", "options": ["分类数据 / Categorical data", "数据的分布 / Data distribution", "只显示平均值 / Mean only", "只显示中位数 / Median only"], "correctAnswer": 1},
+            {"question": "直方图的柱子之间有间隙吗？", "questionEn": "Do histogram bars have gaps?", "type": "choice", "options": ["有 / Yes", "没有 / No", "有时候有 / Sometimes", "取决于数据 / Depends on data"], "correctAnswer": 1},
+            {"question": "直方图的柱子高度代表什么？", "questionEn": "What does bar height in histogram represent?", "type": "choice", "options": ["数据类别 / Data categories", "频数（数量） / Frequency (count)", "平均值 / Mean", "百分比 / Percentage"], "correctAnswer": 1},
+            {"question": "直方图和条形图的主要区别是什么？", "questionEn": "Main difference between histogram and bar graph?", "type": "choice", "options": ["颜色不同 / Different colors", "直方图用于数值数据 / Histogram for numerical data", "大小不同 / Different sizes", "文字不同 / Different labels"], "correctAnswer": 1},
+            {"question": "如果直方图中一个柱子高度为 5，表示什么？", "questionEn": "If histogram bar height is 5, what does it mean?", "type": "choice", "options": ["5 类别 / 5 categories", "5 个数据点 / 5 data points", "平均值是 5 / Mean is 5", "中位数是 5 / Median is 5"], "correctAnswer": 1}
+          ],
           "khanAcademy": [
             {
               "title": "Histograms",
@@ -1232,6 +1253,13 @@
           "id": "g6-simple-interest",
           "title": "Simple Interest / 单利",
           "description": "理解和计算单利",
+          "examples": [
+            {"question": "如果你存 $100，利率 5%，1 年后单利是多少？", "questionEn": "Save $100 at 5% for 1 year. Simple interest?", "type": "choice", "options": ["$3", "$4", "$5", "$10"], "correctAnswer": 2},
+            {"question": "单利公式中，I = P × R × T，T 代表什么？", "questionEn": "In I = P × R × T, what does T represent?", "type": "choice", "options": ["本金 / Principal", "利率 / Rate", "时间 / Time", "利息 / Interest"], "correctAnswer": 2},
+            {"question": "本金 $200，利率 4%，2 年单利是多少？", "questionEn": "Principal $200, rate 4%, 2 years. Simple interest?", "type": "choice", "options": ["$8", "$12", "$16", "$24"], "correctAnswer": 2},
+            {"question": "如果你借 $500，利率 6%，1 年要还多少利息？", "questionEn": "Borrow $500 at 6% for 1 year. Interest owed?", "type": "choice", "options": ["$20", "$25", "$30", "$35"], "correctAnswer": 2},
+            {"question": "哪个因素不影响单利计算？", "questionEn": "What doesn't affect simple interest calculation?", "type": "choice", "options": ["本金 / Principal", "利率 / Rate", "时间 / Time", "银行名称 / Bank name"], "correctAnswer": 3}
+          ],
           "khanAcademy": [
             {
               "title": "Introduction to interest",
@@ -1252,6 +1280,13 @@
           "id": "g6-budgeting",
           "title": "Budgeting and Saving / 预算和储蓄",
           "description": "创建预算和储蓄计划",
+          "examples": [
+            {"question": "如果你每周赚 $50，花 $35，可以存多少？", "questionEn": "Earn $50/week, spend $35. How much can you save?", "type": "choice", "options": ["$10", "$15", "$20", "$25"], "correctAnswer": 1},
+            {"question": "预算的主要目的是什么？", "questionEn": "Main purpose of a budget is?", "type": "choice", "options": ["花更多钱 / Spend more", "计划收入和支出 / Plan income and expenses", "不工作 / Not work", "借钱 / Borrow money"], "correctAnswer": 1},
+            {"question": "如果你每月收入 $200，应该花多少？", "questionEn": "If monthly income is $200, how much should you spend?", "type": "choice", "options": ["全部 $200 / All $200", "多于 $200 / More than $200", "少于 $200 / Less than $200", "$0"], "correctAnswer": 2},
+            {"question": "\"需要\"和\"想要\"的区别是什么？", "questionEn": "Difference between \"needs\" and \"wants\"?", "type": "choice", "options": ["没有区别 / No difference", "需要是必需的，想要是可选的 / Needs essential, wants optional", "想要更重要 / Wants more important", "需要更便宜 / Needs cheaper"], "correctAnswer": 1},
+            {"question": "储蓄率 20% 意味着什么？", "questionEn": "Saving rate 20% means?", "type": "choice", "options": ["花 20% / Spend 20%", "存 20% / Save 20%", "花 80% / Spend 80%", "存 80% / Save 80%"], "correctAnswer": 1}
+          ],
           "khanAcademy": [],
           "youtube": [
             {
