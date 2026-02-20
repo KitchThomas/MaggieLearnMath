@@ -1659,10 +1659,35 @@
       let content = '';
 
       // Examples section - show first, before resources
-      if (topic.examples && topic.examples.length > 0) {
-        // Store examples for regeneration
+      const hasStaticExamples = topic.examples && topic.examples.length > 0;
+      const hasDynamicExamples = topic.dynamicExamples && topic.dynamicExamples.length > 0;
+
+      if (hasStaticExamples || hasDynamicExamples) {
+        // Store examples for this topic
         window.currentTopicExamples = window.currentTopicExamples || {};
-        window.currentTopicExamples[topicId] = JSON.parse(JSON.stringify(topic.examples));
+        window.currentTopicExamples[topicId] = [];
+
+        // Add static examples
+        if (hasStaticExamples) {
+          topic.examples.forEach(ex => {
+            window.currentTopicExamples[topicId].push(JSON.parse(JSON.stringify(ex)));
+          });
+        }
+
+        // Add dynamic examples
+        if (hasDynamicExamples) {
+          window.currentDynamicTemplates = window.currentDynamicTemplates || {};
+          window.currentDynamicTemplates[topicId] = topic.dynamicExamples;
+
+          topic.dynamicExamples.forEach((template, idx) => {
+            const question = window.QuestionGenerator.generateChoiceQuestion(template);
+            question.templateIndex = idx;
+            window.currentTopicExamples[topicId].push(question);
+          });
+        }
+
+        console.log('Topic opened:', topicId, 'with', window.currentTopicExamples[topicId].length, 'questions');
+        console.log('Dynamic templates:', window.currentDynamicTemplates[topicId]?.length || 0);
 
         content += `
           <div class="examples-section">
@@ -1671,47 +1696,10 @@
               Answer the questions to practice / 完成以下问题来练习
             </div>
             <div id="examplesContainer-${topicId}">
-              ${generateExamplesHTML(topicId, topic.examples)}
+              ${generateExamplesHTML(topicId, window.currentTopicExamples[topicId])}
             </div>
           </div>
         `;
-      }
-
-      // Dynamic examples section (if any)
-      if (topic.dynamicExamples && topic.dynamicExamples.length > 0) {
-        // Generate dynamic questions and add templateIndex
-        const generatedQuestions = topic.dynamicExamples.map((template, idx) => {
-          const question = window.QuestionGenerator.generateChoiceQuestion(template);
-          question.templateIndex = idx;  // Store template index for regeneration
-          return question;
-        });
-
-        window.currentTopicExamples = window.currentTopicExamples || {};
-        window.currentTopicExamples[topicId] = (window.currentTopicExamples[topicId] || []).concat(generatedQuestions);
-        window.currentDynamicTemplates = window.currentDynamicTemplates || {};
-        window.currentDynamicTemplates[topicId] = topic.dynamicExamples;
-
-        if (!content.includes('examples-section')) {
-          content += `
-            <div class="examples-section">
-              <h3><span class="icon">✎</span> Interactive Examples / 互动练习</h3>
-              <div class="example-progress" id="exampleProgress-${topicId}">
-                Answer the questions to practice / 完成以下问题来练习
-              </div>
-              <div id="examplesContainer-${topicId}">
-                ${generateExamplesHTML(topicId, generatedQuestions)}
-              </div>
-            </div>
-          `;
-        } else {
-          // Append to existing section
-          const existingHTML = generateExamplesHTML(topicId, generatedQuestions,
-            (window.currentTopicExamples[topicId] || []).length);
-          content = content.replace(
-            `</div>\n          </div>\n        `,
-            existingHTML + `</div>\n          </div>\n        `
-          );
-        }
       }
 
       // Khan Academy resources
@@ -1803,32 +1791,43 @@
         updateExampleProgress(topicId);
         checkTopicCompletion(topicId);
       } else {
-        // Wrong answer - show hint and add a new practice question at the end
+        // Wrong answer
         const selectedOption = options[selectedAnswer];
         selectedOption.classList.add('incorrect');
 
-        // Disable this question (it's wrong, need to try a similar one)
-        options.forEach(opt => opt.classList.add('disabled'));
+        // Check if this is a dynamic question (can add new practice questions)
+        const isDynamic = templateIndex !== null && templateIndex !== undefined && window.currentDynamicTemplates && window.currentDynamicTemplates[topicId];
 
-        // Show hint
-        feedback.className = 'example-feedback show incorrect';
-        feedback.innerHTML = `✗ Not quite. / 不太对。<br><strong>💡 Hint / 提示:</strong> ${hint}<br><small>A similar question has been added at the end / 已在末尾添加相似题目</small>`;
+        if (isDynamic) {
+          // Dynamic question - disable it and add a new one
+          options.forEach(opt => opt.classList.add('disabled'));
 
-        // Add shake animation
-        exampleItem.style.animation = 'none';
-        setTimeout(() => {
-          exampleItem.style.animation = 'shake 0.5s ease';
-        }, 10);
+          // Show hint (if meaningful) and message about new question
+          feedback.className = 'example-feedback show incorrect';
+          const hasMeaningfulHint = hint && !hint.includes('Think about the concept and try again');
+          if (hasMeaningfulHint) {
+            feedback.innerHTML = `✗ Not quite. / 不太对。<br><strong>💡 Hint / 提示:</strong> ${hint}<br><small>A new question has been added below 👇</small>`;
+          } else {
+            feedback.innerHTML = `✗ Not quite. / 不太对。<br><small>A new question has been added below 👇</small>`;
+          }
 
-        // For dynamic questions, add a new similar question at the end
-        if (templateIndex !== null && templateIndex !== undefined && window.currentDynamicTemplates && window.currentDynamicTemplates[topicId]) {
+          // Add new practice question
           addNewPracticeQuestion(topicId, templateIndex);
         } else {
-          // For static questions, just allow retry after a delay
+          // Static question - just shake and allow retry
+          feedback.className = 'example-feedback show incorrect';
+          feedback.innerHTML = `✗ Not quite. Try again! / 不太对，再试一次！`;
+
+          // Add shake animation
+          exampleItem.style.animation = 'none';
           setTimeout(() => {
-            options.forEach(opt => opt.classList.remove('disabled'));
+            exampleItem.style.animation = 'shake 0.5s ease';
+          }, 10);
+
+          // Allow retry after delay
+          setTimeout(() => {
             selectedOption.classList.remove('incorrect');
-          }, 2000);
+          }, 1000);
         }
 
         updateExampleProgress(topicId);
@@ -1837,14 +1836,20 @@
 
     // Add a new practice question at the end (for wrong answers)
     function addNewPracticeQuestion(topicId, templateIndex) {
+      console.log('addNewPracticeQuestion called:', { topicId, templateIndex });
+
       if (!window.currentDynamicTemplates || !window.currentDynamicTemplates[topicId]) {
+        console.error('No dynamic templates found for topic:', topicId);
         return;
       }
 
       const template = window.currentDynamicTemplates[topicId][templateIndex];
+      console.log('Using template:', template);
+
       const newQuestion = window.QuestionGenerator.generateChoiceQuestion(template);
       newQuestion.templateIndex = templateIndex;
       newQuestion.isExtra = true; // Mark as extra practice question
+      console.log('Generated new question:', newQuestion);
 
       // Add to the examples array
       if (!window.currentTopicExamples) window.currentTopicExamples = {};
@@ -1853,38 +1858,42 @@
 
       // Get the container and add the new question HTML
       const container = document.getElementById(`examplesContainer-${topicId}`);
-      if (container) {
-        const newIndex = window.currentTopicExamples[topicId].length - 1;
-        const escapedHint = (newQuestion.hint || 'Think about the concept and try again').replace(/`/g, '\\`').replace(/"/g, '&quot;');
-
-        const newQuestionHTML = `
-          <div class="example-item" id="example-item-${topicId}-${newIndex}"
-               data-attempts="0" data-correct="false" data-is-extra="true"
-               data-template-index="${templateIndex}"
-               style="animation: fadeIn 0.5s ease; border-color: #667eea;">
-            <div class="example-question">🔄 ${newQuestion.question}</div>
-            ${newQuestion.questionEn ? `<div class="example-question-en">${newQuestion.questionEn}</div>` : ''}
-            <div class="example-options" id="options-${topicId}-${newIndex}">
-              ${newQuestion.options.map((option, optIndex) => `
-                <button class="example-option" onclick="checkAnswer('${topicId}', ${newIndex}, ${optIndex}, ${newQuestion.correctAnswer}, event, '${escapedHint}', ${templateIndex})">
-                  ${String.fromCharCode(65 + optIndex)}. ${option}
-                </button>
-              `).join('')}
-            </div>
-            <div class="example-feedback" id="feedback-${topicId}-${newIndex}"></div>
-          </div>
-        `;
-
-        container.insertAdjacentHTML('beforeend', newQuestionHTML);
-
-        // Scroll to the new question smoothly
-        setTimeout(() => {
-          const newElement = document.getElementById(`example-item-${topicId}-${newIndex}`);
-          if (newElement) {
-            newElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
-        }, 100);
+      if (!container) {
+        console.error('Container not found:', `examplesContainer-${topicId}`);
+        return;
       }
+
+      const newIndex = window.currentTopicExamples[topicId].length - 1;
+      const escapedHint = (newQuestion.hint || '').replace(/`/g, '\\`').replace(/"/g, '&quot;');
+
+      const newQuestionHTML = `
+        <div class="example-item" id="example-item-${topicId}-${newIndex}"
+             data-attempts="0" data-correct="false" data-is-extra="true"
+             style="animation: fadeIn 0.5s ease; border-color: #667eea;">
+          <div class="example-question">🔄 Practice: ${newQuestion.question}</div>
+          ${newQuestion.questionEn ? `<div class="example-question-en">${newQuestion.questionEn}</div>` : ''}
+          <div class="example-options" id="options-${topicId}-${newIndex}">
+            ${newQuestion.options.map((option, optIndex) => `
+              <button class="example-option" onclick="checkAnswer('${topicId}', ${newIndex}, ${optIndex}, ${newQuestion.correctAnswer}, event, '${escapedHint}', ${templateIndex})">
+                ${String.fromCharCode(65 + optIndex)}. ${option}
+              </button>
+            `).join('')}
+          </div>
+          <div class="example-feedback" id="feedback-${topicId}-${newIndex}"></div>
+        </div>
+      `;
+
+      container.insertAdjacentHTML('beforeend', newQuestionHTML);
+      console.log('New question added at index:', newIndex);
+
+      // Scroll to the new question smoothly
+      setTimeout(() => {
+        const newElement = document.getElementById(`example-item-${topicId}-${newIndex}`);
+        if (newElement) {
+          newElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          console.log('Scrolled to new question');
+        }
+      }, 100);
 
       // Update progress to show more questions
       updateExampleProgress(topicId);
