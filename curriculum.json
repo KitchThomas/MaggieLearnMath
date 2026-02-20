@@ -101,6 +101,32 @@
               "title": "Math-Drills - Place Value Worksheets (FREE)",
               "url": "https://www.math-drills.com/placevalue.php"
             }
+          ],
+          "dynamicExamples": [
+            {
+              "question": "{num1} 在数字 {num2} 中的位值是什么？",
+              "questionEn": "What is the place value of digit {num1} in the number {num2}?",
+              "hint": "数字 {num1} 在 {num2} 的位置决定它的位值",
+              "hintEn": "The position of digit {num1} in {num2} determines its place value",
+              "answer": "num1",
+              "variables": {
+                "num1": {
+                  "type": "integer",
+                  "min": 1,
+                  "max": 9
+                },
+                "num2": {
+                  "type": "integer",
+                  "min": 1000,
+                  "max": 99999
+                }
+              },
+              "wrongOptions": [
+                "num1 + 1",
+                "num1 - 1",
+                "num1 * 10"
+              ]
+            }
           ]
         },
         {
@@ -550,6 +576,34 @@
               "title": "Math-Drills - Multiplying Decimals (FREE)",
               "url": "https://www.math-drills.com/decimal/decimal_multiply.php"
             }
+          ],
+          "dynamicExamples": [
+            {
+              "question": "{dec1} + {dec2} = ?",
+              "questionEn": "{dec1} + {dec2} = ?",
+              "hint": "对齐小数点，然后相加",
+              "hintEn": "Line up the decimal points, then add",
+              "answer": "dec1 + dec2",
+              "variables": {
+                "dec1": {
+                  "type": "decimal",
+                  "min": 0.1,
+                  "max": 50,
+                  "decimals": 1
+                },
+                "dec2": {
+                  "type": "decimal",
+                  "min": 0.1,
+                  "max": 50,
+                  "decimals": 1
+                }
+              },
+              "wrongOptions": [
+                "dec1 + dec2 + 1",
+                "dec1 + dec2 - 0.1",
+                "dec1 + dec2 + 0.5"
+              ]
+            }
           ]
         },
         {
@@ -734,6 +788,43 @@
               "title": "Equivalent Fractions Song",
               "url": "https://www.youtube.com/watch?v=Bss4F1LZsTA",
               "channel": "Numberock"
+            }
+          ],
+          "dynamicExamples": [
+            {
+              "question": "比较 {num1}/{den1} 和 {num2}/{den2}，哪个更大？",
+              "questionEn": "Compare {num1}/{den1} and {num2}/{den2}. Which is larger?",
+              "hint": "找到公分母或交叉相乘来比较",
+              "hintEn": "Find common denominator or cross-multiply to compare",
+              "answer": "num1/den1 > num2/den2 ? num1/den1 : num2/den2",
+              "answerType": "expression",
+              "variables": {
+                "num1": {
+                  "type": "integer",
+                  "min": 1,
+                  "max": 9
+                },
+                "den1": {
+                  "type": "integer",
+                  "min": 2,
+                  "max": 12
+                },
+                "num2": {
+                  "type": "integer",
+                  "min": 1,
+                  "max": 9
+                },
+                "den2": {
+                  "type": "integer",
+                  "min": 2,
+                  "max": 12
+                }
+              },
+              "wrongOptions": [
+                "num1/den1 < num2/den2 ? num1/den1 : num2/den2",
+                "1/2",
+                "3/4"
+              ]
             }
           ]
         },

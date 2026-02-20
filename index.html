@@ -1766,7 +1766,7 @@
     }
 
     // Check answer for choice questions
-    function checkAnswer(topicId, exampleIndex, selectedAnswer, correctAnswer, event, hint) {
+    function checkAnswer(topicId, exampleIndex, selectedAnswer, correctAnswer, event, hint, templateIndex) {
       event.stopPropagation();
       const exampleItem = document.getElementById(`example-item-${topicId}-${exampleIndex}`);
       const options = exampleItem.querySelectorAll('.example-option');
@@ -1808,30 +1808,84 @@
         updateExampleProgress(topicId);
         checkTopicCompletion(topicId);
       } else {
-        // Wrong answer - show hint, mark the wrong choice, allow retry
+        // Wrong answer - for dynamic questions, regenerate after showing hint
         const selectedOption = options[selectedAnswer];
-
-        // Mark this attempt as wrong but allow retry
         selectedOption.classList.add('incorrect', 'attempted-wrong');
 
-        // Remove the incorrect class after a short delay so they can try again
-        setTimeout(() => {
-          selectedOption.classList.remove('incorrect');
-        }, 1500);
+        // Disable all options temporarily
+        options.forEach(opt => opt.classList.add('disabled'));
 
-        // Show hint instead of correct answer
+        // Show hint
         feedback.className = 'example-feedback show incorrect';
-        feedback.innerHTML = `✗ Not quite. / 不太对。<br><strong>💡 Hint / 提示:</strong> ${hint}`;
+        feedback.innerHTML = `✗ Not quite. / 不太对。<br><strong>💡 Hint / 提示:</strong> ${hint}<br><small>New question coming... / 正在生成新题...</small>`;
 
-        // Add shake animation to the example item
+        // Add shake animation
         exampleItem.style.animation = 'none';
         setTimeout(() => {
           exampleItem.style.animation = 'shake 0.5s ease';
         }, 10);
 
-        // Update progress (shows attempts)
+        // For dynamic questions, regenerate after delay
+        if (templateIndex !== null && templateIndex !== undefined && window.currentDynamicTemplates && window.currentDynamicTemplates[topicId]) {
+          setTimeout(() => {
+            regenerateQuestion(topicId, exampleIndex, templateIndex);
+          }, 2000); // Wait 2 seconds before regenerating
+        } else {
+          // For static questions, allow retry with same options
+          setTimeout(() => {
+            options.forEach(opt => opt.classList.remove('disabled'));
+            selectedOption.classList.remove('incorrect', 'attempted-wrong');
+          }, 1500);
+        }
+
         updateExampleProgress(topicId);
       }
+    }
+
+    // Regenerate a dynamic question (with new random values)
+    function regenerateQuestion(topicId, exampleIndex, templateIndex) {
+      if (!window.currentDynamicTemplates || !window.currentDynamicTemplates[topicId]) {
+        return;
+      }
+
+      const template = window.currentDynamicTemplates[topicId][templateIndex];
+      const newQuestion = window.QuestionGenerator.generateChoiceQuestion(template);
+
+      // Update the example item with new question
+      const exampleItem = document.getElementById(`example-item-${topicId}-${exampleIndex}`);
+
+      // Reset state
+      exampleItem.dataset.attempts = '0';
+      exampleItem.dataset.correct = 'false';
+
+      // Update question text
+      const questionEl = exampleItem.querySelector('.example-question');
+      const questionEnEl = exampleItem.querySelector('.example-question-en');
+      questionEl.textContent = `${exampleIndex + 1}. ${newQuestion.question}`;
+      if (questionEnEl) {
+        questionEnEl.textContent = newQuestion.questionEn;
+      }
+
+      // Update options
+      const optionsContainer = exampleItem.querySelector('.example-options');
+      const escapedHint = (newQuestion.hint || 'Think about the concept and try again').replace(/`/g, '\\`').replace(/"/g, '&quot;');
+      optionsContainer.innerHTML = newQuestion.options.map((option, optIndex) => `
+        <button class="example-option" onclick="checkAnswer('${topicId}', ${exampleIndex}, ${optIndex}, ${newQuestion.correctAnswer}, event, '${escapedHint}', ${templateIndex})">
+          ${String.fromCharCode(65 + optIndex)}. ${option}
+        </button>
+      `).join('');
+
+      // Update feedback
+      const feedback = document.getElementById(`feedback-${topicId}-${exampleIndex}`);
+      feedback.className = 'example-feedback';
+      feedback.innerHTML = '<span style="color: #667eea;">🔄 New question! Try again / 新题目！再试一次</span>';
+      setTimeout(() => {
+        feedback.className = 'example-feedback';
+        feedback.textContent = '';
+      }, 1500);
+
+      // Store new question data for answer checking
+      window.currentTopicExamples[topicId][exampleIndex] = newQuestion;
     }
 
     // Check answer for input questions

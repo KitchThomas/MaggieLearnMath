@@ -96,6 +96,27 @@
               "url": "https://www.youtube.com/watch?v=t8m3WgCwrPo",
               "channel": "Numberock"
             }
+          ],
+          "dynamicExamples": [
+            {
+              "question": "|{num}| = ?",
+              "questionEn": "|{num}| = ?",
+              "hint": "绝对值是一个数到0的距离，总是非负的",
+              "hintEn": "Absolute value is the distance from 0, always non-negative",
+              "answer": "num < 0 ? -num : num",
+              "variables": {
+                "num": {
+                  "type": "integer",
+                  "min": -20,
+                  "max": 20
+                }
+              },
+              "wrongOptions": [
+                "num",
+                "num + 1",
+                "num - 1"
+              ]
+            }
           ]
         },
         {
@@ -350,6 +371,32 @@
               "title": "Subtracting Integers",
               "url": "https://www.youtube.com/watch?v=iq_c3VXbEG4",
               "channel": "Math with Mr. J"
+            }
+          ],
+          "dynamicExamples": [
+            {
+              "question": "{num1} + ({num2}) = ?",
+              "questionEn": "{num1} + ({num2}) = ?",
+              "hint": "同号相加保持符号，异号相加取绝对值大的符号",
+              "hintEn": "Same signs add and keep sign, different signs subtract and take sign of larger absolute value",
+              "answer": "num1 + num2",
+              "variables": {
+                "num1": {
+                  "type": "integer",
+                  "min": -15,
+                  "max": 15
+                },
+                "num2": {
+                  "type": "integer",
+                  "min": -15,
+                  "max": 15
+                }
+              },
+              "wrongOptions": [
+                "num1 + num2 + 2",
+                "num1 + num2 - 2",
+                "num1 - num2"
+              ]
             }
           ]
         }
@@ -621,6 +668,42 @@
               "url": "https://www.youtube.com/watch?v=gcnk8TnzsLc",
               "channel": "Math with Mr. J"
             }
+          ],
+          "dynamicExamples": [
+            {
+              "question": "{num1}/{den1} × {num2}/{den2} = ?",
+              "questionEn": "{num1}/{den1} × {num2}/{den2} = ?",
+              "hint": "分子相乘，分母相乘",
+              "hintEn": "Multiply numerators together and denominators together",
+              "answer": "(num1 * num2) / (den1 * den2)",
+              "variables": {
+                "num1": {
+                  "type": "integer",
+                  "min": 1,
+                  "max": 8
+                },
+                "den1": {
+                  "type": "integer",
+                  "min": 2,
+                  "max": 9
+                },
+                "num2": {
+                  "type": "integer",
+                  "min": 1,
+                  "max": 8
+                },
+                "den2": {
+                  "type": "integer",
+                  "min": 2,
+                  "max": 9
+                }
+              },
+              "wrongOptions": [
+                "(num1 + num2) / (den1 + den2)",
+                "(num1 * num2) / (den1 * den2) + 1/10",
+                "(num1 * den2) / (den1 * num2)"
+              ]
+            }
           ]
         }
       ]
@@ -717,6 +800,29 @@
               "title": "Ratios Song",
               "url": "https://www.youtube.com/watch?v=RQ2nYUBVvqI",
               "channel": "Numberock"
+            }
+          ],
+          "dynamicExamples": [
+            {
+              "question": "如果一个比例是 {num1}:{num2}，化简后的比例是什么？",
+              "questionEn": "If a ratio is {num1}:{num2}, what is the simplified ratio?",
+              "hint": "找到两个数的最大公约数，然后同时除以它",
+              "hintEn": "Find the GCD of both numbers and divide by it",
+              "answer": "num1/gcd : num2/gcd",
+              "answerFormat": "ratio",
+              "variables": {
+                "num1": {
+                  "type": "integer",
+                  "min": 2,
+                  "max": 20
+                },
+                "num2": {
+                  "type": "integer",
+                  "min": 2,
+                  "max": 20
+                }
+              },
+              "wrongOptions": []
             }
           ]
         },
