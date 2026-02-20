@@ -1670,10 +1670,12 @@
 
       // Dynamic examples section (if any)
       if (topic.dynamicExamples && topic.dynamicExamples.length > 0) {
-        // Generate dynamic questions
-        const generatedQuestions = topic.dynamicExamples.map(template =>
-          window.QuestionGenerator.generateChoiceQuestion(template)
-        );
+        // Generate dynamic questions and add templateIndex
+        const generatedQuestions = topic.dynamicExamples.map((template, idx) => {
+          const question = window.QuestionGenerator.generateChoiceQuestion(template);
+          question.templateIndex = idx;  // Store template index for regeneration
+          return question;
+        });
 
         window.currentTopicExamples = window.currentTopicExamples || {};
         window.currentTopicExamples[topicId] = (window.currentTopicExamples[topicId] || []).concat(generatedQuestions);
@@ -1730,22 +1732,6 @@
                 <li class="resource-item">
                   <a href="${resource.url}" target="_blank">${resource.title}</a>
                   <span class="channel">${resource.channel}</span>
-                </li>
-              `).join('')}
-            </ul>
-          </div>
-        `;
-      }
-
-      // Practice resources
-      if (topic.practice && topic.practice.length > 0) {
-        content += `
-          <div class="resource-section">
-            <h3><span class="icon practice-icon">✎</span> Practice / 练习</h3>
-            <ul class="resource-list">
-              ${topic.practice.map(resource => `
-                <li class="resource-item">
-                  <a href="${resource.url}" target="_blank">${resource.title}</a>
                 </li>
               `).join('')}
             </ul>

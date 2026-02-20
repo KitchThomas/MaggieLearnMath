@@ -96,12 +96,6 @@
               "channel": "Math with Mr. J"
             }
           ],
-          "practice": [
-            {
-              "title": "Math-Drills - Place Value Worksheets (FREE)",
-              "url": "https://www.math-drills.com/placevalue.php"
-            }
-          ],
           "dynamicExamples": [
             {
               "question": "{num1} 在数字 {num2} 中的位值是什么？",
@@ -289,12 +283,6 @@
               "url": "https://www.youtube.com/watch?v=UP7YmXJc7Ik",
               "channel": "Numberock"
             }
-          ],
-          "practice": [
-            {
-              "title": "Math-Drills - Rounding Worksheets (FREE)",
-              "url": "https://www.math-drills.com/numbersense/rounding_numbers_various_powers_001.php"
-            }
           ]
         }
       ]
@@ -391,12 +379,6 @@
               "title": "Decimal Place Value Song",
               "url": "https://www.youtube.com/watch?v=dXh8MX-fJRo",
               "channel": "Numberock"
-            }
-          ],
-          "practice": [
-            {
-              "title": "Math-Drills - Decimal Worksheets (FREE)",
-              "url": "https://www.math-drills.com/decimal.php"
             }
           ]
         },
@@ -571,12 +553,6 @@
               "channel": "Math with Mr. J"
             }
           ],
-          "practice": [
-            {
-              "title": "Math-Drills - Multiplying Decimals (FREE)",
-              "url": "https://www.math-drills.com/decimal/decimal_multiply.php"
-            }
-          ],
           "dynamicExamples": [
             {
               "question": "{dec1} + {dec2} = ?",
@@ -684,12 +660,6 @@
               "title": "Dividing Decimals",
               "url": "https://www.youtube.com/watch?v=wOUkBkLPCGI",
               "channel": "Math with Mr. J"
-            }
-          ],
-          "practice": [
-            {
-              "title": "Math-Drills - Dividing Decimals (FREE)",
-              "url": "https://www.math-drills.com/decimal/decimal_divide.php"
             }
           ]
         }
@@ -903,12 +873,6 @@
               "url": "https://www.youtube.com/watch?v=UA0MjzKmwhg",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": [
-            {
-              "title": "Math-Drills - Comparing Fractions (FREE)",
-              "url": "https://www.math-drills.com/fractions/fractions_comparing_visual_001.php"
-            }
           ]
         },
         {
@@ -1000,12 +964,6 @@
               "url": "https://www.youtube.com/watch?v=BvHkjxcPOOI",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": [
-            {
-              "title": "Math-Drills - Adding Fractions (FREE)",
-              "url": "https://www.math-drills.com/fractions/fractions_adding_unlike_denominators_001.php"
-            }
           ]
         },
         {
@@ -1087,12 +1045,6 @@
               "url": "https://www.youtube.com/watch?v=bX95hmVmDjY",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": [
-            {
-              "title": "Math-Drills - Multiplying Fractions (FREE)",
-              "url": "https://www.math-drills.com/fractions/fractions_multiply_proper_001.php"
-            }
           ]
         },
         {
@@ -1173,12 +1125,6 @@
               "title": "Dividing Fractions",
               "url": "https://www.youtube.com/watch?v=5juto2ze8Lg",
               "channel": "Math with Mr. J"
-            }
-          ],
-          "practice": [
-            {
-              "title": "Math-Drills - Dividing Fractions (FREE)",
-              "url": "https://www.math-drills.com/fractions/fractions_divide_proper_001.php"
             }
           ]
         }
@@ -1273,16 +1219,6 @@
               "url": "https://www.youtube.com/watch?v=6pSAT7X1SOs",
               "channel": "Numberock"
             }
-          ],
-          "practice": [
-            {
-              "title": "Math-Drills - Long Multiplication (FREE)",
-              "url": "https://www.math-drills.com/multiplication/multiplication_long_nohint_0202_001.php"
-            },
-            {
-              "title": "Multiplication.com - Games (FREE)",
-              "url": "https://www.multiplication.com/games/all-games"
-            }
           ]
         },
         {
@@ -1368,12 +1304,6 @@
               "title": "Long Division - Easy Method",
               "url": "https://www.youtube.com/watch?v=LGqBQrUYua4",
               "channel": "Math with Mr. J"
-            }
-          ],
-          "practice": [
-            {
-              "title": "Math-Drills - Long Division (FREE)",
-              "url": "https://www.math-drills.com/division/division_long_0402_001.php"
             }
           ]
         },
@@ -2140,12 +2070,6 @@
               "url": "https://www.youtube.com/watch?v=AAY1bpsiaps",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": [
-            {
-              "title": "Math-Drills - Perimeter Worksheets (FREE)",
-              "url": "https://www.math-drills.com/measurement/perimeter_rectangle_001.php"
-            }
           ]
         },
         {
@@ -2231,12 +2155,6 @@
               "title": "How to Find Area",
               "url": "https://www.youtube.com/watch?v=_uKKl8R1xBM",
               "channel": "Math with Mr. J"
-            }
-          ],
-          "practice": [
-            {
-              "title": "Math-Drills - Area Worksheets (FREE)",
-              "url": "https://www.math-drills.com/measurement/area_rectangle_001.php"
             }
           ]
         },
@@ -2404,12 +2322,6 @@
               "title": "Metric System Conversions",
               "url": "https://www.youtube.com/watch?v=O0pDVbKb5rs",
               "channel": "Math with Mr. J"
-            }
-          ],
-          "practice": [
-            {
-              "title": "Math-Drills - Metric Conversion (FREE)",
-              "url": "https://www.math-drills.com/measurement/measurement_metric_conversion_length_001.php"
             }
           ]
         }
@@ -2749,12 +2661,6 @@
               "url": "https://www.youtube.com/watch?v=WlbGTsX2BPM",
               "channel": "Math with Mr. J"
             }
-          ],
-          "practice": [
-            {
-              "title": "ABCya - Counting Money (FREE)",
-              "url": "https://www.abcya.com/games/counting_money"
-            }
           ]
         },
         {
@@ -2829,12 +2735,6 @@
               "title": "Budgeting for Kids",
               "url": "https://www.youtube.com/watch?v=YyOfIj7nWcU",
               "channel": "FunKidsTV"
-            }
-          ],
-          "practice": [
-            {
-              "title": "Practical Money Skills - Games (FREE)",
-              "url": "https://www.practicalmoneyskills.com/play"
             }
           ]
         }
