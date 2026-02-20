@@ -890,6 +890,12 @@
       50% { opacity: 0.8; }
     }
 
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+
     /* Grade 6 theme */
     body.grade6-theme {
       background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
@@ -1447,13 +1453,13 @@
               Answer the questions to practice / 完成以下问题来练习
             </div>
             ${topic.examples.map((example, index) => `
-              <div class="example-item" id="example-item-${topicId}-${index}">
+              <div class="example-item" id="example-item-${topicId}-${index}" data-attempts="0" data-correct="false">
                 <div class="example-question">${index + 1}. ${example.question}</div>
                 ${example.questionEn ? `<div class="example-question-en">${example.questionEn}</div>` : ''}
                 ${example.type === 'choice' ? `
-                  <div class="example-options">
+                  <div class="example-options" id="options-${topicId}-${index}">
                     ${example.options.map((option, optIndex) => `
-                      <button class="example-option" onclick="checkAnswer('${topicId}', ${index}, ${optIndex}, ${example.correctAnswer}, event)">
+                      <button class="example-option" onclick="checkAnswer('${topicId}', ${index}, ${optIndex}, ${example.correctAnswer}, event, \`${(example.hint || 'Think about the concept and try again / 想想这个概念，再试一次').replace(/`/g, '\\`')}\`)">
                         ${String.fromCharCode(65 + optIndex)}. ${option}
                       </button>
                     `).join('')}
@@ -1461,7 +1467,7 @@
                 ` : `
                   <div class="example-input-container">
                     <input type="text" class="example-input" id="input-${topicId}-${index}" placeholder="输入答案 / Enter answer">
-                    <button class="example-check-btn" onclick="checkInputAnswer('${topicId}', ${index}, '${example.correctAnswer}', ${JSON.stringify(example.answers || []).replace(/"/g, '&quot;')}, event)">检查 / Check</button>
+                    <button class="example-check-btn" onclick="checkInputAnswer('${topicId}', ${index}, '${example.correctAnswer}', ${JSON.stringify(example.answers || []).replace(/"/g, '&quot;')}, event, \`${(example.hint || 'Check your calculation and try again / 检查你的计算，再试一次').replace(/`/g, '\\`')}\`)">检查 / Check</button>
                   </div>
                 `}
                 <div class="example-feedback" id="feedback-${topicId}-${index}"></div>
@@ -1534,84 +1540,153 @@
     }
 
     // Check answer for choice questions
-    function checkAnswer(topicId, exampleIndex, selectedAnswer, correctAnswer, event) {
+    function checkAnswer(topicId, exampleIndex, selectedAnswer, correctAnswer, event, hint) {
       event.stopPropagation();
       const exampleItem = document.getElementById(`example-item-${topicId}-${exampleIndex}`);
       const options = exampleItem.querySelectorAll('.example-option');
       const feedback = document.getElementById(`feedback-${topicId}-${exampleIndex}`);
 
-      // Disable all options
-      options.forEach((opt, idx) => {
-        opt.classList.add('disabled');
-        if (idx === correctAnswer) {
-          opt.classList.add('correct');
-        } else if (idx === selectedAnswer && selectedAnswer !== correctAnswer) {
-          opt.classList.add('incorrect');
-        }
-      });
-
-      // Show feedback
-      feedback.className = 'example-feedback show ' + (selectedAnswer === correctAnswer ? 'correct' : 'incorrect');
-      feedback.textContent = selectedAnswer === correctAnswer
-        ? '✓ Correct! / 答对了！'
-        : `✗ Incorrect. 正确答案是: ${String.fromCharCode(65 + correctAnswer)}`;
-
-      // Update item style
-      exampleItem.classList.add('answered');
-      if (selectedAnswer !== correctAnswer) {
-        exampleItem.classList.add('wrong');
+      // Check if already answered correctly
+      if (exampleItem.dataset.correct === 'true') {
+        return; // Already correct, don't allow changes
       }
 
-      // Update progress and check if all correct
-      updateExampleProgress(topicId);
-      checkTopicCompletion(topicId);
+      // Get current attempts
+      let attempts = parseInt(exampleItem.dataset.attempts || 0);
+      attempts++;
+      exampleItem.dataset.attempts = attempts;
+
+      if (selectedAnswer === correctAnswer) {
+        // Correct answer!
+        exampleItem.dataset.correct = 'true';
+        exampleItem.classList.add('answered');
+        exampleItem.classList.remove('wrong');
+
+        // Show correct styling for selected option
+        options.forEach((opt, idx) => {
+          opt.classList.add('disabled');
+          if (idx === correctAnswer) {
+            opt.classList.add('correct');
+          }
+        });
+
+        // Show success message
+        feedback.className = 'example-feedback show correct';
+        if (attempts > 1) {
+          feedback.innerHTML = `✓ Correct! Got it in ${attempts} attempts! / 答对了！用了 ${attempts} 次尝试！`;
+        } else {
+          feedback.innerHTML = `✓ Perfect! First try! / 完美！一次就对！`;
+        }
+
+        // Update progress and check if all correct
+        updateExampleProgress(topicId);
+        checkTopicCompletion(topicId);
+      } else {
+        // Wrong answer - show hint, mark the wrong choice, allow retry
+        const selectedOption = options[selectedAnswer];
+
+        // Mark this attempt as wrong but allow retry
+        selectedOption.classList.add('incorrect', 'attempted-wrong');
+
+        // Remove the incorrect class after a short delay so they can try again
+        setTimeout(() => {
+          selectedOption.classList.remove('incorrect');
+        }, 1500);
+
+        // Show hint instead of correct answer
+        feedback.className = 'example-feedback show incorrect';
+        feedback.innerHTML = `✗ Not quite. / 不太对。<br><strong>💡 Hint / 提示:</strong> ${hint}`;
+
+        // Add shake animation to the example item
+        exampleItem.style.animation = 'none';
+        setTimeout(() => {
+          exampleItem.style.animation = 'shake 0.5s ease';
+        }, 10);
+
+        // Update progress (shows attempts)
+        updateExampleProgress(topicId);
+      }
     }
 
     // Check answer for input questions
-    function checkInputAnswer(topicId, exampleIndex, correctAnswer, alternativeAnswers, event) {
+    function checkInputAnswer(topicId, exampleIndex, correctAnswer, alternativeAnswers, event, hint) {
       event.stopPropagation();
       const input = document.getElementById(`input-${topicId}-${exampleIndex}`);
       const feedback = document.getElementById(`feedback-${topicId}-${exampleIndex}`);
       const exampleItem = document.getElementById(`example-item-${topicId}-${exampleIndex}`);
       const userAnswer = input.value.trim().replace(/[,\s]/g, '');
 
+      // Check if already answered correctly
+      if (exampleItem.dataset.correct === 'true') {
+        return; // Already correct, don't allow changes
+      }
+
+      // Get current attempts
+      let attempts = parseInt(exampleItem.dataset.attempts || 0);
+      attempts++;
+      exampleItem.dataset.attempts = attempts;
+
       const isCorrect = userAnswer === correctAnswer.replace(/[,\s]/g, '') ||
                        (alternativeAnswers && alternativeAnswers.includes(userAnswer));
 
-      feedback.className = 'example-feedback show ' + (isCorrect ? 'correct' : 'incorrect');
-      feedback.textContent = isCorrect
-        ? '✓ Correct! / 答对了！'
-        : `✗ Incorrect. 正确答案是: ${correctAnswer}`;
+      if (isCorrect) {
+        // Correct answer!
+        exampleItem.dataset.correct = 'true';
+        exampleItem.classList.add('answered');
+        exampleItem.classList.remove('wrong');
+        input.disabled = true;
 
-      exampleItem.classList.add('answered');
-      if (!isCorrect) {
+        feedback.className = 'example-feedback show correct';
+        if (attempts > 1) {
+          feedback.innerHTML = `✓ Correct! Got it in ${attempts} attempts! / 答对了！用了 ${attempts} 次尝试！`;
+        } else {
+          feedback.innerHTML = `✓ Perfect! First try! / 完美！一次就对！`;
+        }
+
+        updateExampleProgress(topicId);
+        checkTopicCompletion(topicId);
+      } else {
+        // Wrong answer - show hint, allow retry
         exampleItem.classList.add('wrong');
-      }
 
-      input.disabled = true;
-      updateExampleProgress(topicId);
-      checkTopicCompletion(topicId);
+        // Add shake animation
+        exampleItem.style.animation = 'none';
+        setTimeout(() => {
+          exampleItem.style.animation = 'shake 0.5s ease';
+          exampleItem.classList.remove('wrong');
+        }, 500);
+
+        // Show hint instead of correct answer
+        feedback.className = 'example-feedback show incorrect';
+        feedback.innerHTML = `✗ Not quite. / 不太对。<br><strong>💡 Hint / 提示:</strong> ${hint}<br><small>Try again! / 再试一次！</small>`;
+      }
     }
 
     // Update example progress
     function updateExampleProgress(topicId) {
       const exampleItems = document.querySelectorAll(`[id^="example-item-${topicId}"]`);
-      const answered = document.querySelectorAll(`[id^="example-item-${topicId}"].answered`);
 
       if (exampleItems.length > 0) {
         const progressEl = document.getElementById(`exampleProgress-${topicId}`);
-        const correct = document.querySelectorAll(`[id^="example-item-${topicId}"].answered:not(.wrong)`).length;
-        const wrong = answered.length - correct;
 
-        let message = `Progress / 进度: <strong>${answered.length}/${exampleItems.length}</strong> answered, <strong>${correct}</strong> correct`;
+        // Count correct answers (data-correct="true")
+        let correct = 0;
+        let totalAttempts = 0;
+        exampleItems.forEach(item => {
+          if (item.dataset.correct === 'true') {
+            correct++;
+          }
+          totalAttempts += parseInt(item.dataset.attempts || 0);
+        });
 
-        if (wrong > 0) {
-          message += ` <span style="color: #f44336;">(${wrong} wrong / 答错)</span>`;
-          message += `<br><small>Answer all correctly to complete / 全部答对才能完成本节</small>`;
-        } else if (answered.length === exampleItems.length && correct === exampleItems.length) {
+        let message = `Progress / 进度: <strong>${correct}/${exampleItems.length}</strong> correct`;
+
+        if (correct === exampleItems.length) {
           // All correct! checkTopicCompletion will handle the celebration
+          message = `<span style="color: #4CAF50;">🎉 All correct! Total attempts: ${totalAttempts} / 全部正确！共尝试 ${totalAttempts} 次</span>`;
         } else {
-          message += `<br><small>Keep going! / 继续加油！</small>`;
+          const remaining = exampleItems.length - correct;
+          message += `<br><small>${remaining} more to go / 还剩 ${remaining} 题</small>`;
         }
 
         progressEl.innerHTML = message;
