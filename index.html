@@ -1797,34 +1797,38 @@
 
         // Check if this is a dynamic question (can add new practice questions)
         const isDynamic = templateIndex !== null && templateIndex !== undefined && window.currentDynamicTemplates && window.currentDynamicTemplates[topicId];
+        const isExtra = exampleItem.dataset.isExtra === 'true';
 
-        if (isDynamic) {
-          // Dynamic question - disable it and add a new one
-          options.forEach(opt => opt.classList.add('disabled'));
+        // Add shake animation
+        exampleItem.style.animation = 'none';
+        setTimeout(() => {
+          exampleItem.style.animation = 'shake 0.5s ease';
+        }, 10);
 
-          // Show hint (if meaningful) and message about new question
-          feedback.className = 'example-feedback show incorrect';
+        if (isDynamic && !isExtra) {
+          // Original dynamic question - show hint, add new question, but allow retry
           const hasMeaningfulHint = hint && !hint.includes('Think about the concept and try again');
           if (hasMeaningfulHint) {
-            feedback.innerHTML = `✗ Not quite. / 不太对。<br><strong>💡 Hint / 提示:</strong> ${hint}<br><small>A new question has been added below 👇</small>`;
+            feedback.className = 'example-feedback show incorrect';
+            feedback.innerHTML = `✗ Not quite. / 不太对。<br><strong>💡 Hint / 提示:</strong> ${hint}<br><small>A practice question added below 👇</small>`;
           } else {
-            feedback.innerHTML = `✗ Not quite. / 不太对。<br><small>A new question has been added below 👇</small>`;
+            feedback.className = 'example-feedback show incorrect';
+            feedback.innerHTML = `✗ Not quite. / 不太对。<br><small>A practice question added below 👇</small>`;
           }
 
-          // Add new practice question
+          // Add new practice question (only for original questions, not extra ones)
           addNewPracticeQuestion(topicId, templateIndex);
+
+          // Allow retry after a delay
+          setTimeout(() => {
+            selectedOption.classList.remove('incorrect');
+          }, 1500);
         } else {
-          // Static question - just shake and allow retry
+          // Static question or extra practice question - just allow retry
           feedback.className = 'example-feedback show incorrect';
           feedback.innerHTML = `✗ Not quite. Try again! / 不太对，再试一次！`;
 
-          // Add shake animation
-          exampleItem.style.animation = 'none';
-          setTimeout(() => {
-            exampleItem.style.animation = 'shake 0.5s ease';
-          }, 10);
-
-          // Allow retry after delay
+          // Allow retry after a delay
           setTimeout(() => {
             selectedOption.classList.remove('incorrect');
           }, 1000);
