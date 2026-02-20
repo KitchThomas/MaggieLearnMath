@@ -1806,17 +1806,19 @@
         }, 10);
 
         if (isDynamic && !isExtra) {
-          // Original dynamic question - show hint, add new question, but allow retry
+          // Original dynamic question - show hint, add new question EVERY TIME
           const hasMeaningfulHint = hint && !hint.includes('Think about the concept and try again');
+          const attempts = parseInt(exampleItem.dataset.attempts || 0);
+
           if (hasMeaningfulHint) {
             feedback.className = 'example-feedback show incorrect';
-            feedback.innerHTML = `✗ Not quite. / 不太对。<br><strong>💡 Hint / 提示:</strong> ${hint}<br><small>A practice question added below 👇</small>`;
+            feedback.innerHTML = `✗ Not quite. / 不太对。<br><strong>💡 Hint / 提示:</strong> ${hint}<br><small>Practice question #${attempts} added below 👇</small>`;
           } else {
             feedback.className = 'example-feedback show incorrect';
-            feedback.innerHTML = `✗ Not quite. / 不太对。<br><small>A practice question added below 👇</small>`;
+            feedback.innerHTML = `✗ Not quite. / 不太对。<br><small>Practice question #${attempts} added below 👇</small>`;
           }
 
-          // Add new practice question (only for original questions, not extra ones)
+          // Add new practice question EVERY TIME (not just first time)
           addNewPracticeQuestion(topicId, templateIndex);
 
           // Allow retry after a delay
