@@ -11,6 +11,43 @@
           "id": "g6-integers-intro",
           "title": "Introduction to Integers / 整数入门",
           "description": "理解正数、负数和零的概念",
+          "examples": [
+            {
+              "question": "下面哪个是负数？",
+              "questionEn": "Which number is negative?",
+              "type": "choice",
+              "options": ["0", "5", "-3", "+2"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "-5 读作？",
+              "questionEn": "How do you read -5?",
+              "type": "choice",
+              "options": ["五 / Five", "正五 / Positive five", "负五 / Negative five", "零五 / Zero five"],
+              "correctAnswer": 2
+            },
+            {
+              "question": "在数轴上，-3 在哪一边？",
+              "questionEn": "On the number line, where is -3 located?",
+              "type": "choice",
+              "options": ["0 的右边 / Right of 0", "0 的左边 / Left of 0", "0 的上面 / Above 0", "0 的下面 / Below 0"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "温度 -5°C 比 -2°C 热还是冷？",
+              "questionEn": "Is -5°C warmer or colder than -2°C?",
+              "type": "choice",
+              "options": ["更热 / Warmer", "更冷 / Colder", "一样 / Same", "无法比较 / Cannot compare"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "海平面以下 20 米可以表示为？",
+              "questionEn": "20 meters below sea level can be written as:",
+              "type": "choice",
+              "options": ["+20 m", "20 m", "-20 m", "0 m"],
+              "correctAnswer": 2
+            }
+          ],
           "khanAcademy": [
             {
               "title": "Introduction to negative numbers",
@@ -46,6 +83,43 @@
           "id": "g6-compare-order-integers",
           "title": "Comparing and Ordering Integers / 比较和排序整数",
           "description": "在数轴上比较和排序正负整数",
+          "examples": [
+            {
+              "question": "哪个数字更大：-3 还是 -5？",
+              "questionEn": "Which is larger: -3 or -5?",
+              "type": "choice",
+              "options": ["-5", "-3", "它们相等 / Equal", "无法比较"],
+              "correctAnswer": 1
+            },
+            {
+              "question": "比较：-4 ___ -2",
+              "questionEn": "Compare: -4 ___ -2",
+              "type": "choice",
+              "options": [">", "<", "="],
+              "correctAnswer": 1
+            },
+            {
+              "question": "把下面数字从大到小排列：-1, -5, 3, -2",
+              "questionEn": "Order from largest to smallest: -1, -5, 3, -2",
+              "type": "choice",
+              "options": ["3 > -1 > -2 > -5", "3 > -2 > -1 > -5", "-5 > -2 > -1 > 3", "3 > -5 > -2 > -1"],
+              "correctAnswer": 0
+            },
+            {
+              "question": "0 和 -3 相比，哪个更大？",
+              "questionEn": "Which is larger: 0 or -3?",
+              "type": "choice",
+              "options": ["0", "-3", "它们相等 / Equal"],
+              "correctAnswer": 0
+            },
+            {
+              "question": "在数轴上，哪个数字在最右边？",
+              "questionEn": "On the number line, which number is furthest right?",
+              "type": "choice",
+              "options": ["-10", "-5", "0", "5"],
+              "correctAnswer": 3
+            }
+          ],
           "khanAcademy": [
             {
               "title": "Ordering negative numbers",
@@ -76,6 +150,13 @@
           "id": "g6-absolute-value",
           "title": "Absolute Value / 绝对值",
           "description": "理解数字与零的距离",
+          "examples": [
+            {"question": "|-5| = ?", "questionEn": "|-5| = ?", "type": "choice", "options": ["-5", "0", "5", "10"], "correctAnswer": 2},
+            {"question": "|7| = ?", "questionEn": "|7| = ?", "type": "choice", "options": ["-7", "0", "7", "14"], "correctAnswer": 2},
+            {"question": "|0| = ?", "questionEn": "|0| = ?", "type": "choice", "options": ["-1", "0", "1", "不存在"], "correctAnswer": 1},
+            {"question": "绝对值一定是正数吗？", "questionEn": "Is absolute value always positive?", "type": "choice", "options": ["是 / Yes", "否 / No", "可以是负数 / Can be negative"], "correctAnswer": 0},
+            {"question": "|-100| = ?", "questionEn": "|-100| = ?", "type": "choice", "options": ["-100", "0", "100", "1000"], "correctAnswer": 2}
+          ],
           "khanAcademy": [
             {
               "title": "Absolute value",

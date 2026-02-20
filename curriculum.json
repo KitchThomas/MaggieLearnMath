@@ -1881,7 +1881,7 @@
               "question": "饼图主要用来表示什么？",
               "questionEn": "What does a pie chart mainly show?",
               "type": "choice",
-              ["options": "数据随时间变化 / Changes over time", "部分占整体的比例 / Parts of a whole", "数据分布 / Distribution", "类别比较 / Category comparison"],
+              "options": ["数据随时间变化 / Changes over time", "部分占整体的比例 / Parts of a whole", "数据分布 / Distribution", "类别比较 / Category comparison"],
               "correctAnswer": 1
             },
             {
@@ -2093,7 +2093,7 @@
               "question": "你买了 $15.75 的东西，给了 $20，找回多少钱？",
               "questionEn": "You buy items for $15.75 and pay with $20. Change?",
               "type": "choice",
-              ["options": "$3.25", "$4.25", "$4.75", "$5.25"],
+              "options": ["$3.25", "$4.25", "$4.75", "$5.25"],
               "correctAnswer": 1
             },
             {
