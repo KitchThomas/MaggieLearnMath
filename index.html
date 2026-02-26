@@ -1687,7 +1687,7 @@
         }
 
         console.log('Topic opened:', topicId, 'with', window.currentTopicExamples[topicId].length, 'questions');
-        console.log('Dynamic templates:', window.currentDynamicTemplates[topicId]?.length || 0);
+        console.log('Dynamic templates:', window.currentDynamicTemplates?.[topicId]?.length || 0);
 
         content += `
           <div class="examples-section">
