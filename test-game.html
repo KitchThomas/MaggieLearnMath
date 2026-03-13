@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>游戏化测试 - Maggie School</title>
+  <link rel="stylesheet" href="game-styles.css">
+</head>
+<body>
+  <h1>🎮 游戏化系统测试</h1>
+
+  <div id="test-area">
+    <button onclick="testCorrect()">答对测试</button>
+    <button onclick="testWrong()">答错测试</button>
+    <button onclick="showState()">显示状态</button>
+  </div>
+
+  <script type="module">
+    import { GameConfig } from './game-config.js';
+    import './game-manager.js';
+    import './game-ui.js';
+
+    window.GameConfig = GameConfig;
+
+    window.addEventListener('load', () => {
+      console.log('🎮 游戏系统已加载！');
+
+      setTimeout(() => {
+        if (window.gameManager && window.gameUI) {
+          const gameState = window.gameManager.getDisplayState();
+          window.updateGameUI(gameState);
+          console.log('📊 当前状态:', gameState);
+        }
+      }, 500);
+    });
+
+    window.testCorrect = function() {
+      const reward = window.gameManager.answerCorrect(5);
+      console.log('答对奖励:', reward);
+
+      // 模拟点击位置
+      const event = { clientX: 400, clientY: 300 };
+      window.gameUI.showCoinsAnimation(reward.coins, event.clientX, event.clientY);
+      window.gameUI.showCorrectAnimation(event.clientX, event.clientY);
+
+      if (reward.streak >= 5) {
+        window.gameUI.showStreakAnimation(reward.streak);
+      }
+
+      reward.newBadges.forEach(badge => {
+        window.gameUI.showBadgeUnlockAnimation(badge);
+      });
+    };
+
+    window.testWrong = function() {
+      window.gameManager.answerWrong();
+      const event = { clientX: 400, clientY: 300 };
+      window.gameUI.showWrongAnimation(event.clientX, event.clientY);
+    };
+
+    window.showState = function() {
+      const state = window.gameManager.getDisplayState();
+      console.log('当前游戏状态:', state);
+      alert(`
+等级: ${state.level.name} (Lv.${state.level.level})
+金币: ${state.coins}
+连胜: ${state.streak}
+徽章: ${state.badges.length}个
+      `);
+    };
+  </script>
+</body>
+</html>

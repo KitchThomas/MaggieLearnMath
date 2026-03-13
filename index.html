@@ -927,8 +927,22 @@
       border-bottom-color: #11998e;
     }
   </style>
+
+  <!-- 游戏化样式 -->
+  <link rel="stylesheet" href="game-styles.css">
 </head>
 <body>
+  <!-- 游戏化模块 -->
+  <script type="module">
+    import { GameConfig } from './game-config.js';
+    import './game-manager.js';
+    import './game-ui.js';
+
+    // 将配置设为全局可用
+    window.GameConfig = GameConfig;
+
+    console.log('🎮 游戏系统已加载！');
+  </script>
   <div class="stars" id="stars"></div>
 
   <!-- User Section -->
@@ -1060,17 +1074,7 @@
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, updateProfile } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
     import { getFirestore, doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
-
-    // Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyCrOBieHPKE59XObQDJ5O-j64Y5l6Q9zFg",
-      authDomain: "maggie-school.firebaseapp.com",
-      projectId: "maggie-school",
-      storageBucket: "maggie-school.firebasestorage.app",
-      messagingSenderId: "122000318310",
-      appId: "1:122000318310:web:b345f00c307c44597d32a7",
-      measurementId: "G-ZQ4ENNVHD7"
-    };
+    import { firebaseConfig } from './firebase-config.js';
 
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
@@ -1779,6 +1783,36 @@
           }
         });
 
+        // ========== 游戏化奖励 ==========
+        if (window.gameManager && window.gameUI) {
+          // 计算答题用时（从点击按钮到答对的时间）
+          const timeSpent = 0; // 可以添加计时器功能
+          const reward = window.gameManager.answerCorrect(timeSpent);
+
+          // 显示金币动画
+          window.gameUI.showCoinsAnimation(reward.coins, event.clientX, event.clientY);
+
+          // 显示答对动画
+          window.gameUI.showCorrectAnimation(event.clientX, event.clientY);
+
+          // 显示连胜
+          if (reward.streak >= 5) {
+            window.gameUI.showStreakAnimation(reward.streak);
+          }
+
+          // 显示新解锁的徽章
+          if (reward.newBadges && reward.newBadges.length > 0) {
+            reward.newBadges.forEach(badge => {
+              window.gameUI.showBadgeUnlockAnimation(badge);
+            });
+          }
+
+          // 更新游戏UI
+          const gameState = window.gameManager.getDisplayState();
+          window.updateGameUI(gameState);
+        }
+        // ========== 游戏化结束 ==========
+
         // Show success message
         feedback.className = 'example-feedback show correct';
         if (attempts > 1) {
@@ -1792,6 +1826,18 @@
         checkTopicCompletion(topicId);
       } else {
         // Wrong answer
+
+        // ========== 游戏化处理 ==========
+        if (window.gameManager && window.gameUI) {
+          window.gameManager.answerWrong();
+          window.gameUI.showWrongAnimation(event.clientX, event.clientY);
+
+          // 更新游戏UI
+          const gameState = window.gameManager.getDisplayState();
+          window.updateGameUI(gameState);
+        }
+        // ========== 游戏化结束 ==========
+
         const selectedOption = options[selectedAnswer];
         selectedOption.classList.add('incorrect');
 
@@ -2143,6 +2189,21 @@
     // Initialize
     createStars();
     loadCurriculum();
+
+    // ========== 游戏系统初始化 ==========
+    setTimeout(() => {
+      if (window.gameManager && window.gameUI) {
+        const gameState = window.gameManager.getDisplayState();
+        window.updateGameUI(gameState);
+        console.log('🎮 游戏UI已初始化！');
+        console.log('📊 当前状态:', {
+          level: gameState.level.name,
+          coins: gameState.coins,
+          streak: gameState.streak
+        });
+      }
+    }, 500);
+    // ========== 游戏系统初始化结束 ==========
   </script>
 </body>
 </html>

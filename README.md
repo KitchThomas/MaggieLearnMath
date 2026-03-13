@@ -1,13 +1,65 @@
-# Maggie's Math Learning Application
+# Maggie's Math Learning Application 🎮
 
 > 五年级数学学习应用 | Grade 5 Math Learning Application
 
 ## 项目简介
 
-这是一个专为五年级学生设计的在线数学学习平台，包含：
-- 中英文双语界面
-- 加拿大安大略省五年级数学课程
-- 集成 Khan Academy、YouTube、IXL 等学习资源
+这是一个专为五年级学生设计的**游戏化**在线数学学习平台，包含：
+- 🎮 **游戏化学习系统** - 金币、等级、徽章、宠物
+- 🌐 中英文双语界面
+- 📚 加拿大安大略省五年级数学课程
+- 🔗 集成 Khan Academy、YouTube、IXL 等学习资源
+
+## 🎮 游戏化功能
+
+### 金币系统 💰
+- 答对题目获得金币
+- 连胜奖励
+- 每日登录奖励
+
+### 等级系统 🌟
+- 10个等级，从"数学新手"到"数学之神"
+- 答题获得经验值
+- 升级解锁新称号和奖励
+
+### 徽章系统 🏆
+- 12种成就徽章
+- 涵盖答题数量、连胜、速度等
+- 解锁炫酷动画
+
+### 宠物系统 🐱
+- 5种可爱宠物
+- 学习喂养宠物
+- 增强学习动力
+
+### 主题商店 🎨
+- 多种主题皮肤
+- 公主、恐龙、太空、海洋
+- 用金币兑换
+
+---
+
+## 🎮 游戏化功能使用指南
+
+### 集成步骤
+
+1. **配置 Firebase**
+   ```bash
+   cp firebase-config.example.js firebase-config.js
+   # 编辑 firebase-config.js，填入你的 Firebase 配置
+   ```
+
+2. **查看集成文档**
+   ```bash
+   # 详细集成说明请查看
+   GAME_INTEGRATION.md
+   ```
+
+3. **游戏化模块文件**
+   - `game-config.js` - 游戏配置
+   - `game-manager.js` - 游戏逻辑
+   - `game-ui.js` - 游戏UI
+   - `game-styles.css` - 游戏样式
 
 ---
 
