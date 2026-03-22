@@ -9,7 +9,6 @@
       "server.js",
       "package.json",
       "package-lock.json",
-      "*.js",
       "repomix-output.xml"
     ],
     "rewrites": [
