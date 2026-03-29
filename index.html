@@ -925,6 +925,69 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* Dictation Practice Section */
+    .dictation-section {
+      margin-bottom: 30px;
+    }
+
+    .dictation-entry-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 25px 30px;
+      background: white;
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .dictation-entry-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    }
+
+    .dictation-icon {
+      font-size: 48px;
+      animation: wave 2s ease-in-out infinite;
+    }
+
+    @keyframes wave {
+      0%, 100% { transform: rotate(-5deg); }
+      50% { transform: rotate(5deg); }
+    }
+
+    .dictation-text {
+      flex: 1;
+      text-align: left;
+    }
+
+    .dictation-title-text {
+      display: block;
+      font-size: 22px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .dictation-desc {
+      display: block;
+      font-size: 16px;
+      color: #666;
+    }
+
+    .dictation-arrow {
+      font-size: 32px;
+      color: #667eea;
+      transition: transform 0.3s ease;
+    }
+
+    .dictation-entry-btn:hover .dictation-arrow {
+      transform: translateX(10px);
+    }
+
     /* Study Timer Styles */
     .study-timer-section {
       background: white;
@@ -1254,6 +1317,9 @@
 
   <!-- 游戏化样式 -->
   <link rel="stylesheet" href="game-styles.css">
+
+  <!-- 听写练习样式 -->
+  <link rel="stylesheet" href="dictation-styles.css">
 </head>
 <body>
   <!-- i18n 语言模块 -->
@@ -1274,6 +1340,15 @@
     window.GameConfig = GameConfig;
 
     console.log('🎮 游戏系统已加载！');
+  </script>
+
+  <!-- 听写练习模块 -->
+  <script type="module">
+    import SpellingWords from './spelling-words.js';
+    import DictationPractice from './dictation-practice.js';
+    window.SpellingWords = SpellingWords;
+    window.DictationPractice = DictationPractice;
+    console.log('✍️ Dictation practice module loaded');
   </script>
 
   <!-- 学习时间追踪模块 -->
@@ -1364,6 +1439,18 @@
           <button class="timer-btn secondary" onclick="cancelManualTime()">Cancel / 取消</button>
         </div>
       </div>
+    </div>
+
+    <!-- Dictation Practice Entry -->
+    <div class="dictation-section">
+      <button class="dictation-entry-btn" onclick="DictationPractice.show()">
+        <span class="dictation-icon">✍️</span>
+        <div class="dictation-text">
+          <span class="dictation-title-text" data-i18n="dictationTitle">Dictation Practice / 听写练习</span>
+          <span class="dictation-desc">English & French / 英语和法语</span>
+        </div>
+        <span class="dictation-arrow">→</span>
+      </button>
     </div>
 
     <div class="units-grid" id="unitsContainer">
