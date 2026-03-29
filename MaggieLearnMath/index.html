@@ -1,0 +1,2360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maggie School - 数学学习</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      color: white;
+      padding: 30px 0;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    /* User Auth Section */
+    .user-section {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .user-info {
+      color: white;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .auth-btn {
+      padding: 8px 16px;
+      border: 2px solid white;
+      border-radius: 20px;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+
+    .auth-btn:hover {
+      background: white;
+      color: #667eea;
+    }
+
+    .auth-btn.logout {
+      border-color: rgba(255,255,255,0.5);
+      font-size: 0.8rem;
+      padding: 6px 12px;
+    }
+
+    /* Language Toggle */
+    .lang-toggle {
+      padding: 8px 12px;
+      border: 2px solid white;
+      border-radius: 20px;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .lang-toggle:hover {
+      background: white;
+      color: #667eea;
+    }
+
+    .lang-toggle span {
+      font-weight: 600;
+    }
+
+    /* Login Modal */
+    .login-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-modal.active {
+      display: flex;
+    }
+
+    .login-box {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .login-box h2 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .login-box p {
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    .login-tabs {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #eee;
+    }
+
+    .login-tab {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 1rem;
+      color: #999;
+      transition: all 0.3s;
+    }
+
+    .login-tab.active {
+      color: #667eea;
+      border-bottom: 2px solid #667eea;
+      margin-bottom: -2px;
+    }
+
+    .login-form {
+      display: none;
+    }
+
+    .login-form.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+      font-size: 0.9rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #eee;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 20px 0;
+      color: #999;
+    }
+
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #eee;
+    }
+
+    .divider span {
+      padding: 0 15px;
+      font-size: 0.85rem;
+    }
+
+    .google-btn {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #eee;
+      border-radius: 10px;
+      background: white;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    .google-btn:hover {
+      border-color: #4285f4;
+      background: #f8f9fa;
+    }
+
+    .google-btn img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .close-login {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #999;
+      cursor: pointer;
+    }
+
+    .error-message {
+      background: #ffebee;
+      color: #c62828;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .sync-status {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.7);
+      margin-top: 3px;
+    }
+
+    .sync-status.syncing {
+      color: #ffeb3b;
+    }
+
+    .sync-status.synced {
+      color: #8bc34a;
+    }
+
+    /* Grade Selector */
+    .grade-selector {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0 30px 0;
+    }
+
+    .grade-btn {
+      padding: 15px 40px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: 3px solid white;
+      border-radius: 50px;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .grade-btn:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+
+    .grade-btn.active {
+      background: white;
+      color: #667eea;
+    }
+
+    .grade-btn .grade-icon {
+      font-size: 1.5rem;
+    }
+
+    .progress-section {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .progress-header h3 {
+      color: #333;
+    }
+
+    .grade-badge {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .progress-bar {
+      height: 20px;
+      background: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #4CAF50, #8BC34A);
+      width: 0%;
+      transition: width 0.5s ease;
+      border-radius: 10px;
+    }
+
+    .progress-text {
+      text-align: center;
+      margin-top: 10px;
+      color: #666;
+    }
+
+    /* Dictation Practice Section */
+    .dictation-section {
+      margin-bottom: 30px;
+    }
+
+    .dictation-entry-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 25px 30px;
+      background: white;
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .dictation-entry-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    }
+
+    .dictation-icon {
+      font-size: 48px;
+      animation: wave 2s ease-in-out infinite;
+    }
+
+    @keyframes wave {
+      0%, 100% { transform: rotate(-5deg); }
+      50% { transform: rotate(5deg); }
+    }
+
+    .dictation-text {
+      flex: 1;
+      text-align: left;
+    }
+
+    .dictation-title {
+      display: block;
+      font-size: 22px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .dictation-desc {
+      display: block;
+      font-size: 16px;
+      color: #666;
+    }
+
+    .dictation-arrow {
+      font-size: 32px;
+      color: #667eea;
+      transition: transform 0.3s ease;
+    }
+
+    .dictation-entry-btn:hover .dictation-arrow {
+      transform: translateX(10px);
+    }
+
+    .units-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 20px;
+    }
+
+    .unit-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .unit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    }
+
+    .unit-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px;
+    }
+
+    .unit-header.grade6 {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    }
+
+    .unit-header h2 {
+      font-size: 1.3rem;
+      margin-bottom: 5px;
+    }
+
+    .unit-header p {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .unit-progress {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 0.85rem;
+    }
+
+    .unit-progress-bar {
+      flex: 1;
+      height: 6px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .unit-progress-fill {
+      height: 100%;
+      background: white;
+      border-radius: 3px;
+    }
+
+    .unit-topics {
+      padding: 15px;
+      display: none;
+    }
+
+    .unit-card.expanded .unit-topics {
+      display: block;
+    }
+
+    .topic-item {
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .topic-item:hover {
+      background: #f5f5f5;
+    }
+
+    .topic-item:last-child {
+      border-bottom: none;
+    }
+
+    .topic-title {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .topic-title .status {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #ddd;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .topic-title .status.completed {
+      background: #4CAF50;
+      border-color: #4CAF50;
+      color: white;
+    }
+
+    .topic-description {
+      font-size: 0.85rem;
+      color: #666;
+      margin-left: 30px;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: white;
+      border-radius: 15px;
+      max-width: 800px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .modal-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 25px;
+      position: sticky;
+      top: 0;
+    }
+
+    .modal-header.grade6 {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    }
+
+    .modal-header h2 {
+      margin-bottom: 5px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-close:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .modal-content {
+      padding: 25px;
+    }
+
+    .resource-section {
+      margin-bottom: 25px;
+    }
+
+    .resource-section h3 {
+      color: #333;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .resource-section h3 .icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+    }
+
+    .khan-icon { background: #14bf96; }
+    .youtube-icon { background: #ff0000; }
+    .practice-icon { background: #ff9800; }
+
+    .resource-list {
+      list-style: none;
+    }
+
+    .resource-item {
+      padding: 12px 15px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.2s;
+    }
+
+    .resource-item:hover {
+      background: #e9ecef;
+    }
+
+    .resource-item a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 500;
+      flex: 1;
+    }
+
+    .resource-item a:hover {
+      text-decoration: underline;
+    }
+
+    .resource-item .type-badge {
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 12px;
+      background: #e0e0e0;
+      color: #666;
+      margin-left: 10px;
+    }
+
+    .resource-item .channel {
+      font-size: 0.8rem;
+      color: #888;
+      margin-left: 10px;
+    }
+
+    .mark-complete-btn {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .mark-complete-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+    }
+
+    .mark-complete-btn.completed {
+      background: linear-gradient(135deg, #9e9e9e 0%, #757575 100%);
+    }
+
+    .no-resources {
+      color: #999;
+      font-style: italic;
+      padding: 10px 0;
+    }
+
+    /* Examples Section */
+    .examples-section {
+      margin-bottom: 25px;
+    }
+
+    .examples-section h3 {
+      color: #333;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .examples-section h3 .icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+      background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+    }
+
+    .example-item {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+      border: 2px solid #e9ecef;
+      transition: border-color 0.3s;
+    }
+
+    .example-item.answered {
+      border-color: #4CAF50;
+    }
+
+    .example-item.wrong {
+      border-color: #f44336;
+    }
+
+    .example-question {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .example-question-en {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+
+    .example-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .example-option {
+      padding: 10px 15px;
+      background: white;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    .example-option:hover:not(.disabled) {
+      background: #f0f0f0;
+      border-color: #667eea;
+    }
+
+    .example-option.selected {
+      background: #e3f2fd;
+      border-color: #2196F3;
+    }
+
+    .example-option.correct {
+      background: #e8f5e9;
+      border-color: #4CAF50;
+      color: #2e7d32;
+    }
+
+    .example-option.incorrect {
+      background: #ffebee;
+      border-color: #f44336;
+      color: #c62828;
+    }
+
+    .example-option.disabled {
+      cursor: default;
+      opacity: 0.7;
+    }
+
+    .example-input-container {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .example-input {
+      flex: 1;
+      padding: 10px 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    .example-input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .example-check-btn {
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: transform 0.2s;
+    }
+
+    .example-check-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .example-feedback {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: 500;
+      display: none;
+    }
+
+    .example-feedback.show {
+      display: block;
+    }
+
+    .example-feedback.correct {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .example-feedback.incorrect {
+      background: #ffebee;
+      color: #c62828;
+    }
+
+    .example-progress {
+      text-align: center;
+      padding: 10px;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .example-progress strong {
+      color: #4CAF50;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+
+      .units-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .grade-selector {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .grade-btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+
+      .user-section {
+        position: static;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+    }
+
+    /* Stars decoration */
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .star {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.5;
+      animation: twinkle 2s infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.8; }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Grade 6 theme */
+    body.grade6-theme {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    }
+
+    body.grade6-theme .grade-btn.active {
+      color: #11998e;
+    }
+
+    body.grade6-theme .grade-badge {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    }
+
+    body.grade6-theme .resource-item a {
+      color: #11998e;
+    }
+
+    body.grade6-theme .submit-btn {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    }
+
+    body.grade6-theme .login-tab.active {
+      color: #11998e;
+      border-bottom-color: #11998e;
+    }
+  </style>
+
+  <!-- 游戏化样式 -->
+  <link rel="stylesheet" href="game-styles.css">
+
+  <!-- 听写练习样式 -->
+  <link rel="stylesheet" href="dictation-styles.css">
+
+  <!-- 单词导入样式 -->
+  <link rel="stylesheet" href="word-import.css">
+</head>
+<body>
+  <!-- i18n 语言模块 -->
+  <script type="module">
+    import i18n from './i18n.js';
+    window.i18n = i18n;
+    i18n.init();
+    console.log('🌐 Language system loaded:', i18n.getLang());
+  </script>
+  
+  <!-- 游戏化模块 -->
+  <script type="module">
+    import { GameConfig } from './game-config.js';
+    import './game-manager.js';
+    window.GameConfig = GameConfig;
+  </script>
+
+  <!-- 听写练习模块 -->
+  <script type="module">
+    import SpellingWords from './spelling-words.js';
+    import DictationPractice from './dictation-practice.js';
+    window.SpellingWords = SpellingWords;
+    window.DictationPractice = DictationPractice;
+    console.log('✍️ Dictation practice module loaded');
+  </script>
+
+  <!-- 单词导入模块 -->
+  <script type="module">
+    import WordImport from './word-import.js';
+    window.WordImport = WordImport;
+    window.wordImport = new WordImport();
+    console.log('📥 Word import module loaded');
+  </script>
+  <div class="stars" id="stars"></div>
+
+  <!-- User Section -->
+  <div class="user-section" id="userSection">
+    <!-- Language Toggle -->
+    <button class="lang-toggle" onclick="toggleLanguage()" id="langToggle" title="Switch Language">
+      🌐 <span id="langLabel">EN</span>
+    </button>
+    <div id="loggedOutView">
+      <button class="auth-btn" onclick="openLoginModal()">Login / 登录</button>
+    </div>
+    <div id="loggedInView" style="display: none;">
+      <div class="user-info">
+        <div class="user-avatar" id="userAvatar">U</div>
+        <div>
+          <div id="userEmail">user@email.com</div>
+          <div class="sync-status" id="syncStatus" data-i18n="progressSaved">Progress saved locally</div>
+        </div>
+      </div>
+      <button class="auth-btn logout" onclick="handleLogout()">Logout / 退出</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <header>
+      <h1>🌟 Maggie School 🌟</h1>
+      <p id="headerSubtitle">Grade 5 & 6 Math Curriculum / 五年级和六年级数学课程</p>
+    </header>
+
+    <!-- Grade Selector -->
+    <div class="grade-selector">
+      <button class="grade-btn active" onclick="switchGrade(5)" id="grade5Btn">
+        <span class="grade-icon">5️⃣</span>
+        <span>Grade 5 / 五年级</span>
+      </button>
+      <button class="grade-btn" onclick="switchGrade(6)" id="grade6Btn">
+        <span class="grade-icon">6️⃣</span>
+        <span>Grade 6 / 六年级</span>
+      </button>
+    </div>
+
+    <div class="progress-section">
+      <div class="progress-header">
+        <h3>Learning Progress / 学习进度</h3>
+        <span class="grade-badge" id="gradeBadge">Grade 5</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <p class="progress-text" id="progressText">0 / 0 topics completed</p>
+    </div>
+
+    <!-- Dictation Practice Section -->
+    <div class="dictation-section">
+      <button class="dictation-entry-btn" onclick="DictationPractice.show()">
+        <span class="dictation-icon">✍️</span>
+        <div class="dictation-text">
+          <span class="dictation-title" data-i18n="dictationTitle">Dictation Practice / 听写练习</span>
+          <span class="dictation-desc">English & French / 英语和法语</span>
+        </div>
+        <span class="dictation-arrow">→</span>
+      </button>
+    </div>
+
+    <div class="units-grid" id="unitsContainer">
+      <!-- Units will be loaded here -->
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div class="login-modal" id="loginModal">
+    <div class="login-box" style="position: relative;">
+      <button class="close-login" onclick="closeLoginModal()">&times;</button>
+      <h2>Welcome / 欢迎</h2>
+      <p>Sign in to sync your progress across devices<br>登录以同步学习进度</p>
+
+      <div class="error-message" id="authError"></div>
+
+      <div class="login-tabs">
+        <button class="login-tab active" onclick="switchLoginTab('login')">Login / 登录</button>
+        <button class="login-tab" onclick="switchLoginTab('register')">Register / 注册</button>
+      </div>
+
+      <form class="login-form active" id="loginForm" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label>Email / 邮箱</label>
+          <input type="email" id="loginEmail" required placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label>Password / 密码</label>
+          <input type="password" id="loginPassword" required placeholder="Enter password">
+        </div>
+        <button type="submit" class="submit-btn" id="loginBtn">Login / 登录</button>
+      </form>
+
+      <form class="login-form" id="registerForm" onsubmit="handleRegister(event)">
+        <div class="form-group">
+          <label>Name / 姓名</label>
+          <input type="text" id="registerName" required placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label>Email / 邮箱</label>
+          <input type="email" id="registerEmail" required placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label>Password / 密码</label>
+          <input type="password" id="registerPassword" required minlength="6" placeholder="At least 6 characters">
+        </div>
+        <button type="submit" class="submit-btn" id="registerBtn">Register / 注册</button>
+      </form>
+
+      <div class="divider"><span>OR / 或者</span></div>
+
+      <button class="google-btn" onclick="handleGoogleLogin()">
+        <svg width="20" height="20" viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+        </svg>
+        Continue with Google
+      </button>
+    </div>
+  </div>
+
+  <!-- Topic Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-header" id="modalHeader">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <h2 id="modalTitle">Topic Title</h2>
+        <p id="modalDescription">Topic description</p>
+      </div>
+      <div class="modal-content" id="modalContent">
+        <!-- Resources will be loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    // Detect if Firebase loads
+    window.firebaseLoadStart = Date.now();
+    console.log('Loading Firebase...');
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, updateProfile } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+    import { getFirestore, doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+    import { firebaseConfig } from './firebase-config.js';
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const googleProvider = new GoogleAuthProvider();
+
+    // Make functions available globally
+    window.firebaseAuth = auth;
+    window.firebaseDb = db;
+    window.googleProvider = googleProvider;
+    window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+    window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
+    window.signInWithPopup = signInWithPopup;
+    window.signOut = signOut;
+    window.updateProfile = updateProfile;
+    window.doc = doc;
+    window.setDoc = setDoc;
+    window.getDoc = getDoc;
+
+    // Listen for auth state changes
+    onAuthStateChanged(auth, (user) => {
+      console.log('Auth state changed. User:', user ? user.email : 'null');
+      if (user) {
+        window.currentUser = user;
+        updateUIForLoggedInUser(user);
+        loadProgressFromCloud();
+      } else {
+        window.currentUser = null;
+        updateUIForLoggedOutUser();
+      }
+    });
+
+    // Check if Firebase is properly configured
+    setTimeout(() => {
+      console.log('=== Firebase Status Check ===');
+      console.log('Firebase loaded in:', Date.now() - window.firebaseLoadStart, 'ms');
+      console.log('Firebase Auth:', auth);
+      console.log('Firebase DB:', db);
+      console.log('Config:', firebaseConfig);
+      console.log('Current user:', window.currentUser);
+
+      // Test if auth methods are available
+      console.log('signInWithEmailAndPassword available:', typeof signInWithEmailAndPassword !== 'undefined');
+      console.log('createUserWithEmailAndPassword available:', typeof createUserWithEmailAndPassword !== 'undefined');
+
+      if (typeof signInWithEmailAndPassword === 'undefined') {
+        console.error('Firebase Auth methods not loaded!');
+        showAuthError('Firebase 加载失败！请检查网络连接或刷新页面 / Firebase failed to load!');
+      }
+    }, 2000);
+  </script>
+
+  <script>
+    // ========================================
+    // 动态题目生成系统 / Dynamic Question Generator
+    // ========================================
+
+    window.QuestionGenerator = {
+      // 生成随机整数
+      randomInt: function(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      },
+
+      // 生成随机小数
+      randomDecimal: function(min, max, decimals = 1) {
+        const num = Math.random() * (max - min) + min;
+        return Number(num.toFixed(decimals));
+      },
+
+      // 生成随机分数
+      randomFraction: function(minNum, maxNum, minDen, maxDen) {
+        const num = this.randomInt(minNum, maxNum);
+        let den = this.randomInt(minDen, maxDen);
+        while (den === num || den === 0) {
+          den = this.randomInt(minDen, maxDen);
+        }
+        return { num, den };
+      },
+
+      // 格式化分数
+      formatFraction: function(frac) {
+        return `${frac.num}/${frac.den}`;
+      },
+
+      // 计算表达式的值
+      evaluate: function(expr, vars) {
+        let result = expr;
+        for (const [key, value] of Object.entries(vars)) {
+          const regex = new RegExp(`\\b${key}\\b`, 'g');
+          if (typeof value === 'object' && value.num !== undefined) {
+            result = result.replace(regex, `(${value.num}/${value.den})`);
+          } else {
+            result = result.replace(regex, value);
+          }
+        }
+        try {
+          return eval(result);
+        } catch (e) {
+          console.error('Error evaluating:', expr, result);
+          return null;
+        }
+      },
+
+      // 替换模板中的变量
+      fillTemplate: function(template, vars, formatFuncs = {}) {
+        let result = template;
+        for (const [key, value] of Object.entries(vars)) {
+          const regex = new RegExp(`\\{${key}\\}`, 'g');
+          let displayValue = value;
+          if (typeof value === 'object' && value.num !== undefined) {
+            displayValue = formatFuncs.fraction ? formatFuncs.fraction(value) : `${value.num}/${value.den}`;
+          }
+          result = result.replace(regex, displayValue);
+        }
+        return result;
+      },
+
+      // 生成动态选择题
+      generateChoiceQuestion: function(template) {
+        const vars = {};
+        const formatFuncs = { fraction: this.formatFraction.bind(this) };
+
+        // 生成变量值
+        for (const [key, config] of Object.entries(template.variables || {})) {
+          if (config.type === 'integer') {
+            vars[key] = this.randomInt(config.min, config.max);
+          } else if (config.type === 'decimal') {
+            vars[key] = this.randomDecimal(config.min, config.max, config.decimals || 1);
+          } else if (config.type === 'fraction') {
+            vars[key] = this.randomFraction(config.minNum, config.maxNum, config.minDen, config.maxDen);
+          }
+        }
+
+        // 生成题目文本
+        const question = this.fillTemplate(template.question, vars, formatFuncs);
+        const questionEn = template.questionEn ? this.fillTemplate(template.questionEn, vars, formatFuncs) : '';
+        const hint = this.fillTemplate(template.hint, vars, formatFuncs);
+        const hintEn = template.hintEn ? this.fillTemplate(template.hintEn, vars, formatFuncs) : hint;
+
+        // 计算正确答案
+        const correctAnswer = this.evaluate(template.answer, vars);
+
+        // 生成选项
+        let options = [];
+        const usedValues = new Set();
+
+        // 添加正确答案
+        let correctDisplay = correctAnswer;
+        if (template.answerFormat === 'fraction' || (typeof correctAnswer === 'number' && !Number.isInteger(correctAnswer))) {
+          // 转换为分数显示
+          const tolerance = 0.0001;
+          for (let d = 2; d <= 10; d++) {
+            for (let n = 1; n < d * 10; n++) {
+              if (Math.abs(n/d - correctAnswer) < tolerance) {
+                correctDisplay = `${n}/${d}`;
+                break;
+              }
+            }
+            if (typeof correctDisplay === 'string') break;
+          }
+        }
+        options.push(correctDisplay);
+        usedValues.add(String(correctAnswer));
+
+        // 生成干扰项
+        for (const wrongExpr of (template.wrongOptions || [])) {
+          const wrongValue = this.evaluate(wrongExpr, vars);
+          if (wrongValue !== null && !usedValues.has(String(wrongValue))) {
+            let wrongDisplay = wrongValue;
+            if (typeof wrongValue === 'number' && !Number.isInteger(wrongValue)) {
+              const tolerance = 0.0001;
+              for (let d = 2; d <= 10; d++) {
+                for (let n = 1; n < d * 10; n++) {
+                  if (Math.abs(n/d - wrongValue) < tolerance) {
+                    wrongDisplay = `${n}/${d}`;
+                    break;
+                  }
+                }
+                if (typeof wrongDisplay === 'string') break;
+              }
+            }
+            options.push(wrongDisplay);
+            usedValues.add(String(wrongValue));
+          }
+        }
+
+        // 如果选项不够，添加随机干扰项
+        while (options.length < 4) {
+          const randomOffset = this.randomInt(-10, 10);
+          const wrongValue = correctAnswer + randomOffset;
+          if (!usedValues.has(String(wrongValue))) {
+            options.push(wrongValue);
+            usedValues.add(String(wrongValue));
+          }
+        }
+
+        // 打乱选项顺序
+        const correctIndex = 0;
+        for (let i = options.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [options[i], options[j]] = [options[j], options[i]];
+        }
+        const newCorrectIndex = options.indexOf(correctDisplay);
+
+        return {
+          question,
+          questionEn,
+          hint,
+          type: 'choice',
+          options,
+          correctAnswer: newCorrectIndex
+        };
+      },
+
+      // 为题目生成新版本（用于答错后重新生成）
+      regenerateQuestion: function(example, topicId, exampleIndex) {
+        if (example.dynamicTemplate) {
+          return this.generateChoiceQuestion(example.dynamicTemplate);
+        }
+        return example;
+      }
+    };
+  </script>
+
+  <script>
+    // State
+    let curriculum = null;
+    let currentGrade = 5;
+    let completedTopics = {
+      5: JSON.parse(localStorage.getItem('completedTopics_grade5') || '[]'),
+      6: JSON.parse(localStorage.getItem('completedTopics_grade6') || '[]')
+    };
+
+    // UI update for logged in user
+    function updateUIForLoggedInUser(user) {
+      document.getElementById('loggedOutView').style.display = 'none';
+      document.getElementById('loggedInView').style.display = 'flex';
+      document.getElementById('userEmail').textContent = user.displayName || user.email;
+      document.getElementById('userAvatar').textContent = (user.displayName || user.email).charAt(0).toUpperCase();
+      document.getElementById('syncStatus').textContent = 'Synced to cloud';
+      document.getElementById('syncStatus').className = 'sync-status synced';
+      closeLoginModal();
+    }
+
+    // UI update for logged out user
+    function updateUIForLoggedOutUser() {
+      document.getElementById('loggedOutView').style.display = 'block';
+      document.getElementById('loggedInView').style.display = 'none';
+      document.getElementById('syncStatus').textContent = 'Progress saved locally';
+      document.getElementById('syncStatus').className = 'sync-status';
+    }
+
+    // Open login modal
+    function openLoginModal() {
+      document.getElementById('loginModal').classList.add('active');
+      document.getElementById('authError').classList.remove('show');
+    }
+
+    // Close login modal
+    function closeLoginModal() {
+      document.getElementById('loginModal').classList.remove('active');
+    }
+
+    // Switch login tabs
+    function switchLoginTab(tab) {
+      document.querySelectorAll('.login-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.login-form').forEach(f => f.classList.remove('active'));
+
+      if (tab === 'login') {
+        document.querySelector('.login-tab:first-child').classList.add('active');
+        document.getElementById('loginForm').classList.add('active');
+      } else {
+        document.querySelector('.login-tab:last-child').classList.add('active');
+        document.getElementById('registerForm').classList.add('active');
+      }
+      document.getElementById('authError').classList.remove('show');
+    }
+
+    // Show error
+    function showAuthError(message, fullError = null) {
+      const errorEl = document.getElementById('authError');
+      errorEl.textContent = message;
+      if (fullError) {
+        errorEl.innerHTML += '<br><small style="color: #666;">详细信息: ' + JSON.stringify(fullError) + '</small>';
+        console.error('Full error object:', fullError);
+      }
+      errorEl.classList.add('show');
+    }
+
+    // Handle login
+    async function handleLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      const btn = document.getElementById('loginBtn');
+
+      btn.disabled = true;
+      btn.textContent = 'Logging in...';
+      document.getElementById('authError').classList.remove('show');
+
+      try {
+        console.log('Attempting login with:', email);
+        await window.signInWithEmailAndPassword(window.firebaseAuth, email, password);
+        console.log('Login successful!');
+      } catch (error) {
+        console.error('Login error:', error);
+        console.error('Error code:', error.code);
+        console.error('Error message:', error.message);
+        showAuthError(getErrorMessage(error.code) + ' (' + error.code + ')', {
+          code: error.code,
+          message: error.message,
+          name: error.name
+        });
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Login / 登录';
+      }
+    }
+
+    // Handle register
+    async function handleRegister(e) {
+      e.preventDefault();
+      const name = document.getElementById('registerName').value;
+      const email = document.getElementById('registerEmail').value;
+      const password = document.getElementById('registerPassword').value;
+      const btn = document.getElementById('registerBtn');
+
+      btn.disabled = true;
+      btn.textContent = 'Creating account...';
+      document.getElementById('authError').classList.remove('show');
+
+      try {
+        console.log('Attempting registration for:', email);
+        console.log('Password length:', password.length);
+        const userCredential = await window.createUserWithEmailAndPassword(window.firebaseAuth, email, password);
+        console.log('Registration successful! User:', userCredential.user);
+        await window.updateProfile(userCredential.user, { displayName: name });
+        // Save initial progress to cloud
+        await saveProgressToCloud();
+      } catch (error) {
+        console.error('Registration error:', error);
+        console.error('Error code:', error.code);
+        console.error('Error message:', error.message);
+        showAuthError(getErrorMessage(error.code) + ' (' + error.code + ')', {
+          code: error.code,
+          message: error.message,
+          name: error.name
+        });
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Register / 注册';
+      }
+    }
+
+    // Handle Google login
+    async function handleGoogleLogin() {
+      try {
+        await window.signInWithPopup(window.firebaseAuth, window.googleProvider);
+      } catch (error) {
+        if (error.code !== 'auth/popup-closed-by-user') {
+          showAuthError(getErrorMessage(error.code));
+        }
+      }
+    }
+
+    // Handle logout
+    async function handleLogout() {
+      try {
+        await window.signOut(window.firebaseAuth);
+      } catch (error) {
+        console.error('Logout error:', error);
+      }
+    }
+
+    // Get friendly error message
+    function getErrorMessage(code) {
+      const messages = {
+        'auth/email-already-in-use': 'This email is already registered / 此邮箱已注册',
+        'auth/invalid-email': 'Invalid email address / 邮箱格式不正确',
+        'auth/weak-password': 'Password is too weak / 密码太弱',
+        'auth/user-not-found': 'User not found / 用户不存在',
+        'auth/wrong-password': 'Incorrect password / 密码错误',
+        'auth/invalid-credential': 'Invalid email or password / 邮箱或密码错误',
+        'auth/too-many-requests': 'Too many attempts. Please try later / 尝试次数过多，请稍后再试',
+        'auth/configuration-not-found': 'Firebase Auth not configured. Please enable Email/Password in Firebase Console / Firebase未配置，请在控制台启用邮箱密码登录',
+        'auth/operation-not-allowed': 'Email/Password sign-in is not enabled. Please enable in Firebase Console / 邮箱密码登录未启用',
+        'auth/network-request-failed': 'Network error. Please check your connection / 网络错误，请检查网络连接',
+        'auth/unauthorized-domain': 'This domain is not authorized in Firebase Console / 此域名未被授权',
+        'auth/api-key-not-allowed': 'API key restrictions. Please check Firebase Console / API密钥限制',
+        'auth/quota-exceeded': 'Quota exceeded. Please try later / 配额已用完，请稍后再试'
+      };
+      return messages[code] || 'An error occurred / 发生错误: ' + code;
+    }
+
+    // Save progress to cloud
+    async function saveProgressToCloud() {
+      if (!window.currentUser) return;
+
+      const syncStatus = document.getElementById('syncStatus');
+      syncStatus.textContent = 'Syncing...';
+      syncStatus.className = 'sync-status syncing';
+
+      try {
+        const userDoc = window.doc(window.firebaseDb, 'users', window.currentUser.uid);
+        await window.setDoc(userDoc, {
+          completedTopics: completedTopics,
+          lastUpdated: new Date().toISOString(),
+          email: window.currentUser.email
+        }, { merge: true });
+
+        syncStatus.textContent = 'Synced to cloud';
+        syncStatus.className = 'sync-status synced';
+      } catch (error) {
+        console.error('Error saving to cloud:', error);
+        syncStatus.textContent = 'Sync failed';
+        syncStatus.className = 'sync-status';
+      }
+    }
+
+    // Load progress from cloud
+    async function loadProgressFromCloud() {
+      if (!window.currentUser) return;
+
+      try {
+        const userDoc = window.doc(window.firebaseDb, 'users', window.currentUser.uid);
+        const docSnap = await window.getDoc(userDoc);
+
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          if (data.completedTopics) {
+            completedTopics = data.completedTopics;
+            // Also save to localStorage as backup
+            localStorage.setItem('completedTopics_grade5', JSON.stringify(completedTopics[5] || []));
+            localStorage.setItem('completedTopics_grade6', JSON.stringify(completedTopics[6] || []));
+            renderUnits();
+            updateProgress();
+          }
+        } else {
+          // First time user - save current local progress to cloud
+          await saveProgressToCloud();
+        }
+      } catch (error) {
+        console.error('Error loading from cloud:', error);
+      }
+    }
+
+    // Switch grade
+    async function switchGrade(grade) {
+      currentGrade = grade;
+
+      // Update buttons
+      document.getElementById('grade5Btn').classList.toggle('active', grade === 5);
+      document.getElementById('grade6Btn').classList.toggle('active', grade === 6);
+
+      // Update theme
+      document.body.classList.toggle('grade6-theme', grade === 6);
+
+      // Update badge
+      document.getElementById('gradeBadge').textContent = `Grade ${grade}`;
+
+      // Load curriculum
+      await loadCurriculum();
+    }
+
+    // Load curriculum data
+    async function loadCurriculum() {
+      try {
+        const fileName = currentGrade === 5 ? 'curriculum.json' : 'curriculum-grade6.json';
+        const response = await fetch(fileName);
+        curriculum = await response.json();
+        renderUnits();
+        updateProgress();
+      } catch (error) {
+        console.error('Failed to load curriculum:', error);
+      }
+    }
+
+    // Render all units
+    function renderUnits() {
+      const container = document.getElementById('unitsContainer');
+      container.innerHTML = '';
+
+      curriculum.units.forEach((unit, unitIndex) => {
+        // Calculate unit progress
+        const completedInUnit = unit.topics.filter(t => isCompleted(t.id)).length;
+        const totalInUnit = unit.topics.length;
+        const unitPercent = totalInUnit > 0 ? (completedInUnit / totalInUnit) * 100 : 0;
+
+        const unitCard = document.createElement('div');
+        unitCard.className = 'unit-card';
+        unitCard.innerHTML = `
+          <div class="unit-header ${currentGrade === 6 ? 'grade6' : ''}" onclick="toggleUnit(${unitIndex})">
+            <h2>${getUnitEmoji(unitIndex, currentGrade)} ${unit.title}</h2>
+            <p>${unit.description}</p>
+            <div class="unit-progress">
+              <div class="unit-progress-bar">
+                <div class="unit-progress-fill" style="width: ${unitPercent}%"></div>
+              </div>
+              <span>${completedInUnit}/${totalInUnit}</span>
+            </div>
+          </div>
+          <div class="unit-topics" id="unit-${unitIndex}">
+            ${unit.topics.map((topic, topicIndex) => `
+              <div class="topic-item" onclick="openTopic('${unit.id}', '${topic.id}', event)">
+                <div class="topic-title">
+                  <span class="status ${isCompleted(topic.id) ? 'completed' : ''}">${isCompleted(topic.id) ? '✓' : ''}</span>
+                  ${topic.title}
+                </div>
+                <div class="topic-description">${topic.description}</div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        container.appendChild(unitCard);
+      });
+    }
+
+    // Get emoji for unit based on grade
+    function getUnitEmoji(index, grade) {
+      const emojis5 = ['🔢', '🔵', '🍕', '➕', '📐', '📏', '📊', '💰', '🎯'];
+      const emojis6 = ['🔢', '🍕', '⚖️', '💯', '🔵', '📝', '📐', '🗺️', '📊', '💰'];
+      const emojis = grade === 5 ? emojis5 : emojis6;
+      return emojis[index] || '📚';
+    }
+
+    // Toggle unit expansion
+    function toggleUnit(unitIndex) {
+      const unitCards = document.querySelectorAll('.unit-card');
+      unitCards[unitIndex].classList.toggle('expanded');
+    }
+
+    // Check if topic is completed
+    function isCompleted(topicId) {
+      return (completedTopics[currentGrade] || []).includes(topicId);
+    }
+
+    // Generate examples HTML
+    function generateExamplesHTML(topicId, examples, startIndex = 0) {
+      return examples.map((example, index) => {
+        const actualIndex = startIndex + index;
+        const hint = example.hint || 'Think about the concept and try again / 想想这个概念，再试一次';
+        const escapedHint = hint.replace(/`/g, '\\`').replace(/"/g, '&quot;');
+        const isExtra = example.isExtra ? 'true' : 'false';
+        const templateIndex = example.templateIndex !== undefined ? example.templateIndex : 'null';
+        const extraClass = example.isExtra ? ' style="border-color: #667eea;"' : '';
+        const extraPrefix = example.isExtra ? '🔄 ' : '';
+
+        return `
+          <div class="example-item" id="example-item-${topicId}-${actualIndex}"
+               data-attempts="0" data-correct="false"
+               data-is-extra="${isExtra}"${extraClass}>
+            <div class="example-question">${actualIndex + 1}. ${extraPrefix}${example.question}</div>
+            ${example.questionEn ? `<div class="example-question-en">${example.questionEn}</div>` : ''}
+            ${example.type === 'choice' ? `
+              <div class="example-options" id="options-${topicId}-${actualIndex}">
+                ${example.options.map((option, optIndex) => `
+                  <button class="example-option" onclick="checkAnswer('${topicId}', ${actualIndex}, ${optIndex}, ${example.correctAnswer}, event, '${escapedHint}', ${templateIndex})">
+                    ${String.fromCharCode(65 + optIndex)}. ${option}
+                  </button>
+                `).join('')}
+              </div>
+            ` : `
+              <div class="example-input-container">
+                <input type="text" class="example-input" id="input-${topicId}-${actualIndex}" placeholder="输入答案 / Enter answer">
+                <button class="example-check-btn" onclick="checkInputAnswer('${topicId}', ${actualIndex}, '${example.correctAnswer}', ${JSON.stringify(example.answers || []).replace(/"/g, '&quot;')}, event, '${escapedHint}')">检查 / Check</button>
+              </div>
+            `}
+            <div class="example-feedback" id="feedback-${topicId}-${actualIndex}"></div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Open topic modal
+    function openTopic(unitId, topicId, event) {
+      event.stopPropagation();
+
+      const unit = curriculum.units.find(u => u.id === unitId);
+      const topic = unit.topics.find(t => t.id === topicId);
+
+      document.getElementById('modalTitle').textContent = topic.title;
+      document.getElementById('modalDescription').textContent = topic.description;
+      document.getElementById('modalHeader').className = `modal-header ${currentGrade === 6 ? 'grade6' : ''}`;
+
+      let content = '';
+
+      // Examples section - show first, before resources
+      const hasStaticExamples = topic.examples && topic.examples.length > 0;
+      const hasDynamicExamples = topic.dynamicExamples && topic.dynamicExamples.length > 0;
+
+      if (hasStaticExamples || hasDynamicExamples) {
+        // Store examples for this topic
+        window.currentTopicExamples = window.currentTopicExamples || {};
+        window.currentTopicExamples[topicId] = [];
+
+        // Add static examples
+        if (hasStaticExamples) {
+          topic.examples.forEach(ex => {
+            window.currentTopicExamples[topicId].push(JSON.parse(JSON.stringify(ex)));
+          });
+        }
+
+        // Add dynamic examples
+        if (hasDynamicExamples) {
+          window.currentDynamicTemplates = window.currentDynamicTemplates || {};
+          window.currentDynamicTemplates[topicId] = topic.dynamicExamples;
+
+          topic.dynamicExamples.forEach((template, idx) => {
+            const question = window.QuestionGenerator.generateChoiceQuestion(template);
+            question.templateIndex = idx;
+            window.currentTopicExamples[topicId].push(question);
+          });
+        }
+
+        console.log('Topic opened:', topicId, 'with', window.currentTopicExamples[topicId].length, 'questions');
+        console.log('Dynamic templates:', window.currentDynamicTemplates?.[topicId]?.length || 0);
+
+        content += `
+          <div class="examples-section">
+            <h3><span class="icon">✎</span> Interactive Examples / 互动练习</h3>
+            <div class="example-progress" id="exampleProgress-${topicId}">
+              Answer the questions to practice / 完成以下问题来练习
+            </div>
+            <div id="examplesContainer-${topicId}">
+              ${generateExamplesHTML(topicId, window.currentTopicExamples[topicId])}
+            </div>
+          </div>
+        `;
+      }
+
+      // Khan Academy resources
+      if (topic.khanAcademy && topic.khanAcademy.length > 0) {
+        content += `
+          <div class="resource-section">
+            <h3><span class="icon khan-icon">K</span> Khan Academy</h3>
+            <ul class="resource-list">
+              ${topic.khanAcademy.map(resource => `
+                <li class="resource-item">
+                  <a href="${resource.url}" target="_blank">${resource.title}</a>
+                  <span class="type-badge">${resource.type || 'video'}</span>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+        `;
+      }
+
+      // YouTube resources
+      if (topic.youtube && topic.youtube.length > 0) {
+        content += `
+          <div class="resource-section">
+            <h3><span class="icon youtube-icon">▶</span> YouTube Videos</h3>
+            <ul class="resource-list">
+              ${topic.youtube.map(resource => `
+                <li class="resource-item">
+                  <a href="${resource.url}" target="_blank">${resource.title}</a>
+                  <span class="channel">${resource.channel}</span>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+        `;
+      }
+
+      // Mark complete button - shows status, not clickable (must complete all examples correctly)
+      const isComplete = isCompleted(topicId);
+      content += `
+        <button class="mark-complete-btn ${isComplete ? 'completed' : ''}" id="completeBtn-${topicId}" style="cursor: default;">
+          ${isComplete ? '✓ Completed! All answers correct! / 已完成！全部答对！' : '⏳ Complete all examples correctly to finish / 正确完成所有练习题后自动完成'}
+        </button>
+      `;
+
+      document.getElementById('modalContent').innerHTML = content;
+      document.getElementById('modalOverlay').classList.add('active');
+    }
+
+    // Check answer for choice questions
+    function checkAnswer(topicId, exampleIndex, selectedAnswer, correctAnswer, event, hint, templateIndex) {
+      event.stopPropagation();
+      const exampleItem = document.getElementById(`example-item-${topicId}-${exampleIndex}`);
+      const options = exampleItem.querySelectorAll('.example-option');
+      const feedback = document.getElementById(`feedback-${topicId}-${exampleIndex}`);
+
+      // Check if already answered correctly
+      if (exampleItem.dataset.correct === 'true') {
+        return; // Already correct, don't allow changes
+      }
+
+      // Get current attempts
+      let attempts = parseInt(exampleItem.dataset.attempts || 0);
+      attempts++;
+      exampleItem.dataset.attempts = attempts;
+
+      if (selectedAnswer === correctAnswer) {
+        // Correct answer!
+        exampleItem.dataset.correct = 'true';
+        exampleItem.classList.add('answered');
+        exampleItem.classList.remove('wrong');
+
+        // Show correct styling for selected option
+        options.forEach((opt, idx) => {
+          opt.classList.add('disabled');
+          if (idx === correctAnswer) {
+            opt.classList.add('correct');
+          }
+        });
+
+        // ========== 游戏化奖励 ==========
+        if (window.gameManager && window.gameUI) {
+          // 计算答题用时（从点击按钮到答对的时间）
+          const timeSpent = 0; // 可以添加计时器功能
+          const reward = window.gameManager.answerCorrect(timeSpent);
+
+          // 显示金币动画
+          window.gameUI.showCoinsAnimation(reward.coins, event.clientX, event.clientY);
+
+          // 显示答对动画
+          window.gameUI.showCorrectAnimation(event.clientX, event.clientY);
+
+          // 显示连胜
+          if (reward.streak >= 5) {
+            window.gameUI.showStreakAnimation(reward.streak);
+          }
+
+          // 显示新解锁的徽章
+          if (reward.newBadges && reward.newBadges.length > 0) {
+            reward.newBadges.forEach(badge => {
+              window.gameUI.showBadgeUnlockAnimation(badge);
+            });
+          }
+
+          // 更新游戏UI
+          const gameState = window.gameManager.getDisplayState();
+          window.updateGameUI(gameState);
+        }
+        // ========== 游戏化结束 ==========
+
+        // Show success message
+        feedback.className = 'example-feedback show correct';
+        if (attempts > 1) {
+          feedback.innerHTML = `✓ Correct! Got it in ${attempts} attempts! / 答对了！用了 ${attempts} 次尝试！`;
+        } else {
+          feedback.innerHTML = `✓ Perfect! First try! / 完美！一次就对！`;
+        }
+
+        // Update progress and check if all correct
+        updateExampleProgress(topicId);
+        checkTopicCompletion(topicId);
+      } else {
+        // Wrong answer
+
+        // ========== 游戏化处理 ==========
+        if (window.gameManager && window.gameUI) {
+          window.gameManager.answerWrong();
+          window.gameUI.showWrongAnimation(event.clientX, event.clientY);
+
+          // 更新游戏UI
+          const gameState = window.gameManager.getDisplayState();
+          window.updateGameUI(gameState);
+        }
+        // ========== 游戏化结束 ==========
+
+        const selectedOption = options[selectedAnswer];
+        selectedOption.classList.add('incorrect');
+
+        // Check if this is a dynamic question (can add new practice questions)
+        const isDynamic = templateIndex !== null && templateIndex !== undefined && window.currentDynamicTemplates && window.currentDynamicTemplates[topicId];
+        const isExtra = exampleItem.dataset.isExtra === 'true';
+
+        // Add shake animation
+        exampleItem.style.animation = 'none';
+        setTimeout(() => {
+          exampleItem.style.animation = 'shake 0.5s ease';
+        }, 10);
+
+        if (isDynamic && !isExtra) {
+          // Original dynamic question - show hint, add new question EVERY TIME
+          const hasMeaningfulHint = hint && !hint.includes('Think about the concept and try again');
+          const attempts = parseInt(exampleItem.dataset.attempts || 0);
+
+          if (hasMeaningfulHint) {
+            feedback.className = 'example-feedback show incorrect';
+            feedback.innerHTML = `✗ Not quite. / 不太对。<br><strong>💡 Hint / 提示:</strong> ${hint}<br><small>Practice question #${attempts} added below 👇</small>`;
+          } else {
+            feedback.className = 'example-feedback show incorrect';
+            feedback.innerHTML = `✗ Not quite. / 不太对。<br><small>Practice question #${attempts} added below 👇</small>`;
+          }
+
+          // Add new practice question EVERY TIME (not just first time)
+          addNewPracticeQuestion(topicId, templateIndex);
+
+          // Allow retry after a delay
+          setTimeout(() => {
+            selectedOption.classList.remove('incorrect');
+          }, 1500);
+        } else {
+          // Static question or extra practice question - just allow retry
+          feedback.className = 'example-feedback show incorrect';
+          feedback.innerHTML = `✗ Not quite. Try again! / 不太对，再试一次！`;
+
+          // Allow retry after a delay
+          setTimeout(() => {
+            selectedOption.classList.remove('incorrect');
+          }, 1000);
+        }
+
+        updateExampleProgress(topicId);
+      }
+    }
+
+    // Add a new practice question at the end (for wrong answers)
+    function addNewPracticeQuestion(topicId, templateIndex) {
+      console.log('addNewPracticeQuestion called:', { topicId, templateIndex });
+
+      if (!window.currentDynamicTemplates || !window.currentDynamicTemplates[topicId]) {
+        console.error('No dynamic templates found for topic:', topicId);
+        return;
+      }
+
+      const template = window.currentDynamicTemplates[topicId][templateIndex];
+      console.log('Using template:', template);
+
+      const newQuestion = window.QuestionGenerator.generateChoiceQuestion(template);
+      newQuestion.templateIndex = templateIndex;
+      newQuestion.isExtra = true; // Mark as extra practice question
+      console.log('Generated new question:', newQuestion);
+
+      // Add to the examples array
+      if (!window.currentTopicExamples) window.currentTopicExamples = {};
+      if (!window.currentTopicExamples[topicId]) window.currentTopicExamples[topicId] = [];
+      window.currentTopicExamples[topicId].push(newQuestion);
+
+      // Get the container and add the new question HTML
+      const container = document.getElementById(`examplesContainer-${topicId}`);
+      if (!container) {
+        console.error('Container not found:', `examplesContainer-${topicId}`);
+        return;
+      }
+
+      const newIndex = window.currentTopicExamples[topicId].length - 1;
+      const escapedHint = (newQuestion.hint || '').replace(/`/g, '\\`').replace(/"/g, '&quot;');
+
+      const newQuestionHTML = `
+        <div class="example-item" id="example-item-${topicId}-${newIndex}"
+             data-attempts="0" data-correct="false" data-is-extra="true"
+             style="animation: fadeIn 0.5s ease; border-color: #667eea;">
+          <div class="example-question">🔄 Practice: ${newQuestion.question}</div>
+          ${newQuestion.questionEn ? `<div class="example-question-en">${newQuestion.questionEn}</div>` : ''}
+          <div class="example-options" id="options-${topicId}-${newIndex}">
+            ${newQuestion.options.map((option, optIndex) => `
+              <button class="example-option" onclick="checkAnswer('${topicId}', ${newIndex}, ${optIndex}, ${newQuestion.correctAnswer}, event, '${escapedHint}', ${templateIndex})">
+                ${String.fromCharCode(65 + optIndex)}. ${option}
+              </button>
+            `).join('')}
+          </div>
+          <div class="example-feedback" id="feedback-${topicId}-${newIndex}"></div>
+        </div>
+      `;
+
+      container.insertAdjacentHTML('beforeend', newQuestionHTML);
+      console.log('New question added at index:', newIndex);
+
+      // Scroll to the new question smoothly
+      setTimeout(() => {
+        const newElement = document.getElementById(`example-item-${topicId}-${newIndex}`);
+        if (newElement) {
+          newElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          console.log('Scrolled to new question');
+        }
+      }, 100);
+
+      // Update progress to show more questions
+      updateExampleProgress(topicId);
+    }
+
+    // Check answer for input questions
+    function checkInputAnswer(topicId, exampleIndex, correctAnswer, alternativeAnswers, event, hint) {
+      event.stopPropagation();
+      const input = document.getElementById(`input-${topicId}-${exampleIndex}`);
+      const feedback = document.getElementById(`feedback-${topicId}-${exampleIndex}`);
+      const exampleItem = document.getElementById(`example-item-${topicId}-${exampleIndex}`);
+      const userAnswer = input.value.trim().replace(/[,\s]/g, '');
+
+      // Check if already answered correctly
+      if (exampleItem.dataset.correct === 'true') {
+        return; // Already correct, don't allow changes
+      }
+
+      // Get current attempts
+      let attempts = parseInt(exampleItem.dataset.attempts || 0);
+      attempts++;
+      exampleItem.dataset.attempts = attempts;
+
+      const isCorrect = userAnswer === correctAnswer.replace(/[,\s]/g, '') ||
+                       (alternativeAnswers && alternativeAnswers.includes(userAnswer));
+
+      if (isCorrect) {
+        // Correct answer!
+        exampleItem.dataset.correct = 'true';
+        exampleItem.classList.add('answered');
+        exampleItem.classList.remove('wrong');
+        input.disabled = true;
+
+        feedback.className = 'example-feedback show correct';
+        if (attempts > 1) {
+          feedback.innerHTML = `✓ Correct! Got it in ${attempts} attempts! / 答对了！用了 ${attempts} 次尝试！`;
+        } else {
+          feedback.innerHTML = `✓ Perfect! First try! / 完美！一次就对！`;
+        }
+
+        updateExampleProgress(topicId);
+        checkTopicCompletion(topicId);
+      } else {
+        // Wrong answer - show hint, allow retry
+        exampleItem.classList.add('wrong');
+
+        // Add shake animation
+        exampleItem.style.animation = 'none';
+        setTimeout(() => {
+          exampleItem.style.animation = 'shake 0.5s ease';
+          exampleItem.classList.remove('wrong');
+        }, 500);
+
+        // Show hint instead of correct answer
+        feedback.className = 'example-feedback show incorrect';
+        feedback.innerHTML = `✗ Not quite. / 不太对。<br><strong>💡 Hint / 提示:</strong> ${hint}<br><small>Try again! / 再试一次！</small>`;
+      }
+    }
+
+    // Update example progress
+    function updateExampleProgress(topicId) {
+      const exampleItems = document.querySelectorAll(`[id^="example-item-${topicId}"]`);
+
+      if (exampleItems.length > 0) {
+        const progressEl = document.getElementById(`exampleProgress-${topicId}`);
+
+        // Count correct answers (only count original questions, not extra practice)
+        let correct = 0;
+        let totalOriginal = 0;
+        let totalAttempts = 0;
+        let extraCount = 0;
+
+        exampleItems.forEach(item => {
+          totalAttempts += parseInt(item.dataset.attempts || 0);
+          if (item.dataset.isExtra !== 'true') {
+            totalOriginal++;
+            if (item.dataset.correct === 'true') {
+              correct++;
+            }
+          } else {
+            extraCount++;
+          }
+        });
+
+        let message = `Progress / 进度: <strong>${correct}/${totalOriginal}</strong> correct`;
+
+        if (extraCount > 0) {
+          message += ` <small style="color: #667eea;">(+${extraCount} practice / +${extraCount} 道练习)</small>`;
+        }
+
+        if (correct === totalOriginal && totalOriginal > 0) {
+          // All original questions correct!
+          message = `<span style="color: #4CAF50;">🎉 All ${totalOriginal} questions correct! / 全部 ${totalOriginal} 题正确！`;
+          if (extraCount > 0) {
+            message += ` <small>(${extraCount} practice completed / ${extraCount} 道练习)</small>`;
+          }
+          message += `</span>`;
+        } else {
+          const remaining = totalOriginal - correct;
+          message += `<br><small>${remaining} more to go / 还剩 ${remaining} 题</small>`;
+        }
+
+        progressEl.innerHTML = message;
+      }
+    }
+
+    // Check if all examples are answered correctly and mark topic as complete
+    async function checkTopicCompletion(topicId) {
+      const exampleItems = document.querySelectorAll(`[id^="example-item-${topicId}"]`);
+
+      // Count correct answers (only original questions, not extra practice)
+      let correctCount = 0;
+      let totalCount = 0;
+
+      exampleItems.forEach(item => {
+        if (item.dataset.isExtra !== 'true') {
+          totalCount++;
+          if (item.dataset.correct === 'true') {
+            correctCount++;
+          }
+        }
+      });
+
+      // Check if all original examples are answered correctly
+      if (totalCount > 0 && correctCount === totalCount) {
+        // All original examples answered correctly!
+        if (!isCompleted(topicId)) {
+          await markTopicComplete(topicId);
+        }
+      }
+    }
+
+    // Mark topic as complete (called automatically when all examples are correct)
+    async function markTopicComplete(topicId) {
+      if (!completedTopics[currentGrade]) {
+        completedTopics[currentGrade] = [];
+      }
+
+      if (!completedTopics[currentGrade].includes(topicId)) {
+        completedTopics[currentGrade].push(topicId);
+
+        // Save to localStorage
+        localStorage.setItem(`completedTopics_grade${currentGrade}`, JSON.stringify(completedTopics[currentGrade]));
+
+        // Save to cloud if logged in
+        if (window.currentUser) {
+          await saveProgressToCloud();
+        }
+
+        // Update UI
+        renderUnits();
+        updateProgress();
+
+        // Update the complete button in modal
+        const completeBtn = document.getElementById(`completeBtn-${topicId}`);
+        if (completeBtn) {
+          completeBtn.classList.add('completed');
+          completeBtn.textContent = '✓ Completed! All answers correct! / 已完成！全部答对！';
+        }
+
+        // Show celebration message
+        const progressEl = document.getElementById(`exampleProgress-${topicId}`);
+        if (progressEl) {
+          progressEl.innerHTML = `<span style="color: #4CAF50; font-size: 1.1rem;">🎉 Excellent! All correct! Topic completed! / 太棒了！全部正确！本节完成！</span>`;
+        }
+      }
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
+    }
+
+    // Toggle topic completion
+    async function toggleComplete(topicId) {
+      if (!completedTopics[currentGrade]) {
+        completedTopics[currentGrade] = [];
+      }
+
+      if (completedTopics[currentGrade].includes(topicId)) {
+        completedTopics[currentGrade] = completedTopics[currentGrade].filter(id => id !== topicId);
+      } else {
+        completedTopics[currentGrade].push(topicId);
+      }
+
+      // Save to localStorage
+      localStorage.setItem(`completedTopics_grade${currentGrade}`, JSON.stringify(completedTopics[currentGrade]));
+
+      // Save to cloud if logged in
+      if (window.currentUser) {
+        await saveProgressToCloud();
+      }
+
+      renderUnits();
+      updateProgress();
+      closeModal();
+    }
+
+    // Update progress bar
+    function updateProgress() {
+      let totalTopics = 0;
+      curriculum.units.forEach(unit => {
+        totalTopics += unit.topics.length;
+      });
+
+      const completed = (completedTopics[currentGrade] || []).length;
+      const percentage = totalTopics > 0 ? (completed / totalTopics) * 100 : 0;
+
+      document.getElementById('progressFill').style.width = percentage + '%';
+      document.getElementById('progressText').textContent =
+        `${completed} / ${totalTopics} topics completed (${Math.round(percentage)}%)`;
+    }
+
+    // Close modal on overlay click
+    document.getElementById('modalOverlay').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+
+    // Close login modal on overlay click
+    document.getElementById('loginModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeLoginModal();
+      }
+    });
+
+    // Create stars
+    function createStars() {
+      const starsContainer = document.getElementById('stars');
+      for (let i = 0; i < 50; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDelay = Math.random() * 2 + 's';
+        starsContainer.appendChild(star);
+      }
+    }
+
+    // Initialize
+    createStars();
+    loadCurriculum();
+
+    // ========== 游戏系统初始化 ==========
+    setTimeout(() => {
+      if (window.gameManager && window.gameUI) {
+        const gameState = window.gameManager.getDisplayState();
+        window.updateGameUI(gameState);
+        console.log('🎮 游戏UI已初始化！');
+        console.log('📊 当前状态:', {
+          level: gameState.level.name,
+          coins: gameState.coins,
+          streak: gameState.streak
+        });
+      }
+    }, 500);
+    // ========== 游戏系统初始化结束 ==========
+
+    // ========== 语言切换功能 ==========
+    function toggleLanguage() {
+      if (window.i18n) {
+        const newLang = window.i18n.toggleLang();
+        const langLabel = document.getElementById('langLabel');
+        if (langLabel) {
+          langLabel.textContent = newLang.toUpperCase();
+        }
+        console.log('🌐 Language switched to:', newLang);
+      }
+    }
+
+    // 监听语言变化事件
+    window.addEventListener('languageChanged', (e) => {
+      const lang = e.detail.lang;
+      const langLabel = document.getElementById('langLabel');
+      if (langLabel) {
+        langLabel.textContent = lang.toUpperCase();
+      }
+    });
+    // ========== 语言切换结束 ==========
+  </script>
+</body>
+</html>

@@ -1,0 +1,2744 @@
+{
+  "grade": 5,
+  "province": "Ontario, Canada",
+  "units": [
+    {
+      "id": "number-sense-whole",
+      "title": "Number Sense - Whole Numbers / 数感 - 整数",
+      "description": "理解和运用大数字，包括读、写、比较和排序",
+      "topics": [
+        {
+          "id": "place-value",
+          "title": "Place Value / 位值",
+          "description": "理解到百万位的位值系统",
+          "examples": [
+            {
+              "question": "在数字 456,789 中，7 在哪一位？",
+              "questionEn": "In the number 456,789, what place value is the digit 7 in?",
+              "type": "choice",
+              "options": [
+                "百位 / Hundreds",
+                "十位 / Tens",
+                "千位 / Thousands",
+                "万位 / Ten Thousands"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "3,456,789 中，5 代表多少？",
+              "questionEn": "In 3,456,789, what value does the digit 5 represent?",
+              "type": "choice",
+              "options": [
+                "5",
+                "50",
+                "500",
+                "5,000"
+              ],
+              "correctAnswer": 3
+            },
+            {
+              "question": "下面哪个数字有 7 个十万？",
+              "questionEn": "Which number has 7 in the hundred thousands place?",
+              "type": "choice",
+              "options": [
+                "789,456",
+                "678,912",
+                "978,564",
+                "567,891"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "写出这个数字：三百二十万五千六百零七",
+              "questionEn": "Write this number: 三百二十万五千六百零七",
+              "type": "input",
+              "correctAnswer": "3,205,607",
+              "answers": [
+                "3205607",
+                "3,205,607",
+                "3 205 607"
+              ]
+            },
+            {
+              "question": "在 9,876,543 中，8 代表多少？",
+              "questionEn": "In 9,876,543, what value does the digit 8 represent?",
+              "type": "choice",
+              "options": [
+                "800",
+                "8,000",
+                "80,000",
+                "800,000"
+              ],
+              "correctAnswer": 2
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Place value with whole numbers",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/powers-of-ten/imp-place-value-with-powers-of-10/v/place-value-with-whole-numbers",
+              "type": "video"
+            },
+            {
+              "title": "Place value practice",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/powers-of-ten/imp-place-value-with-powers-of-10/e/place-value",
+              "type": "practice"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Place Value Song For Kids | Ones, Tens, Hundreds",
+              "url": "https://www.youtube.com/watch?v=5W47G-h7myY",
+              "channel": "Scratch Garden"
+            },
+            {
+              "title": "Place Value Through Millions",
+              "url": "https://www.youtube.com/watch?v=_8xGqn8Nfcs",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "dynamicExamples": [
+            {
+              "question": "{num1} 在数字 {num2} 中的位值是什么？",
+              "questionEn": "What is the place value of digit {num1} in the number {num2}?",
+              "hint": "数字 {num1} 在 {num2} 的位置决定它的位值",
+              "hintEn": "The position of digit {num1} in {num2} determines its place value",
+              "answer": "num1",
+              "variables": {
+                "num1": {
+                  "type": "integer",
+                  "min": 1,
+                  "max": 9
+                },
+                "num2": {
+                  "type": "integer",
+                  "min": 1000,
+                  "max": 99999
+                }
+              },
+              "wrongOptions": [
+                "num1 + 1",
+                "num1 - 1",
+                "num1 * 10"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "compare-order",
+          "title": "Comparing and Ordering Numbers / 比较和排序数字",
+          "description": "比较和排序大数字",
+          "examples": [
+            {
+              "question": "哪个数字更大？456,789 还是 465,432？",
+              "questionEn": "Which number is larger? 456,789 or 465,432?",
+              "type": "choice",
+              "options": [
+                "456,789",
+                "465,432",
+                "它们相等 / They are equal"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "把下面数字从小到大排序：789,456 / 987,654 / 678,912",
+              "questionEn": "Order these numbers from smallest to largest",
+              "type": "choice",
+              "options": [
+                "678,912 < 789,456 < 987,654",
+                "789,456 < 678,912 < 987,654",
+                "987,654 < 789,456 < 678,912"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "在 >、<、= 中选择正确的符号：234,567 ___ 243,567",
+              "questionEn": "Choose the correct symbol: 234,567 ___ 243,567",
+              "type": "choice",
+              "options": [
+                ">",
+                "<",
+                "="
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "下面哪组数字是按从大到小排列的？",
+              "questionEn": "Which group is ordered from largest to smallest?",
+              "type": "choice",
+              "options": [
+                "123,456 < 234,567 < 345,678",
+                "345,678 > 234,567 > 123,456",
+                "234,567 > 345,678 > 123,456"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "比较：890,123 和 890,132",
+              "questionEn": "Compare: 890,123 and 890,132",
+              "type": "choice",
+              "options": [
+                "890,123 > 890,132",
+                "890,123 < 890,132",
+                "890,123 = 890,132"
+              ],
+              "correctAnswer": 1
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Comparing whole numbers",
+              "url": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-place-value-and-rounding-2/imp-comparing-multi-digit-numbers/v/comparing-whole-numbers",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Comparing and Ordering Whole Numbers",
+              "url": "https://www.youtube.com/watch?v=WLgU3hHLH-4",
+              "channel": "Math with Mr. J"
+            }
+          ]
+        },
+        {
+          "id": "rounding",
+          "title": "Rounding Numbers / 四舍五入",
+          "description": "四舍五入到不同位值",
+          "examples": [
+            {
+              "question": "把 4,567 四舍五入到最近的百位",
+              "questionEn": "Round 4,567 to the nearest hundred",
+              "type": "choice",
+              "options": [
+                "4,500",
+                "4,600",
+                "4,570",
+                "5,000"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "把 78,945 四舍五入到最近的千位",
+              "questionEn": "Round 78,945 to the nearest thousand",
+              "type": "choice",
+              "options": [
+                "78,000",
+                "78,900",
+                "79,000",
+                "80,000"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "把 234,567 四舍五入到最近的万位",
+              "questionEn": "Round 234,567 to the nearest ten thousand",
+              "type": "choice",
+              "options": [
+                "230,000",
+                "234,000",
+                "235,000",
+                "240,000"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "下面哪个数字四舍五入到千位后是 56,000？",
+              "questionEn": "Which number rounds to 56,000 to the nearest thousand?",
+              "type": "choice",
+              "options": [
+                "56,499",
+                "55,499",
+                "56,500",
+                "55,500"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "把 9,876 四舍五入到最近的百位是？",
+              "questionEn": "Round 9,876 to the nearest hundred",
+              "type": "choice",
+              "options": [
+                "9,800",
+                "9,880",
+                "9,900",
+                "10,000"
+              ],
+              "correctAnswer": 2
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Rounding whole numbers",
+              "url": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-place-value-and-rounding-2/imp-rounding-whole-numbers/v/rounding-whole-numbers",
+              "type": "video"
+            },
+            {
+              "title": "Rounding practice",
+              "url": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-place-value-and-rounding-2/imp-rounding-whole-numbers/e/rounding-whole-numbers",
+              "type": "practice"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Rounding Numbers Song",
+              "url": "https://www.youtube.com/watch?v=UP7YmXJc7Ik",
+              "channel": "Numberock"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "number-sense-decimals",
+      "title": "Number Sense - Decimals / 数感 - 小数",
+      "description": "理解和运用小数，包括加减乘除",
+      "topics": [
+        {
+          "id": "decimal-place-value",
+          "title": "Decimal Place Value / 小数位值",
+          "description": "理解小数位值到千分位",
+          "examples": [
+            {
+              "question": "在 0.456 中，5 在哪一位？",
+              "questionEn": "In 0.456, what place value is the digit 5 in?",
+              "type": "choice",
+              "options": [
+                "十分位 / Tenths",
+                "百分位 / Hundredths",
+                "千分位 / Thousandths",
+                "个位 / Ones"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "0.3 中的 3 代表多少？",
+              "questionEn": "What value does the digit 3 represent in 0.3?",
+              "type": "choice",
+              "options": [
+                "0.003",
+                "0.03",
+                "0.3",
+                "3"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "哪个小数有 6 个百分之一？",
+              "questionEn": "Which decimal has 6 in the hundredths place?",
+              "type": "choice",
+              "options": [
+                "0.065",
+                "0.65",
+                "0.605",
+                "6.5"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "0.789 中，8 代表多少？",
+              "questionEn": "In 0.789, what value does the digit 8 represent?",
+              "type": "choice",
+              "options": [
+                "0.008",
+                "0.08",
+                "0.8",
+                "8"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "比较大小：0.45 和 0.405",
+              "questionEn": "Compare: 0.45 and 0.405",
+              "type": "choice",
+              "options": [
+                "0.45 > 0.405",
+                "0.45 < 0.405",
+                "0.45 = 0.405"
+              ],
+              "correctAnswer": 0
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Decimal place value intro",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-place-value-and-decimals/imp-decimal-place-value-intro/v/decimal-place-value",
+              "type": "video"
+            },
+            {
+              "title": "Decimals on the number line",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-place-value-and-decimals/imp-decimals-on-the-number-line/v/decimals-on-a-number-line",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Understanding Decimal Place Value",
+              "url": "https://www.youtube.com/watch?v=OqiWuUfLvdc",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Decimal Place Value Song",
+              "url": "https://www.youtube.com/watch?v=dXh8MX-fJRo",
+              "channel": "Numberock"
+            }
+          ]
+        },
+        {
+          "id": "add-subtract-decimals",
+          "title": "Adding and Subtracting Decimals / 小数加减法",
+          "description": "小数的加法和减法运算",
+          "examples": [
+            {
+              "question": "计算：3.45 + 2.3 = ?",
+              "questionEn": "Calculate: 3.45 + 2.3 = ?",
+              "type": "choice",
+              "options": [
+                "5.48",
+                "5.75",
+                "5.78",
+                "6.75"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "计算：8.56 - 3.24 = ?",
+              "questionEn": "Calculate: 8.56 - 3.24 = ?",
+              "type": "choice",
+              "options": [
+                "5.22",
+                "5.32",
+                "5.42",
+                "11.8"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "计算：12.5 + 6.75 = ?",
+              "questionEn": "Calculate: 12.5 + 6.75 = ?",
+              "type": "choice",
+              "options": [
+                "18.25",
+                "19.00",
+                "19.25",
+                "18.75"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "计算：10 - 4.56 = ?",
+              "questionEn": "Calculate: 10 - 4.56 = ?",
+              "type": "choice",
+              "options": [
+                "5.44",
+                "5.54",
+                "6.44",
+                "14.56"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "小红有 5.5 元，小刚有 3.75 元，他们一共有多少元？",
+              "questionEn": "Xiao Hong has $5.5, Xiao Gang has $3.75. How much do they have together?",
+              "type": "choice",
+              "options": [
+                "8.25",
+                "9.25",
+                "9.75",
+                "8.75"
+              ],
+              "correctAnswer": 1
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Adding decimals",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-adding-and-subtracting-decimals/imp-adding-decimals-intro/v/adding-decimals-example-1",
+              "type": "video"
+            },
+            {
+              "title": "Subtracting decimals",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-adding-and-subtracting-decimals/imp-subtracting-decimals-intro/v/subtracting-decimals",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Adding Decimals | Math with Mr. J",
+              "url": "https://www.youtube.com/watch?v=9GlvJ-XRvno",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Subtracting Decimals | Math with Mr. J",
+              "url": "https://www.youtube.com/watch?v=6HMdL9nB4s4",
+              "channel": "Math with Mr. J"
+            }
+          ]
+        },
+        {
+          "id": "multiply-decimals",
+          "title": "Multiplying Decimals / 小数乘法",
+          "description": "小数的乘法运算",
+          "examples": [
+            {
+              "question": "计算：0.5 × 0.3 = ?",
+              "questionEn": "Calculate: 0.5 × 0.3 = ?",
+              "type": "choice",
+              "options": [
+                "0.15",
+                "0.015",
+                "1.5",
+                "0.8"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "计算：2.5 × 4 = ?",
+              "questionEn": "Calculate: 2.5 × 4 = ?",
+              "type": "choice",
+              "options": [
+                "10",
+                "100",
+                "1.0",
+                "6.5"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "计算：1.2 × 0.11 = ?",
+              "questionEn": "Calculate: 1.2 × 0.11 = ?",
+              "type": "choice",
+              "options": [
+                "0.132",
+                "0.0132",
+                "1.32",
+                "0.022"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "一个苹果 0.5 千克，6 个苹果多少千克？",
+              "questionEn": "An apple weighs 0.5 kg. How much do 6 apples weigh?",
+              "type": "choice",
+              "options": [
+                "3 kg",
+                "0.3 kg",
+                "5.5 kg",
+                "30 kg"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "计算：3.4 × 2.5 = ?",
+              "questionEn": "Calculate: 3.4 × 2.5 = ?",
+              "type": "choice",
+              "options": [
+                "8.5",
+                "0.85",
+                "85",
+                "5.9"
+              ],
+              "correctAnswer": 0
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Multiplying decimals",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multiplying-and-dividing-decimals/imp-multiplying-decimals-strategies/v/multiplying-decimals-example",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Multiplying Decimals",
+              "url": "https://www.youtube.com/watch?v=JETRf1mFnHM",
+              "channel": "Math with Mr. J"
+            }
+          ],
+          "dynamicExamples": [
+            {
+              "question": "{dec1} + {dec2} = ?",
+              "questionEn": "{dec1} + {dec2} = ?",
+              "hint": "对齐小数点，然后相加",
+              "hintEn": "Line up the decimal points, then add",
+              "answer": "dec1 + dec2",
+              "variables": {
+                "dec1": {
+                  "type": "decimal",
+                  "min": 0.1,
+                  "max": 50,
+                  "decimals": 1
+                },
+                "dec2": {
+                  "type": "decimal",
+                  "min": 0.1,
+                  "max": 50,
+                  "decimals": 1
+                }
+              },
+              "wrongOptions": [
+                "dec1 + dec2 + 1",
+                "dec1 + dec2 - 0.1",
+                "dec1 + dec2 + 0.5"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "divide-decimals",
+          "title": "Dividing Decimals / 小数除法",
+          "description": "小数的除法运算",
+          "examples": [
+            {
+              "question": "计算：4.8 ÷ 2 = ?",
+              "questionEn": "Calculate: 4.8 ÷ 2 = ?",
+              "type": "choice",
+              "options": [
+                "2.4",
+                "0.24",
+                "24",
+                "4.2"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "计算：0.36 ÷ 0.6 = ?",
+              "questionEn": "Calculate: 0.36 ÷ 0.6 = ?",
+              "type": "choice",
+              "options": [
+                "0.6",
+                "0.06",
+                "6",
+                "0.006"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "计算：7.2 ÷ 0.9 = ?",
+              "questionEn": "Calculate: 7.2 ÷ 0.9 = ?",
+              "type": "choice",
+              "options": [
+                "0.8",
+                "8",
+                "80",
+                "7.11"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "5.6 米长的绳子平均分成 4 段，每段多少米？",
+              "questionEn": "A 5.6 m rope is cut into 4 equal pieces. How long is each piece?",
+              "type": "choice",
+              "options": [
+                "1.4 m",
+                "0.14 m",
+                "14 m",
+                "1.11 m"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "计算：12.6 ÷ 3 = ?",
+              "questionEn": "Calculate: 12.6 ÷ 3 = ?",
+              "type": "choice",
+              "options": [
+                "4.2",
+                "0.42",
+                "42",
+                "3.2"
+              ],
+              "correctAnswer": 0
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Dividing decimals",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multiplying-and-dividing-decimals/imp-dividing-decimals-with-hundredths/v/dividing-decimals",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Dividing Decimals",
+              "url": "https://www.youtube.com/watch?v=wOUkBkLPCGI",
+              "channel": "Math with Mr. J"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "number-sense-fractions",
+      "title": "Number Sense - Fractions / 数感 - 分数",
+      "description": "理解和运用分数",
+      "topics": [
+        {
+          "id": "equivalent-fractions",
+          "title": "Equivalent Fractions / 等值分数",
+          "description": "找出和创建等值分数",
+          "examples": [
+            {
+              "question": "哪个分数等于 1/2？",
+              "questionEn": "Which fraction is equal to 1/2?",
+              "type": "choice",
+              "options": [
+                "2/5",
+                "3/6",
+                "2/3",
+                "3/8"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "2/3 的分子分母同时乘 3，得到的新分数是？",
+              "questionEn": "Multiply numerator and denominator of 2/3 by 3, you get:",
+              "type": "choice",
+              "options": [
+                "5/6",
+                "6/9",
+                "2/9",
+                "6/3"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "填空：3/4 = ?/8",
+              "questionEn": "Fill in: 3/4 = ?/8",
+              "type": "choice",
+              "options": [
+                "4",
+                "5",
+                "6",
+                "7"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "哪个分数和 4/6 相等？",
+              "questionEn": "Which fraction equals 4/6?",
+              "type": "choice",
+              "options": [
+                "3/4",
+                "2/3",
+                "4/8",
+                "6/4"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "把 5/10 化成最简分数是？",
+              "questionEn": "Simplify 5/10 to lowest terms:",
+              "type": "choice",
+              "options": [
+                "1/5",
+                "1/3",
+                "1/2",
+                "5/1"
+              ],
+              "correctAnswer": 2
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Equivalent fractions",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-fractions-2/imp-visualizing-equivalent-fractions/v/equivalent-fractions",
+              "type": "video"
+            },
+            {
+              "title": "Equivalent fractions practice",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-fractions-2/imp-visualizing-equivalent-fractions/e/equivalent-fractions",
+              "type": "practice"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Equivalent Fractions | Math with Mr. J",
+              "url": "https://www.youtube.com/watch?v=qcHHhd6HizI",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Equivalent Fractions Song",
+              "url": "https://www.youtube.com/watch?v=Bss4F1LZsTA",
+              "channel": "Numberock"
+            }
+          ],
+          "dynamicExamples": [
+            {
+              "question": "比较 {num1}/{den1} 和 {num2}/{den2}，哪个更大？",
+              "questionEn": "Compare {num1}/{den1} and {num2}/{den2}. Which is larger?",
+              "hint": "找到公分母或交叉相乘来比较",
+              "hintEn": "Find common denominator or cross-multiply to compare",
+              "answer": "num1/den1 > num2/den2 ? num1/den1 : num2/den2",
+              "answerType": "expression",
+              "variables": {
+                "num1": {
+                  "type": "integer",
+                  "min": 1,
+                  "max": 9
+                },
+                "den1": {
+                  "type": "integer",
+                  "min": 2,
+                  "max": 12
+                },
+                "num2": {
+                  "type": "integer",
+                  "min": 1,
+                  "max": 9
+                },
+                "den2": {
+                  "type": "integer",
+                  "min": 2,
+                  "max": 12
+                }
+              },
+              "wrongOptions": [
+                "num1/den1 < num2/den2 ? num1/den1 : num2/den2",
+                "1/2",
+                "3/4"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "compare-fractions",
+          "title": "Comparing Fractions / 比较分数",
+          "description": "比较不同分母的分数",
+          "examples": [
+            {
+              "question": "哪个分数更大：3/4 还是 2/3？",
+              "questionEn": "Which is larger: 3/4 or 2/3?",
+              "type": "choice",
+              "options": [
+                "3/4",
+                "2/3",
+                "它们相等 / Equal"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "比较：1/2 ___ 3/8",
+              "questionEn": "Compare: 1/2 ___ 3/8",
+              "type": "choice",
+              "options": [
+                ">",
+                "<",
+                "="
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "把分数从小到大排列：2/5, 1/2, 3/5",
+              "questionEn": "Order from smallest to largest: 2/5, 1/2, 3/5",
+              "type": "choice",
+              "options": [
+                "2/5 < 1/2 < 3/5",
+                "1/2 < 2/5 < 3/5",
+                "3/5 < 1/2 < 2/5"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "哪个分数小于 4/5？",
+              "questionEn": "Which fraction is less than 4/5?",
+              "type": "choice",
+              "options": [
+                "5/6",
+                "3/4",
+                "9/10",
+                "4/4"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "比较：5/6 和 7/8",
+              "questionEn": "Compare: 5/6 and 7/8",
+              "type": "choice",
+              "options": [
+                "5/6 > 7/8",
+                "5/6 < 7/8",
+                "5/6 = 7/8"
+              ],
+              "correctAnswer": 1
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Comparing fractions with different denominators",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-fractions-2/imp-common-denominators/v/comparing-fractions-with-different-denominators",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Comparing Fractions",
+              "url": "https://www.youtube.com/watch?v=UA0MjzKmwhg",
+              "channel": "Math with Mr. J"
+            }
+          ]
+        },
+        {
+          "id": "add-subtract-fractions",
+          "title": "Adding and Subtracting Fractions / 分数加减法",
+          "description": "不同分母分数的加减法",
+          "examples": [
+            {
+              "question": "计算：1/4 + 1/4 = ?",
+              "questionEn": "Calculate: 1/4 + 1/4 = ?",
+              "type": "choice",
+              "options": [
+                "2/8",
+                "1/2",
+                "2/4",
+                "1/8"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "计算：1/2 + 1/3 = ?",
+              "questionEn": "Calculate: 1/2 + 1/3 = ?",
+              "type": "choice",
+              "options": [
+                "2/5",
+                "5/6",
+                "2/6",
+                "1/5"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "计算：3/4 - 1/4 = ?",
+              "questionEn": "Calculate: 3/4 - 1/4 = ?",
+              "type": "choice",
+              "options": [
+                "2/4",
+                "1/2",
+                "2/8",
+                "1/4"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "计算：5/6 - 1/3 = ?",
+              "questionEn": "Calculate: 5/6 - 1/3 = ?",
+              "type": "choice",
+              "options": [
+                "4/3",
+                "3/6",
+                "1/2",
+                "2/3"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "小明吃了 1/4 个披萨，小红吃了 1/3 个披萨，他们一共吃了多少？",
+              "questionEn": "Xiao Ming ate 1/4 pizza, Xiao Hong ate 1/3 pizza. How much total?",
+              "type": "choice",
+              "options": [
+                "2/7",
+                "7/12",
+                "1/6",
+                "2/12"
+              ],
+              "correctAnswer": 1
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Adding fractions with unlike denominators",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-add-and-subtract-fractions/imp-adding-fractions-with-unlike-denominators/v/adding-fractions-with-unlike-denominators",
+              "type": "video"
+            },
+            {
+              "title": "Subtracting fractions with unlike denominators",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-add-and-subtract-fractions/imp-subtracting-fractions-with-unlike-denominators-2/v/subtracting-fractions-with-unlike-denominators",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Adding Fractions with Unlike Denominators",
+              "url": "https://www.youtube.com/watch?v=52ZlXsFJULI",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Subtracting Fractions with Unlike Denominators",
+              "url": "https://www.youtube.com/watch?v=BvHkjxcPOOI",
+              "channel": "Math with Mr. J"
+            }
+          ]
+        },
+        {
+          "id": "multiply-fractions",
+          "title": "Multiplying Fractions / 分数乘法",
+          "description": "分数与整数和分数的乘法",
+          "examples": [
+            {
+              "question": "计算：1/2 × 1/3 = ?",
+              "questionEn": "Calculate: 1/2 × 1/3 = ?",
+              "type": "choice",
+              "options": [
+                "2/6",
+                "1/6",
+                "1/5",
+                "2/3"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "计算：3/4 × 2 = ?",
+              "questionEn": "Calculate: 3/4 × 2 = ?",
+              "type": "choice",
+              "options": [
+                "6/4",
+                "3/2",
+                "5/4",
+                "6/8"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "计算：2/3 × 3/5 = ?",
+              "questionEn": "Calculate: 2/3 × 3/5 = ?",
+              "type": "choice",
+              "options": [
+                "6/15",
+                "5/15",
+                "2/5",
+                "6/8"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "一桶水的 1/2 再取 1/3 是多少？",
+              "questionEn": "Take 1/2 of a bucket, then 1/3 of that. How much?",
+              "type": "choice",
+              "options": [
+                "1/5",
+                "2/5",
+                "1/6",
+                "1/3"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "计算：4 × 1/4 = ?",
+              "questionEn": "Calculate: 4 × 1/4 = ?",
+              "type": "choice",
+              "options": [
+                "4/4",
+                "1",
+                "1/16",
+                "4/16"
+              ],
+              "correctAnswer": 1
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Multiplying fractions",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multiply-fractions/imp-multiplying-fractions/v/multiplying-fractions",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Multiplying Fractions",
+              "url": "https://www.youtube.com/watch?v=bX95hmVmDjY",
+              "channel": "Math with Mr. J"
+            }
+          ]
+        },
+        {
+          "id": "divide-fractions",
+          "title": "Dividing Fractions / 分数除法",
+          "description": "分数的除法运算",
+          "examples": [
+            {
+              "question": "计算：1 ÷ 1/2 = ?",
+              "questionEn": "Calculate: 1 ÷ 1/2 = ?",
+              "type": "choice",
+              "options": [
+                "1/2",
+                "1",
+                "2",
+                "1/4"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "计算：1/2 ÷ 4 = ?",
+              "questionEn": "Calculate: 1/2 ÷ 4 = ?",
+              "type": "choice",
+              "options": [
+                "1/8",
+                "2",
+                "4/2",
+                "1/6"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "把 3/4 平均分成 3 份，每份是多少？",
+              "questionEn": "Divide 3/4 into 3 equal parts. What is each part?",
+              "type": "choice",
+              "options": [
+                "3/12",
+                "1/4",
+                "9/4",
+                "1/12"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "计算：2/3 ÷ 1/3 = ?",
+              "questionEn": "Calculate: 2/3 ÷ 1/3 = ?",
+              "type": "choice",
+              "options": [
+                "2/9",
+                "2",
+                "1/3",
+                "2/6"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "一块蛋糕的 1/2 分给 4 个人，每人得到多少？",
+              "questionEn": "Divide 1/2 of a cake among 4 people. How much does each get?",
+              "type": "choice",
+              "options": [
+                "1/8",
+                "1/6",
+                "1/4",
+                "1/2"
+              ],
+              "correctAnswer": 0
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Dividing fractions",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-dividing-fractions/imp-dividing-unit-fractions-by-whole-numbers/v/dividing-unit-fractions-by-whole-numbers",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Dividing Fractions",
+              "url": "https://www.youtube.com/watch?v=5juto2ze8Lg",
+              "channel": "Math with Mr. J"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "operations",
+      "title": "Operations / 运算",
+      "description": "多位数的乘法和除法",
+      "topics": [
+        {
+          "id": "multi-digit-multiplication",
+          "title": "Multi-digit Multiplication / 多位数乘法",
+          "description": "两位数和三位数的乘法",
+          "examples": [
+            {
+              "question": "计算：23 × 4 = ?",
+              "questionEn": "Calculate: 23 × 4 = ?",
+              "type": "choice",
+              "options": [
+                "72",
+                "82",
+                "92",
+                "102"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "计算：45 × 23 = ?",
+              "questionEn": "Calculate: 45 × 23 = ?",
+              "type": "choice",
+              "options": [
+                "935",
+                "1035",
+                "1135",
+                "1235"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "计算：123 × 5 = ?",
+              "questionEn": "Calculate: 123 × 5 = ?",
+              "type": "choice",
+              "options": [
+                "515",
+                "615",
+                "625",
+                "715"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "一个盒子装 24 个苹果，35 个盒子能装多少个苹果？",
+              "questionEn": "A box holds 24 apples. How many apples in 35 boxes?",
+              "type": "choice",
+              "options": [
+                "740",
+                "780",
+                "840",
+                "940"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "计算：56 × 42 = ?",
+              "questionEn": "Calculate: 56 × 42 = ?",
+              "type": "choice",
+              "options": [
+                "2252",
+                "2352",
+                "2452",
+                "2552"
+              ],
+              "correctAnswer": 1
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Multi-digit multiplication",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multi-digit-multiplication-and-division/imp-multi-digit-multiplication/v/multiplication-5-2-digit-times-a-2-digit-number",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "2-Digit by 2-Digit Multiplication",
+              "url": "https://www.youtube.com/watch?v=mQH4YXQFL0U",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Multiplication Song",
+              "url": "https://www.youtube.com/watch?v=6pSAT7X1SOs",
+              "channel": "Numberock"
+            }
+          ]
+        },
+        {
+          "id": "long-division",
+          "title": "Long Division / 长除法",
+          "description": "多位数除以一位数和两位数",
+          "examples": [
+            {
+              "question": "计算：96 ÷ 4 = ?",
+              "questionEn": "Calculate: 96 ÷ 4 = ?",
+              "type": "choice",
+              "options": [
+                "22",
+                "23",
+                "24",
+                "25"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "计算：144 ÷ 12 = ?",
+              "questionEn": "Calculate: 144 ÷ 12 = ?",
+              "type": "choice",
+              "options": [
+                "10",
+                "11",
+                "12",
+                "13"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "计算：525 ÷ 5 = ?",
+              "questionEn": "Calculate: 525 ÷ 5 = ?",
+              "type": "choice",
+              "options": [
+                "95",
+                "105",
+                "115",
+                "125"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "把 168 个糖果平均分给 14 个小朋友，每人得多少？",
+              "questionEn": "Divide 168 candies equally among 14 kids. How many each?",
+              "type": "choice",
+              "options": [
+                "10",
+                "11",
+                "12",
+                "13"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "计算：392 ÷ 7 = ?",
+              "questionEn": "Calculate: 392 ÷ 7 = ?",
+              "type": "choice",
+              "options": [
+                "46",
+                "52",
+                "56",
+                "62"
+              ],
+              "correctAnswer": 2
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Long division",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multi-digit-multiplication-and-division/imp-multi-digit-division/v/long-division-without-remainder",
+              "type": "video"
+            },
+            {
+              "title": "Division with remainders",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multi-digit-multiplication-and-division/imp-multi-digit-division/v/long-division-with-remainder-example",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Long Division - Easy Method",
+              "url": "https://www.youtube.com/watch?v=LGqBQrUYua4",
+              "channel": "Math with Mr. J"
+            }
+          ]
+        },
+        {
+          "id": "order-of-operations",
+          "title": "Order of Operations (BEDMAS) / 运算顺序",
+          "description": "按正确顺序计算表达式",
+          "examples": [
+            {
+              "question": "计算：3 + 4 × 2 = ?",
+              "questionEn": "Calculate: 3 + 4 × 2 = ?",
+              "type": "choice",
+              "options": [
+                "11",
+                "14",
+                "8",
+                "9"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "计算：(5 + 3) × 2 = ?",
+              "questionEn": "Calculate: (5 + 3) × 2 = ?",
+              "type": "choice",
+              "options": [
+                "10",
+                "11",
+                "16",
+                "13"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "计算：20 - 3 × 4 = ?",
+              "questionEn": "Calculate: 20 - 3 × 4 = ?",
+              "type": "choice",
+              "options": [
+                "8",
+                "68",
+                "12",
+                "17"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "计算：24 ÷ (3 + 1) = ?",
+              "questionEn": "Calculate: 24 ÷ (3 + 1) = ?",
+              "type": "choice",
+              "options": [
+                "8",
+                "6",
+                "4",
+                "7"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "计算：5 + 6 × 2 - 3 = ?",
+              "questionEn": "Calculate: 5 + 6 × 2 - 3 = ?",
+              "type": "choice",
+              "options": [
+                "10",
+                "14",
+                "22",
+                "13"
+              ],
+              "correctAnswer": 1
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Order of operations introduction",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-powers-of-ten/imp-order-of-operations-introduction/v/introduction-to-order-of-operations",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Order of Operations | PEMDAS",
+              "url": "https://www.youtube.com/watch?v=dAgfnK528RA",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "PEMDAS Song",
+              "url": "https://www.youtube.com/watch?v=JVFyMT5C3Nk",
+              "channel": "Numberock"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "algebra",
+      "title": "Algebra - Patterns and Equations / 代数 - 规律和方程",
+      "description": "识别规律，解简单方程",
+      "topics": [
+        {
+          "id": "patterns",
+          "title": "Number Patterns / 数字规律",
+          "description": "识别和延续数字规律",
+          "examples": [
+            {
+              "question": "找规律：2, 5, 8, 11, ___",
+              "questionEn": "Find the pattern: 2, 5, 8, 11, ___",
+              "type": "choice",
+              "options": [
+                "12",
+                "13",
+                "14",
+                "15"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "找规律：5, 10, 15, 20, ___",
+              "questionEn": "Find the pattern: 5, 10, 15, 20, ___",
+              "type": "choice",
+              "options": [
+                "21",
+                "22",
+                "25",
+                "30"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "找规律：1, 4, 9, 16, ___",
+              "questionEn": "Find the pattern: 1, 4, 9, 16, ___",
+              "type": "choice",
+              "options": [
+                "20",
+                "21",
+                "24",
+                "25"
+              ],
+              "correctAnswer": 3
+            },
+            {
+              "question": "找规律：100, 95, 90, 85, ___",
+              "questionEn": "Find the pattern: 100, 95, 90, 85, ___",
+              "type": "choice",
+              "options": [
+                "75",
+                "80",
+                "82",
+                "90"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "找规律：3, 6, 12, 24, ___",
+              "questionEn": "Find the pattern: 3, 6, 12, 24, ___",
+              "type": "choice",
+              "options": [
+                "36",
+                "42",
+                "48",
+                "54"
+              ],
+              "correctAnswer": 2
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Number patterns",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-algebraic-thinking/imp-number-patterns/v/practice-finding-patterns-in-numbers",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Number Patterns",
+              "url": "https://www.youtube.com/watch?v=F9G1yOCH1B0",
+              "channel": "Math with Mr. J"
+            }
+          ]
+        },
+        {
+          "id": "variables",
+          "title": "Variables and Expressions / 变量和表达式",
+          "description": "用字母代表未知数",
+          "examples": [
+            {
+              "question": "如果 x = 5，那么 3x = ?",
+              "questionEn": "If x = 5, then 3x = ?",
+              "type": "choice",
+              "options": [
+                "8",
+                "10",
+                "15",
+                "35"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "如果 n = 8，那么 n + 7 = ?",
+              "questionEn": "If n = 8, then n + 7 = ?",
+              "type": "choice",
+              "options": [
+                "14",
+                "15",
+                "16",
+                "17"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "如果 y = 12，那么 y ÷ 3 = ?",
+              "questionEn": "If y = 12, then y ÷ 3 = ?",
+              "type": "choice",
+              "options": [
+                "3",
+                "4",
+                "5",
+                "6"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "如果 a = 4, b = 3，那么 a + b = ?",
+              "questionEn": "If a = 4, b = 3, then a + b = ?",
+              "type": "choice",
+              "options": [
+                "6",
+                "7",
+                "8",
+                "9"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "如果 x = 10，那么 2x - 3 = ?",
+              "questionEn": "If x = 10, then 2x - 3 = ?",
+              "type": "choice",
+              "options": [
+                "15",
+                "17",
+                "20",
+                "23"
+              ],
+              "correctAnswer": 1
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Variables and expressions",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-algebraic-thinking/imp-intro-to-variables/v/what-is-a-variable",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "What is a Variable?",
+              "url": "https://www.youtube.com/watch?v=Xmt6cRRKP1k",
+              "channel": "Math with Mr. J"
+            }
+          ]
+        },
+        {
+          "id": "equations",
+          "title": "Simple Equations / 简单方程",
+          "description": "解简单的一步方程",
+          "examples": [
+            {
+              "question": "解方程：x + 5 = 12，x = ?",
+              "questionEn": "Solve: x + 5 = 12, x = ?",
+              "type": "choice",
+              "options": [
+                "5",
+                "6",
+                "7",
+                "8"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "解方程：x - 7 = 9，x = ?",
+              "questionEn": "Solve: x - 7 = 9, x = ?",
+              "type": "choice",
+              "options": [
+                "14",
+                "15",
+                "16",
+                "17"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "解方程：3x = 18，x = ?",
+              "questionEn": "Solve: 3x = 18, x = ?",
+              "type": "choice",
+              "options": [
+                "4",
+                "5",
+                "6",
+                "7"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "解方程：x ÷ 4 = 5，x = ?",
+              "questionEn": "Solve: x ÷ 4 = 5, x = ?",
+              "type": "choice",
+              "options": [
+                "15",
+                "18",
+                "20",
+                "25"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "解方程：2x + 3 = 11，x = ?",
+              "questionEn": "Solve: 2x + 3 = 11, x = ?",
+              "type": "choice",
+              "options": [
+                "3",
+                "4",
+                "5",
+                "6"
+              ],
+              "correctAnswer": 1
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "One-step equations",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-equations-and-inequalities/cc-6th-one-step-add-sub-equations/v/simple-equations",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Solving One-Step Equations",
+              "url": "https://www.youtube.com/watch?v=l3XzepN03KQ",
+              "channel": "Math with Mr. J"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "geometry",
+      "title": "Geometry / 几何",
+      "description": "二维和三维图形",
+      "topics": [
+        {
+          "id": "2d-shapes",
+          "title": "2D Shapes / 二维图形",
+          "description": "识别和分类多边形",
+          "examples": [
+            {
+              "question": "一个正方形有几条边？",
+              "questionEn": "How many sides does a square have?",
+              "type": "choice",
+              "options": [
+                "3",
+                "4",
+                "5",
+                "6"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "三角形有几个角？",
+              "questionEn": "How many angles does a triangle have?",
+              "type": "choice",
+              "options": [
+                "2",
+                "3",
+                "4",
+                "5"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "哪个图形有 4 条相等的边和 4 个直角？",
+              "questionEn": "Which shape has 4 equal sides and 4 right angles?",
+              "type": "choice",
+              "options": [
+                "长方形 / Rectangle",
+                "正方形 / Square",
+                "梯形 / Trapezoid",
+                "菱形 / Rhombus"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "五边形有多少条边？",
+              "questionEn": "How many sides does a pentagon have?",
+              "type": "choice",
+              "options": [
+                "4",
+                "5",
+                "6",
+                "8"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "平行四边形的特点是什么？",
+              "questionEn": "What is special about a parallelogram?",
+              "type": "choice",
+              "options": [
+                "所有边相等 / All sides equal",
+                "两组对边平行 / Two pairs of parallel sides",
+                "所有角都是直角 / All right angles",
+                "没有平行边 / No parallel sides"
+              ],
+              "correctAnswer": 1
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Classifying shapes",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-geometry-3/imp-classifying-triangles/v/classifying-triangles",
+              "type": "video"
+            },
+            {
+              "title": "Quadrilaterals",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-geometry-3/imp-classifying-quadrilaterals/v/classifying-quadrilaterals",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Types of Quadrilaterals",
+              "url": "https://www.youtube.com/watch?v=Byd5ACrCYcY",
+              "channel": "Math with Mr. J"
+            }
+          ]
+        },
+        {
+          "id": "3d-shapes",
+          "title": "3D Shapes / 三维图形",
+          "description": "识别立体图形及其特征",
+          "examples": [
+            {
+              "question": "正方体有几个面？",
+              "questionEn": "How many faces does a cube have?",
+              "type": "choice",
+              "options": [
+                "4",
+                "5",
+                "6",
+                "8"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "球体有几个顶点？",
+              "questionEn": "How many vertices does a sphere have?",
+              "type": "choice",
+              "options": [
+                "0",
+                "1",
+                "2",
+                "4"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "圆柱体的上下底面是什么形状？",
+              "questionEn": "What shape are the top and bottom of a cylinder?",
+              "type": "choice",
+              "options": [
+                "正方形 / Square",
+                "三角形 / Triangle",
+                "圆形 / Circle",
+                "长方形 / Rectangle"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "哪个图形有 6 个面、12 条边、8 个顶点？",
+              "questionEn": "Which shape has 6 faces, 12 edges, 8 vertices?",
+              "type": "choice",
+              "options": [
+                "球体 / Sphere",
+                "圆锥体 / Cone",
+                "长方体 / Rectangular prism",
+                "圆柱体 / Cylinder"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "金字塔的底面通常是？",
+              "questionEn": "The base of a pyramid is usually:",
+              "type": "choice",
+              "options": [
+                "圆形 / Circular",
+                "三角形 / Triangular",
+                "方形 / Square",
+                "椭圆形 / Oval"
+              ],
+              "correctAnswer": 2
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Intro to 3D shapes",
+              "url": "https://www.khanacademy.org/math/basic-geo/basic-geo-volume/basic-geo-volumes-rectangular-prism/v/introduction-to-3d-solids",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "3D Shapes",
+              "url": "https://www.youtube.com/watch?v=2cg-Uc556-Q",
+              "channel": "Math with Mr. J"
+            }
+          ]
+        },
+        {
+          "id": "angles",
+          "title": "Angles / 角度",
+          "description": "测量和分类角度",
+          "examples": [
+            {
+              "question": "直角是多少度？",
+              "questionEn": "How many degrees is a right angle?",
+              "type": "choice",
+              "options": [
+                "45°",
+                "90°",
+                "180°",
+                "360°"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "哪个角比直角大？",
+              "questionEn": "Which angle is larger than a right angle?",
+              "type": "choice",
+              "options": [
+                "锐角 / Acute",
+                "钝角 / Obtuse",
+                "平角 / Straight",
+                "直角 / Right"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "30° 角是什么类型的角？",
+              "questionEn": "What type of angle is 30°?",
+              "type": "choice",
+              "options": [
+                "锐角 / Acute",
+                "直角 / Right",
+                "钝角 / Obtuse",
+                "平角 / Straight"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "一个圆周是多少度？",
+              "questionEn": "How many degrees in a full circle?",
+              "type": "choice",
+              "options": [
+                "180°",
+                "270°",
+                "360°",
+                "90°"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "120° 是什么类型的角？",
+              "questionEn": "What type of angle is 120°?",
+              "type": "choice",
+              "options": [
+                "锐角 / Acute",
+                "直角 / Right",
+                "钝角 / Obtuse",
+                "平角 / Straight"
+              ],
+              "correctAnswer": 2
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Measuring angles",
+              "url": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-geometry-2/imp-measuring-angles/v/using-a-protractor-to-measure-angles",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Types of Angles",
+              "url": "https://www.youtube.com/watch?v=Rp2-1a0LgtM",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "How to Use a Protractor",
+              "url": "https://www.youtube.com/watch?v=2TqOh4TQMW4",
+              "channel": "Math with Mr. J"
+            }
+          ]
+        },
+        {
+          "id": "coordinate-plane",
+          "title": "Coordinate Plane / 坐标平面",
+          "description": "在坐标平面上绘制和读取点",
+          "examples": [
+            {
+              "question": "点 (3, 4) 的 x 坐标是多少？",
+              "questionEn": "What is the x-coordinate of point (3, 4)?",
+              "type": "choice",
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "在坐标平面上，原点的坐标是？",
+              "questionEn": "What are the coordinates of the origin?",
+              "type": "choice",
+              "options": [
+                "(1, 0)",
+                "(0, 1)",
+                "(1, 1)",
+                "(0, 0)"
+              ],
+              "correctAnswer": 3
+            },
+            {
+              "question": "点 (5, 2) 在哪个象限？（假设有象限）",
+              "questionEn": "Which quadrant is point (5, 2) in?",
+              "type": "choice",
+              "options": [
+                "第一象限 / First",
+                "第二象限 / Second",
+                "第三象限 / Third",
+                "第四象限 / Fourth"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "y 轴上的点的 x 坐标是？",
+              "questionEn": "What is the x-coordinate of points on the y-axis?",
+              "type": "choice",
+              "options": [
+                "0",
+                "1",
+                "-1",
+                "取决于点 / Depends on point"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "点 (-2, 3) 的 y 坐标是？",
+              "questionEn": "What is the y-coordinate of point (-2, 3)?",
+              "type": "choice",
+              "options": [
+                "-2",
+                "2",
+                "3",
+                "-3"
+              ],
+              "correctAnswer": 2
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Coordinate plane",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-geometry-3/imp-intro-to-the-coordinate-plane/v/coordinate-plane-graphing-points-intro",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Coordinate Plane Basics",
+              "url": "https://www.youtube.com/watch?v=9Uc62CuQjc4",
+              "channel": "Math with Mr. J"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "measurement",
+      "title": "Measurement / 测量",
+      "description": "周长、面积和体积",
+      "topics": [
+        {
+          "id": "perimeter",
+          "title": "Perimeter / 周长",
+          "description": "计算多边形的周长",
+          "examples": [
+            {
+              "question": "一个长方形长 8 cm，宽 5 cm，周长是多少？",
+              "questionEn": "A rectangle is 8 cm long and 5 cm wide. What is the perimeter?",
+              "type": "choice",
+              "options": [
+                "13 cm",
+                "26 cm",
+                "40 cm",
+                "18 cm"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "一个正方形边长 6 m，周长是多少？",
+              "questionEn": "A square has sides of 6 m. What is the perimeter?",
+              "type": "choice",
+              "options": [
+                "12 m",
+                "18 m",
+                "24 m",
+                "36 m"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "三角形三边分别是 4 cm, 5 cm, 6 cm，周长是多少？",
+              "questionEn": "A triangle has sides 4 cm, 5 cm, 6 cm. What is the perimeter?",
+              "type": "choice",
+              "options": [
+                "11 cm",
+                "12 cm",
+                "15 cm",
+                "16 cm"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "一个长方形周长 20 cm，长 6 cm，宽是多少？",
+              "questionEn": "A rectangle has perimeter 20 cm and length 6 cm. What is the width?",
+              "type": "choice",
+              "options": [
+                "2 cm",
+                "4 cm",
+                "5 cm",
+                "8 cm"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "正方形周长 28 m，边长是多少？",
+              "questionEn": "A square has perimeter 28 m. What is the side length?",
+              "type": "choice",
+              "options": [
+                "4 m",
+                "6 m",
+                "7 m",
+                "8 m"
+              ],
+              "correctAnswer": 2
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Perimeter",
+              "url": "https://www.khanacademy.org/math/basic-geo/basic-geo-area-and-perimeter/basic-geo-perimeter/v/perimeter-and-area-basics",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "How to Find Perimeter",
+              "url": "https://www.youtube.com/watch?v=AAY1bpsiaps",
+              "channel": "Math with Mr. J"
+            }
+          ]
+        },
+        {
+          "id": "area",
+          "title": "Area / 面积",
+          "description": "计算长方形和三角形的面积",
+          "examples": [
+            {
+              "question": "一个长方形长 8 cm，宽 5 cm，面积是多少？",
+              "questionEn": "A rectangle is 8 cm long and 5 cm wide. What is the area?",
+              "type": "choice",
+              "options": [
+                "13 cm²",
+                "26 cm²",
+                "40 cm²",
+                "80 cm²"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "一个正方形边长 6 m，面积是多少？",
+              "questionEn": "A square has sides of 6 m. What is the area?",
+              "type": "choice",
+              "options": [
+                "12 m²",
+                "24 m²",
+                "36 m²",
+                "18 m²"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "一个三角形底 10 cm，高 6 cm，面积是多少？",
+              "questionEn": "A triangle has base 10 cm and height 6 cm. What is the area?",
+              "type": "choice",
+              "options": [
+                "16 cm²",
+                "30 cm²",
+                "60 cm²",
+                "32 cm²"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "长方形面积 48 cm²，长 8 cm，宽是多少？",
+              "questionEn": "A rectangle has area 48 cm² and length 8 cm. What is the width?",
+              "type": "choice",
+              "options": [
+                "4 cm",
+                "6 cm",
+                "8 cm",
+                "12 cm"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "正方形面积 64 m²，边长是多少？",
+              "questionEn": "A square has area 64 m². What is the side length?",
+              "type": "choice",
+              "options": [
+                "6 m",
+                "7 m",
+                "8 m",
+                "9 m"
+              ],
+              "correctAnswer": 2
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Area of rectangles",
+              "url": "https://www.khanacademy.org/math/basic-geo/basic-geo-area-and-perimeter/basic-geo-area-rectangle/v/area-of-a-rectangle",
+              "type": "video"
+            },
+            {
+              "title": "Area of triangles",
+              "url": "https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-geometry-topic/cc-6th-area-triangle/v/area-of-a-triangle",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "How to Find Area",
+              "url": "https://www.youtube.com/watch?v=_uKKl8R1xBM",
+              "channel": "Math with Mr. J"
+            }
+          ]
+        },
+        {
+          "id": "volume",
+          "title": "Volume / 体积",
+          "description": "计算长方体的体积",
+          "examples": [
+            {
+              "question": "一个长方体长 4 cm，宽 3 cm，高 2 cm，体积是多少？",
+              "questionEn": "A rectangular prism is 4 cm × 3 cm × 2 cm. What is the volume?",
+              "type": "choice",
+              "options": [
+                "9 cm³",
+                "12 cm³",
+                "24 cm³",
+                "48 cm³"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "一个正方体边长 5 m，体积是多少？",
+              "questionEn": "A cube has sides of 5 m. What is the volume?",
+              "type": "choice",
+              "options": [
+                "15 m³",
+                "25 m³",
+                "100 m³",
+                "125 m³"
+              ],
+              "correctAnswer": 3
+            },
+            {
+              "question": "体积 = 长 × 宽 × ___",
+              "questionEn": "Volume = Length × Width × ___",
+              "type": "choice",
+              "options": [
+                "对角线 / Diagonal",
+                "周长 / Perimeter",
+                "高 / Height",
+                "面积 / Area"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "一个盒子体积 60 cm³，底面积 12 cm²，高是多少？",
+              "questionEn": "A box has volume 60 cm³ and base area 12 cm². What is the height?",
+              "type": "choice",
+              "options": [
+                "3 cm",
+                "4 cm",
+                "5 cm",
+                "6 cm"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "长方体体积 36 cm³，长 6 cm，宽 3 cm，高是多少？",
+              "questionEn": "A prism has volume 36 cm³, length 6 cm, width 3 cm. What is the height?",
+              "type": "choice",
+              "options": [
+                "1 cm",
+                "2 cm",
+                "3 cm",
+                "4 cm"
+              ],
+              "correctAnswer": 1
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Volume of rectangular prisms",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-geometry-3/imp-volume/v/volume-of-a-rectangular-prism",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "How to Find Volume",
+              "url": "https://www.youtube.com/watch?v=qJwecTgce6c",
+              "channel": "Math with Mr. J"
+            },
+            {
+              "title": "Volume Song",
+              "url": "https://www.youtube.com/watch?v=7eItzklm0Tg",
+              "channel": "Numberock"
+            }
+          ]
+        },
+        {
+          "id": "unit-conversion",
+          "title": "Unit Conversion / 单位换算",
+          "description": "公制和英制单位转换",
+          "examples": [
+            {
+              "question": "1 米等于多少厘米？",
+              "questionEn": "How many centimeters are in 1 meter?",
+              "type": "choice",
+              "options": [
+                "10 cm",
+                "100 cm",
+                "1000 cm",
+                "50 cm"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "2 千米等于多少米？",
+              "questionEn": "How many meters are in 2 kilometers?",
+              "type": "choice",
+              "options": [
+                "200 m",
+                "2000 m",
+                "20000 m",
+                "20 m"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "5000 克等于多少千克？",
+              "questionEn": "How many kilograms are in 5000 grams?",
+              "type": "choice",
+              "options": [
+                "5 kg",
+                "50 kg",
+                "500 kg",
+                "0.5 kg"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "1 升等于多少毫升？",
+              "questionEn": "How many milliliters are in 1 liter?",
+              "type": "choice",
+              "options": [
+                "100 mL",
+                "1000 mL",
+                "10000 mL",
+                "10 mL"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "3 小时等于多少分钟？",
+              "questionEn": "How many minutes are in 3 hours?",
+              "type": "choice",
+              "options": [
+                "180 min",
+                "300 min",
+                "200 min",
+                "150 min"
+              ],
+              "correctAnswer": 0
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Converting units",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-measurement-and-data-3/imp-unit-conversion/v/converting-pounds-to-ounces",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Metric System Conversions",
+              "url": "https://www.youtube.com/watch?v=O0pDVbKb5rs",
+              "channel": "Math with Mr. J"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "data-probability",
+      "title": "Data and Probability / 数据和概率",
+      "description": "收集、整理和分析数据",
+      "topics": [
+        {
+          "id": "graphs",
+          "title": "Graphs and Charts / 图表",
+          "description": "创建和解读各种图表",
+          "examples": [
+            {
+              "question": "哪种图表最适合表示类别之间的数量比较？",
+              "questionEn": "Which chart is best for comparing quantities between categories?",
+              "type": "choice",
+              "options": [
+                "折线图 / Line graph",
+                "条形图 / Bar graph",
+                "饼图 / Pie chart",
+                "散点图 / Scatter plot"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "哪种图表最适合显示数据随时间的变化？",
+              "questionEn": "Which chart is best for showing changes over time?",
+              "type": "choice",
+              "options": [
+                "条形图 / Bar graph",
+                "饼图 / Pie chart",
+                "折线图 / Line graph",
+                "柱状图 / Histogram"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "饼图主要用来表示什么？",
+              "questionEn": "What does a pie chart mainly show?",
+              "type": "choice",
+              "options": [
+                "数据随时间变化 / Changes over time",
+                "部分占整体的比例 / Parts of a whole",
+                "数据分布 / Distribution",
+                "类别比较 / Category comparison"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "在条形图中，条的高度表示什么？",
+              "questionEn": "In a bar graph, what does the height of a bar represent?",
+              "type": "choice",
+              "options": [
+                "类别名称 / Category name",
+                "数量 / Quantity",
+                "颜色 / Color",
+                "时间 / Time"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "哪种图表可以同时显示两个变量之间的关系？",
+              "questionEn": "Which chart can show the relationship between two variables?",
+              "type": "choice",
+              "options": [
+                "条形图 / Bar graph",
+                "饼图 / Pie chart",
+                "散点图 / Scatter plot",
+                "折线图 / Line graph"
+              ],
+              "correctAnswer": 2
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Reading bar graphs",
+              "url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-data-and-statistics/imp-line-plots/v/line-plots",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Reading Bar Graphs",
+              "url": "https://www.youtube.com/watch?v=7jqGF8wvMYI",
+              "channel": "Math with Mr. J"
+            }
+          ]
+        },
+        {
+          "id": "mean-median-mode",
+          "title": "Mean, Median, Mode / 平均数、中位数、众数",
+          "description": "计算和理解数据的中心趋势",
+          "examples": [
+            {
+              "question": "数据：2, 4, 6, 8, 10。平均数是多少？",
+              "questionEn": "Data: 2, 4, 6, 8, 10. What is the mean?",
+              "type": "choice",
+              "options": [
+                "4",
+                "5",
+                "6",
+                "7"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "数据：1, 3, 5, 7, 9。中位数是多少？",
+              "questionEn": "Data: 1, 3, 5, 7, 9. What is the median?",
+              "type": "choice",
+              "options": [
+                "3",
+                "5",
+                "7",
+                "9"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "数据：2, 2, 3, 4, 4, 4。众数是多少？",
+              "questionEn": "Data: 2, 2, 3, 4, 4, 4. What is the mode?",
+              "type": "choice",
+              "options": [
+                "2",
+                "3",
+                "4",
+                "2 和 4 / Both 2 and 4"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "数据：5, 10, 15, 20, 25。平均数是多少？",
+              "questionEn": "Data: 5, 10, 15, 20, 25. What is the mean?",
+              "type": "choice",
+              "options": [
+                "10",
+                "12",
+                "15",
+                "18"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "数据：1, 2, 3, 4, 5, 6。中位数是多少？",
+              "questionEn": "Data: 1, 2, 3, 4, 5, 6. What is the median?",
+              "type": "choice",
+              "options": [
+                "2",
+                "3",
+                "3.5",
+                "4"
+              ],
+              "correctAnswer": 2
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Mean, median, and mode",
+              "url": "https://www.khanacademy.org/math/statistics-probability/summarizing-quantitative-data/mean-median-basics/v/statistics-intro-mean-median-and-mode",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Mean, Median, Mode, and Range",
+              "url": "https://www.youtube.com/watch?v=B1HEzNTGeZ4",
+              "channel": "Math with Mr. J"
+            }
+          ]
+        },
+        {
+          "id": "probability",
+          "title": "Probability / 概率",
+          "description": "基本概率概念",
+          "examples": [
+            {
+              "question": "抛硬币，正面朝上的概率是多少？",
+              "questionEn": "Flipping a coin, what's the probability of heads?",
+              "type": "choice",
+              "options": [
+                "1/4",
+                "1/3",
+                "1/2",
+                "2/3"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "掷一个 6 面骰子，掷出 4 的概率是多少？",
+              "questionEn": "Rolling a 6-sided die, what's the probability of rolling a 4?",
+              "type": "choice",
+              "options": [
+                "1/6",
+                "1/4",
+                "1/3",
+                "1/2"
+              ],
+              "correctAnswer": 0
+            },
+            {
+              "question": "袋子里有 3 个红球和 2 个蓝球，摸到红球的概率是多少？",
+              "questionEn": "A bag has 3 red and 2 blue balls. Probability of red?",
+              "type": "choice",
+              "options": [
+                "2/5",
+                "3/5",
+                "1/2",
+                "1/3"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "概率值的范围是？",
+              "questionEn": "What is the range of probability values?",
+              "type": "choice",
+              "options": [
+                "0 到 10",
+                "0 到 1",
+                "1 到 100",
+                "-1 到 1"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "一定会发生的事件的概率是多少？",
+              "questionEn": "What is the probability of an event that is certain?",
+              "type": "choice",
+              "options": [
+                "0",
+                "0.5",
+                "1",
+                "100"
+              ],
+              "correctAnswer": 2
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Basic probability",
+              "url": "https://www.khanacademy.org/math/statistics-probability/probability-library/basic-theoretical-probability/v/basic-probability",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Introduction to Probability",
+              "url": "https://www.youtube.com/watch?v=SkidyDQuupA",
+              "channel": "Math with Mr. J"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "financial-literacy",
+      "title": "Financial Literacy / 财务素养",
+      "description": "基本理财知识",
+      "topics": [
+        {
+          "id": "money-calculations",
+          "title": "Money Calculations / 金钱计算",
+          "description": "计算价格、找零和折扣",
+          "examples": [
+            {
+              "question": "一个玩具 $12.5，你有 $20，应该找回多少钱？",
+              "questionEn": "A toy costs $12.5. You pay with $20. How much change?",
+              "type": "choice",
+              "options": [
+                "$6.50",
+                "$7.00",
+                "$7.50",
+                "$8.00"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "一件衬衫原价 $40，打 8 折（20% off）后多少钱？",
+              "questionEn": "A shirt is $40 with 20% off. What's the sale price?",
+              "type": "choice",
+              "options": [
+                "$20",
+                "$28",
+                "$30",
+                "$32"
+              ],
+              "correctAnswer": 3
+            },
+            {
+              "question": "3 本书每本 $8.5，一共多少钱？",
+              "questionEn": "3 books cost $8.5 each. How much total?",
+              "type": "choice",
+              "options": [
+                "$24.50",
+                "$25.50",
+                "$26.50",
+                "$27.50"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "你买了 $15.75 的东西，给了 $20，找回多少钱？",
+              "questionEn": "You buy items for $15.75 and pay with $20. Change?",
+              "type": "choice",
+              "options": [
+                "$3.25",
+                "$4.25",
+                "$4.75",
+                "$5.25"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "50% 折扣意味着付原价的多少？",
+              "questionEn": "50% discount means paying what percent of original?",
+              "type": "choice",
+              "options": [
+                "25%",
+                "40%",
+                "50%",
+                "75%"
+              ],
+              "correctAnswer": 2
+            }
+          ],
+          "khanAcademy": [
+            {
+              "title": "Money word problems",
+              "url": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-place-value-and-rounding-2/imp-rounding-whole-numbers/v/rounding-to-nearest-dollar",
+              "type": "video"
+            }
+          ],
+          "youtube": [
+            {
+              "title": "Counting Money",
+              "url": "https://www.youtube.com/watch?v=WlbGTsX2BPM",
+              "channel": "Math with Mr. J"
+            }
+          ]
+        },
+        {
+          "id": "budgeting",
+          "title": "Budgeting / 预算编制",
+          "description": "创建简单预算",
+          "examples": [
+            {
+              "question": "你每周有 $20 零花钱，花 $8 买零食，$5 买游戏，剩下多少？",
+              "questionEn": "You have $20 weekly allowance. Spend $8 on snacks, $5 on games. Left?",
+              "type": "choice",
+              "options": [
+                "$5",
+                "6",
+                "$7",
+                "$8"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "如果你想买一个 $60 的游戏，每周存 $10，需要几周？",
+              "questionEn": "You want a $60 game and save $10 weekly. How many weeks?",
+              "type": "choice",
+              "options": [
+                "4 周 / 4 weeks",
+                "5 周 / 5 weeks",
+                "6 周 / 6 weeks",
+                "7 周 / 7 weeks"
+              ],
+              "correctAnswer": 2
+            },
+            {
+              "question": "你每月收入 $50，支出 $30，每月能存多少？",
+              "questionEn": "You earn $50 monthly and spend $30. How much can you save?",
+              "type": "choice",
+              "options": [
+                "$10",
+                "$20",
+                "$30",
+                "$40"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "预算中哪项最重要应该优先考虑？",
+              "questionEn": "In budgeting, what should be prioritized?",
+              "type": "choice",
+              "options": [
+                "娱乐 / Entertainment",
+                "必需品 / Essentials",
+                "零食 / Snacks",
+                "玩具 / Toys"
+              ],
+              "correctAnswer": 1
+            },
+            {
+              "question": "如果你想在 4 个月内存 $100，每月需要存多少？",
+              "questionEn": "You want to save $100 in 4 months. How much monthly?",
+              "type": "choice",
+              "options": [
+                "$20",
+                "$25",
+                "$30",
+                "$35"
+              ],
+              "correctAnswer": 1
+            }
+          ],
+          "khanAcademy": [],
+          "youtube": [
+            {
+              "title": "Budgeting for Kids",
+              "url": "https://www.youtube.com/watch?v=YyOfIj7nWcU",
+              "channel": "FunKidsTV"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

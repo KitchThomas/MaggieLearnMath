@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dictation Practice Test - 听写练习测试</title>
+  <link rel="stylesheet" href="dictation-styles.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .test-container {
+      text-align: center;
+    }
+    .test-title {
+      color: white;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+    .test-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .test-btn {
+      padding: 20px 30px;
+      background: white;
+      border: none;
+      border-radius: 15px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    .test-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="test-container">
+    <h1 class="test-title">✍️ Dictation Practice Test</h1>
+    <div class="test-buttons">
+      <button class="test-btn" onclick="testDictation()">
+        <span style="font-size: 24px;">🎯</span><br>
+        Open Dictation Practice
+      </button>
+      <button class="test-btn" onclick="testImport()">
+        <span style="font-size: 24px;">📥</span><br>
+        Word Import / 单词导入
+      </button>
+      <button class="test-btn" onclick="testWords()">
+        <span style="font-size: 24px;">📚</span><br>
+        Test Word Lists
+      </button>
+      <button class="test-btn" onclick="testSpeech()">
+        <span style="font-size: 24px;">🔊</span><br>
+        Test Speech Synthesis
+      </button>
+      <button class="test-btn" onclick="testQuickImport()">
+        <span style="font-size: 24px;">⚡</span><br>
+        Quick Test Import
+      </button>
+    </div>
+  </div>
+
+  <script type="module">
+    import SpellingWords from './spelling-words.js';
+    import DictationPractice from './dictation-practice.js';
+    import WordImport from './word-import.js';
+
+    window.SpellingWords = SpellingWords;
+    window.DictationPractice = DictationPractice;
+    window.WordImport = WordImport;
+    window.wordImport = new WordImport();
+
+    window.testDictation = function() {
+      DictationPractice.show();
+    };
+
+    window.testImport = function() {
+      wordImport.createImportUI();
+    };
+
+    window.testQuickImport = function() {
+      // Quick test - create a sample list
+      const sampleWords = [
+        { word: 'algorithm', definition: 'a step-by-step procedure', example: 'The algorithm solves the problem efficiently.' },
+        { word: 'database', definition: 'organized collection of data', example: 'We store user information in the database.' },
+        { word: 'function', definition: 'reusable block of code', example: 'This function calculates the sum.' },
+        { word: 'variable', definition: 'storage location with a name', example: 'Declare a variable to store the value.' },
+        { word: 'browser', definition: 'software for accessing the web', example: 'Open the browser to visit the website.' }
+      ];
+
+      // Save as custom list
+      wordImport.customLists['Test Words'] = {
+        id: 'test_words_' + Date.now(),
+        name: 'Test Words',
+        language: 'English',
+        words: sampleWords,
+        createdAt: new Date().toISOString(),
+        wordCount: sampleWords.length
+      };
+      wordImport.saveCustomLists();
+
+      alert('✅ Sample list "Test Words" created!\n\nOpen Dictation Practice to see it in "My Custom Lists"');
+    };
+
+    window.testWords = function() {
+      const categories = SpellingWords.getCategories('grade5', 'English');
+      const words = SpellingWords.getWords('grade5', 'English', 'homophones', 5);
+
+      alert('Categories: ' + categories.join(', ') + '\n\n' +
+            'Sample words from homophones:\n' +
+            words.map(w => `${w.word} - ${w.definition}`).join('\n'));
+    };
+
+    window.testSpeech = function() {
+      const synth = window.speechSynthesis;
+      const voices = synth.getVoices();
+
+      const englishVoices = voices.filter(v => v.lang.startsWith('en'));
+      const frenchVoices = voices.filter(v => v.lang.startsWith('fr'));
+
+      let message = `Total voices: ${voices.length}\n\n`;
+      message += `English voices: ${englishVoices.length}\n`;
+      englishVoices.slice(0, 3).forEach(v => {
+        message += `  - ${v.name} (${v.lang})\n`;
+      });
+
+      message += `\nFrench voices: ${frenchVoices.length}\n`;
+      frenchVoices.slice(0, 3).forEach(v => {
+        message += `  - ${v.name} (${v.lang})\n`;
+      });
+
+      alert(message);
+
+      // Test speaking
+      const utterance = new SpeechSynthesisUtterance('Hello! This is a test of the dictation practice system.');
+      utterance.lang = 'en-US';
+      if (englishVoices.length > 0) {
+        utterance.voice = englishVoices[0];
+      }
+      synth.speak(utterance);
+    };
+  </script>
+</body>
+</html>

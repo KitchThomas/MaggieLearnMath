@@ -1,0 +1,22 @@
+{
+  "name": "maggie-math-learning",
+  "version": "1.0.0",
+  "description": "Maggie's Grade 5 Math Learning Application - 五年级数学学习应用",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "sync": "node auto-sync.js",
+    "sync:fast": "SYNC_INTERVAL=60000 node auto-sync.js",
+    "deploy": "firebase deploy --only hosting",
+    "test": "node start-test-server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "chokidar": "^4.0.3",
+    "simple-git": "^3.30.0"
+  }
+}
