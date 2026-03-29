@@ -925,6 +925,306 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* Study Timer Styles */
+    .study-timer-section {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .study-timer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .study-timer-header h3 {
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .timer-status-badge {
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .timer-status-badge.running {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .timer-status-badge.paused {
+      background: #fff3e0;
+      color: #e65100;
+    }
+
+    .study-timer-main {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 15px;
+    }
+
+    .timer-display {
+      font-size: 2.5rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      color: #333;
+      letter-spacing: 2px;
+    }
+
+    .timer-display.running {
+      color: #4CAF50;
+    }
+
+    .timer-today-info {
+      flex: 1;
+    }
+
+    .timer-today-info .today-total {
+      font-size: 1.1rem;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .timer-today-info .today-detail {
+      font-size: 0.85rem;
+      color: #888;
+    }
+
+    .timer-today-info .streak-info {
+      font-size: 0.85rem;
+      color: #ff9800;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .study-timer-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .timer-btn {
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 2px solid;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .timer-btn.primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-color: transparent;
+    }
+
+    .timer-btn.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    .timer-btn.secondary {
+      background: white;
+      color: #667eea;
+      border-color: #667eea;
+    }
+
+    .timer-btn.secondary:hover {
+      background: #f0f0ff;
+    }
+
+    /* Weekly chart */
+    .weekly-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      height: 80px;
+      margin-top: 15px;
+      padding-top: 10px;
+      border-top: 1px solid #eee;
+    }
+
+    .chart-bar-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      justify-content: flex-end;
+    }
+
+    .chart-bar {
+      width: 100%;
+      max-width: 40px;
+      min-height: 4px;
+      border-radius: 4px 4px 0 0;
+      background: linear-gradient(180deg, #667eea, #764ba2);
+      transition: height 0.5s ease;
+      position: relative;
+    }
+
+    .chart-bar.today {
+      background: linear-gradient(180deg, #4CAF50, #8BC34A);
+    }
+
+    .chart-bar-label {
+      font-size: 0.7rem;
+      color: #888;
+      margin-top: 4px;
+    }
+
+    .chart-bar-value {
+      font-size: 0.65rem;
+      color: #667eea;
+      margin-bottom: 2px;
+      font-weight: 600;
+    }
+
+    /* Manual Time Entry Modal */
+    .manual-time-form {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .manual-time-form input,
+    .manual-time-form select {
+      padding: 8px 12px;
+      border: 2px solid #eee;
+      border-radius: 10px;
+      font-size: 0.9rem;
+    }
+
+    .manual-time-form input:focus,
+    .manual-time-form select:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .manual-time-form input[type="number"] {
+      width: 80px;
+    }
+
+    .manual-time-form input[type="date"] {
+      width: 160px;
+    }
+
+    /* Study History Modal */
+    .study-history-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 1500;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .study-history-modal.active {
+      display: flex;
+    }
+
+    .study-history-box {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      width: 100%;
+      max-width: 600px;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .study-history-box h2 {
+      color: #333;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .history-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #999;
+      cursor: pointer;
+    }
+
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .history-item:last-child {
+      border-bottom: none;
+    }
+
+    .history-date {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .history-time {
+      color: #667eea;
+      font-weight: 600;
+    }
+
+    .history-detail {
+      font-size: 0.8rem;
+      color: #888;
+    }
+
+    .history-stats-summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .history-stat-card {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .history-stat-card .stat-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #667eea;
+    }
+
+    .history-stat-card .stat-label {
+      font-size: 0.8rem;
+      color: #888;
+      margin-top: 4px;
+    }
+
     /* Grade 6 theme */
     body.grade6-theme {
       background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
@@ -975,6 +1275,9 @@
 
     console.log('🎮 游戏系统已加载！');
   </script>
+
+  <!-- 学习时间追踪模块 -->
+  <script src="study-timer.js"></script>
   <div class="stars" id="stars"></div>
 
   <!-- User Section -->
@@ -1027,8 +1330,54 @@
       <p class="progress-text" id="progressText">0 / 0 topics completed</p>
     </div>
 
+    <!-- Study Timer Section -->
+    <div class="study-timer-section" id="studyTimerSection">
+      <div class="study-timer-header">
+        <h3>⏱️ Study Time / 学习时间</h3>
+        <span class="timer-status-badge running" id="timerStatusBadge">Tracking / 追踪中</span>
+      </div>
+
+      <div class="study-timer-main">
+        <div class="timer-display running" id="timerDisplay">00:00</div>
+        <div class="timer-today-info">
+          <div class="today-total" id="todayTotal">Today: 0 min / 今天: 0 分钟</div>
+          <div class="today-detail" id="todayDetail">0 sessions / 0 次学习</div>
+          <div class="streak-info" id="streakInfo"></div>
+        </div>
+      </div>
+
+      <!-- Weekly mini chart -->
+      <div class="weekly-chart" id="weeklyChart"></div>
+
+      <div class="study-timer-actions">
+        <button class="timer-btn primary" onclick="openManualTimeEntry()">+ Add Time / 添加时间</button>
+        <button class="timer-btn secondary" onclick="openStudyHistory()">📊 History / 历史</button>
+      </div>
+
+      <!-- Manual Time Entry (inline) -->
+      <div id="manualTimeForm" style="display:none; margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee;">
+        <div class="manual-time-form">
+          <input type="number" id="manualMinutes" min="1" max="480" placeholder="Minutes" value="30">
+          <span style="color:#888;">min / 分钟</span>
+          <input type="date" id="manualDate">
+          <button class="timer-btn primary" onclick="submitManualTime()">Save / 保存</button>
+          <button class="timer-btn secondary" onclick="cancelManualTime()">Cancel / 取消</button>
+        </div>
+      </div>
+    </div>
+
     <div class="units-grid" id="unitsContainer">
       <!-- Units will be loaded here -->
+    </div>
+  </div>
+
+  <!-- Study History Modal -->
+  <div class="study-history-modal" id="studyHistoryModal">
+    <div class="study-history-box">
+      <button class="history-close" onclick="closeStudyHistory()">&times;</button>
+      <h2>📊 Study History / 学习历史</h2>
+      <div id="historyStats" class="history-stats-summary"></div>
+      <div id="historyList"></div>
     </div>
   </div>
 
@@ -1518,6 +1867,7 @@
         const userDoc = window.doc(window.firebaseDb, 'users', window.currentUser.uid);
         await window.setDoc(userDoc, {
           completedTopics: completedTopics,
+          studyTimeRecords: StudyTimer.getAllRecords(),
           lastUpdated: new Date().toISOString(),
           email: window.currentUser.email
         }, { merge: true });
@@ -1548,6 +1898,13 @@
             localStorage.setItem('completedTopics_grade6', JSON.stringify(completedTopics[6] || []));
             renderUnits();
             updateProgress();
+          }
+          // Load study time records from cloud
+          if (data.studyTimeRecords) {
+            StudyTimer.loadRecordsFromCloud(data.studyTimeRecords);
+            if (typeof window.updateStudyTimerUI === 'function') {
+              window.updateStudyTimerUI();
+            }
           }
         } else {
           // First time user - save current local progress to cloud
@@ -2240,6 +2597,181 @@
       }
     }, 500);
     // ========== 游戏系统初始化结束 ==========
+
+    // ========== 学习时间追踪 ==========
+    // Initialize study timer
+    StudyTimer.autoStart();
+
+    // Update timer display every second
+    setInterval(() => {
+      updateStudyTimerUI();
+    }, 1000);
+
+    // Study timer UI update function
+    let _lastChartKey = '';
+    window.updateStudyTimerUI = function() {
+      const display = document.getElementById('timerDisplay');
+      const badge = document.getElementById('timerStatusBadge');
+      const todayTotal = document.getElementById('todayTotal');
+      const todayDetail = document.getElementById('todayDetail');
+      const streakInfo = document.getElementById('streakInfo');
+
+      if (!display) return;
+
+      // Update timer display
+      display.textContent = StudyTimer.getCurrentSessionFormatted();
+      if (StudyTimer.isRunning()) {
+        display.className = 'timer-display running';
+        badge.className = 'timer-status-badge running';
+        badge.textContent = 'Tracking / 追踪中';
+      } else {
+        display.className = 'timer-display';
+        badge.className = 'timer-status-badge paused';
+        badge.textContent = 'Paused / 暂停';
+      }
+
+      // Update today's info
+      const today = StudyTimer.getTodayTime();
+      const totalMin = today.minutes + (today.manualMinutes || 0);
+      todayTotal.textContent = `Today: ${totalMin} min / 今天: ${totalMin} 分钟`;
+      todayDetail.textContent = `${today.sessions || 0} sessions / ${today.sessions || 0} 次学习`;
+
+      // Update streak
+      const streak = StudyTimer.getStreak();
+      if (streak > 1) {
+        streakInfo.textContent = `🔥 ${streak} day streak! / 连续 ${streak} 天！`;
+      } else if (streak === 1) {
+        streakInfo.textContent = '🔥 Great start! / 好的开始！';
+      } else {
+        streakInfo.textContent = '';
+      }
+
+      // Only rebuild chart when data changes (not every second)
+      const stats = StudyTimer.getStats(7);
+      const chartKey = stats.map(s => s.minutes).join(',');
+      if (chartKey !== _lastChartKey) {
+        _lastChartKey = chartKey;
+        updateWeeklyChart(stats);
+      }
+    };
+
+    // Update weekly mini chart
+    function updateWeeklyChart(stats) {
+      const chart = document.getElementById('weeklyChart');
+      if (!chart) return;
+
+      if (!stats) stats = StudyTimer.getStats(7);
+      const maxMinutes = Math.max(...stats.map(s => s.minutes), 1);
+
+      chart.innerHTML = stats.map(s => {
+        const height = Math.max((s.minutes / maxMinutes) * 60, 4);
+        const isToday = s.dayLabel === 'Today';
+        return `
+          <div class="chart-bar-wrapper">
+            <div class="chart-bar-value">${s.minutes > 0 ? s.minutes + 'm' : ''}</div>
+            <div class="chart-bar ${isToday ? 'today' : ''}" style="height: ${height}px;"></div>
+            <div class="chart-bar-label">${s.dayLabel}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Manual time entry
+    function openManualTimeEntry() {
+      const form = document.getElementById('manualTimeForm');
+      const dateInput = document.getElementById('manualDate');
+      dateInput.value = new Date().toISOString().split('T')[0];
+      form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function cancelManualTime() {
+      document.getElementById('manualTimeForm').style.display = 'none';
+    }
+
+    function submitManualTime() {
+      const minutes = parseInt(document.getElementById('manualMinutes').value);
+      const date = document.getElementById('manualDate').value;
+
+      if (!minutes || minutes < 1) {
+        alert('Please enter a valid number of minutes / 请输入有效分钟数');
+        return;
+      }
+      if (!date) {
+        alert('Please select a date / 请选择日期');
+        return;
+      }
+
+      StudyTimer.addManualTime(date, minutes, 'Manual entry');
+      document.getElementById('manualTimeForm').style.display = 'none';
+      updateStudyTimerUI();
+    }
+
+    // Study history modal
+    function openStudyHistory() {
+      const modal = document.getElementById('studyHistoryModal');
+      const statsDiv = document.getElementById('historyStats');
+      const listDiv = document.getElementById('historyList');
+
+      // Summary stats
+      const weeklyTotal = StudyTimer.getWeeklyTotal();
+      const streak = StudyTimer.getStreak();
+      const stats = StudyTimer.getStats(30);
+      const totalAllTime = stats.reduce((sum, s) => sum + s.minutes, 0);
+
+      statsDiv.innerHTML = `
+        <div class="history-stat-card">
+          <div class="stat-value">${weeklyTotal}</div>
+          <div class="stat-label">This Week (min)<br>本周（分钟）</div>
+        </div>
+        <div class="history-stat-card">
+          <div class="stat-value">${streak}</div>
+          <div class="stat-label">Day Streak<br>连续天数</div>
+        </div>
+        <div class="history-stat-card">
+          <div class="stat-value">${totalAllTime}</div>
+          <div class="stat-label">30 Days (min)<br>30天（分钟）</div>
+        </div>
+      `;
+
+      // History list
+      const recentStats = StudyTimer.getStats(14);
+      listDiv.innerHTML = recentStats.filter(s => s.minutes > 0).map(s => `
+        <div class="history-item">
+          <div>
+            <div class="history-date">${s.date} (${s.dayLabel})</div>
+            <div class="history-detail">${s.sessions} sessions / ${s.sessions} 次学习</div>
+          </div>
+          <div>
+            <div class="history-time">${s.minutes} min / 分钟</div>
+            ${s.manualMinutes > 0 ? `<div class="history-detail">incl. ${s.manualMinutes}m manual / 含手动${s.manualMinutes}分钟</div>` : ''}
+          </div>
+        </div>
+      `).join('') || '<p style="color:#888; text-align:center; padding:20px;">No study records yet / 暂无学习记录</p>';
+
+      modal.classList.add('active');
+    }
+
+    function closeStudyHistory() {
+      document.getElementById('studyHistoryModal').classList.remove('active');
+    }
+
+    // Close history modal on overlay click
+    document.getElementById('studyHistoryModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeStudyHistory();
+      }
+    });
+
+    // Initial UI update
+    updateStudyTimerUI();
+
+    // Auto-sync study time to cloud every 5 minutes
+    setInterval(() => {
+      if (window.currentUser) {
+        saveProgressToCloud();
+      }
+    }, 5 * 60 * 1000);
+    // ========== 学习时间追踪结束 ==========
 
     // ========== 语言切换功能 ==========
     function toggleLanguage() {
