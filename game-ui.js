@@ -31,7 +31,7 @@ class GameUI {
           <span class="stat-value" id="streak-display">0</span>
         </div>
         <div class="stat-item badges" onclick="gameUI.showBadgesModal()">
-          <span class="stat-icon">🏆</span>
+          <span class="stat-icon">🏅</span>
           <span class="stat-value" id="badges-display">0</span>
         </div>
         <div class="stat-item pet" onclick="gameUI.showPetModal()">
@@ -68,7 +68,7 @@ class GameUI {
     modal.innerHTML = `
       <div class="modal-content">
         <div class="modal-header">
-          <h2>🏆 我的徽章</h2>
+          <h2>🏅 我的徽章</h2>
           <button class="close-btn" onclick="this.parentElement.parentElement.parentElement.remove()">×</button>
         </div>
         <div class="badges-grid">
