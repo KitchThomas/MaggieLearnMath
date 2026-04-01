@@ -120,6 +120,12 @@ export const GameConfig = {
       coins: 50,
       exp: 100
     },
+    sentenceDictation: {
+      perfect: { coins: 20, exp: 25 },
+      nearPerfect: { coins: 15, exp: 20 },
+      good: { coins: 10, exp: 15 },
+      needsWork: { coins: 5, exp: 5 }
+    },
     dailyLogin: {
       coins: 20,
       exp: 30

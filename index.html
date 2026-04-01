@@ -942,6 +942,20 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       cursor: pointer;
       transition: all 0.3s ease;
+
+    .dictation-buttons-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    @media (max-width: 768px) {
+      .dictation-buttons-row {
+        grid-template-columns: 1fr;
+      }
+    }
+    .sentence-dictation-entry {
+      background: linear-gradient(135deg, #fff 0%, #e8f5ff 100%) !important;
+    }
     }
 
     .dictation-entry-btn:hover {
@@ -1320,6 +1334,7 @@
 
   <!-- 听写练习样式 -->
   <link rel="stylesheet" href="dictation-styles.css">
+  <link rel="stylesheet" href="sentence-dictation-styles.css">
 </head>
 <body>
   <!-- i18n 语言模块 -->
@@ -1349,6 +1364,15 @@
     window.SpellingWords = SpellingWords;
     window.DictationPractice = DictationPractice;
     console.log('✍️ Dictation practice module loaded');
+  </script>
+
+  <!-- 句子听写模块 -->
+  <script type="module">
+    import SentenceData from './sentence-data.js';
+    import SentenceDictationPractice from './sentence-dictation.js';
+    window.SentenceData = SentenceData;
+    window.SentenceDictationPractice = SentenceDictationPractice;
+    console.log('📝 Sentence dictation module loaded');
   </script>
 
   <!-- 学习时间追踪模块 -->
@@ -1443,14 +1467,24 @@
 
     <!-- Dictation Practice Entry -->
     <div class="dictation-section">
-      <button class="dictation-entry-btn" onclick="DictationPractice.show()">
-        <span class="dictation-icon">✍️</span>
-        <div class="dictation-text">
-          <span class="dictation-title-text" data-i18n="dictationTitle">Dictation Practice / 听写练习</span>
-          <span class="dictation-desc">English & French / 英语和法语</span>
-        </div>
-        <span class="dictation-arrow">→</span>
-      </button>
+      <div class="dictation-buttons-row">
+        <button class="dictation-entry-btn" onclick="DictationPractice.show()">
+          <span class="dictation-icon">✍️</span>
+          <div class="dictation-text">
+            <span class="dictation-title-text" data-i18n="dictationTitle">Dictation Practice / 听写练习</span>
+            <span class="dictation-desc" data-i18n="wordDictationDesc">Word spelling practice</span>
+          </div>
+          <span class="dictation-arrow">→</span>
+        </button>
+        <button class="dictation-entry-btn sentence-dictation-entry" onclick="SentenceDictationPractice.show()">
+          <span class="dictation-icon">📝</span>
+          <div class="dictation-text">
+            <span class="dictation-title-text" data-i18n="sentenceDictationTitle">Sentence Dictation</span>
+            <span class="dictation-desc" data-i18n="sentenceDictationDesc">Listen and write full sentences</span>
+          </div>
+          <span class="dictation-arrow">→</span>
+        </button>
+      </div>
     </div>
 
     <div class="units-grid" id="unitsContainer">
