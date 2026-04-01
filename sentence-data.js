@@ -163,8 +163,9 @@ const SentenceData = {
   // ========== Utility Methods ==========
 
   _resolveKey(grade, subject) {
-    if (subject === 'french') return 'grade5_6French';
-    return `grade${grade}${subject.charAt(0).toUpperCase() + subject.slice(1)}`;
+    const subjectLower = subject.toLowerCase();
+    if (subjectLower === 'french') return 'grade5_6French';
+    return `grade${grade}${subject.charAt(0).toUpperCase() + subject.slice(1).toLowerCase()}`;
   },
 
   getSentences(grade, subject, category, count, difficulty) {
