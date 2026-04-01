@@ -51,7 +51,8 @@ class GameUI {
     document.getElementById('level-display').textContent = `Lv.${gameState.level.level}`;
     document.getElementById('exp-fill').style.width = `${gameState.level.progress}%`;
     document.getElementById('streak-display').textContent = gameState.streak;
-    document.getElementById('badges-display').textContent = gameState.badges;
+    const badgesCount = Array.isArray(gameState.badges) ? gameState.badges.length : gameState.badges;
+    document.getElementById('badges-display').textContent = badgesCount;
 
     if (gameState.activePet) {
       document.getElementById('pet-icon').textContent = gameState.activePet.emoji;
