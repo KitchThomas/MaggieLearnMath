@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maggie School - Science Books / 科学图书馆</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+    header { text-align: center; color: white; padding: 20px 0 30px; }
+    header h1 { font-size: 1.8rem; margin-bottom: 8px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+    header p { font-size: 1.1rem; opacity: 0.9; }
+    .back-link {
+      display: inline-block; color: white; text-decoration: none;
+      margin-bottom: 15px; font-size: 0.95rem; opacity: 0.85;
+      transition: opacity 0.3s;
+    }
+    .back-link:hover { opacity: 1; }
+    .category { margin-bottom: 30px; }
+    .category-title {
+      color: white; font-size: 1.2rem; margin-bottom: 12px;
+      padding-bottom: 6px; border-bottom: 2px solid rgba(255,255,255,0.3);
+    }
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+    }
+    .book-card {
+      background: white; border-radius: 14px;
+      padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .book-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+    .book-title { font-size: 1.05rem; font-weight: 700; color: #333; margin-bottom: 4px; }
+    .book-author { font-size: 0.85rem; color: #888; margin-bottom: 10px; }
+    .book-desc { font-size: 0.88rem; color: #666; margin-bottom: 14px; line-height: 1.4; }
+    .download-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .dl-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 16px; border-radius: 20px; text-decoration: none;
+      font-size: 0.85rem; font-weight: 600; transition: all 0.2s;
+    }
+    .dl-btn.epub {
+      background: #667eea; color: white;
+    }
+    .dl-btn.epub:hover { background: #5568d3; }
+    .dl-btn.pdf {
+      background: #e74c3c; color: white;
+    }
+    .dl-btn.pdf:hover { background: #c0392b; }
+    .dl-btn .size { font-weight: 400; opacity: 0.85; font-size: 0.78rem; }
+    .note {
+      color: rgba(255,255,255,0.7); text-align: center;
+      font-size: 0.85rem; margin-top: 20px; padding-bottom: 30px;
+    }
+    @media (max-width: 640px) {
+      .books-grid { grid-template-columns: 1fr; }
+      header h1 { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="/" class="back-link">&larr; Back to Home / 返回首页</a>
+    <header>
+      <h1>Science Library / 科学图书馆</h1>
+      <p>Classic science & adventure books for teens / 经典科学与探险读物</p>
+    </header>
+
+    <!-- Science History -->
+    <div class="category">
+      <div class="category-title">Science & History / 科学与历史</div>
+      <div class="books-grid" id="scienceHistory"></div>
+    </div>
+
+    <!-- Nature -->
+    <div class="category">
+      <div class="category-title">Nature & Earth / 自然与地球</div>
+      <div class="books-grid" id="nature"></div>
+    </div>
+
+    <!-- Adventure -->
+    <div class="category">
+      <div class="category-title">Classic Adventure / 经典探险</div>
+      <div class="books-grid" id="adventure"></div>
+    </div>
+
+    <div class="note">
+      All books are from Project Gutenberg (Public Domain). 15 books total.<br>
+      所有书籍来自 Project Gutenberg（公共领域），共 15 本。
+    </div>
+  </div>
+
+<script>
+const books = [
+  { id: "01_Short_History_Natural_Science", title: "A Short History of Natural Science", titleCn: "自然科学简史", author: "A. P. Martin", desc: "A concise history of scientific discoveries from ancient times to the 19th century.", descCn: "从古代到19世纪科学发现的简明历史。", cat: "scienceHistory" },
+  { id: "02_Origin_of_Species", title: "On the Origin of Species", titleCn: "物种起源", author: "Charles Darwin", desc: "The foundational work of evolutionary biology.", descCn: "进化生物学的奠基之作。", cat: "scienceHistory" },
+  { id: "03_Voyage_of_the_Beagle", title: "The Voyage of the Beagle", titleCn: "小猎犬号环球航行", author: "Charles Darwin", desc: "Darwin's around-the-world voyage of discovery.", descCn: "达尔文的环球发现之旅。", cat: "scienceHistory" },
+  { id: "04_Heroes_of_Science", title: "Heroes of Science", titleCn: "科学英雄", author: "Various", desc: "Biographies of great scientists who changed the world.", descCn: "改变世界的伟大科学家传记。", cat: "scienceHistory" },
+  { id: "05_History_of_Science", title: "History of Science", titleCn: "科学通史", author: "Various", desc: "A comprehensive survey of scientific progress through the ages.", descCn: "跨越时代的科学进步全面综述。", cat: "scienceHistory" },
+  { id: "06_Story_of_the_Heavens", title: "The Story of the Heavens", titleCn: "星空的故事", author: "Robert S. Ball", desc: "An introduction to astronomy and the wonders of the night sky.", descCn: "天文学与夜空奇观的入门读物。", cat: "nature" },
+  { id: "07_Elements_of_Geology", title: "Elements of Geology", titleCn: "地质学基础", author: "Various", desc: "An introduction to Earth science and geological formations.", descCn: "地球科学与地质构造入门。", cat: "nature" },
+  { id: "14_Life_of_Spider", title: "The Life of the Spider", titleCn: "蜘蛛的生活", author: "J. Henri Fabre", desc: "Fascinating observations of spider behavior and ecology.", descCn: "对蜘蛛行为与生态的精彩观察。", cat: "nature" },
+  { id: "15_Manual_of_Gardening", title: "Manual of Gardening", titleCn: "园艺入门", author: "L. H. Bailey", desc: "A practical guide to hands-on plant science.", descCn: "动手实践植物科学的实用指南。", cat: "nature" },
+  { id: "08_Wizard_of_Oz", title: "The Wonderful Wizard of Oz", titleCn: "绿野仙踪", author: "L. Frank Baum", desc: "A magical journey of courage, heart, and brains.", descCn: "一段关于勇气、爱心与智慧的魔幻旅程。", cat: "adventure" },
+  { id: "09_Around_World_80_Days", title: "Around the World in 80 Days", titleCn: "八十天环游地球", author: "Jules Verne", desc: "A thrilling race around the globe.", descCn: "激动人心的环球冒险竞赛。", cat: "adventure" },
+  { id: "10_20000_Leagues_Under_Sea", title: "20,000 Leagues Under the Sea", titleCn: "海底两万里", author: "Jules Verne", desc: "An extraordinary underwater adventure.", descCn: "非凡的海底探险之旅。", cat: "adventure" },
+  { id: "11_Journey_Center_Earth", title: "Journey to the Center of the Earth", titleCn: "地心游记", author: "Jules Verne", desc: "A descent into the unknown depths of our planet.", descCn: "深入地球未知深处的探险。", cat: "adventure" },
+  { id: "12_Mysterious_Island", title: "The Mysterious Island", titleCn: "神秘岛", author: "Jules Verne", desc: "Survival and discovery on a mysterious island.", descCn: "神秘岛上的生存与发现。", cat: "adventure" },
+  { id: "13_From_Earth_to_Moon", title: "From the Earth to the Moon", titleCn: "从地球到月球", author: "Jules Verne", desc: "A visionary tale of space travel.", descCn: "关于太空旅行的远见之作。", cat: "adventure" }
+];
+
+function formatSize(bytes) {
+  if (bytes < 1024) return bytes + 'B';
+  if (bytes < 1048576) return (bytes / 1024).toFixed(0) + 'KB';
+  return (bytes / 1048576).toFixed(1) + 'MB';
+}
+
+// File sizes known from listing
+const fileSizes = {
+  "01_Short_History_Natural_Science": { epub: 175000, pdf: 1048000 },
+  "02_Origin_of_Species": { epub: 415000, pdf: 2936000 },
+  "03_Voyage_of_the_Beagle": { epub: 598000, pdf: 4198000 },
+  "04_Heroes_of_Science": { epub: 194000, pdf: 987000 },
+  "05_History_of_Science": { epub: 265000, pdf: 1468000 },
+  "06_Story_of_the_Heavens": { epub: 165000, pdf: 784000 },
+  "07_Elements_of_Geology": { epub: 340000, pdf: 2252000 },
+  "08_Wizard_of_Oz": { epub: 178000, pdf: 793000 },
+  "09_Around_World_80_Days": { epub: 264000, pdf: 1228000 },
+  "10_20000_Leagues_Under_Sea": { epub: 363000, pdf: 1708000 },
+  "11_Journey_Center_Earth": { epub: 232000, pdf: 1160000 },
+  "12_Mysterious_Island": { epub: 374000, pdf: 1960000 },
+  "13_From_Earth_to_Moon": { epub: 198000, pdf: 1032000 },
+  "14_Life_of_Spider": { epub: 287000, pdf: 1460000 },
+  "15_Manual_of_Gardening": { epub: 432000, pdf: 2680000 }
+};
+
+function renderBooks() {
+  const containers = {};
+  books.forEach(function(b) {
+    var container = document.getElementById(b.cat);
+    if (!container) return;
+    var sizes = fileSizes[b.id] || { epub: 0, pdf: 0 };
+    var card = document.createElement('div');
+    card.className = 'book-card';
+    card.innerHTML =
+      '<div class="book-title">' + b.title + '</div>' +
+      '<div class="book-title" style="font-size:0.9rem;color:#667eea;margin-bottom:2px;">' + b.titleCn + '</div>' +
+      '<div class="book-author">' + b.author + '</div>' +
+      '<div class="book-desc">' + b.desc + '<br>' + b.descCn + '</div>' +
+      '<div class="download-btns">' +
+        '<a class="dl-btn epub" href="books/' + b.id + '.epub" download>' +
+          'EPUB <span class="size">(' + formatSize(sizes.epub) + ')</span></a>' +
+        '<a class="dl-btn pdf" href="books/' + b.id + '.pdf" download>' +
+          'PDF <span class="size">(' + formatSize(sizes.pdf) + ')</span></a>' +
+      '</div>';
+    container.appendChild(card);
+  });
+}
+
+renderBooks();
+</script>
+</body>
+</html>
