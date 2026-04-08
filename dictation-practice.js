@@ -13,6 +13,7 @@ class DictationPractice {
     this.subject = 'English';
     this.category = 'mixed';
     this.difficulty = 'normal';
+    this.wordCount = 20;
     this.speechEnabled = true;
     this.speechRate = 0.8;
     this.gameMode = false;

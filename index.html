@@ -2744,6 +2744,7 @@
         const fileName = currentGrade === 5 ? 'curriculum.json' : 'curriculum-grade6.json';
         const response = await fetch(fileName);
         curriculum = await response.json();
+        window.currentCurriculum = curriculum;
         renderUnits();
         updateProgress();
       } catch (error) {

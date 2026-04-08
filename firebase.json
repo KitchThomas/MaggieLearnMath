@@ -14,12 +14,20 @@
       "package-lock.json",
       "repomix-output.xml",
       "firebase-config.js",
-      "**/*.epub",
-      "**/*.pdf",
       "git-autosync-tool/**",
-      "firestore.rules"
+      "firestore.rules",
+      "science_books_for_teens/**"
     ],
     "headers": [
+      {
+        "source": "/books/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000"
+          }
+        ]
+      },
       {
         "source": "**",
         "headers": [
