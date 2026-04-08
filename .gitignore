@@ -29,3 +29,13 @@ build/
 
 # Repomix output
 repomix-output.xml
+
+# Large binary files (science books)
+*.epub
+*.pdf
+
+# Git auto-sync tool (development utility)
+git-autosync-tool/
+
+# Firebase hosting cache
+.firebase/

@@ -1624,25 +1624,23 @@
 
     // Check if Firebase is properly configured
     setTimeout(() => {
-      console.log('=== Firebase Status Check ===');
-      console.log('Firebase loaded in:', Date.now() - window.firebaseLoadStart, 'ms');
-      console.log('Firebase Auth:', auth);
-      console.log('Firebase DB:', db);
-      console.log('Config:', firebaseConfig);
-      console.log('Current user:', window.currentUser);
-
-      // Test if auth methods are available
-      console.log('signInWithEmailAndPassword available:', typeof signInWithEmailAndPassword !== 'undefined');
-      console.log('createUserWithEmailAndPassword available:', typeof createUserWithEmailAndPassword !== 'undefined');
-
       if (typeof signInWithEmailAndPassword === 'undefined') {
-        console.error('Firebase Auth methods not loaded!');
         showAuthError('Firebase 加载失败！请检查网络连接或刷新页面 / Firebase failed to load!');
       }
     }, 2000);
   </script>
 
   <script>
+    // ========================================
+    // HTML 转义工具 / HTML Escape Utility
+    // ========================================
+
+    function escapeHtml(str) {
+      if (typeof str !== 'string') return str;
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    }
+
     // ========================================
     // 动态题目生成系统 / Dynamic Question Generator
     // ========================================
@@ -1674,7 +1672,84 @@
         return `${frac.num}/${frac.den}`;
       },
 
-      // 计算表达式的值
+      // 安全的数学表达式计算器（替代 eval）
+      _tokenize: function(expr) {
+        const tokens = [];
+        let i = 0;
+        while (i < expr.length) {
+          if (expr[i] === ' ') { i++; continue; }
+          if ('+-*/()'.includes(expr[i])) {
+            tokens.push({ type: 'op', value: expr[i] });
+            i++;
+          } else if (/\d/.test(expr[i]) || expr[i] === '.') {
+            let num = '';
+            while (i < expr.length && (/\d/.test(expr[i]) || expr[i] === '.')) {
+              num += expr[i]; i++;
+            }
+            tokens.push({ type: 'num', value: parseFloat(num) });
+          } else {
+            return null; // 未知字符，拒绝执行
+          }
+        }
+        return tokens;
+      },
+
+      _parseExpr: function(tokens, pos) {
+        let left = this._parseTerm(tokens, pos);
+        if (left === null) return null;
+        while (left.pos < tokens.length && tokens[left.pos].type === 'op' &&
+               (tokens[left.pos].value === '+' || tokens[left.pos].value === '-')) {
+          const op = tokens[left.pos].value;
+          const right = this._parseTerm(tokens, left.pos + 1);
+          if (right === null) return null;
+          left = { value: op === '+' ? left.value + right.value : left.value - right.value, pos: right.pos };
+        }
+        return left;
+      },
+
+      _parseTerm: function(tokens, pos) {
+        let left = this._parseFactor(tokens, pos);
+        if (left === null) return null;
+        while (left.pos < tokens.length && tokens[left.pos].type === 'op' &&
+               (tokens[left.pos].value === '*' || tokens[left.pos].value === '/')) {
+          const op = tokens[left.pos].value;
+          const right = this._parseFactor(tokens, left.pos + 1);
+          if (right === null) return null;
+          left = { value: op === '*' ? left.value * right.value : left.value / right.value, pos: right.pos };
+        }
+        return left;
+      },
+
+      _parseFactor: function(tokens, pos) {
+        if (pos >= tokens.length) return null;
+        if (tokens[pos].type === 'op' && tokens[pos].value === '-') {
+          const result = this._parseFactor(tokens, pos + 1);
+          if (result === null) return null;
+          return { value: -result.value, pos: result.pos };
+        }
+        if (tokens[pos].type === 'op' && tokens[pos].value === '(') {
+          const inner = this._parseExpr(tokens, pos + 1);
+          if (inner === null || inner.pos >= tokens.length || tokens[inner.pos].value !== ')') return null;
+          return { value: inner.value, pos: inner.pos + 1 };
+        }
+        if (tokens[pos].type === 'num') {
+          return { value: tokens[pos].value, pos: pos + 1 };
+        }
+        return null;
+      },
+
+      safeMathEval: function(expr) {
+        if (!expr || typeof expr !== 'string') return null;
+        // 只允许数字、运算符、括号、空格和小数点
+        if (!/^[\d+\-*/().\s]+$/.test(expr)) return null;
+        const tokens = this._tokenize(expr);
+        if (!tokens || tokens.length === 0) return null;
+        const result = this._parseExpr(tokens, 0);
+        if (result === null || result.pos !== tokens.length) return null;
+        return result.value;
+      },
+
+      // 计算表达式的值（安全版本）
       evaluate: function(expr, vars) {
         let result = expr;
         for (const [key, value] of Object.entries(vars)) {
@@ -1685,12 +1760,7 @@
             result = result.replace(regex, value);
           }
         }
-        try {
-          return eval(result);
-        } catch (e) {
-          console.error('Error evaluating:', expr, result);
-          return null;
-        }
+        return this.safeMathEval(result);
       },
 
       // 替换模板中的变量
@@ -1872,10 +1942,6 @@
     function showAuthError(message, fullError = null) {
       const errorEl = document.getElementById('authError');
       errorEl.textContent = message;
-      if (fullError) {
-        errorEl.innerHTML += '<br><small style="color: #666;">详细信息: ' + JSON.stringify(fullError) + '</small>';
-        console.error('Full error object:', fullError);
-      }
       errorEl.classList.add('show');
     }
 
@@ -1891,18 +1957,9 @@
       document.getElementById('authError').classList.remove('show');
 
       try {
-        console.log('Attempting login with:', email);
         await window.signInWithEmailAndPassword(window.firebaseAuth, email, password);
-        console.log('Login successful!');
       } catch (error) {
-        console.error('Login error:', error);
-        console.error('Error code:', error.code);
-        console.error('Error message:', error.message);
-        showAuthError(getErrorMessage(error.code) + ' (' + error.code + ')', {
-          code: error.code,
-          message: error.message,
-          name: error.name
-        });
+        showAuthError(getErrorMessage(error.code) + ' (' + error.code + ')');
       } finally {
         btn.disabled = false;
         btn.textContent = 'Login / 登录';
@@ -1922,22 +1979,12 @@
       document.getElementById('authError').classList.remove('show');
 
       try {
-        console.log('Attempting registration for:', email);
-        console.log('Password length:', password.length);
         const userCredential = await window.createUserWithEmailAndPassword(window.firebaseAuth, email, password);
-        console.log('Registration successful! User:', userCredential.user);
         await window.updateProfile(userCredential.user, { displayName: name });
         // Save initial progress to cloud
         await saveProgressToCloud();
       } catch (error) {
-        console.error('Registration error:', error);
-        console.error('Error code:', error.code);
-        console.error('Error message:', error.message);
-        showAuthError(getErrorMessage(error.code) + ' (' + error.code + ')', {
-          code: error.code,
-          message: error.message,
-          name: error.name
-        });
+        showAuthError(getErrorMessage(error.code) + ' (' + error.code + ')');
       } finally {
         btn.disabled = false;
         btn.textContent = 'Register / 注册';
@@ -2090,8 +2137,8 @@
         unitCard.className = 'unit-card';
         unitCard.innerHTML = `
           <div class="unit-header ${currentGrade === 6 ? 'grade6' : ''}" onclick="toggleUnit(${unitIndex})">
-            <h2>${getUnitEmoji(unitIndex, currentGrade)} ${unit.title}</h2>
-            <p>${unit.description}</p>
+            <h2>${getUnitEmoji(unitIndex, currentGrade)} ${escapeHtml(unit.title)}</h2>
+            <p>${escapeHtml(unit.description)}</p>
             <div class="unit-progress">
               <div class="unit-progress-bar">
                 <div class="unit-progress-fill" style="width: ${unitPercent}%"></div>
@@ -2101,12 +2148,12 @@
           </div>
           <div class="unit-topics" id="unit-${unitIndex}">
             ${unit.topics.map((topic, topicIndex) => `
-              <div class="topic-item" onclick="openTopic('${unit.id}', '${topic.id}', event)">
+              <div class="topic-item" onclick="openTopic('${escapeHtml(unit.id)}', '${escapeHtml(topic.id)}', event)">
                 <div class="topic-title">
                   <span class="status ${isCompleted(topic.id) ? 'completed' : ''}">${isCompleted(topic.id) ? '✓' : ''}</span>
-                  ${topic.title}
+                  ${escapeHtml(topic.title)}
                 </div>
-                <div class="topic-description">${topic.description}</div>
+                <div class="topic-description">${escapeHtml(topic.description)}</div>
               </div>
             `).join('')}
           </div>
@@ -2139,30 +2186,30 @@
       return examples.map((example, index) => {
         const actualIndex = startIndex + index;
         const hint = example.hint || 'Think about the concept and try again / 想想这个概念，再试一次';
-        const escapedHint = hint.replace(/`/g, '\\`').replace(/"/g, '&quot;');
+        const escapedHint = escapeHtml(hint).replace(/`/g, '\\`').replace(/"/g, '&quot;');
         const isExtra = example.isExtra ? 'true' : 'false';
         const templateIndex = example.templateIndex !== undefined ? example.templateIndex : 'null';
         const extraClass = example.isExtra ? ' style="border-color: #667eea;"' : '';
         const extraPrefix = example.isExtra ? '🔄 ' : '';
 
         return `
-          <div class="example-item" id="example-item-${topicId}-${actualIndex}"
+          <div class="example-item" id="example-item-${escapeHtml(topicId)}-${actualIndex}"
                data-attempts="0" data-correct="false"
                data-is-extra="${isExtra}"${extraClass}>
-            <div class="example-question">${actualIndex + 1}. ${extraPrefix}${example.question}</div>
-            ${example.questionEn ? `<div class="example-question-en">${example.questionEn}</div>` : ''}
+            <div class="example-question">${actualIndex + 1}. ${extraPrefix}${escapeHtml(example.question)}</div>
+            ${example.questionEn ? `<div class="example-question-en">${escapeHtml(example.questionEn)}</div>` : ''}
             ${example.type === 'choice' ? `
-              <div class="example-options" id="options-${topicId}-${actualIndex}">
+              <div class="example-options" id="options-${escapeHtml(topicId)}-${actualIndex}">
                 ${example.options.map((option, optIndex) => `
-                  <button class="example-option" onclick="checkAnswer('${topicId}', ${actualIndex}, ${optIndex}, ${example.correctAnswer}, event, '${escapedHint}', ${templateIndex})">
-                    ${String.fromCharCode(65 + optIndex)}. ${option}
+                  <button class="example-option" onclick="checkAnswer('${escapeHtml(topicId)}', ${actualIndex}, ${optIndex}, ${example.correctAnswer}, event, '${escapedHint}', ${templateIndex})">
+                    ${String.fromCharCode(65 + optIndex)}. ${escapeHtml(option)}
                   </button>
                 `).join('')}
               </div>
             ` : `
               <div class="example-input-container">
-                <input type="text" class="example-input" id="input-${topicId}-${actualIndex}" placeholder="输入答案 / Enter answer">
-                <button class="example-check-btn" onclick="checkInputAnswer('${topicId}', ${actualIndex}, '${example.correctAnswer}', ${JSON.stringify(example.answers || []).replace(/"/g, '&quot;')}, event, '${escapedHint}')">检查 / Check</button>
+                <input type="text" class="example-input" id="input-${escapeHtml(topicId)}-${actualIndex}" placeholder="输入答案 / Enter answer">
+                <button class="example-check-btn" onclick="checkInputAnswer('${escapeHtml(topicId)}', ${actualIndex}, '${escapeHtml(example.correctAnswer)}', ${JSON.stringify(example.answers || []).replace(/"/g, '&quot;')}, event, '${escapedHint}')">检查 / Check</button>
               </div>
             `}
             <div class="example-feedback" id="feedback-${topicId}-${actualIndex}"></div>
@@ -2236,8 +2283,8 @@
             <ul class="resource-list">
               ${topic.khanAcademy.map(resource => `
                 <li class="resource-item">
-                  <a href="${resource.url}" target="_blank">${resource.title}</a>
-                  <span class="type-badge">${resource.type || 'video'}</span>
+                  <a href="${escapeHtml(resource.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(resource.title)}</a>
+                  <span class="type-badge">${escapeHtml(resource.type || 'video')}</span>
                 </li>
               `).join('')}
             </ul>
@@ -2253,8 +2300,8 @@
             <ul class="resource-list">
               ${topic.youtube.map(resource => `
                 <li class="resource-item">
-                  <a href="${resource.url}" target="_blank">${resource.title}</a>
-                  <span class="channel">${resource.channel}</span>
+                  <a href="${escapeHtml(resource.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(resource.title)}</a>
+                  <span class="channel">${escapeHtml(resource.channel)}</span>
                 </li>
               `).join('')}
             </ul>

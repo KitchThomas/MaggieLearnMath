@@ -27,6 +27,23 @@ const server = http.createServer((req, res) => {
   let filePath = req.url === '/' ? '/index.html' : req.url;
   filePath = path.join(__dirname, filePath);
 
+  // 防止路径遍历攻击：确保解析后的路径在项目目录内
+  filePath = path.resolve(filePath);
+  if (!filePath.startsWith(__dirname)) {
+    res.writeHead(403, { 'Content-Type': 'text/html' });
+    res.end('<h1>403 - Forbidden</h1>');
+    return;
+  }
+
+  // 禁止访问敏感文件
+  const basename = path.basename(filePath);
+  const sensitiveFiles = ['firebase-config.js', 'package.json', 'package-lock.json', '.env'];
+  if (sensitiveFiles.includes(basename) || filePath.includes('node_modules')) {
+    res.writeHead(403, { 'Content-Type': 'text/html' });
+    res.end('<h1>403 - Forbidden</h1>');
+    return;
+  }
+
   // 获取文件扩展名
   const ext = path.extname(filePath).toLowerCase();
   const contentType = MIME_TYPES[ext] || 'application/octet-stream';
