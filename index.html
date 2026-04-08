@@ -1327,6 +1327,567 @@
       color: #11998e;
       border-bottom-color: #11998e;
     }
+
+    /* ========== 错题本样式 / Wrong Answer Book Styles ========== */
+
+    /* 入口按钮徽标 / Entry button badge */
+    .wrong-answer-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #ff4757;
+      color: white;
+      font-size: 11px;
+      font-weight: bold;
+      min-width: 18px;
+      height: 18px;
+      border-radius: 9px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 0 4px;
+      z-index: 1;
+    }
+
+    /* 错题本模态框 / Wrong Answer Book Modal */
+    .wrong-answer-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .wrong-answer-modal.active {
+      display: flex;
+    }
+
+    .wrong-answer-box {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      width: 100%;
+      max-width: 700px;
+      max-height: 85vh;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .wrong-answer-box h2 {
+      color: #333;
+      margin-bottom: 5px;
+      font-size: 1.4rem;
+    }
+
+    .wrong-answer-box .subtitle {
+      color: #888;
+      font-size: 0.85rem;
+      margin-bottom: 15px;
+    }
+
+    .wrong-answer-close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: #999;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .wrong-answer-close:hover {
+      color: #333;
+    }
+
+    /* 筛选栏 / Filter bar */
+    .wrong-answer-filters {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .wrong-answer-filters select {
+      padding: 6px 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: #555;
+      background: white;
+      cursor: pointer;
+    }
+
+    .wrong-answer-filters select:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    /* 标签页 / Tabs */
+    .wrong-answer-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid #eee;
+      margin-bottom: 15px;
+    }
+
+    .wrong-answer-tab {
+      padding: 8px 16px;
+      border: none;
+      background: none;
+      color: #888;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.2s;
+    }
+
+    .wrong-answer-tab.active {
+      color: #667eea;
+      border-bottom-color: #667eea;
+      font-weight: 600;
+    }
+
+    .wrong-answer-tab:hover {
+      color: #667eea;
+    }
+
+    /* 错题列表项 / Wrong answer list items */
+    .wrong-answer-item {
+      background: #f8f9ff;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 12px;
+      border-left: 4px solid #ff4757;
+      transition: all 0.2s;
+    }
+
+    .wrong-answer-item.mastered {
+      border-left-color: #4CAF50;
+      opacity: 0.7;
+    }
+
+    .wrong-answer-item:hover {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .wrong-answer-item .question-text {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+
+    .wrong-answer-item .answer-row {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 6px;
+      font-size: 0.85rem;
+    }
+
+    .wrong-answer-item .user-answer {
+      color: #ff4757;
+      background: #fff0f0;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .wrong-answer-item .correct-answer {
+      color: #4CAF50;
+      background: #f0fff0;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .wrong-answer-item .meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: #999;
+      margin-top: 8px;
+    }
+
+    .wrong-answer-item .hint-text {
+      font-size: 0.8rem;
+      color: #667eea;
+      margin-top: 4px;
+      padding: 4px 8px;
+      background: rgba(102, 126, 234, 0.08);
+      border-radius: 6px;
+    }
+
+    .wrong-answer-item .mastered-label {
+      color: #4CAF50;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+
+    .wrong-answer-item .delete-btn {
+      background: none;
+      border: none;
+      color: #ccc;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .wrong-answer-item .delete-btn:hover {
+      color: #ff4757;
+      background: #fff0f0;
+    }
+
+    /* 主题分组标题 / Topic group header */
+    .topic-group-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 10px;
+      margin: 15px 0 10px 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.95rem;
+    }
+
+    .topic-group-header:first-child {
+      margin-top: 0;
+    }
+
+    .topic-group-header .topic-count {
+      background: rgba(255,255,255,0.25);
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+    }
+
+    /* 空状态 / Empty state */
+    .wrong-answer-empty {
+      text-align: center;
+      padding: 40px 20px;
+      color: #999;
+    }
+
+    .wrong-answer-empty .empty-icon {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    .wrong-answer-empty p {
+      font-size: 0.95rem;
+    }
+
+    /* 统计面板 / Statistics panel */
+    .wrong-answer-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card {
+      background: #f8f9ff;
+      border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .stat-card .stat-number {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #667eea;
+    }
+
+    .stat-card .stat-label {
+      font-size: 0.75rem;
+      color: #888;
+      margin-top: 4px;
+    }
+
+    .stat-card.stat-green .stat-number {
+      color: #4CAF50;
+    }
+
+    .stat-card.stat-red .stat-number {
+      color: #ff4757;
+    }
+
+    /* 趋势图 / Trend chart */
+    .trend-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      height: 80px;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 15px;
+    }
+
+    .trend-bar-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .trend-bar {
+      width: 100%;
+      max-width: 30px;
+      background: linear-gradient(to top, #667eea, #764ba2);
+      border-radius: 4px 4px 0 0;
+      min-height: 4px;
+      transition: height 0.3s;
+    }
+
+    .trend-bar.mastered-bar {
+      background: linear-gradient(to top, #4CAF50, #81C784);
+    }
+
+    .trend-label {
+      font-size: 0.65rem;
+      color: #999;
+    }
+
+    /* 复习模式 / Review mode */
+    .review-container {
+      padding: 20px 0;
+    }
+
+    .review-progress {
+      text-align: center;
+      color: #667eea;
+      font-weight: 600;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+    }
+
+    .review-question {
+      background: #f8f9ff;
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 15px;
+    }
+
+    .review-question .question-label {
+      font-size: 0.8rem;
+      color: #888;
+      margin-bottom: 8px;
+    }
+
+    .review-question .question-content {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .review-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .review-option {
+      padding: 12px 16px;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      background: white;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+      text-align: left;
+    }
+
+    .review-option:hover {
+      border-color: #667eea;
+      background: #f8f9ff;
+    }
+
+    .review-option.correct {
+      border-color: #4CAF50;
+      background: #f0fff0;
+      color: #2E7D32;
+    }
+
+    .review-option.incorrect {
+      border-color: #ff4757;
+      background: #fff0f0;
+      color: #c0392b;
+    }
+
+    .review-input-area {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .review-input-area input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+
+    .review-input-area input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .review-input-area button {
+      padding: 12px 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .review-feedback {
+      margin-top: 15px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .review-feedback.show {
+      display: block;
+    }
+
+    .review-feedback.correct {
+      background: #f0fff0;
+      color: #2E7D32;
+    }
+
+    .review-feedback.incorrect {
+      background: #fff0f0;
+      color: #c0392b;
+    }
+
+    /* 操作按钮 / Action buttons */
+    .wrong-answer-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+
+    .wab-btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .wab-btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .wab-btn-primary:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .wab-btn-secondary {
+      background: #f0f0f0;
+      color: #555;
+    }
+
+    .wab-btn-secondary:hover {
+      background: #e0e0e0;
+    }
+
+    .wab-btn-danger {
+      background: #fff0f0;
+      color: #ff4757;
+    }
+
+    .wab-btn-danger:hover {
+      background: #ffe0e0;
+    }
+
+    /* 复习结果摘要 / Review summary */
+    .review-summary {
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    .review-summary .summary-icon {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    .review-summary .summary-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .review-summary .summary-detail {
+      color: #888;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    /* 响应式 / Responsive */
+    @media (max-width: 600px) {
+      .wrong-answer-box {
+        padding: 20px 15px;
+        max-height: 90vh;
+      }
+
+      .wrong-answer-filters {
+        flex-direction: column;
+      }
+
+      .wrong-answer-filters select {
+        width: 100%;
+      }
+
+      .review-options {
+        grid-template-columns: 1fr;
+      }
+
+      .wrong-answer-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    body.grade6-theme .wrong-answer-tab.active {
+      color: #11998e;
+      border-bottom-color: #11998e;
+    }
+
+    body.grade6-theme .wab-btn-primary {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    }
+
+    body.grade6-theme .review-option:hover {
+      border-color: #11998e;
+      background: #f0faf7;
+    }
+
+    body.grade6-theme .stat-card .stat-number {
+      color: #11998e;
+    }
   </style>
 
   <!-- 游戏化样式 -->
@@ -1373,6 +1934,13 @@
     window.SentenceData = SentenceData;
     window.SentenceDictationPractice = SentenceDictationPractice;
     console.log('📝 Sentence dictation module loaded');
+  </script>
+
+  <!-- 错题本模块 -->
+  <script type="module">
+    import WrongAnswerBook from './wrong-answer-book.js';
+    window.WrongAnswerBook = WrongAnswerBook;
+    console.log('📓 Wrong Answer Book module loaded');
   </script>
 
   <!-- 学习时间追踪模块 -->
@@ -1492,6 +2060,15 @@
           </div>
           <span class="dictation-arrow">→</span>
         </button>
+        <button class="dictation-entry-btn" style="position:relative;" onclick="window.WrongAnswerBookUI && window.WrongAnswerBookUI.show()">
+          <span class="dictation-icon">📓</span>
+          <div class="dictation-text">
+            <span class="dictation-title-text">Wrong Answer Book / 错题本</span>
+            <span class="dictation-desc">Review mistakes / 复习错题</span>
+          </div>
+          <span class="wrong-answer-badge" id="wrongAnswerBadge" style="display:none;">0</span>
+          <span class="dictation-arrow">→</span>
+        </button>
       </div>
     </div>
 
@@ -1507,6 +2084,43 @@
       <h2>📊 Study History / 学习历史</h2>
       <div id="historyStats" class="history-stats-summary"></div>
       <div id="historyList"></div>
+    </div>
+  </div>
+
+  <!-- Wrong Answer Book Modal / 错题本模态框 -->
+  <div class="wrong-answer-modal" id="wrongAnswerModal">
+    <div class="wrong-answer-box">
+      <button class="wrong-answer-close" onclick="window.WrongAnswerBookUI && window.WrongAnswerBookUI.hide()">&times;</button>
+      <h2>📓 Wrong Answer Book / 错题本</h2>
+      <p class="subtitle" id="wabSubtitle">Review your mistakes and master them / 复习错题，攻克难关</p>
+
+      <!-- 筛选栏 / Filters -->
+      <div class="wrong-answer-filters" id="wabFilters">
+        <select id="wabFilterGrade" onchange="window.WrongAnswerBookUI && window.WrongAnswerBookUI.filterByGrade(this.value)">
+          <option value="">All Grades / 全部年级</option>
+          <option value="5">Grade 5 / 五年级</option>
+          <option value="6">Grade 6 / 六年级</option>
+        </select>
+        <select id="wabFilterUnit" onchange="window.WrongAnswerBookUI && window.WrongAnswerBookUI.filterByUnit(this.value)">
+          <option value="">All Units / 全部单元</option>
+        </select>
+      </div>
+
+      <!-- 标签页 / Tabs -->
+      <div class="wrong-answer-tabs">
+        <button class="wrong-answer-tab active" onclick="window.WrongAnswerBookUI && window.WrongAnswerBookUI.switchTab('all')">All / 全部</button>
+        <button class="wrong-answer-tab" onclick="window.WrongAnswerBookUI && window.WrongAnswerBookUI.switchTab('topic')">By Topic / 按主题</button>
+        <button class="wrong-answer-tab" onclick="window.WrongAnswerBookUI && window.WrongAnswerBookUI.switchTab('stats')">Statistics / 统计</button>
+      </div>
+
+      <!-- 内容区域 / Content area -->
+      <div id="wabContent"></div>
+
+      <!-- 操作按钮 / Actions -->
+      <div class="wrong-answer-actions" id="wabActions">
+        <button class="wab-btn wab-btn-primary" onclick="window.WrongAnswerBookUI && window.WrongAnswerBookUI.startReview()">Start Review / 开始复习</button>
+        <button class="wab-btn wab-btn-secondary" onclick="window.WrongAnswerBookUI && window.WrongAnswerBookUI.clearMastered()">Clear Mastered / 清除已掌握</button>
+      </div>
     </div>
   </div>
 
@@ -2040,10 +2654,18 @@
       syncStatus.className = 'sync-status syncing';
 
       try {
+        // 准备错题本数据（限制大小以避免超出 Firestore 文档限制）
+        // Prepare wrong answer data (limit size to avoid Firestore doc limit)
+        let wrongAnswersData = [];
+        if (window.wrongAnswerBook) {
+          wrongAnswersData = window.wrongAnswerBook.getCompactData(500);
+        }
+
         const userDoc = window.doc(window.firebaseDb, 'users', window.currentUser.uid);
         await window.setDoc(userDoc, {
           completedTopics: completedTopics,
           studyTimeRecords: StudyTimer.getAllRecords(),
+          wrongAnswers: wrongAnswersData,
           lastUpdated: new Date().toISOString(),
           email: window.currentUser.email
         }, { merge: true });
@@ -2080,6 +2702,13 @@
             StudyTimer.loadRecordsFromCloud(data.studyTimeRecords);
             if (typeof window.updateStudyTimerUI === 'function') {
               window.updateStudyTimerUI();
+            }
+          }
+          // 加载错题本数据 / Load wrong answer book data from cloud
+          if (data.wrongAnswers && window.wrongAnswerBook) {
+            window.wrongAnswerBook.loadFromCloudData(data.wrongAnswers);
+            if (typeof updateWrongAnswerBadge === 'function') {
+              updateWrongAnswerBadge();
             }
           }
         } else {
@@ -2396,6 +3025,40 @@
       } else {
         // Wrong answer
 
+        // ========== 记录错题 / Record wrong answer ==========
+        if (window.wrongAnswerBook) {
+          const questionEl = exampleItem.querySelector('.example-question');
+          const questionText = questionEl ? questionEl.textContent.replace(/^\d+\.\s*/, '') : '';
+          const optionButtons = exampleItem.querySelectorAll('.example-option');
+          const optionTexts = Array.from(optionButtons).map(opt => opt.textContent.replace(/^[A-D]\.\s*/, ''));
+          // 获取当前单元ID / Get current unit ID
+          let unitId = '';
+          if (window.currentCurriculum) {
+            for (const unit of window.currentCurriculum.units) {
+              for (const topic of unit.topics) {
+                if (topic.id === topicId) { unitId = unit.id; break; }
+              }
+              if (unitId) break;
+            }
+          }
+          window.wrongAnswerBook.addWrongAnswer({
+            topicId: topicId,
+            unitId: unitId,
+            grade: typeof currentGrade !== 'undefined' ? currentGrade : 5,
+            question: questionText,
+            questionEn: questionText,
+            userAnswer: optionTexts[selectedAnswer] || String(selectedAnswer),
+            correctAnswer: optionTexts[correctAnswer] || String(correctAnswer),
+            options: optionTexts,
+            hint: hint || '',
+            type: 'choice',
+            attempts: attempts,
+            dynamicTemplate: (templateIndex !== null && templateIndex !== undefined) ? templateIndex : null
+          });
+          if (typeof updateWrongAnswerBadge === 'function') updateWrongAnswerBadge();
+        }
+        // ========== 记录错题结束 ==========
+
         // ========== 游戏化处理 ==========
         if (window.gameManager && window.gameUI) {
           window.gameManager.answerWrong();
@@ -2560,6 +3223,38 @@
       } else {
         // Wrong answer - show hint, allow retry
         exampleItem.classList.add('wrong');
+
+        // ========== 记录错题 / Record wrong answer ==========
+        if (window.wrongAnswerBook) {
+          const questionEl = exampleItem.querySelector('.example-question');
+          const questionText = questionEl ? questionEl.textContent.replace(/^\d+\.\s*/, '') : '';
+          // 获取当前单元ID / Get current unit ID
+          let unitId = '';
+          if (window.currentCurriculum) {
+            for (const unit of window.currentCurriculum.units) {
+              for (const topic of unit.topics) {
+                if (topic.id === topicId) { unitId = unit.id; break; }
+              }
+              if (unitId) break;
+            }
+          }
+          window.wrongAnswerBook.addWrongAnswer({
+            topicId: topicId,
+            unitId: unitId,
+            grade: typeof currentGrade !== 'undefined' ? currentGrade : 5,
+            question: questionText,
+            questionEn: questionText,
+            userAnswer: input.value.trim(),
+            correctAnswer: correctAnswer,
+            options: null,
+            hint: hint || '',
+            type: 'input',
+            attempts: attempts,
+            dynamicTemplate: null
+          });
+          if (typeof updateWrongAnswerBadge === 'function') updateWrongAnswerBadge();
+        }
+        // ========== 记录错题结束 ==========
 
         // Add shake animation
         exampleItem.style.animation = 'none';
@@ -2941,6 +3636,17 @@
     // Initial UI update
     updateStudyTimerUI();
 
+    // ========== 错题本徽标更新 / Wrong answer badge update ==========
+    function updateWrongAnswerBadge() {
+      const badge = document.getElementById('wrongAnswerBadge');
+      if (!badge || !window.wrongAnswerBook) return;
+      const count = window.wrongAnswerBook.getWrongAnswers({ mastered: false }).length;
+      badge.textContent = count;
+      badge.style.display = count > 0 ? 'flex' : 'none';
+    }
+    // 页面加载时更新徽标 / Update badge on page load
+    setTimeout(updateWrongAnswerBadge, 1000);
+
     // Auto-sync study time to cloud every 5 minutes
     setInterval(() => {
       if (window.currentUser) {
@@ -2948,6 +3654,512 @@
       }
     }, 5 * 60 * 1000);
     // ========== 学习时间追踪结束 ==========
+
+    // ========== 错题本UI控制器 / Wrong Answer Book UI Controller ==========
+    window.WrongAnswerBookUI = {
+      currentFilter: { grade: null, unitId: null, topicId: null },
+      currentTab: 'all',
+      reviewMode: false,
+      reviewQueue: [],
+      reviewIndex: 0,
+
+      // 显示错题本模态框 / Show wrong answer book modal
+      show() {
+        document.getElementById('wrongAnswerModal').classList.add('active');
+        this.populateUnitFilter();
+        this.render();
+      },
+
+      // 隐藏错题本模态框 / Hide wrong answer book modal
+      hide() {
+        document.getElementById('wrongAnswerModal').classList.remove('active');
+        this.reviewMode = false;
+        this.reviewQueue = [];
+        this.reviewIndex = 0;
+      },
+
+      // 切换标签页 / Switch tab
+      switchTab(tab) {
+        this.currentTab = tab;
+        // 更新标签页样式 / Update tab styles
+        const tabs = document.querySelectorAll('.wrong-answer-tab');
+        tabs.forEach(t => t.classList.remove('active'));
+        event.target.classList.add('active');
+        this.render();
+      },
+
+      // 按年级筛选 / Filter by grade
+      filterByGrade(grade) {
+        this.currentFilter.grade = grade ? parseInt(grade) : null;
+        this.populateUnitFilter();
+        this.render();
+      },
+
+      // 按单元筛选 / Filter by unit
+      filterByUnit(unitId) {
+        this.currentFilter.unitId = unitId || null;
+        this.render();
+      },
+
+      // 填充单元筛选下拉框 / Populate unit filter dropdown
+      populateUnitFilter() {
+        const select = document.getElementById('wabFilterUnit');
+        if (!select) return;
+        select.innerHTML = '<option value="">All Units / 全部单元</option>';
+
+        if (!window.currentCurriculum || !window.currentCurriculum.units) return;
+
+        window.currentCurriculum.units.forEach(unit => {
+          const opt = document.createElement('option');
+          opt.value = unit.id;
+          opt.textContent = unit.title || unit.id;
+          select.appendChild(opt);
+        });
+      },
+
+      // 主渲染函数 / Main render function
+      render() {
+        const content = document.getElementById('wabContent');
+        const actions = document.getElementById('wabActions');
+
+        if (this.reviewMode) {
+          this.renderReviewQuestion();
+          return;
+        }
+
+        actions.style.display = 'flex';
+
+        switch (this.currentTab) {
+          case 'all':
+            this.renderAll(content);
+            break;
+          case 'topic':
+            this.renderByTopic(content);
+            break;
+          case 'stats':
+            this.renderStatistics(content);
+            actions.style.display = 'none';
+            break;
+        }
+      },
+
+      // 渲染全部错题列表 / Render all wrong answers
+      renderAll(container) {
+        if (!window.wrongAnswerBook) return;
+        const items = window.wrongAnswerBook.getWrongAnswers(this.currentFilter);
+
+        if (items.length === 0) {
+          container.innerHTML = `
+            <div class="wrong-answer-empty">
+              <div class="empty-icon">🎉</div>
+              <p>No wrong answers yet! / 还没有错题！</p>
+              <p style="font-size:0.8rem; color:#bbb;">Keep practicing and mistakes will appear here / 继续练习，错题会出现在这里</p>
+            </div>`;
+          return;
+        }
+
+        // 更新副标题 / Update subtitle
+        const subtitle = document.getElementById('wabSubtitle');
+        if (subtitle) {
+          const unmastered = items.filter(i => !i.mastered).length;
+          subtitle.textContent = `${items.length} wrong answers, ${unmastered} to review / ${items.length} 道错题，${unmastered} 道待复习`;
+        }
+
+        container.innerHTML = items.map(item => this.renderItem(item)).join('');
+      },
+
+      // 渲染单条错题 / Render single wrong answer item
+      renderItem(item) {
+        const date = item.timestamp ? new Date(item.timestamp).toLocaleDateString() : '';
+        const time = item.timestamp ? new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '';
+        const typeLabel = item.type === 'input' ? 'Fill-in / 填空' : 'Choice / 选择';
+        const masteredClass = item.mastered ? ' mastered' : '';
+        const masteredLabel = item.mastered ? '<span class="mastered-label">Mastered / 已掌握</span>' : '';
+
+        // 获取主题名称 / Get topic name
+        let topicName = item.topicId;
+        if (window.currentCurriculum) {
+          for (const unit of window.currentCurriculum.units) {
+            for (const topic of unit.topics) {
+              if (topic.id === item.topicId) {
+                topicName = topic.title || topic.id;
+                break;
+              }
+            }
+          }
+        }
+
+        const hintHtml = item.hint
+          ? `<div class="hint-text">Hint / 提示: ${escapeHtml(item.hint)}</div>`
+          : '';
+
+        return `
+          <div class="wrong-answer-item${masteredClass}">
+            <div class="question-text">${escapeHtml(item.question)}</div>
+            <div class="answer-row">
+              <span class="user-answer">Your answer / 你的答案: ${escapeHtml(String(item.userAnswer))}</span>
+              <span class="correct-answer">Correct / 正确: ${escapeHtml(String(item.correctAnswer))}</span>
+            </div>
+            ${hintHtml}
+            <div class="meta-row">
+              <span>${escapeHtml(String(topicName))} | ${typeLabel} | Attempt ${item.attempts} / 第${item.attempts}次</span>
+              <span>${masteredLabel} ${date} ${time}
+                <button class="delete-btn" onclick="window.WrongAnswerBookUI.deleteItem('${escapeHtml(item.id)}')" title="Delete / 删除">&times;</button>
+              </span>
+            </div>
+          </div>`;
+      },
+
+      // 按主题分组渲染 / Render grouped by topic
+      renderByTopic(container) {
+        if (!window.wrongAnswerBook) return;
+        const items = window.wrongAnswerBook.getWrongAnswers(this.currentFilter);
+
+        if (items.length === 0) {
+          container.innerHTML = `
+            <div class="wrong-answer-empty">
+              <div class="empty-icon">🎉</div>
+              <p>No wrong answers yet! / 还没有错题！</p>
+            </div>`;
+          return;
+        }
+
+        // 按主题分组 / Group by topic
+        const grouped = {};
+        items.forEach(item => {
+          const key = item.topicId || 'unknown';
+          if (!grouped[key]) {
+            grouped[key] = { name: key, items: [] };
+          }
+          grouped[key].items.push(item);
+        });
+
+        // 尝试获取主题名称 / Try to get topic names
+        if (window.currentCurriculum) {
+          window.currentCurriculum.units.forEach(unit => {
+            unit.topics.forEach(topic => {
+              if (grouped[topic.id]) {
+                grouped[topic.id].name = topic.title || topic.id;
+              }
+            });
+          });
+        }
+
+        let html = '';
+        Object.values(grouped).forEach(group => {
+          const unmasteredCount = group.items.filter(i => !i.mastered).length;
+          html += `
+            <div class="topic-group-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'">
+              <span>${escapeHtml(group.name)}</span>
+              <span class="topic-count">${group.items.length} wrong / 错题 (${unmasteredCount} to review / 待复习)</span>
+            </div>
+            <div>${group.items.map(item => this.renderItem(item)).join('')}</div>`;
+        });
+
+        container.innerHTML = html;
+      },
+
+      // 渲染统计面板 / Render statistics panel
+      renderStatistics(container) {
+        if (!window.wrongAnswerBook) return;
+        const stats = window.wrongAnswerBook.getStatistics();
+
+        // 趋势图 / Trend chart
+        const maxAdded = Math.max(...stats.last7Days.map(d => d.added), 1);
+        const trendHtml = stats.last7Days.map(day => {
+          const height = Math.max((day.added / maxAdded) * 60, 4);
+          const masteredHeight = Math.max((day.mastered / maxAdded) * 60, 4);
+          return `
+            <div class="trend-bar-wrapper">
+              <div style="display:flex; flex-direction:column; gap:2px; align-items:center; width:100%;">
+                <div class="trend-bar" style="height:${height}px; width:100%; max-width:20px;"></div>
+                <div class="trend-bar mastered-bar" style="height:${masteredHeight}px; width:100%; max-width:20px;"></div>
+              </div>
+              <span class="trend-label">${day.day}</span>
+            </div>`;
+        }).join('');
+
+        container.innerHTML = `
+          <div class="wrong-answer-stats">
+            <div class="stat-card">
+              <div class="stat-number">${stats.total}</div>
+              <div class="stat-label">Total / 总错题</div>
+            </div>
+            <div class="stat-card stat-red">
+              <div class="stat-number">${stats.unmastered}</div>
+              <div class="stat-label">To Review / 待复习</div>
+            </div>
+            <div class="stat-card stat-green">
+              <div class="stat-number">${stats.mastered}</div>
+              <div class="stat-label">Mastered / 已掌握</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">${stats.masteryRate}%</div>
+              <div class="stat-label">Mastery Rate / 掌握率</div>
+            </div>
+          </div>
+          <h3 style="font-size:0.95rem; color:#555; margin: 15px 0 5px;">Last 7 Days Trend / 近7天趋势</h3>
+          <div style="font-size:0.7rem; color:#999; margin-bottom:5px;">
+            <span style="display:inline-block; width:12px; height:12px; background:linear-gradient(to top, #667eea, #764ba2); border-radius:2px; vertical-align:middle;"></span> Wrong / 错题
+            <span style="display:inline-block; width:12px; height:12px; background:linear-gradient(to top, #4CAF50, #81C784); border-radius:2px; vertical-align:middle; margin-left:10px;"></span> Mastered / 已掌握
+          </div>
+          <div class="trend-chart">${trendHtml}</div>
+          <h3 style="font-size:0.95rem; color:#555; margin: 15px 0 10px;">By Type / 按题型</h3>
+          <div class="wrong-answer-stats">
+            <div class="stat-card">
+              <div class="stat-number">${stats.byType.choice}</div>
+              <div class="stat-label">Choice / 选择题</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">${stats.byType.input}</div>
+              <div class="stat-label">Fill-in / 填空题</div>
+            </div>
+          </div>`;
+      },
+
+      // 开始复习模式 / Start review mode
+      startReview() {
+        if (!window.wrongAnswerBook) return;
+        const unmastered = window.wrongAnswerBook.getWrongAnswers({
+          ...this.currentFilter,
+          mastered: false
+        });
+
+        if (unmastered.length === 0) {
+          const content = document.getElementById('wabContent');
+          content.innerHTML = `
+            <div class="wrong-answer-empty">
+              <div class="empty-icon">🎉</div>
+              <p>No wrong answers to review! / 没有需要复习的错题！</p>
+            </div>`;
+          return;
+        }
+
+        // 随机打乱 / Shuffle
+        this.reviewQueue = unmastered.sort(() => Math.random() - 0.5);
+        this.reviewIndex = 0;
+        this.reviewMode = true;
+
+        document.getElementById('wabActions').style.display = 'none';
+        this.renderReviewQuestion();
+      },
+
+      // 渲染复习题目 / Render review question
+      renderReviewQuestion() {
+        const content = document.getElementById('wabContent');
+
+        if (this.reviewIndex >= this.reviewQueue.length) {
+          // 复习完毕 / Review complete
+          this.renderReviewSummary();
+          return;
+        }
+
+        const item = this.reviewQueue[this.reviewIndex];
+        const progress = `${this.reviewIndex + 1}/${this.reviewQueue.length}`;
+
+        if (item.type === 'choice' && item.options && item.options.length > 0) {
+          // 选择题 / Choice question
+          const optionsHtml = item.options.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<button class="review-option" onclick="window.WrongAnswerBookUI.checkReviewChoice('${escapeHtml(item.id)}', ${idx}, this)">${letter}. ${escapeHtml(String(opt))}</button>`;
+          }).join('');
+
+          content.innerHTML = `
+            <div class="review-container">
+              <div class="review-progress">Review ${progress} / 复习进度 ${progress}</div>
+              <div class="review-question">
+                <div class="question-label">Question / 题目</div>
+                <div class="question-content">${escapeHtml(item.question)}</div>
+                <div class="review-options">${optionsHtml}</div>
+                <div class="review-feedback" id="reviewFeedback"></div>
+              </div>
+              <button class="wab-btn wab-btn-secondary" onclick="window.WrongAnswerBookUI.skipReview()">Skip / 跳过</button>
+            </div>`;
+        } else {
+          // 填空题 / Fill-in question
+          content.innerHTML = `
+            <div class="review-container">
+              <div class="review-progress">Review ${progress} / 复习进度 ${progress}</div>
+              <div class="review-question">
+                <div class="question-label">Question / 题目</div>
+                <div class="question-content">${escapeHtml(item.question)}</div>
+                <div class="review-input-area">
+                  <input type="text" id="reviewInput" placeholder="Enter answer / 输入答案"
+                    onkeypress="if(event.key==='Enter') window.WrongAnswerBookUI.checkReviewInput('${escapeHtml(item.id)}')">
+                  <button onclick="window.WrongAnswerBookUI.checkReviewInput('${escapeHtml(item.id)}')">Check / 检查</button>
+                </div>
+                <div class="review-feedback" id="reviewFeedback"></div>
+              </div>
+              <button class="wab-btn wab-btn-secondary" onclick="window.WrongAnswerBookUI.skipReview()">Skip / 跳过</button>
+            </div>`;
+        }
+      },
+
+      // 检查复习选择题 / Check review choice answer
+      checkReviewChoice(id, selectedIndex, buttonEl) {
+        const item = window.wrongAnswerBook ? window.wrongAnswerBook.getById(id) : null;
+        if (!item) return;
+
+        const feedback = document.getElementById('reviewFeedback');
+        const options = document.querySelectorAll('.review-option');
+        const correctIdx = item.options ? item.options.indexOf(item.correctAnswer) : -1;
+
+        // 禁用所有选项 / Disable all options
+        options.forEach(opt => { opt.style.pointerEvents = 'none'; });
+
+        if (item.options && item.options[selectedIndex] === item.correctAnswer) {
+          // 答对了 / Correct
+          buttonEl.classList.add('correct');
+          if (correctIdx >= 0 && correctIdx !== selectedIndex) {
+            options[correctIdx].classList.add('correct');
+          }
+          feedback.className = 'review-feedback show correct';
+          feedback.innerHTML = 'Correct! Well done! / 答对了！做得好！';
+
+          // 标记为已掌握 / Mark as mastered
+          window.wrongAnswerBook.removeWrongAnswer(id);
+
+          // 游戏化奖励 / Gamification reward
+          if (window.gameManager && window.gameUI) {
+            const reward = window.gameManager.answerCorrect(0);
+            const gameState = window.gameManager.getDisplayState();
+            if (typeof window.updateGameUI === 'function') {
+              window.updateGameUI(gameState);
+            }
+          }
+
+          if (typeof updateWrongAnswerBadge === 'function') updateWrongAnswerBadge();
+
+          // 自动下一题 / Auto next
+          setTimeout(() => {
+            this.reviewIndex++;
+            this.renderReviewQuestion();
+          }, 1200);
+        } else {
+          // 答错了 / Wrong
+          buttonEl.classList.add('incorrect');
+          if (correctIdx >= 0) {
+            options[correctIdx].classList.add('correct');
+          }
+          feedback.className = 'review-feedback show incorrect';
+          feedback.innerHTML = `Not quite. The correct answer is: ${escapeHtml(String(item.correctAnswer))} / 不太对，正确答案是：${escapeHtml(String(item.correctAnswer))}`;
+
+          // 允许重试 / Allow retry after delay
+          setTimeout(() => {
+            options.forEach(opt => {
+              opt.classList.remove('incorrect', 'correct');
+              opt.style.pointerEvents = 'auto';
+            });
+            feedback.className = 'review-feedback';
+          }, 2000);
+        }
+      },
+
+      // 检查复习填空题 / Check review input answer
+      checkReviewInput(id) {
+        const input = document.getElementById('reviewInput');
+        if (!input) return;
+        const userAnswer = input.value.trim().replace(/[,\s]/g, '');
+        const item = window.wrongAnswerBook ? window.wrongAnswerBook.getById(id) : null;
+        if (!item) return;
+
+        const feedback = document.getElementById('reviewFeedback');
+        const correctNormalized = String(item.correctAnswer).replace(/[,\s]/g, '');
+
+        if (userAnswer === correctNormalized) {
+          // 答对了 / Correct
+          feedback.className = 'review-feedback show correct';
+          feedback.innerHTML = 'Correct! Well done! / 答对了！做得好！';
+
+          window.wrongAnswerBook.removeWrongAnswer(id);
+
+          if (window.gameManager && window.gameUI) {
+            window.gameManager.answerCorrect(0);
+            const gameState = window.gameManager.getDisplayState();
+            if (typeof window.updateGameUI === 'function') {
+              window.updateGameUI(gameState);
+            }
+          }
+
+          if (typeof updateWrongAnswerBadge === 'function') updateWrongAnswerBadge();
+
+          setTimeout(() => {
+            this.reviewIndex++;
+            this.renderReviewQuestion();
+          }, 1200);
+        } else {
+          // 答错了 / Wrong
+          feedback.className = 'review-feedback show incorrect';
+          feedback.innerHTML = `Not quite. The correct answer is: ${escapeHtml(String(item.correctAnswer))} / 不太对，正确答案是：${escapeHtml(String(item.correctAnswer))}`;
+
+          setTimeout(() => {
+            feedback.className = 'review-feedback';
+            input.value = '';
+            input.focus();
+          }, 2000);
+        }
+      },
+
+      // 跳过当前复习题 / Skip current review question
+      skipReview() {
+        this.reviewIndex++;
+        this.renderReviewQuestion();
+      },
+
+      // 渲染复习结果摘要 / Render review summary
+      renderReviewSummary() {
+        const content = document.getElementById('wabContent');
+        const total = this.reviewQueue.length;
+        const mastered = this.reviewQueue.filter(item => {
+          const current = window.wrongAnswerBook ? window.wrongAnswerBook.getById(item.id) : null;
+          return current && current.mastered;
+        }).length;
+
+        this.reviewMode = false;
+        document.getElementById('wabActions').style.display = 'flex';
+
+        const icon = mastered === total ? '🏆' : mastered > total / 2 ? '🌟' : '💪';
+        const message = mastered === total
+          ? 'Perfect! All mastered! / 完美！全部掌握！'
+          : `${mastered} out of ${total} mastered / 掌握了 ${mastered}/${total}`;
+
+        content.innerHTML = `
+          <div class="review-summary">
+            <div class="summary-icon">${icon}</div>
+            <div class="summary-title">Review Complete! / 复习完成！</div>
+            <div class="summary-detail">${message}</div>
+            <button class="wab-btn wab-btn-primary" onclick="window.WrongAnswerBookUI.switchTab('all'); document.querySelectorAll('.wrong-answer-tab')[0].click();">Back to List / 返回列表</button>
+          </div>`;
+      },
+
+      // 删除错题 / Delete wrong answer
+      deleteItem(id) {
+        if (!window.wrongAnswerBook) return;
+        if (confirm('Delete this wrong answer? / 确定删除这道错题？')) {
+          window.wrongAnswerBook.deleteWrongAnswer(id);
+          this.render();
+          if (typeof updateWrongAnswerBadge === 'function') updateWrongAnswerBadge();
+        }
+      },
+
+      // 清除已掌握的错题 / Clear mastered items
+      clearMastered() {
+        if (!window.wrongAnswerBook) return;
+        const cleared = window.wrongAnswerBook.clearMastered();
+        if (cleared > 0) {
+          this.render();
+          if (typeof updateWrongAnswerBadge === 'function') updateWrongAnswerBadge();
+        }
+      }
+    };
+
+    // 点击遮罩层关闭错题本模态框 / Close wrong answer modal on overlay click
+    document.getElementById('wrongAnswerModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        window.WrongAnswerBookUI.hide();
+      }
+    });
+    // ========== 错题本UI控制器结束 ==========
 
     // ========== 语言切换功能 ==========
     function toggleLanguage() {
