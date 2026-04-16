@@ -40,7 +40,7 @@ const SpellingWords = {
       { word: "compare", definition: "find similarities", example: "Compare the two pictures." },
       { word: "contrast", definition: "find differences", example: "Contrast day and night." },
       { word: "evaluate", definition: "judge or assess", example: "Evaluate the results." },
-      { word: " summarize", definition: "briefly tell", example: "Summarize the story." },
+      { word: "summarize", definition: "briefly tell", example: "Summarize the story." },
       { word: "conclude", definition: "finish or decide", example: "What can you conclude?" },
       { word: "evidence", definition: "proof", example: "Show your evidence." },
       { word: "opinion", definition: "personal belief", example: "What's your opinion?" },

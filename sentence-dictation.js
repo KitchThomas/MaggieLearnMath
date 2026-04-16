@@ -43,6 +43,9 @@ class SentenceDictationPractice {
     const existing = document.getElementById('sentence-dictation-container');
     if (existing) existing.remove();
 
+    // Reset state to match default UI selections
+    this.subject = 'English';
+
     const container = document.createElement('div');
     container.id = 'sentence-dictation-container';
     container.className = 'sentence-dictation-container';

@@ -13,6 +13,7 @@ class DictationPractice {
     this.subject = 'English';
     this.category = 'mixed';
     this.difficulty = 'normal';
+    this.wordCount = 20;
     this.speechEnabled = true;
     this.speechRate = 0.8;
     this.gameMode = false;
@@ -48,6 +49,10 @@ class DictationPractice {
     // Remove existing dictation container if any
     const existing = document.getElementById('dictation-container');
     if (existing) existing.remove();
+
+    // Reset state to match default UI selections
+    this.subject = 'English';
+    this.selectedCustomList = null;
 
     const container = document.createElement('div');
     container.id = 'dictation-container';
@@ -244,7 +249,6 @@ class DictationPractice {
   selectSubject(subject) {
     this.selectedCustomList = null;
     this.subject = subject;
-    this.subject = subject;
     document.querySelectorAll('.subject-btn').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.subject === subject);
     });
@@ -427,7 +431,7 @@ class DictationPractice {
     if (!this.synth) return;
 
     const word = this.currentWords[this.currentIndex];
-    const utterance = new SpeechSynthesisUtterance(word.word);
+    const utterance = new SpeechSynthesisUtterance(word.word.trim());
 
     // Set language
     if (this.subject === 'French') {
@@ -482,7 +486,7 @@ class DictationPractice {
   checkAnswer() {
     const input = document.getElementById('word-input');
     const userAnswer = input.value.trim().toLowerCase();
-    const correctAnswer = this.currentWords[this.currentIndex].word.toLowerCase();
+    const correctAnswer = this.currentWords[this.currentIndex].word.trim().toLowerCase();
 
     if (!userAnswer) return;
 
